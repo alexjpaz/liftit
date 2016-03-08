@@ -6,13 +6,24 @@
   "dependencies": {
     "chai": "^3.5.0",
     "file-loader": "^0.8.5",
+    "liftit-common": "git+https://github.com/alexjpaz/liftit-common.git",
     "material-design-lite": "^1.1.2",
     "mocha": "^2.4.5",
     "require-dir": "^0.3.0",
+    "riot": "^2.3.16",
+    "riotjs": "^1.0.4",
     "riotjs-loader": "^2.0.0",
     "webpack": "^1.12.14"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-loader": "^6.2.4",
+    "css-loader": "^0.23.1",
+    "riot": "^2.3.16",
+    "riotjs-loader": "^2.0.0",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

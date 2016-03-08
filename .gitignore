@@ -1,3 +1,4 @@
 .DS_Store
 web/dist
+web/public
 node_modules/

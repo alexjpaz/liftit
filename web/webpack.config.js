@@ -1,12 +1,10 @@
 var webpack = require('webpack');
 
 module.exports = {
-  entry: {
-    "app": "./app/entry.js",
-  },
+  entry: './app/index',
   output: {
-    path: __dirname,
-    filename: "dist/bundles/[name].js"
+    path: __dirname + '/public',
+    filename: 'bundle.js'
   },
   plugins: [
     new webpack.ProvidePlugin({
@@ -18,9 +16,13 @@ module.exports = {
       { test: /\.tag$/, exclude: /node_modules/, loader: 'riotjs-loader', query: { type: 'none' } }
     ],
     loaders: [
-      { test: /\.css$/, loader: "style!css" },
-      { test: /\.tag$/, exclude: /node_modules/, loader: 'riotjs-loader', query: { type: 'none' } }
+//      { test: /\.css$/, loader: "style-loader!css-loader" },
+  //    { test: /\.png$/, loader: "url-loader?limit=100000" },
+    //  { test: /\.jpg$/, loader: "file-loader" },
+      { test: /\.js$|\.tag$/, exclude: /node_modules/, loader: 'babel-loader' }
     ]
   },
-  publicPath: "/app"
+  devServer: {
+    contentBase: './public'
+  }
 };
