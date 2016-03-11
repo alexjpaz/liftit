@@ -18,9 +18,13 @@ var store = function() {
     self.trigger('digest');
   });
 
+  this.on('removeEvent', function(eventKey) {
+    delete self.events;
+    self.trigger('digest');
+  });
+
   this.on('persist', function() {
     localStorage.setItem('events', JSON.stringify(self.events));
-    console.log(self);
   });
 
   this.on('aggregate', function() {

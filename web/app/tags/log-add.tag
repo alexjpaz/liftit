@@ -34,6 +34,8 @@
       type: 'log'
     };
 
+console.log(riot.route.query())
+
     this.model = function(e) {
       self.vm[e.target.name] = e.target.value;
     };

@@ -6,5 +6,21 @@ var mdl = require('file?name=[name].[ext]!../node_modules/material-design-lite/m
 
 var api = require('./api');
 
-riot.mount('*', {api: api});
+var opts = {
+  api: api,
+  views: {
+    main: ''
+  }
+}
 
+riot.mount('*', opts);
+
+riot.route('/logs', function(name) {
+  opts.views.main = 'log-list';
+});
+
+riot.route('/logs/222', function(name) {
+  opts.views.main = 'log-add';
+});
+
+riot.route.start(true);
