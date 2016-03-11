@@ -1,15 +1,15 @@
-sudo: required
-services:
-- docker
-before_install:
-- openssl aes-256-cbc -K $encrypted_8e5a0429f0a8_key -iv $encrypted_8e5a0429f0a8_iv
-  -in liftit-9aaa156b481d.json.enc -out liftit-9aaa156b481d.json -d
-script:
-- ./tasks build
+language: node_js
+node_js:
+- '5.3'
 deploy:
-- provider: gae
-  config: datastore/app.yaml
-  keyfile: liftit-9aaa156b481d.json
-  default: true
-  project: liftit-1138
+  provider: s3
+  access_key_id: AKIAIN4GJC6ZF6WNZV7Q
+  secret_access_key:
+    secure: JfsiKzWtj/dvweMM5S5DBAeRSnx4NtScsX9GAql0ioFyJ8PpuNKUp7gtAyhQPFHp6MBK5Egx7xqvg0CaUfMPI+BDf4tf+jz6zsmEz0wcazG74Ht8kUr6uWexjjW7GA+eH+7vVbP71lY3DBbgPkHF2Kke/Av2T5it1Ufjf269Awmtsz2urE3C93JowMKBXRsU52RKInt3pc1QTmQH4XoBc0xhcruyVRx7nyCFhRl4O5JMRi0Z8VmztfWP0i0qAh5jtXsk3q6XmGTYTXMbF1Vv/ZvuLbQ8Z+SdHejfXdImP81+A+b47ilY5RlDE8yYji0mL0dTcX30KTsruUV0ItjFck7hgwQmH12VLHtI1OSCjO4uk2VPtObeRnLVQV/SHvLWs+stFwxYKu6UXfcxuTtgTu5LqgIFUZpHh9R9ChbRKZZAAsxwjOp4WJsd2owAhavA0gmgut/Cj6osz/ZAUW1y5qjYgEF0KZZzSejTX4hmcEFNoDrGrDl60F8317QZ+yw9EoUhkCw2CBpakte2dITNl5N2gqPQnObprQUEK7IUZcPOmIMHIMkdc2y1lDf1vdmvO1tidbL24uTFWUBE1T8qzwoQt3uHfM9ffE2XGt/5cj1GaSjGzX7+2Fnv4BhcVSMx0P8YpULMNyyhsvANFVjSOLBvQa6LuWki75VPbDT0n3c=
+  bucket: liftit.alexjpaz.com
+  cache_control: "max-age=3600"
   skip_cleanup: true
+  local-dir: wev/public
+  acl: public_read
+  on:
+    repo: alexjpaz/liftit
