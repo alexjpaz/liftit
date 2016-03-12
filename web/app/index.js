@@ -15,6 +15,10 @@ var opts = {
 
 riot.mount('*', opts);
 
+riot.route(function() {
+  console.log('route', arguments);
+});
+
 riot.route('/logs', function(name) {
   opts.views.main = 'log-list';
 });

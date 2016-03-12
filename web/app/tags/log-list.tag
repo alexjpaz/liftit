@@ -3,6 +3,7 @@
     <thead>
       <tr>
         <th>Date</th>
+        <th>Lift</th>
         <th>Weight</th>
         <th>Reps</th>
       </tr>
@@ -10,12 +11,13 @@
     <tbody>
       <tr each={ l in logs }>
         <td>{ l.date }</td>
+        <td>{ l.lift }</td>
         <td>{ l.weight }</td>
         <td>{ l.reps }</td>
       </tr>
     </tbody>
   </table>
-  <a href='#/log/new'>Add Log</a>
+  <a href='#/logs/new'>Add Log</a>
 
   <pre>{ JSON.stringify(logs, null, 4); }</pre>
   <script>

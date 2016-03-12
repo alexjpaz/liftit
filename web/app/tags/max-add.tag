@@ -1,26 +1,13 @@
-<log-add>
+<max-add>
   <form onsubmit={submit}>
      <div class="mdl-textfield mdl-js-textfield">
       <input class="mdl-textfield__input" type="date" id="sample1" name='date' onchange={ model }>
       <label class="mdl-textfield__label" for="sample1">Date...</label>
     </div>
 
-    <div class="mdl-textfield mdl-js-textfield">
-      <select name='lift' onchange={model}>
-        <option>-- select lift --</option>
-        <option value='press'>press</option>
-        <option value='deadlift'>deadlift</option>
-      </select>
-    </div>
-
-    <div class="mdl-textfield mdl-js-textfield">
-      <input class="mdl-textfield__input" type="text" id="sample1" name='weight' onchange={ model }>
-      <label class="mdl-textfield__label" for="sample1">Text...</label>
-    </div>
-
-    <div class="mdl-textfield mdl-js-textfield">
-      <input class="mdl-textfield__input" type="text" id="sample1" name='reps' onchange={ model }>
-      <label class="mdl-textfield__label" for="sample1">Text...</label>
+    <div class="mdl-textfield mdl-js-textfield" each={l in lifts}>
+      <input class="mdl-textfield__input" type="number" id="sample1" name={l} onchange={ model }>
+      <label class="mdl-textfield__label" for="sample1">{ lift }</label>
     </div>
 
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
@@ -39,16 +26,15 @@
   </style>
 
   <script>
-
     var self = this;
     var store = opts.api.store;
 
+    this.lifts = ['press','deadlift','bench','squat'];
+
     var vm = this.vm = {
       key: store.guid(),
-      type: 'log'
+      type: 'max'
     };
-
-console.log(riot.route.query())
 
     this.model = function(e) {
       self.vm[e.target.name] = e.target.value;
@@ -59,4 +45,4 @@ console.log(riot.route.query())
       store.trigger('addEvent', Object.assign({}, vm));
     };
   </script>
-</log-add>
+</max-add>
