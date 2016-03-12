@@ -1,0 +1,16 @@
+#!/bin/bash
+
+CMD=$1
+shift
+ARGS=$@
+
+dev() {
+  local WEBPACK=node_modules/webpack/bin/webpack.js
+  local WEBPACK_DEV_SERVER=node_modules/webpack-dev-server/bin/webpack-dev-server.js
+  trap 'kill $(jobs -p)' EXIT
+  $WEBPACK -w &
+  $WEBPACK_DEV_SERVER --hot --inline --content-base public/ &
+  wait
+}
+
+$CMD $ARGS
