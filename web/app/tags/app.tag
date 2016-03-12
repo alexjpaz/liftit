@@ -1,6 +1,8 @@
 require('./log-list.tag');
 require('./log-add.tag');
 require('./max-add.tag');
+require('./max-list.tag');
+require('./sheets.tag');
 
 <app>
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -29,6 +31,8 @@ require('./max-add.tag');
         <log-list if={opts.views.main === "log-list"} api={opts.api}></log-list>
         <log-add if={opts.views.main === "log-add"} api={opts.api}></log-add>
         <max-add if={opts.views.main === "max-add"} api={opts.api}></max-add>
+        <max-list if={opts.views.main === "max-list"} api={opts.api}></max-list>
+        <sheets if={opts.views.main === "sheets"} api={opts.api}></sheets>
       </div>
     </main>
   </div>
@@ -44,8 +48,18 @@ require('./max-add.tag');
       self.update();
     });
 
+    riot.route('/maxes', function(key) {
+      opts.views.main = 'max-list';
+      self.update();
+    });
+
     riot.route('/maxes/*', function(key) {
       opts.views.main = 'max-add';
+      self.update();
+    });
+
+    riot.route('/sheets/*', function(key) {
+      opts.views.main = 'sheets';
       self.update();
     });
 
