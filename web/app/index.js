@@ -1,3 +1,15 @@
-var angular = require('angularjs');
+var angular = require('angular');
 
-console.log('hi');
+require('./store');
+
+require('./routes');
+
+require('./directive/click-route');
+
+require('./components/app');
+require('./components/logs');
+require('./components/logs-add');
+
+require('./screens/dashboard');
+
+angular.bootstrap(document, ['app']);
