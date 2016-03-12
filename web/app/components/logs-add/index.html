@@ -1,0 +1,26 @@
+<div class='logs-add'>
+  <md-content class="md-no-momentum">
+    <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+    <md-input-container class='md-block'>
+      <label>Lift</label>
+      <md-select ng-model="ctrl.userState">
+        <md-option ng-repeat="state in config.selectLifts" value="{{state}}">
+          {{state}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+    <md-input-container md-no-float class="md-block">
+      <label>Weight</label>
+      <input ng-model="vm.weight" type="number"  step='5'>
+    </md-input-container>
+    <md-input-container class='md-block'>
+      <label>Reps</label>
+      <md-select ng-model="ctrl.userState">
+        <md-option ng-repeat="state in config.selectReps" value="{{state}}">
+          {{state}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+    <md-button class="md-raised md-primary">Primary</md-button>
+  </md-content>
+</div>

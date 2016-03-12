@@ -1,0 +1,24 @@
+<div class='logs'>
+  <table class="mdl-data-table mdl-js-data-table">
+    <thead>
+    </thead>
+    <tbody>
+      <tr ng-repeat='ev in vm.events' click-route='/logs/{{ ev.key }}'>
+        <td>
+          {{ ev.lift }}
+        </td>
+
+        <td>
+          <a ng-href='#/logs/{{ ev.key }}'>Edit</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <a ng-href='#/logs/new' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+    Add Log
+  </a>
+  <style>
+    .logs {
+    }
+  </style>
+</div>

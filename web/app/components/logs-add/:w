@@ -1,0 +1,20 @@
+<div class='logs-add'>
+  <div layout="row" layout-padding layout-wrap layout-fill style="padding-bottom: 32px;" ng-cloak>
+    <md-content>
+    </md-content>
+
+    <div layout-gt-sm="row">
+
+      <md-input-container class="md-block" flex-gt-sm>
+      <label>First name</label>
+      <input ng-model="user.firstName">
+      </md-input-container>
+      <md-input-container class="md-block" flex-gt-sm>
+      <label>Long Last Name That Will Be Truncated And 3 Dots (Ellipsis) Will Appear At The End</label>
+      <input ng-model="theMax">
+
+    <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+      </md-input-container>
+    </div>
+  </div>
+</div>
