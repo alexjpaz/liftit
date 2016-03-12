@@ -16,6 +16,7 @@ require('./sheets.tag');
         <nav class="mdl-navigation mdl-layout--large-screen-only">
           <a class="mdl-navigation__link" href="#/logs">Logs</a>
           <a class="mdl-navigation__link" href="#/maxes">Maxes</a>
+          <a class="mdl-navigation__link" href="#/sheets/531">Sheets</a>
         </nav>
       </div>
     </header>
@@ -24,6 +25,7 @@ require('./sheets.tag');
       <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="#/logs">Logs</a>
         <a class="mdl-navigation__link" href="#/maxes">Maxes</a>
+        <a class="mdl-navigation__link" href="#/sheets/531">Sheets</a>
       </nav>
     </div>
     <main class="mdl-layout__content">
@@ -38,6 +40,13 @@ require('./sheets.tag');
   </div>
   <script>
     var self = this;
+
+    opts.api.routeParams = {a:1};
+
+    riot.route(function() {
+      opts.api.routeParams = arguments;
+    });
+
     riot.route('/logs', function(name) {
       opts.views.main = 'log-list';
       self.update();
@@ -45,6 +54,7 @@ require('./sheets.tag');
 
     riot.route('/logs/*', function(key) {
       opts.views.main = 'log-add';
+      opts.api.routeParams = {key: key};
       self.update();
     });
 

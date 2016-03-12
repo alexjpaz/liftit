@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr each={ l in logs }>
+      <tr each={ l in logs } onclick={navigate(l.key)}>
         <td>{ l.date }</td>
         <td>{ l.lift }</td>
         <td>{ l.weight }</td>
@@ -24,6 +24,12 @@
     var self = this;
 
     var store = self.store = opts.api.store;
+
+    self.navigate = function(key) {
+      return function() {
+        riot.route('/logs/'+key);
+      };
+    };
 
     self.logs = Object.keys(store.events).map(function(k){
       return store.events[k];

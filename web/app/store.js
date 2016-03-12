@@ -14,6 +14,7 @@ var store = function() {
   this.guid = guid;
 
   this.on('addEvent', function(event) {
+    event.updated = new Date().getTime();
     self.events[event.key] = event;
     self.trigger('digest');
   });

@@ -39,16 +39,14 @@
   </style>
 
   <script>
-
+console.log(1)
     var self = this;
     var store = opts.api.store;
 
-    var vm = this.vm = {
+    var vm = this.vm = store.events[opts.api.routeParams.key] ||  {
       key: store.guid(),
       type: 'log'
     };
-
-console.log(riot.route.query())
 
     this.model = function(e) {
       self.vm[e.target.name] = e.target.value;
