@@ -1,0 +1,4 @@
+<config>
+  <script>
+  </script>
+</config>

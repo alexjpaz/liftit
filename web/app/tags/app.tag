@@ -9,7 +9,7 @@ require('./sheets.tag');
     <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
         <!-- Title -->
-        <span class="mdl-layout-title">Title</span>
+        <span class="mdl-layout-title">{ title }</span>
         <!-- Add spacer, to align navigation to the right -->
         <div class="mdl-layout-spacer"></div>
         <!-- Navigation. We hide it in small screens. -->
@@ -30,16 +30,47 @@ require('./sheets.tag');
     </div>
     <main class="mdl-layout__content">
       <div class="page-content">
-        <log-list if={opts.views.main === "log-list"} api={opts.api}></log-list>
-        <log-add if={opts.views.main === "log-add"} api={opts.api}></log-add>
-        <max-add if={opts.views.main === "max-add"} api={opts.api}></max-add>
-        <max-list if={opts.views.main === "max-list"} api={opts.api}></max-list>
-        <sheets if={opts.views.main === "sheets"} api={opts.api}></sheets>
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+              <view></view>
+                 </div>
+        </div>
       </div>
     </main>
   </div>
   <script>
     var self = this;
+
+    var el = null;
+    var tag = null;
+
+    var updateView = function(viewName, title, toTag) {
+      return function() {
+        opts.views.main = viewName;
+        self.title = title;
+
+        if(tag) {
+          tag.unmount(true);
+        }
+
+        self.update();
+       var tagNode = document.createElement(viewName);
+
+         el.appendChild(tagNode);
+        console.log(el, opts)
+        tag = riot.mount(tagNode, opts)[0];
+      };
+    };
+
+    var route = function(url, tagName, title) {
+      riot.route(url, updateView(tagName, title));
+    };
+
+    this.title = "Main";
+
+    this.on('mount', function() {
+      el = this.root.querySelector('view');
+    })
 
     opts.api.routeParams = {a:1};
 
@@ -47,38 +78,18 @@ require('./sheets.tag');
       opts.api.routeParams = arguments;
     });
 
-    riot.route('/logs', function(name) {
-      opts.views.main = 'log-list';
-      self.update();
-    });
+    route('/logs', 'log-list', 'Logs');
 
-    riot.route('/logs/*', function(key) {
-      opts.views.main = 'log-add';
-      opts.api.routeParams = {key: key};
-      self.update();
-    });
+    route('/logs/*', 'log-add', 'Log Edit');
 
-    riot.route('/maxes', function(key) {
-      opts.views.main = 'max-list';
-      self.update();
-    });
+    route('/maxes', 'max-list', 'Maxes');
 
-    riot.route('/maxes/*', function(key) {
-      opts.views.main = 'max-add';
-      self.update();
-    });
+    route('/maxes/*', 'max-add', 'Max Add');
 
-    riot.route('/sheets/*', function(key) {
-      opts.views.main = 'sheets';
-      self.update();
-    });
+    route('/sheets/*', 'sheets', 'Sheets');
 
     riot.route.start(true);
   </script>
-  <style>
-    .mdl-layout__content {
-      padding: 20px;
-    }
-  </style>
+
 </app>
 
