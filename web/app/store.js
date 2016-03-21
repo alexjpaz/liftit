@@ -1,15 +1,15 @@
 var riot = require('riot');
 var guid = require('./guid');
 
-var store = function() {
+var store = function(config, storage, reducer) {
+  if(!storage) throw Error("Storage is not set");
+
   riot.observable(this);
   var self = this;
 
-  this.events = JSON.parse(localStorage.getItem('events')) || {};
+  this.config = config;
 
-  this.aggregates = {
-    derp: 0
-  };
+  this.events = storage.get('events') || {};
 
   this.guid = guid;
 
@@ -25,26 +25,16 @@ var store = function() {
   });
 
   this.on('persist', function() {
-    localStorage.setItem('events', JSON.stringify(self.events));
+    storage.set('events');
   });
 
-  this.on('aggregate', function() {
-    var derp = 0;
-
-    for( k in self.events) {
-      var event = self.events[k];
-      if(event.type === 'log') {
-        derp = +derp + +event.weight;
-        console.log('hi1', event);
-      }
-    }
-
-    self.aggregates.derp = derp;
-
+  this.on('reduce', function() {
+    reducer.reduce(self);
+    console.log(self.fart)
   });
 
   this.on('digest', function() {
-    self.trigger('aggregate');
+    self.trigger('reduce');
     self.trigger('persist');
   });
 

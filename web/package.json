@@ -9,6 +9,7 @@
     "liftit-common": "git+https://github.com/alexjpaz/liftit-common.git",
     "material-design-lite": "^1.1.2",
     "mocha": "^2.4.5",
+    "redux": "^3.3.1",
     "require-dir": "^0.3.0",
     "riot": "^2.3.16",
     "riotjs": "^1.0.4",
@@ -25,7 +26,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/mocha/bin/mocha"
   },
   "author": "",
   "license": "ISC"

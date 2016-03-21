@@ -13,4 +13,9 @@ dev() {
   wait
 }
 
+runTest() {
+  local TESTRUNNER=node_modules/mocha/bin/mocha
+  $TESTRUNNER --recursive $ARGS
+}
+
 $CMD $ARGS

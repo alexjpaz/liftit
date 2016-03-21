@@ -3,6 +3,8 @@ require('./log-add.tag');
 require('./max-add.tag');
 require('./max-list.tag');
 require('./sheets.tag');
+require('./dashboard.tag');
+require('./nav-links.tag');
 
 <app>
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -13,11 +15,7 @@ require('./sheets.tag');
         <!-- Add spacer, to align navigation to the right -->
         <div class="mdl-layout-spacer"></div>
         <!-- Navigation. We hide it in small screens. -->
-        <nav class="mdl-navigation mdl-layout--large-screen-only">
-          <a class="mdl-navigation__link" href="#/logs">Logs</a>
-          <a class="mdl-navigation__link" href="#/maxes">Maxes</a>
-          <a class="mdl-navigation__link" href="#/sheets/531">Sheets</a>
-        </nav>
+        <nav-links class='mdl-navigation mdl-layout--large-screen-only'></nav-links>
       </div>
     </header>
     <div class="mdl-layout__drawer">
@@ -37,6 +35,7 @@ require('./sheets.tag');
         </div>
       </div>
     </main>
+    <pre>{ JSON.stringify(opts.api.store, null, 2) }</pre>
   </div>
   <script>
     var self = this;
@@ -87,6 +86,8 @@ require('./sheets.tag');
     route('/maxes/*', 'max-add', 'Max Add');
 
     route('/sheets/*', 'sheets', 'Sheets');
+
+    route('/', 'dashboard', 'Dashboard');
 
     riot.route.start(true);
   </script>
