@@ -25,12 +25,12 @@ var store = function(config, storage, reducer) {
   });
 
   this.on('persist', function() {
-    storage.set('events');
+    storage.set('events', this.events);
   });
 
   this.on('reduce', function() {
     reducer.reduce(self);
-    console.log(self.fart)
+    console.log(self)
   });
 
   this.on('digest', function() {

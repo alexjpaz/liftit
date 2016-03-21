@@ -5,6 +5,7 @@ require('./max-list.tag');
 require('./sheets.tag');
 require('./dashboard.tag');
 require('./nav-links.tag');
+require('./route.tag');
 
 <app>
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -27,15 +28,22 @@ require('./nav-links.tag');
       </nav>
     </div>
     <main class="mdl-layout__content">
-      <div class="page-content">
-        <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--12-col">
-              <view></view>
-                 </div>
+    <div class="page-content">
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--12-col">
+          <route when='/logs'>
+            <log-list api={ parent.opts.api }></log-list>
+          </route>
+          <route when='/maxes'>
+            <max-list api={ parent.opts.api }></max-list>
+          </route>
+          <route when='/logs/*'>
+            <log-add api={ parent.opts.api }></log-add>
+          </route>
         </div>
       </div>
+    </div>
     </main>
-    <pre>{ JSON.stringify(opts.api.store, null, 2) }</pre>
   </div>
   <script>
     var self = this;
@@ -56,13 +64,16 @@ require('./nav-links.tag');
        var tagNode = document.createElement(viewName);
 
          el.appendChild(tagNode);
-        console.log(el, opts)
         tag = riot.mount(tagNode, opts)[0];
       };
     };
 
     var route = function(url, tagName, title) {
       riot.route(url, updateView(tagName, title));
+      var subRoute = riot.route.create()
+      subRoute(url, function() {
+        opts.api.routeParams = arguments;
+      });
     };
 
     this.title = "Main";
@@ -71,23 +82,21 @@ require('./nav-links.tag');
       el = this.root.querySelector('view');
     })
 
-    opts.api.routeParams = {a:1};
+    opts.api.routeParams = [];
 
-    riot.route(function() {
-      opts.api.routeParams = arguments;
-    });
 
-    route('/logs', 'log-list', 'Logs');
 
-    route('/logs/*', 'log-add', 'Log Edit');
+    // route('/logs', 'log-list', 'Logs');
 
-    route('/maxes', 'max-list', 'Maxes');
-
-    route('/maxes/*', 'max-add', 'Max Add');
-
-    route('/sheets/*', 'sheets', 'Sheets');
-
-    route('/', 'dashboard', 'Dashboard');
+//    route('/logs/*', 'log-add', 'Log Edit');
+//
+//    route('/maxes', 'max-list', 'Maxes');
+//
+//    route('/maxes/*', 'max-add', 'Max Add');
+//
+//    route('/sheets/*', 'sheets', 'Sheets');
+//
+//    route('/', 'dashboard', 'Dashboard');
 
     riot.route.start(true);
   </script>

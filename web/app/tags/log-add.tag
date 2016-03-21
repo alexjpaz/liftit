@@ -14,12 +14,12 @@
     </div>
 
     <div class="mdl-textfield mdl-js-textfield">
-      <input class="mdl-textfield__input" type="text" id="sample1" name='weight' onchange={ model }>
+      <input class="mdl-textfield__input" type="text" id="sample1" value={ vm.weight} name='weight' onchange={ model }>
       <label class="mdl-textfield__label" for="sample1">Text...</label>
     </div>
 
     <div class="mdl-textfield mdl-js-textfield">
-      <input class="mdl-textfield__input" type="text" id="sample1" name='reps' onchange={ model }>
+      <input class="mdl-textfield__input" type="text" id="sample1" value={ vm.reps } name='reps' onchange={ model }>
       <label class="mdl-textfield__label" for="sample1">Text...</label>
     </div>
 
@@ -39,11 +39,10 @@
   </style>
 
   <script>
-console.log(1)
     var self = this;
     var store = opts.api.store;
 
-    var vm = this.vm = store.events[opts.api.routeParams.key] ||  {
+    var vm = this.vm = store.events[opts.api.routeParams[0]] ||  {
       key: store.guid(),
       type: 'log'
     };
@@ -56,5 +55,13 @@ console.log(1)
       form.preventDefault();
       store.trigger('addEvent', Object.assign({}, vm));
     };
+
+    var route = riot.route.create();
+    route('/logs/*', function(key) {
+      var event = store.events[key];
+      self.vm = Object.assign({}, event);
+      self.update();
+    });
+
   </script>
 </log-add>

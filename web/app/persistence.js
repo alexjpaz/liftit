@@ -8,10 +8,10 @@ persistence.inMemory = function() {
 
 persistence.localStorage = function() {
   this.get = function(arg) {
-    return localStorage.getItem(arg);
+    return JSON.parse(localStorage.getItem(arg));
   };
   this.set = function(arg, value) {
-    localStorage.setItem(arg, value);
+    localStorage.setItem(arg, JSON.stringify(value));
   };
 };
 
