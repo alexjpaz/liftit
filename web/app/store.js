@@ -15,6 +15,7 @@ var store = function(config, storage, reducer) {
 
   this.on('addEvent', function(event) {
     event.updated = new Date().getTime();
+    console.log(event)
     self.events[event.key] = event;
     self.trigger('digest');
   });

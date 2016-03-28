@@ -15,8 +15,11 @@ DateUtils.string = function(date) {
 };
 
 
-
 DateUtils.before = function(date) {
+};
+
+DateUtils.create = function() {
+  return new Date();
 };
 
 module.exports = DateUtils;

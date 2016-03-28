@@ -3,6 +3,7 @@ var store = require('./store');
 var config = require('./config');
 var persistence = require('./persistence');
 var reducers = require('./reducers/index');
+var DateUtils = require('./date');
 
 var api = function() {
   var self = this;
@@ -15,6 +16,7 @@ var api = function() {
     new reducers()
   );
 
+  this.DateUtils = DateUtils;
 };
 
 module.exports = new api();

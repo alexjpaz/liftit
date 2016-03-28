@@ -18,40 +18,32 @@
     </tr>
   </tbody>
 </table>
-<div class="mdl-card__actions mdl-card--border">
-  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-    Get Started
+  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href='#/logs/new'>
+    Add Log
   </a>
-</div>
-<div class="mdl-card__menu">
-  <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-    <i class="material-icons">share</i>
-  </button>
-</div>
-<a href class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-  Button
-  </button>
-  <a href='#/logs/new'>Add Log</a>
   <script>
-var self = this;
+  var self = this;
 
-var store = self.store = opts.api.store;
+  var store = self.store = opts.api.store;
 
-self.navigate = function(key) {
-  return function() {
-    riot.route('/logs/'+key);
+  self.navigate = function(key) {
+    return function() {
+      riot.route('/logs/'+key);
+    };
   };
-};
 
-self.logs = Object.keys(store.events).map(function(k){
-  return store.events[k];
-}).filter(function(event) {
-  return event.type === 'log';
-});
+  var getLogs = function() {
+    self.logs = Object.keys(store.events).map(function(k){
+      return store.events[k];
+    }).filter(function(event) {
+      return event.type === 'log';
+    });
+    self.update();
+  };
 
-store.on('digest', function(log) {
-  self.update();
-});
+  var route = riot.route.create();
+
+  route('/logs', getLogs);
 
   </script>
 </log-list>

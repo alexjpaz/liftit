@@ -24,10 +24,10 @@
     </div>
 
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-      Add Log
+      Store Log
     </button>
   </form>
-  <pre>{ JSON.stringify(this.vm) }</pre>
+  <pre>{ JSON.stringify(this.vm, null, 4) }</pre>
 
   <style>
     select {
@@ -42,23 +42,28 @@
     var self = this;
     var store = opts.api.store;
 
-    var vm = this.vm = store.events[opts.api.routeParams[0]] ||  {
-      key: store.guid(),
-      type: 'log'
-    };
-
     this.model = function(e) {
       self.vm[e.target.name] = e.target.value;
     };
 
     this.submit = function(form) {
       form.preventDefault();
-      store.trigger('addEvent', Object.assign({}, vm));
+      store.trigger('addEvent', Object.assign({}, self.vm));
     };
 
     var route = riot.route.create();
+
     route('/logs/*', function(key) {
       var event = store.events[key];
+
+      if(!event) {
+        event = {
+          key: store.guid(),
+          date: opts.api.DateUtils.create(),
+          type: 'log'
+        }
+      }
+
       self.vm = Object.assign({}, event);
       self.update();
     });
