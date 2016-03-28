@@ -13,18 +13,12 @@ var opts = {
   }
 }
 
-riot.mount('*', opts);
-
-riot.route(function() {
-  console.log('route', arguments);
-});
-
-riot.route('/logs', function(name) {
-  opts.views.main = 'log-list';
-});
-
-riot.route('/logs/222', function(name) {
-  opts.views.main = 'log-add';
-});
-
 riot.route.start(true);
+
+riot.mixin('api', {
+  api: api
+});
+
+
+
+riot.mount('*', opts);

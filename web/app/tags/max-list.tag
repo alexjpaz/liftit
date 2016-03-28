@@ -25,16 +25,17 @@
   <script>
     var self = this;
 
-    var store = self.store = opts.api.store;
+    this.mixin('api');
 
-    self.logs = Object.keys(store.events).map(function(k){
-      return store.events[k];
-    }).filter(function(event) {
-      return event.type === 'max';
-    });
+    var store = this.api.store;
 
-    store.on('digest', function(log) {
+    var getLogs = function() {
+      self.logs = store.maxes.list();
       self.update();
-    });
+    };
+
+    var route = riot.route.create();
+
+    route('/maxes', getLogs);
   </script>
 </max-list>

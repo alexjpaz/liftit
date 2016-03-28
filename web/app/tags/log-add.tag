@@ -40,7 +40,10 @@
 
   <script>
     var self = this;
-    var store = opts.api.store;
+
+    this.mixin('api');
+
+    var store = this.api.store;
 
     this.model = function(e) {
       self.vm[e.target.name] = e.target.value;
@@ -49,6 +52,7 @@
     this.submit = function(form) {
       form.preventDefault();
       store.trigger('addEvent', Object.assign({}, self.vm));
+      riot.route('/logs');
     };
 
     var route = riot.route.create();

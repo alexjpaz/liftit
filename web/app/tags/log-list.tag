@@ -24,7 +24,9 @@
   <script>
   var self = this;
 
-  var store = self.store = opts.api.store;
+  this.mixin('api');
+
+  var store = self.store = this.api.store;
 
   self.navigate = function(key) {
     return function() {
@@ -33,11 +35,7 @@
   };
 
   var getLogs = function() {
-    self.logs = Object.keys(store.events).map(function(k){
-      return store.events[k];
-    }).filter(function(event) {
-      return event.type === 'log';
-    });
+    self.logs = store.logs.list();
     self.update();
   };
 

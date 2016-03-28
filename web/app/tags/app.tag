@@ -29,6 +29,7 @@ require('./route.tag');
     <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">Liftit</span>
       <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="#/">Home</a>
         <a class="mdl-navigation__link" href="#/logs">Logs</a>
         <a class="mdl-navigation__link" href="#/maxes">Maxes</a>
         <a class="mdl-navigation__link" href="#/sheets/531">Sheets</a>
@@ -38,14 +39,17 @@ require('./route.tag');
       <div class="page-content">
         <div class="mdl-grid">
           <div class="mdl-cell mdl-cell--12-col">
+            <route when='/'>
+              <dashboard></dashoard>
+            </route>
             <route when='/logs'>
-              <log-list api={ parent.opts.api }></log-list>
+              <log-list></log-list>
             </route>
             <route when='/maxes'>
-              <max-list api={ parent.opts.api }></max-list>
+              <max-list></max-list>
             </route>
             <route when='/logs/*'>
-              <log-add api={ parent.opts.api }></log-add>
+              <log-add></log-add>
             </route>
           </div>
         </div>
