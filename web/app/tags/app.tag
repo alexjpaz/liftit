@@ -48,6 +48,9 @@ require('./route.tag');
             <route when='/maxes'>
               <max-list></max-list>
             </route>
+            <route when='/maxes/*'>
+              <max-add></max-add>
+            </route>
             <route when='/logs/*'>
               <log-add></log-add>
             </route>

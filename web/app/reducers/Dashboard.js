@@ -1,10 +1,11 @@
+var utils = require('./utils')
+
 module.exports = function(state) {
   state.dashboard = {
-    foo: 10,
-    derp: logs()
+    heerrrp: utils.effectiveMax(state.events, new Date())
   };
 
   function logs() {
-    return state.logs.list();
+    return utils.list(state.events, 'log');
   }
 };

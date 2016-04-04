@@ -27,7 +27,10 @@
 
   <script>
     var self = this;
-    var store = opts.api.store;
+
+    this.mixin('api');
+
+    var store = self.api.store;
 
     this.lifts = ['press','deadlift','bench','squat'];
 
