@@ -2,7 +2,8 @@
 
 var reducers = [
   require('./ConsoleReducer'),
-  require('./LastAttemptedLift')
+  require('./LastAttemptedLift'),
+  require('./Dashboard')
 ];
 
 var composite = function() {

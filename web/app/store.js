@@ -47,10 +47,11 @@ var store = function(config, storage, reducer) {
     self.trigger('persist');
   });
 
-  this.trigger('digest');
 
   this.maxes = new dao(this, 'max');
   this.logs = new dao(this, 'log');
+
+  this.trigger('digest');
 };
 
 
