@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr each={ l in logs }>
+      <tr each={ l in logs } onclick={navigate(l.key)}>
         <td>{ l.date }</td>
         <td>{ l.press }</td>
         <td>{ l.deadlift }</td>
@@ -19,7 +19,9 @@
       </tr>
     </tbody>
   </table>
-  <a href='#/logs/new'>Add Log</a>
+  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href='#/maxes/new'>
+    Add Max
+  </a>
 
   <pre>{ JSON.stringify(logs, null, 4); }</pre>
   <script>
@@ -33,6 +35,13 @@
       self.logs = store.maxes.list();
       self.update();
     };
+
+    self.navigate = function(key) {
+      return function() {
+        riot.route('/maxes/'+key);
+      };
+    };
+
 
     var route = riot.route.create();
 

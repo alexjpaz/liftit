@@ -11,7 +11,7 @@
     </div>
 
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-      Add Log
+      Store Max
     </button>
   </form>
   <pre>{ JSON.stringify(this.vm) }</pre>
@@ -34,10 +34,23 @@
 
     this.lifts = ['press','deadlift','bench','squat'];
 
-    var vm = this.vm = {
-      key: store.guid(),
-      type: 'max'
-    };
+    var route = riot.route.create();
+
+    route('/maxes/*', function(key) {
+      var event = store.events[key];
+
+      if(!event) {
+        event = {
+          key: store.guid(),
+          date: opts.api.DateUtils.create(),
+          type: 'max'
+        }
+      }
+
+      self.vm = Object.assign({}, event);
+      self.update();
+    });
+
 
     this.model = function(e) {
       self.vm[e.target.name] = e.target.value;
@@ -45,7 +58,7 @@
 
     this.submit = function(form) {
       form.preventDefault();
-      store.trigger('addEvent', Object.assign({}, vm));
+      store.trigger('addEvent', Object.assign({}, self.vm));
     };
   </script>
 </max-add>
