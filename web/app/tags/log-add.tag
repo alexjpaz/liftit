@@ -1,32 +1,34 @@
 <log-add>
-  <form onsubmit={submit}>
-     <div class="mdl-textfield mdl-js-textfield">
-      <input class="mdl-textfield__input" type="date" id="sample1" name='date' onchange={ model }>
-      <label class="mdl-textfield__label" for="sample1">Date...</label>
-    </div>
+    <form onsubmit={submit}>
+       <div class="form-group">
+        <label>Date</label>
+        <input class="form-control" type="date" id="sample1" name='date' onchange={ model }>
+      </div>
 
-    <div class="mdl-textfield mdl-js-textfield">
-      <select name='lift' onchange={model}>
-        <option>-- select lift --</option>
-        <option value='press'>press</option>
-        <option value='deadlift'>deadlift</option>
-      </select>
-    </div>
+      <div class="form-group">
+        <label>Lift</label>
+        <select name='lift' class='form-control' onchange={model}>
+          <option>-- select lift --</option>
+          <option value='press'>press</option>
+          <option value='deadlift'>deadlift</option>
+        </select>
+      </div>
 
-    <div class="mdl-textfield mdl-js-textfield">
-      <input class="mdl-textfield__input" type="text" id="sample1" value={ vm.weight} name='weight' onchange={ model }>
-      <label class="mdl-textfield__label" for="sample1">Text...</label>
-    </div>
+      <div class="form-group">
+        <label>Weight</label>
+        <input class="form-control" type="text"  value={ vm.weight} name='weight' onchange={ model }>
+      </div>
 
-    <div class="mdl-textfield mdl-js-textfield">
-      <input class="mdl-textfield__input" type="text" id="sample1" value={ vm.reps } name='reps' onchange={ model }>
-      <label class="mdl-textfield__label" for="sample1">Text...</label>
-    </div>
+      <div class="form-group">
+        <label>Reps</label>
+        <input class="form-control" type="number"  value={ vm.reps } name='reps' onchange={ model }>
+      </div>
 
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-      Store Log
-    </button>
-  </form>
+      <button class="btn btn-primary">
+        Store Log
+      </button>
+    </form>
+
   <pre>{ JSON.stringify(this.vm, null, 4) }</pre>
 
   <style>
@@ -63,7 +65,7 @@
       if(!event) {
         event = {
           key: store.guid(),
-          date: opts.api.DateUtils.create(),
+          date: self.api.DateUtils.create(),
           type: 'log'
         }
       }

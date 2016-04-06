@@ -1,29 +1,20 @@
 <max-add>
   <form onsubmit={submit}>
-     <div class="mdl-textfield mdl-js-textfield">
-      <input class="mdl-textfield__input" type="date" id="sample1" name='date' onchange={ model }>
-      <label class="mdl-textfield__label" for="sample1">Date...</label>
+     <div class="form-group">
+      <label>Date</label>
+      <input class="form-control" type="date" id="sample1" name='date' onchange={ model }>
     </div>
 
-    <div class="mdl-textfield mdl-js-textfield" each={l in lifts}>
-      <input class="mdl-textfield__input" type="number" id="sample1" name={l} onchange={ model }>
-      <label class="mdl-textfield__label" for="sample1">{ lift }</label>
+    <div class="form-group" each={l in lifts}>
+      <label>{ l }</label>
+      <input class="form-control" type="number" id="sample1" name={l} onchange={ model }>
     </div>
 
-    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+    <button class="btn btn-primary">
       Store Max
     </button>
   </form>
   <pre>{ JSON.stringify(this.vm) }</pre>
-
-  <style>
-    select {
-      border: 1px solid;
-        width: 100%;
-          border-radius: 0;
-            background: none;
-    }
-  </style>
 
   <script>
     var self = this;
@@ -42,7 +33,7 @@
       if(!event) {
         event = {
           key: store.guid(),
-          date: opts.api.DateUtils.create(),
+          date: self.api.DateUtils.create(),
           type: 'max'
         }
       }

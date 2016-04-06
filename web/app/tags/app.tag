@@ -8,56 +8,33 @@ require('./nav-links.tag');
 require('./route.tag');
 
 <app>
-  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
-              mdl-layout--fixed-header">
-    <header class="mdl-layout__header">
-      <div class="mdl-layout__header-row">
-        <div class="mdl-layout-spacer"></div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
-                    mdl-textfield--floating-label mdl-textfield--align-right">
-          <label class="mdl-button mdl-js-button mdl-button--icon"
-                 for="fixed-header-drawer-exp">
-            <i class="material-icons">search</i>
-          </label>
-          <div class="mdl-textfield__expandable-holder">
-            <input class="mdl-textfield__input" type="text" name="sample"
-                   id="fixed-header-drawer-exp">
-          </div>
-        </div>
+  <div style='padding-top: 80px'>
+    <div class='container'>
+      <div class='col-md-2'>
+        <ul class="nav nav-pills nav-stacked">
+          <li><a href='#/'>Home</a></li>
+          <li><a href='#/logs'>Logs</a></li>
+          <li><a href='#/maxes'>Maxes</a></li>
+        </ul>
       </div>
-    </header>
-    <div class="mdl-layout__drawer">
-      <span class="mdl-layout-title">Liftit</span>
-      <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="#/">Home</a>
-        <a class="mdl-navigation__link" href="#/logs">Logs</a>
-        <a class="mdl-navigation__link" href="#/maxes">Maxes</a>
-        <a class="mdl-navigation__link" href="#/sheets/531">Sheets</a>
-      </nav>
+      <div class='col-md-10'>
+        <route when='/'>
+          <dashboard></dashoard>
+        </route>
+        <route when='/logs'>
+          <log-list></log-list>
+        </route>
+        <route when='/maxes'>
+          <max-list></max-list>
+        </route>
+        <route when='/maxes/*'>
+          <max-add></max-add>
+        </route>
+        <route when='/logs/*'>
+          <log-add></log-add>
+        </route>
+      </div>
     </div>
-    <main class="mdl-layout__content">
-      <div class="page-content">
-        <div class="mdl-grid">
-          <div class="mdl-cell mdl-cell--12-col">
-            <route when='/'>
-              <dashboard></dashoard>
-            </route>
-            <route when='/logs'>
-              <log-list></log-list>
-            </route>
-            <route when='/maxes'>
-              <max-list></max-list>
-            </route>
-            <route when='/maxes/*'>
-              <max-add></max-add>
-            </route>
-            <route when='/logs/*'>
-              <log-add></log-add>
-            </route>
-          </div>
-        </div>
-      </div>
-    </main>
   </div>
 
   <script>

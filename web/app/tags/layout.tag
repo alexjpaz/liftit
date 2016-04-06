@@ -1,0 +1,3 @@
+<layout>
+  <yield />
+</layout>

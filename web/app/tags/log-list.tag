@@ -1,6 +1,6 @@
 <log-list>
 
-<table class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp">
+<table class="table table-bordered">
   <thead>
     <tr>
       <th>Date</th>

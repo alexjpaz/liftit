@@ -1,15 +1,12 @@
+require('./calendar.tag');
+require('./dashboard/events.tag');
+
 <dashboard>
 
-<div class="mdl-card mdl-shadow--4dp">
-  <div class="mdl-card__supporting-text">
-    Auckland Sky Tower, taken March 24th, 2014
-  </div>
-  <div class="mdl-card__supporting-text">
-  The Sky Tower is an observation and telecommunications tower located in Auckland,
-  New Zealand. It is 328 metres (1,076 ft) tall, making it the tallest man-made structure
-  in the Southern Hemisphere.
-  </div>
-</div>
+  <calendar></calendar>
+  <dashboard-events></dashboard-events>
+
+
   <pre>{ JSON.stringify(thing, null, 4) }</pre>
 
   <script>

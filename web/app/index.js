@@ -19,6 +19,14 @@ riot.mixin('api', {
   api: api
 });
 
+riot.mixin('store', {
+  store: api.store
+});
+
+riot.mixin('forms', {
+
+});
+
 
 
 riot.mount('*', opts);
