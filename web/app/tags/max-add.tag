@@ -1,20 +1,26 @@
 <max-add>
-  <form onsubmit={submit}>
-     <div class="form-group">
-      <label>Date</label>
-      <input class="form-control" type="date" id="sample1" name='date' onchange={ model }>
+  <div class='panel panel-default'>
+    <div class='panel-heading'>
+      Max
     </div>
+    <div class='panel-body'>
+      <form onsubmit={submit}>
+         <div class="form-group">
+          <label>Date</label>
+          <input class="form-control" type="date" name='date' value={ vm.date } onchange={ model }>
+        </div>
 
-    <div class="form-group" each={l in lifts}>
-      <label>{ l }</label>
-      <input class="form-control" type="number" id="sample1" name={l} onchange={ model }>
+        <div class="form-group" each={l in lifts}>
+          <label>{ l }</label>
+          <input class="form-control" type="number" name={l} value={vm[l]} onchange={ model }>
+        </div>
+
+        <button class="btn btn-primary">
+          Store Max
+        </button>
+      </form>
     </div>
-
-    <button class="btn btn-primary">
-      Store Max
-    </button>
-  </form>
-  <pre>{ JSON.stringify(this.vm) }</pre>
+  </div>
 
   <script>
     var self = this;
@@ -50,6 +56,7 @@
     this.submit = function(form) {
       form.preventDefault();
       store.trigger('addEvent', Object.assign({}, self.vm));
+      riot.route('/maxes');
     };
   </script>
 </max-add>

@@ -11,7 +11,7 @@
   </thead>
   <tbody>
     <tr each={ l in logs } onclick={navigate(l.key)}>
-      <td>{ l.date }</td>
+      <td><a href='/logs/{ l.key }'>{ l.date }</a></td>
       <td>{ l.lift }</td>
       <td>{ l.weight }</td>
       <td>{ l.reps }</td>

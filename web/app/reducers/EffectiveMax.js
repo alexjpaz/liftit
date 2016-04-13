@@ -4,11 +4,7 @@ function EffectiveMax(events, currentDate) {
   checkInput(events, currentDate);
 
   if(currentDate instanceof Date) {
-    currentDate = [
-      currentDate.getFullYear(),
-      currentDate.getMonth() + 1,
-      currentDate.getDay() + 1
-    ].join('-');
+    currentDate = DateUtils.string(currentDate);
   }
 
   var result = null;
@@ -32,6 +28,6 @@ function checkInput(events, currentDate) {
 }
 
 module.exports = function(state) {
-  var lifts = 
+  var lifts =
   EffectiveMax;
 };

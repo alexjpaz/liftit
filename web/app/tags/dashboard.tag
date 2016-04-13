@@ -7,7 +7,13 @@ require('./dashboard/events.tag');
   <dashboard-events></dashboard-events>
 
 
-  <pre>{ JSON.stringify(thing, null, 4) }</pre>
+  <p>
+    <a href='#/maxes/{ thing.currentMax.key }'>
+    <span class='label label-default'>
+      {thing.currentMax.press}-{thing.currentMax.deadlift}-{thing.currentMax.bench}-{thing.currentMax.squat}
+    <span>
+    </a>
+  </p>
 
   <script>
     var self = this;

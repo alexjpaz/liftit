@@ -1,8 +1,13 @@
 <log-add>
+  <div class='panel panel-default'>
+    <div class='panel-heading'>
+      Log
+    </div>
+    <div class='panel-body'>
     <form onsubmit={submit}>
        <div class="form-group">
         <label>Date</label>
-        <input class="form-control" type="date" id="sample1" name='date' onchange={ model }>
+        <input class="form-control" type="date" id="sample1" name='date' onchange={ model } value={ vm.date } />
       </div>
 
       <div class="form-group">
@@ -11,6 +16,8 @@
           <option>-- select lift --</option>
           <option value='press'>press</option>
           <option value='deadlift'>deadlift</option>
+          <option value='bench'>bench</option>
+          <option value='squat'>squat</option>
         </select>
       </div>
 
@@ -28,6 +35,8 @@
         Store Log
       </button>
     </form>
+    </div>
+  </div>
 
   <pre>{ JSON.stringify(this.vm, null, 4) }</pre>
 
@@ -42,6 +51,10 @@
 
   <script>
     var self = this;
+
+    this.openFaux = function(e) {
+      console.log(e, this.fauxdate.click());
+    };
 
     this.mixin('api');
 
