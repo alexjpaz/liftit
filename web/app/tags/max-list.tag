@@ -23,7 +23,6 @@
     Add Max
   </a>
 
-  <pre>{ JSON.stringify(logs, null, 4); }</pre>
   <script>
     var self = this;
 

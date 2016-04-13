@@ -1,3 +1,8 @@
+var utils = require('../reducers/utils')
+
+var Log = require('../models/Log');
+var Cycle = require('../models/Cycle');
+
 <log-add>
   <div class='panel panel-default'>
     <div class='panel-heading'>
@@ -38,7 +43,12 @@
     </div>
   </div>
 
-  <pre>{ JSON.stringify(this.vm, null, 4) }</pre>
+  <div class='panel panel-default'>
+    <div class='panel-body'>
+    </div>
+  </div>
+
+  <pre>{ JSON.stringify(effectiveMax, null, 4) }</pre>
 
   <style>
     select {
@@ -52,16 +62,13 @@
   <script>
     var self = this;
 
-    this.openFaux = function(e) {
-      console.log(e, this.fauxdate.click());
-    };
-
     this.mixin('api');
 
     var store = this.api.store;
 
     this.model = function(e) {
       self.vm[e.target.name] = e.target.value;
+      self.effectiveMax = this.vm.getEffectiveMax();
     };
 
     this.submit = function(form) {
@@ -75,15 +82,11 @@
     route('/logs/*', function(key) {
       var event = store.events[key];
 
-      if(!event) {
-        event = {
-          key: store.guid(),
-          date: self.api.DateUtils.create(),
-          type: 'log'
-        }
-      }
+      var log = new Log(event);
+      self.vm = log;
 
-      self.vm = Object.assign({}, event);
+      self.effectiveMax = log.getEffectiveMax();
+
       self.update();
     });
 

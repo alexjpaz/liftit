@@ -6,6 +6,7 @@ require('./sheets.tag');
 require('./dashboard.tag');
 require('./nav-links.tag');
 require('./route.tag');
+require('./common/panel.tag')
 
 <app>
   <div style='padding-top: 80px'>

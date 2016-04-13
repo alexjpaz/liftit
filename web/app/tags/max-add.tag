@@ -22,6 +22,10 @@
     </div>
   </div>
 
+  <hr />
+
+  <a href='http://liftit-sheets.alexjpaz.com/531bbb/?press={ vm.press }&deadlift={ vm.deadlift }&bench={vm.bench}&squat={vm.squat}' target='_blank'>View Cycle Sheet</a>
+
   <script>
     var self = this;
 
