@@ -19,4 +19,17 @@ Event.findByType = function(type) {
   });
 };
 
+Event.findBefore = function(date) {
+  if(date instanceof Date) {
+    date = DateUtils.string(date);
+  }
+
+  var filteredEvents = Event.all().filter(function(event) {
+    return event.date <= date;
+  }).sort(DateUtils.sort);
+
+  return filteredEvents;
+};
+
+
 module.exports = Event;
