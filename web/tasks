@@ -16,6 +16,8 @@ dev() {
 build() {
  WEBPACK=node_modules/webpack/bin/webpack.js
  $WEBPACK -p
+
+ npm install
 }
 
 runTest() {
