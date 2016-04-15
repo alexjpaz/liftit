@@ -1,3 +1,2 @@
 test:
-  cd web
-  ./tasks build
+	cd web && ./tasks build
