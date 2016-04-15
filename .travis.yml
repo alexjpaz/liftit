@@ -9,7 +9,8 @@ deploy:
   bucket: liftit.alexjpaz.com
   cache_control: "max-age=3600"
   skip_cleanup: true
-  local-dir: wev/public
+  local-dir: web/public
   acl: public_read
   on:
+    branch: web-client
     repo: alexjpaz/liftit
