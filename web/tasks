@@ -13,6 +13,11 @@ dev() {
   wait
 }
 
+build() {
+ WEBPACK=node_modules/webpack/bin/webpack.js
+ $WEBPACK -p
+}
+
 runTest() {
   local TESTRUNNER=node_modules/mocha/bin/mocha
   $TESTRUNNER --recursive $ARGS
