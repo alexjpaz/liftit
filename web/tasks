@@ -15,9 +15,13 @@ dev() {
 
 build() {
  WEBPACK=node_modules/webpack/bin/webpack.js
+ 
+ 
+ npm install babel-core
+ npm install
  $WEBPACK -p
 
- npm install
+ 
 }
 
 runTest() {
