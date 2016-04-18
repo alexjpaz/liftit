@@ -4,20 +4,34 @@ require('./max-add.tag');
 require('./max-list.tag');
 require('./sheets.tag');
 require('./dashboard.tag');
+require('./nav-header.tag');
 require('./nav-links.tag');
 require('./route.tag');
 require('./common/panel.tag')
 
 <app>
-  <div style='padding-top: 80px'>
-    <div class='container'>
-      <div class='col-md-2'>
-        <ul class="nav nav-pills nav-stacked">
-          <li><a href='#/'>Home</a></li>
-          <li><a href='#/logs'>Logs</a></li>
-          <li><a href='#/maxes'>Maxes</a></li>
-        </ul>
-      </div>
+  <style>
+    .app-container {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+
+    .navbar-toggle {
+      position: relative;
+      float: left;
+      padding: 9px 10px;
+      margin-top: 8px;
+      margin-left: 15px;
+      margin-bottom: 8px;
+      background-color: transparent;
+      background-image: none;
+      border: 1px solid transparent;
+      border-radius: 4px;
+    }
+  </style>
+  <nav-header></nav-header>
+  <div style='padding-top: 60px'>
+    <div class='app-container container'>
       <div class='col-md-10'>
         <route when='/'>
           <dashboard></dashoard>
@@ -76,20 +90,6 @@ require('./common/panel.tag')
     })
 
     opts.api.routeParams = [];
-
-
-
-    // route('/logs', 'log-list', 'Logs');
-
-//    route('/logs/*', 'log-add', 'Log Edit');
-//
-//    route('/maxes', 'max-list', 'Maxes');
-//
-//    route('/maxes/*', 'max-add', 'Max Add');
-//
-//    route('/sheets/*', 'sheets', 'Sheets');
-//
-//    route('/', 'dashboard', 'Dashboard');
 
     riot.route.start(true);
   </script>
