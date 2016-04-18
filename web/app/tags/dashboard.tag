@@ -1,20 +1,15 @@
-require('./calendar.tag');
+require('./dashboard/calendar.tag');
+require('./dashboard/today.tag');
 require('./dashboard/events.tag');
 
 <dashboard>
 
-  <calendar></calendar>
+  <dashboard-today></dashboard-today>
+  <dashboard-calendar></dashboard-calendar>
   <dashboard-events></dashboard-events>
 
 
-  <p>
-    <a href='#/maxes/{ thing.currentMax.key }'>
-    <span class='label label-default'>
-      {thing.currentMax.press}-{thing.currentMax.deadlift}-{thing.currentMax.bench}-{thing.currentMax.squat}
-    <span>
-    </a>
-  </p>
-
+  
   <script>
     var self = this;
     this.mixin('api');

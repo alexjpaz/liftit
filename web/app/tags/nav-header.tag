@@ -12,7 +12,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Home</a></li>
             <li><a href="#/logs">Logs</a></li>
             <li><a href="#/maxes">Cycles</a></li>
          </ul>
@@ -33,5 +33,14 @@
           self.navbar.classList.remove('in');
         }
       };
+
+
+      var anchors = this.navbar.querySelectorAll('a');
+      [].forEach.call(anchors, function(e) {
+        e.addEventListener('click', function() {
+              self.navbar.classList.remove('in');
+              self.menuIn = false;
+            }, false);
+      })
     </script>
 </nav-header>
