@@ -21,8 +21,8 @@ var Event = require('../../models/Event');
       </span>
     </div>
   </div>
-
 </div>
+<p class='text-muted'>{ today }</p>
   <style scoped>
     dashboard-calendar {
       display: block;
@@ -79,33 +79,38 @@ var Event = require('../../models/Event');
     function update() {
       var now = new Date();
       var today = new Date();
+
+      self.today = today;
+
       today.setHours(0,0,0,0);
-      var date = new Date();
-      self.firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+
+      self.firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
 
       this.days = Array(self.firstDay.getDay());
 
       var dateDay = 1;
-      for(var i=this.days.length; i < daysInThisMonth() + self.firstDay.getDay(); i++) {
-        var cursorDate = new Date(date.getFullYear(), date.getMonth(), dateDay)
+      var cursorDate = null;
+
+      for(var i=this.days.length; i < daysInThisMonth(today) + self.firstDay.getDay(); i++) {
+        cursorDate = new Date(today.getFullYear(), today.getMonth(), dateDay+1)
         cursorDate.setHours(0,0,0,0);
 
         dateDay = (i+1)-self.firstDay.getDay();
+
         this.days[i] = {
           label: dateDay,
-          events: Event.findOn(new Date(date.getFullYear(), date.getMonth(), dateDay)),
+          events: Event.findOn(cursorDate),
           isToday: false
          };
 
         if(today.getTime() === cursorDate.getTime()) {
+          console.log(today, cursorDate)
           this.days[i].isToday = true;
         }
       }
 
-
-
-      function daysInThisMonth() {
-        return daysInMonth(new Date().getMonth(), new Date().getYear());
+      function daysInThisMonth(date) {
+        return daysInMonth(date.getMonth()+1, date.getYear());
       }
 
       function daysInMonth(month,year) {

@@ -101,7 +101,9 @@ var Cycle = require('../models/Cycle');
     var store = this.api.store;
 
     this.model = function(e) {
-      self.vm[e.target.name] = e.target.value;
+      var  value = e.target.value;
+
+      self.vm[e.target.name] = value;
       self.effectiveMax = this.vm.getEffectiveMax();
       self.update();
     };
@@ -109,7 +111,10 @@ var Cycle = require('../models/Cycle');
     this.submit = function(form) {
       form.preventDefault();
       store.trigger('addEvent', Object.assign({}, self.vm));
-      riot.route('/logs');
+
+      var redirect = getParameterByName('redirect', location) || '/logs';
+
+      riot.route(redirect);
     };
 
     var route = riot.route.create();
@@ -125,5 +130,14 @@ var Cycle = require('../models/Cycle');
       self.update();
     });
 
+    var getParameterByName = function getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
   </script>
 </log-add>
