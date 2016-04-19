@@ -1,4 +1,5 @@
 var api = require('../api');
+var DateUtils = require('../date');
 
 function Event() {
 }
@@ -17,6 +18,18 @@ Event.findByType = function(type) {
   return Event.find(function(ev) {
     return ev.type === type;
   });
+};
+
+Event.findOn = function(date) {
+  if(date instanceof Date) {
+    date = DateUtils.string(date);
+  }
+
+  var filteredEvents = Event.all().filter(function(event) {
+    return event.date == date;
+  }).sort(DateUtils.sort);
+
+  return filteredEvents;
 };
 
 Event.findBefore = function(date) {

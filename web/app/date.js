@@ -11,8 +11,8 @@ DateUtils.sort = function(a,b) {
 DateUtils.string = function(date) {
     return [
       date.getFullYear(),
-      pad(date.getMonth() + 1),
-      pad(date.getDay() + 1)
+      pad(''+(date.getMonth() + 1)),
+      pad(''+date.getDate())
     ].join('-');
 };
 
@@ -25,7 +25,9 @@ DateUtils.create = function() {
 };
 
 function pad(str) {
-  return ('0'+str).substring(str.length);
+  var pad = "00"
+  var ans = pad.substring(0, pad.length - str.length) + str
+  return ans;
 }
 
 module.exports = DateUtils;
