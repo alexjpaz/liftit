@@ -3,8 +3,8 @@ require('./dashboard/today.tag');
 require('./dashboard/events.tag');
 
 <dashboard>
-  <dashboard-today></dashboard-today>
   <dashboard-calendar></dashboard-calendar>
+  <dashboard-today></dashboard-today>
   <script>
     var self = this
     var route = riot.route.create();

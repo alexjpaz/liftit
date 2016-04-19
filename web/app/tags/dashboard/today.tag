@@ -1,13 +1,14 @@
 <dashboard-today>
-  <div class='card'>
+    <p>
+      <a href='#/logs/new'>Add New Log</a>
+    </p>
     <p>
       <a href='#/maxes/{ thing.currentMax.key }'>
-      <span class='label label-default'>
+      <span>
         {thing.currentMax.press}-{thing.currentMax.deadlift}-{thing.currentMax.bench}-{thing.currentMax.squat}
       <span>
       </a>
     </p>
-  </div>
   <style>
     dashboard-today {
       display: block;
