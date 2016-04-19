@@ -21,10 +21,7 @@ var Cycle = require('../models/Cycle');
         <label>Lift</label>
         <select name='lift' class='form-control' onchange={model}>
           <option>-- select lift --</option>
-          <option value='press'>press</option>
-          <option value='deadlift'>deadlift</option>
-          <option value='bench'>bench</option>
-          <option value='squat'>squat</option>
+          <option each={ l in lifts } value={ l } selected={ vm.lift === l }>{ l }</option>
         </select>
       </div>
 
@@ -95,6 +92,8 @@ var Cycle = require('../models/Cycle');
     var self = this;
 
     this.liftit = liftit;
+
+    this.lifts = ['press','deadlift','bench','squat'];
 
     this.mixin('api');
 
