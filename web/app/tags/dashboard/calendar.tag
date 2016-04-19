@@ -16,28 +16,38 @@ var Event = require('../../models/Event');
     <div class='week'>
       <div class='col day isToday--{ d.isToday != false }' each={ d in days } onclick={ selectDay(d) }>
         { d.label }
-        <span each={ e in d.events } class='badge badge-default badge-{e.type}'>
-          <a if={ e.type === 'log' } href='#/logs/{e.key}'>{ e.type[0].toUpperCase() }</a>
-          <a if={ e.type === 'max' } href='#/maxes/{e.key}'>{ e.type[0].toUpperCase() }</a>
+        <span each={ e in d.events } class='badge badge-default badge-{e.type}'>+
         </span>
       </div>
     </div>
   </div>
   <div class='col-md-6 scrollable'>
-    <p>{ JSON.stringify(selectedDay, null, 4) }</p>
-
-    <p each={ e in selectedDay.events } class='badge badge-default badge-{e.type}'>
-          <a if={ e.type === 'log' } href='#/logs/{e.key}'>{ e.type[0].toUpperCase() }</a>
-          <a if={ e.type === 'max' } href='#/maxes/{e.key}'>{ e.type[0].toUpperCase() }</a>
-    </p>
-
+    <h6 style='text-align: right'>{ selectedDay.date }</h3>
+    <div each={ e in selectedDay.events } class='event' onclick={ navigateToEvent(e) }>
+      <span><strong>{ e.type }</strong></span>
+      <span if={e.type==='max'}>
+        { e.press }-{ e.deadlift }-{ e.bench }-{ e.squat }
+      </span>
+      <span if={e.type==='log'}>
+        { e.lift }
+        { e.weight }x{ e.reps }
+      </span>
+    </div>
+    <a href='#/logs/new'>New Log</a>
+    <a href='#/maxe/new'>New Cycle</a>
   </div>
 </div>
-<p class='text-muted'>{ today }</p>
   <style scoped>
     dashboard-calendar {
       display: block;
       display: relative;
+    }
+
+    .event {
+      border: 1px solid #ddd;
+      padding: 4px;
+      margin-top: -1px;
+      padding: 8px 14px;
     }
 
     .scrollable {
@@ -97,6 +107,21 @@ var Event = require('../../models/Event');
         self.selectedDay = d;
         self.update();
       };
+    };
+
+    self.navigateToEvent = function(event) {
+      return function(e) {
+        var typeUrl = null;
+        if(event.type === 'log') {
+          typeUrl = 'logs';
+        }
+
+        if(event.type === 'max') {
+          typeUrl = 'maxes';
+        }
+
+        riot.route('/'+typeUrl+'/'+event.key);
+      }
     };
 
     function update() {
