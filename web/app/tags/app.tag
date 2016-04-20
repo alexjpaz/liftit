@@ -7,6 +7,7 @@ require('./dashboard.tag');
 require('./nav-header.tag');
 require('./nav-links.tag');
 require('./route.tag');
+require('./routes/day.tag');
 require('./common/panel.tag')
 
 <app>
@@ -32,7 +33,7 @@ require('./common/panel.tag')
   <nav-header></nav-header>
   <div style='padding-top: 60px'>
     <div class='app-container container'>
-      <div class='col-md-10'>
+      <div class='col-md-12'>
         <route when='/'>
           <dashboard></dashoard>
         </route>
@@ -42,11 +43,14 @@ require('./common/panel.tag')
         <route when='/maxes'>
           <max-list></max-list>
         </route>
-        <route when='/maxes/*'>
+        <route when='/maxes/..'>
           <max-add></max-add>
         </route>
-        <route when='/logs/*'>
+        <route when='/logs/..'>
           <log-add></log-add>
+        </route>
+        <route when='/day..'>
+          <day></day>
         </route>
       </div>
     </div>

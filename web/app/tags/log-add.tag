@@ -110,10 +110,7 @@ var Cycle = require('../models/Cycle');
     this.submit = function(form) {
       form.preventDefault();
       store.trigger('addEvent', Object.assign({}, self.vm));
-
-      var redirect = getParameterByName('redirect', location) || '/logs';
-
-      riot.route(redirect);
+      window.history.back();
     };
 
     var route = riot.route.create();

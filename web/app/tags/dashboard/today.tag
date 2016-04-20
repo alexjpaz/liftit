@@ -1,14 +1,12 @@
 <dashboard-today>
-    <p>
-      <a href='#/logs/new'>Add New Log</a>
-    </p>
-    <p>
-      <a href='#/maxes/{ thing.currentMax.key }'>
-      <span>
-        {thing.currentMax.press}-{thing.currentMax.deadlift}-{thing.currentMax.bench}-{thing.currentMax.squat}
-      <span>
-      </a>
-    </p>
+  <div class='button-group'>
+    <a href='#/logs/new' class='button-group--left' >Add Log</a>
+    <a href='#/maxes/{ thing.currentMax.key }' class='button-group--right'>
+    <span>
+      {thing.currentMax.press}-{thing.currentMax.deadlift}-{thing.currentMax.bench}-{thing.currentMax.squat}
+    <span>
+    </a>
+  </div>
   <style>
     dashboard-today {
       display: block;
@@ -19,6 +17,28 @@
       border-radius: 4px;
       padding: 4px;
       margin-bottom: 10px;
+    }
+
+    .button-group a {
+      float: left;
+      width: 50%;
+      text-align: center;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+      padding: 8px;
+    }
+
+
+    a.button-group--left  {
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+    }
+
+    a.button-group--right {
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-left: 0;
+
     }
   </style>
   <script>
