@@ -1,5 +1,5 @@
 <route>
-  <div if={show} >
+  <div style="display: { show ? 'block' : 'none' }" >
     <yield />
   </div>
   <script>
