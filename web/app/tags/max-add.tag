@@ -20,6 +20,10 @@ var Cycle = require('../models/Cycle');
         <button class="btn btn-primary">
           Store Max
         </button>
+
+        <button class="btn btn-primary" onclick={ remove }>
+          Remove
+        </button>
       </form>
     </div>
   </div>
@@ -64,7 +68,13 @@ var Cycle = require('../models/Cycle');
     this.submit = function(form) {
       form.preventDefault();
       store.trigger('addEvent', Object.assign({}, self.vm));
-      riot.route('/maxes');
+      window.history.back();
+    };
+
+    this.remove = function(form) {
+      form.preventDefault();
+      store.trigger('removeEvent', self.vm.key);
+      window.history.back();
     };
   </script>
 </max-add>

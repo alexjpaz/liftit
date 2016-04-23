@@ -66,7 +66,7 @@ var store = function(config, storage, reducer) {
   });
 
   this.on('removeEvent', function(eventKey) {
-    delete self.events;
+    delete self.events[eventKey];
     self.trigger('digest');
   });
 
