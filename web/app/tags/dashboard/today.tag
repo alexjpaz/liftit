@@ -7,12 +7,13 @@
     <span>
     </a>
   </div>
-  <style>
-    dashboard-today {
+  <style scoped>
+    :scope {
       display: block;
+      overflow: hidden;
     }
 
-    dashboard-today .card {
+    :scope .card {
       border: 1px solid #aaa;
       border-radius: 4px;
       padding: 4px;

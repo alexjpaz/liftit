@@ -22,9 +22,11 @@ var DateUtils = require('../../date');
       </div>
     </div>
   <style scoped>
-    dashboard-calendar {
+    :scope {
       display: block;
       display: relative;
+      overflow: hidden;
+      margin-bottom: 20px;
     }
 
     .events {

@@ -124,6 +124,7 @@ var Cycle = require('../models/Cycle');
       self.effectiveMax = log.getEffectiveMax();
 
       self.update();
+
     });
 
     var getParameterByName = function getParameterByName(name, url) {

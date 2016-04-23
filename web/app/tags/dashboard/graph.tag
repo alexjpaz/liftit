@@ -35,4 +35,9 @@
         chart.draw(data, options);
       }
 </script>
+<style scoped>
+  :scope {
+    display: block;
+  }
+</style>
 </dashboard-graph>

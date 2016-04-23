@@ -15,6 +15,16 @@ persistence.localStorage = function() {
   };
 };
 
+persistence.composite = function() {
+  this.get = function(arg) {
+    persistence.localStorage.get(arg);
+  };
+
+  this.set = function(arg, value) {
+    persistence.localStorage.set(arg, value);
+  };
+};
+
 function noop() {}
 
 module.exports = persistence;

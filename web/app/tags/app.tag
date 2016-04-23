@@ -8,6 +8,7 @@ require('./nav-header.tag');
 require('./nav-links.tag');
 require('./route.tag');
 require('./routes/day.tag');
+require('./routes/profile.tag');
 require('./common/panel.tag')
 
 <app>
@@ -51,6 +52,9 @@ require('./common/panel.tag')
         </route>
         <route when='/day..'>
           <day></day>
+        </route>
+        <route when='/profile'>
+          <profile></profile>
         </route>
       </div>
     </div>
