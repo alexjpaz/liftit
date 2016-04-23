@@ -127,6 +127,16 @@ var Cycle = require('../models/Cycle');
 
     });
 
+
+    route('/logs/new...', function() {
+      self.vm = new Log({
+        date: riot.route.query().date
+      });
+      console.log(riot.route.query())
+      self.effectiveMax = self.vm.getEffectiveMax();
+      self.update();
+    });
+
     var getParameterByName = function getParameterByName(name, url) {
       if (!url) url = window.location.href;
       name = name.replace(/[\[\]]/g, "\\$&");

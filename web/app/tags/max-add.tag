@@ -52,6 +52,13 @@
       self.update();
     });
 
+    route('/maxes/new...', function() {
+      self.vm = {
+        date: riot.route.query().date
+      };
+      self.update();
+    });
+
 
     this.model = function(e) {
       self.vm[e.target.name] = e.target.value;

@@ -11,7 +11,9 @@ var getParameterByName = function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+if(getParameterByName('apiKey')) {
 localStorage.setItem('apiKey', getParameterByName('apiKey'));
+}
 
 
 
