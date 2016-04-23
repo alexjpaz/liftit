@@ -4,6 +4,11 @@ var DateUtils = require('../date');
 
 function Cycle(event) {
   Event.call(this);
+
+  this.key = guid();
+  this.date = DateUtils.create();
+  this.type = 'max';
+
   Object.assign(this, event);
 }
 

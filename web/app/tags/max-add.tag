@@ -1,3 +1,5 @@
+var Cycle = require('../models/Cycle');
+
 <max-add>
   <div class='panel panel-default'>
     <div class='panel-heading'>
@@ -40,22 +42,17 @@
     route('/maxes/*', function(key) {
       var event = store.events[key];
 
-      if(!event) {
-        event = {
-          key: store.guid(),
-          date: self.api.DateUtils.create(),
-          type: 'max'
-        }
-      }
+      var cycle = new Cycle(event);
+      self.vm = cycle;
 
-      self.vm = Object.assign({}, event);
       self.update();
     });
 
     route('/maxes/new...', function() {
-      self.vm = {
+      self.vm = new Cycle({
         date: riot.route.query().date
-      };
+      });
+
       self.update();
     });
 
