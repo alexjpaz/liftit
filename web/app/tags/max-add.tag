@@ -21,7 +21,7 @@ var Cycle = require('../models/Cycle');
           Store Max
         </button>
 
-        <button class="btn btn-primary" onclick={ remove }>
+        <button class="btn btn-danger pull-right" onclick={ remove }>
           Remove
         </button>
       </form>
@@ -67,14 +67,18 @@ var Cycle = require('../models/Cycle');
 
     this.submit = function(form) {
       form.preventDefault();
+
       store.trigger('addEvent', Object.assign({}, self.vm));
       window.history.back();
     };
 
     this.remove = function(form) {
       form.preventDefault();
-      store.trigger('removeEvent', self.vm.key);
-      window.history.back();
+      var ans = confirm("Are you sure you want to remove this cycle?");
+      if(ans) {
+        store.trigger('removeEvent', self.vm.key);
+        window.history.back();
+      }
     };
   </script>
 </max-add>
