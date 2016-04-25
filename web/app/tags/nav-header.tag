@@ -1,6 +1,11 @@
 <nav-header>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
+        <p class="navbar-text navbar-right pull-right">
+          <a href="#/profile" class="navbar-link">
+            <i class='glyphicon glyphicon-user'></i>
+          </a>
+        </p>
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" onclick={toggleMenu}>
             <span class="sr-only">Toggle navigation</span>
@@ -16,10 +21,8 @@
             <li><a href="#/logs">Logs</a></li>
             <li><a href="#/maxes">Cycles</a></li>
          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#/profile">P</a></li>
-          </ul>
         </div><!--/.nav-collapse -->
+
       </div>
     </nav>
     <script>
