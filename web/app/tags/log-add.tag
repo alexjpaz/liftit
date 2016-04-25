@@ -119,8 +119,11 @@ var Cycle = require('../models/Cycle');
 
     this.remove = function(form) {
       form.preventDefault();
-      store.trigger('removeEvent', self.vm.key);
-      window.history.back();
+      var ans = confirm("Are you sure you want to remove this log?");
+      if(ans) {
+        store.trigger('removeEvent', self.vm.key);
+        window.history.back();
+      }
     };
 
     var route = riot.route.create();

@@ -1,4 +1,6 @@
+var Event = require('../models/Event');
 var Cycle = require('../models/Cycle');
+var DateUtils = require('../date');
 
 <max-add>
   <div class='panel panel-default'>
@@ -46,6 +48,8 @@ var Cycle = require('../models/Cycle');
     route('/maxes/*', function(key) {
       var event = store.events[key];
 
+      console.log(event)
+
       var cycle = new Cycle(event);
       self.vm = cycle;
 
@@ -53,10 +57,31 @@ var Cycle = require('../models/Cycle');
     });
 
     route('/maxes/new...', function() {
-      self.vm = new Cycle({
-        date: riot.route.query().date
-      });
+      var cycle = null;
 
+      var today = riot.route.query().date;
+
+      if(today) {
+        var cyclesBeforeToday = Cycle.findBefore(today);
+
+        if(cyclesBeforeToday[0]) {
+          cycle = Cycle.nextCycleFrom(cyclesBeforeToday[0]);
+          console.log(cycle);;
+          cycle.date = today;
+        }
+      } else {
+        today = DateUtils.create();
+      }
+
+      if(cycle === null) {
+        cycle = new Cycle({
+          date: today
+        });
+      }
+
+      console.log(cycle);
+
+      self.vm = cycle;
       self.update();
     });
 
@@ -69,6 +94,7 @@ var Cycle = require('../models/Cycle');
       form.preventDefault();
 
       store.trigger('addEvent', Object.assign({}, self.vm));
+
       window.history.back();
     };
 

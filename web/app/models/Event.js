@@ -1,8 +1,15 @@
 var api = require('../api');
 var DateUtils = require('../date');
+var guid = require('../guid');
 
 function Event() {
 }
+
+Event.clone = function(event) {
+  var clone = Object.assign({}, event);
+  clone.key = guid();
+  return clone;
+};
 
 Event.all = function() {
   return Object.keys(api.store.events).map(function(k) {

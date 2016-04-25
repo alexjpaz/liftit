@@ -59,7 +59,14 @@ var store = function(config, storage, reducer) {
     });
   };
 
+  this.on('clearEvents', function() {
+    localStorage.setItem("events", "{}");
+    self.events = {};
+    self.trigger('digest');
+  });
+
   this.on('addEvent', function(event) {
+    console.log(123, event);
     event.updated = new Date().getTime();
     self.events[event.key] = event;
     self.trigger('digest');
@@ -67,6 +74,7 @@ var store = function(config, storage, reducer) {
 
   this.on('removeEvent', function(eventKey) {
     delete self.events[eventKey];
+
     self.trigger('digest');
   });
 

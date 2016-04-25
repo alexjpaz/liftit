@@ -1,5 +1,5 @@
 var index = require('file?name=[name].[ext]!./index.html')
-
+var login = require('file?name=[name].[ext]!./login.html')
 
 var getParameterByName = function getParameterByName(name, url) {
   if (!url) url = window.location.href;

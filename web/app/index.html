@@ -7,15 +7,19 @@
     <title>Liftit Sheets</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script>
+      (function() {
+        if(localStorage) {
+          var apiKey = localStorage.getItem('apiKey');
 
-   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+          if(!apiKey) {
+            window.location.assign('/login.html');
+          }
+        }
+      })();
+    </script>
 
-       </script>
-    <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">-->
-    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">-->
-    <!--<link rel="stylesheet" href="https://code.getmdl.io/1.1.2/material.indigo-pink.min.css">-->
-    <!--<script defer src="https://code.getmdl.io/1.1.2/material.min.js"></script>-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <body>
     <style>
       html, body {
@@ -23,7 +27,14 @@
         padding: 0;
         margin: 0;
       }
+
+      .init {
+        position: fixed;
+      }
     </style>
+    <div class='init'>
+      <a href='/login.html' class='btn btn-link btn-lg'>login</a>
+    </div>
     <app></app>
     <script src="bundle.js"></script>
   </body>

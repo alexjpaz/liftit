@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Liftit Sheets</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <body>
+      <style>
+        html, body {
+          height: 100%;
+          padding: 0;
+          margin: 0;
+        }
+      </style>
+      <div class='container'>
+        <h1>Liftit Login</h1>
+        <form id='form'>
+          <div class='form-group'>
+            <label>API Key</label>
+            <input type='text' class='form-control' name='apiKey' />
+          </div>
+          <button class='btn btn-primary'>Save</button>
+        </form>
+      </div>
+      <script>
+        var form = document.getElementById('form');
+        form.apiKey.value = localStorage.getItem('apiKey');
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          localStorage.setItem('apiKey', form.apiKey.value);
+          window.location.assign('/');
+        }, false);
+      </script>
+  </body>
+</html>
