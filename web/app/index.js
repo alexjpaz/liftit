@@ -1,6 +1,8 @@
 var index = require('file?name=[name].[ext]!./index.html')
 var login = require('file?name=[name].[ext]!./login.html')
 
+var session = require('./services/session');
+
 var getParameterByName = function getParameterByName(name, url) {
   if (!url) url = window.location.href;
   name = name.replace(/[\[\]]/g, "\\$&");
@@ -12,41 +14,41 @@ var getParameterByName = function getParameterByName(name, url) {
 }
 
 if(getParameterByName('apiKey')) {
-localStorage.setItem('apiKey', getParameterByName('apiKey'));
+  localStorage.setItem('apiKey', getParameterByName('apiKey'));
 }
 
 
+session.create(function() {
+  var app = require('./tags/app.tag');
 
-var app = require('./tags/app.tag');
+  var mdl = require('material-design-lite');
+  var mdl = require('file?name=[name].[ext]!../node_modules/material-design-lite/material.min.css');
 
-var mdl = require('material-design-lite');
-var mdl = require('file?name=[name].[ext]!../node_modules/material-design-lite/material.min.css');
+  var api = require('./api');
 
-var api = require('./api');
-
-var opts = {
-  api: api,
-  views: {
-    main: ''
+  var opts = {
+    api: api,
+    views: {
+      main: ''
+    }
   }
-}
 
-riot.route.start(true);
+  riot.route.start(true);
 
-riot.mixin('api', {
-  api: api
-});
+  riot.mixin('api', {
+    api: api
+  });
 
-riot.mixin('store', {
-  store: api.store
-});
+  riot.mixin('store', {
+    store: api.store
+  });
 
-riot.mixin('forms', {
+  riot.mixin('forms', {
 
-});
+  });
 
-
-api.store.init(function() {
-  riot.mount('*', opts);
-  riot.route.exec();
+  api.store.init(function() {
+    riot.mount('*', opts);
+    riot.route.exec();
+  });
 });

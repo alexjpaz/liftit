@@ -30,6 +30,7 @@
         form.addEventListener('submit', function(e) {
           e.preventDefault();
           localStorage.setItem('apiKey', form.apiKey.value);
+          localStorage.removeItem('session');
           window.location.assign('/');
         }, false);
       </script>

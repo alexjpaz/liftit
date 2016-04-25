@@ -11,13 +11,16 @@ var dao = function(context, type) {
   };
 };
 
-var cloudUrl = 'https://b3gg00cbli.execute-api.us-east-1.amazonaws.com/prod/profile'
+
+var session = JSON.parse(localStorage.getItem('session'));
 
 var ajax = function(method, url, data, callback) {
   callback = callback || function() {};
   var xhr = new XMLHttpRequest();
   xhr.open(method, url, true);
-  xhr.setRequestHeader('x-api-key', localStorage.getItem('apiKey') || "NONE");
+  if(method === 'PUT') {
+    xhr.setRequestHeader('Content-Type', 'application/json');
+  }
   xhr.onload = function() {
     if(this.responseText && this.responseText.length > 0) {
       callback(JSON.parse(this.responseText));
@@ -30,11 +33,13 @@ var ajax = function(method, url, data, callback) {
 };
 
 var cloud = {
+
   store: function(value, callback) {
-    return ajax('POST', cloudUrl, value, callback);
+    return ajax('PUT', session.store.putUrl, value, callback);
+
   },
   fetch: function(callback) {
-    return ajax('GET', cloudUrl, null, callback);
+    return ajax('GET', session.store.getUrl, null, callback);
   }
 };
 
@@ -66,7 +71,6 @@ var store = function(config, storage, reducer) {
   });
 
   this.on('addEvent', function(event) {
-    console.log(123, event);
     event.updated = new Date().getTime();
     self.events[event.key] = event;
     self.trigger('digest');

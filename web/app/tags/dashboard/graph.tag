@@ -1,6 +1,7 @@
 <dashboard-graph>
 <div id='chart_div'></div>
 <script>
+return;
 
    // Load the Visualization API and the corechart package.
       google.charts.load('current', {'packages':['corechart']});
