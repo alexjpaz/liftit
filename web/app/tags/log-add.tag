@@ -27,7 +27,10 @@ var Cycle = require('../models/Cycle');
 
       <div class="form-group">
         <label>Weight</label>
-        <input class="form-control" type="number"  value={ vm.weight} name='weight' onchange={ model }>
+        { vm.weight }z
+        <select name='weight' class='form-control' onchange={model}>
+          <option each={ wf in weightFractions } value={ wf.weight } selected={ vm.weight == wf.weight }>{ wf.weight } ({ wf.fraction  }%)</option>
+        </select>
       </div>
 
       <div class="form-group">
@@ -108,6 +111,10 @@ var Cycle = require('../models/Cycle');
 
       self.vm[e.target.name] = value;
       self.effectiveMax = this.vm.getEffectiveMax();
+
+
+      calculateWeigthFractions();
+
       self.update();
     };
 
@@ -126,6 +133,17 @@ var Cycle = require('../models/Cycle');
       }
     };
 
+    function calculateWeigthFractions() {
+      self.weightFractions = [];
+
+      for(var i=0.65;i<1;i+=0.05) {
+        self.weightFractions.push({
+          weight: liftit.roundTo(self.effectiveMax[self.vm.lift] * i, 5),
+          fraction: Math.floor(i * 100),
+        });
+      }
+    };
+
     var route = riot.route.create();
 
     route('/logs/*', function(key) {
@@ -135,6 +153,8 @@ var Cycle = require('../models/Cycle');
       self.vm = log;
 
       self.effectiveMax = log.getEffectiveMax();
+
+      calculateWeigthFractions();
 
       self.update();
 
