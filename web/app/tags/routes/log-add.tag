@@ -1,9 +1,9 @@
 var liftit = require('liftit-common');
 
-var utils = require('../reducers/utils')
+var utils = require('../../reducers/utils')
 
-var Log = require('../models/Log');
-var Cycle = require('../models/Cycle');
+var Log = require('../../models/Log');
+var Cycle = require('../../models/Cycle');
 
 <log-add>
   <div class='panel panel-default'>

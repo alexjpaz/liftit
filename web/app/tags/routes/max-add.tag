@@ -1,6 +1,6 @@
-var Event = require('../models/Event');
-var Cycle = require('../models/Cycle');
-var DateUtils = require('../date');
+var Event = require('../../models/Event');
+var Cycle = require('../../models/Cycle');
+var DateUtils = require('../../date');
 
 <max-add>
   <div class='panel panel-default'>

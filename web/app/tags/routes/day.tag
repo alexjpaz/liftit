@@ -1,22 +1,18 @@
 var Event = require('../../models/Event');
 <day>
-  <div class='panel panel-default'>
-    <div class='panel-heading'>
-      Events for { day }
-    </div>
-    <div class='panel-body'>
-
     <p if={ events.length === 0 }>No events to show for this day.</p>
-    <div onclick={navigateToEvent(e)} each={ e in events } class='list'>
-      <div if={ e.type ==='log'}>
-        <h5><a href='#/logs/{ e. key }'>{ e.type }</a></h5>
-        <p>{ e.lift } { e.weight }x{ e.reps }</p>
+    <div class='list-container'>
+      <div onclick={navigateToEvent(e)} each={ e in events } class='list'>
+        <div if={ e.type ==='log'}>
+          <a class='list-avatar list-avatar--{ e.type }' href='#/logs/{ e. key }'>{ e.type[0].toUpperCase() }</a>
+          <span>{ e.lift } { e.weight }x{ e.reps }</span>
+        </div>
+        <div if={ e.type ==='max'}>
+          <a class='list-avatar list-avatar--{ e.type }' href='#/maxes/{ e. key }'>{ e.type[0].toUpperCase() }</a>
+          <span>{ e.press }-{ e.deadlift }-{ e.bench }-{ e.squat }</span>
+        </div>
       </div>
-      <div if={ e.type ==='max'}>
-        <h5><a href='#/maxes/{ e. key }'>{ e.type }</a></h5>
-        <p>{ e.press }-{ e.deadlift }-{ e.bench }-{ e.squat }</p>
       </div>
-    </div>
     </div>
   </div>
   <div class='button-group'>
@@ -25,18 +21,44 @@ var Event = require('../../models/Event');
   </div>
 
   <style>
+    .list-container {
+      margin-bottom: 20px;
+    }
     .list {
       border: 1px solid #ddd;
       margin-top: -1px;
       padding: 4px 8px;
+      overflow: hidden;
     }
+
+    .list span {
+      margin-left: 20px;
+      line-height: 24px;
+    }
+
+    .list-avatar {
+      float: left;
+      height: 24px;
+      width: 24px;
+      background: #FF4242;
+      border-radius: 50%;
+      color: white;
+      text-align: center;
+      line-height: 24px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .list-avatar--max { background: brick; }
+    .list-avatar--log { background: #0606BB; }
+
     .button-group {
     }
     .button-group a {
       float: left;
       width: 50%;
       text-align: center;
-      border: 1px solid #aaa;
+      border: 1px solid #ddd;
       border-radius: 4px;
       padding: 8px;
     }

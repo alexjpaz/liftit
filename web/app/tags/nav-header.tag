@@ -45,5 +45,11 @@
               self.menuIn = false;
             }, false);
       })
+
+      document.addEventListener('click', function() {
+        self.navbar.classList.remove('in');
+        self.menuIn = false;
+
+      }, true);
     </script>
 </nav-header>

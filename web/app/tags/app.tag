@@ -1,7 +1,7 @@
-require('./log-list.tag');
-require('./log-add.tag');
-require('./max-add.tag');
-require('./max-list.tag');
+require('./routes/log-list.tag');
+require('./routes/log-add.tag');
+require('./routes/max-add.tag');
+require('./routes/max-list.tag');
 require('./sheets.tag');
 require('./dashboard.tag');
 require('./nav-header.tag');
