@@ -27,6 +27,10 @@ Log.prototype.getEffectiveMax = function() {
     cycle = cycles[0];
   }
 
+  if(!cycle) {
+    cycle = new Cycle();
+  }
+
   return cycle;
 };
 
