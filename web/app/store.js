@@ -1,6 +1,8 @@
 var riot = require('riot');
 var guid = require('./guid');
 
+var http = require('./services/http');
+
 var dao = function(context, type) {
   this.list = function() {
     return Object.keys(context.events).map(function(k) {
@@ -31,8 +33,6 @@ var ajax = function(method, url, data, callback, failure) {
     }
   };
 
-
-
   if(data) {
     data = JSON.stringify(data);
   }
@@ -61,7 +61,7 @@ var store = function(config, storage, reducer) {
 
   this.guid = guid;
 
-  this.init = function(callback) {
+  this.init = function(callback, failure) {
    cloud.fetch(function(data) {
       self.events = data.events;
       self.config = data.config;

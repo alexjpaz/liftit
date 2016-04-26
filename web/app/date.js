@@ -1,5 +1,3 @@
-var moment = require('moment');
-
 var DateUtils = {};
 
 DateUtils.sort = function(a,b) {
