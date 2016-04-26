@@ -2,6 +2,7 @@ var riot = require('riot');
 var guid = require('./guid');
 
 var http = require('./services/http');
+var ajax = http.ajax;
 
 var dao = function(context, type) {
   this.list = function() {
@@ -14,30 +15,6 @@ var dao = function(context, type) {
 };
 
 var session = JSON.parse(localStorage.getItem('session'));
-
-var ajax = function(method, url, data, callback, failure) {
-  callback = callback || function() {};
-  failure = failure || function() {};
-  var xhr = new XMLHttpRequest();
-  xhr.open(method, url, true);
-  if(method === 'PUT') {
-    xhr.setRequestHeader('Content-Type', 'application/json');
-  }
-  xhr.onload = function() {
-    if(this.status === 200) {
-      if(this.responseText && this.responseText.length > 0) {
-        callback(JSON.parse(this.responseText));
-      }
-    } else {
-      failure(this);
-    }
-  };
-
-  if(data) {
-    data = JSON.stringify(data);
-  }
-  xhr.send(data);
-};
 
 var cloud = {
   store: function(value, callback, failure) {

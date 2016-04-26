@@ -17,12 +17,8 @@ if(getParameterByName('apiKey')) {
   localStorage.setItem('apiKey', getParameterByName('apiKey'));
 }
 
-
 session.create(function() {
   var app = require('./tags/app.tag');
-
-  var mdl = require('material-design-lite');
-  var mdl = require('file?name=[name].[ext]!../node_modules/material-design-lite/material.min.css');
 
   var api = require('./api');
 
