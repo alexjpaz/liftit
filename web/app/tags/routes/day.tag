@@ -27,12 +27,12 @@ var Event = require('../../models/Event');
     .list {
       border: 1px solid #ddd;
       margin-top: -1px;
-      padding: 4px 8px;
+      padding: 12px 8px;
       overflow: hidden;
     }
 
     .list span {
-      margin-left: 20px;
+      margin-left: 16px;
       line-height: 24px;
     }
 
