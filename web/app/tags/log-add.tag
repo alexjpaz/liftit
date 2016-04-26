@@ -27,7 +27,6 @@ var Cycle = require('../models/Cycle');
 
       <div class="form-group">
         <label>Weight</label>
-        { vm.weight }z
         <select name='weight' class='form-control' onchange={model}>
           <option each={ wf in weightFractions } value={ wf.weight } selected={ vm.weight == wf.weight }>{ wf.weight } ({ wf.fraction  }%)</option>
         </select>
