@@ -11,21 +11,28 @@ var dao = function(context, type) {
   };
 };
 
-
 var session = JSON.parse(localStorage.getItem('session'));
 
-var ajax = function(method, url, data, callback) {
+var ajax = function(method, url, data, callback, failure) {
   callback = callback || function() {};
+  failure = failure || function() {};
   var xhr = new XMLHttpRequest();
   xhr.open(method, url, true);
   if(method === 'PUT') {
     xhr.setRequestHeader('Content-Type', 'application/json');
   }
   xhr.onload = function() {
-    if(this.responseText && this.responseText.length > 0) {
-      callback(JSON.parse(this.responseText));
+    if(this.status === 200) {
+      if(this.responseText && this.responseText.length > 0) {
+        callback(JSON.parse(this.responseText));
+      }
+    } else {
+      failure(this);
     }
   };
+
+
+
   if(data) {
     data = JSON.stringify(data);
   }
@@ -33,12 +40,11 @@ var ajax = function(method, url, data, callback) {
 };
 
 var cloud = {
-
-  store: function(value, callback) {
-    return ajax('PUT', session.store.putUrl, value, callback);
+  store: function(value, callback, failure) {
+    return ajax('PUT', session.store.putUrl, value, callback, failure);
 
   },
-  fetch: function(callback) {
+  fetch: function(callback, failure) {
     return ajax('GET', session.store.getUrl, null, callback);
   }
 };
@@ -87,6 +93,10 @@ var store = function(config, storage, reducer) {
     cloud.store({
       events: this.events,
       config: this.config
+    }, function(e) {
+      self.trigger('persistSuccess', e);
+    }, function(e) {
+      self.trigger('persistFailure', e);
     });
   });
 

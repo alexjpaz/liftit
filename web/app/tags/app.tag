@@ -10,6 +10,7 @@ require('./route.tag');
 require('./routes/day.tag');
 require('./routes/profile.tag');
 require('./common/panel.tag')
+require('./layout/toast-bar.tag')
 
 <app>
   <style>
@@ -58,6 +59,7 @@ require('./common/panel.tag')
         </route>
       </div>
     </div>
+    <toast-bar></toast-bar>
   </div>
 
   <script>
