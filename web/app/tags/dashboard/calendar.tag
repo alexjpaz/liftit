@@ -112,7 +112,7 @@ var DateUtils = require('../../date');
 
       this.days = Array(self.firstDay.getDay());
 
-      var dateDay = 1;
+      var dateDay = 0;
       var cursorDate = null;
 
       for(var i=this.days.length; i < daysInThisMonth(today) + self.firstDay.getDay(); i++) {
