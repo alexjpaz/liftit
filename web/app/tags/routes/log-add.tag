@@ -6,7 +6,12 @@ var Log = require('../../models/Log');
 var Cycle = require('../../models/Cycle');
 
 <log-add>
-  <div class='panel panel-default'>
+  <div class='panel panel-danger' if={!effectiveMax}>
+    <div class='panel-heading'>
+      no cycle
+    </div>
+  </div>
+  <div class='panel panel-default' if={effectiveMax}>
     <div class='panel-heading'>
       Log
     </div>
@@ -25,17 +30,21 @@ var Cycle = require('../../models/Cycle');
         </select>
       </div>
 
-      <div class="form-group">
+      <div class="form-group weight-control">
         <label>Weight</label>
-        <select name='weight' class='form-control' onchange={model}>
-          <option each={ wf in weightFractions } value={ wf.weight } selected={ vm.weight == wf.weight }>{ wf.weight } ({ wf.fraction  }%)</option>
-        </select>
+        <div class='clearfix'>
+          <input name='weight' class='form-control' value={vm.weight} onchange={model}>
+          <select name='weight' class='form-control' onchange={model}>
+            <option>?</option>
+            <option each={ wf in weightFractions } value={ wf.weight } selected={ vm.weight == wf.weight }>{ wf.fraction  }%</option>
+          </select>
+        </div>
       </div>
 
       <div class="form-group">
         <label>Reps</label>
         <select name='reps' class='form-control' onchange={model}>
-          <option>-- select lift --</option>
+          <option>-- select reps --</option>
           <option selected={r == vm.reps} value={r} each={ r in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15] }>{r}</option>
         </select>
       </div>
@@ -92,6 +101,20 @@ var Cycle = require('../../models/Cycle');
       vertical-align: top;
       padding-right: 10px;
     }
+
+    .weight-control {
+    }
+
+    .weight-control input {
+      float: left;
+      width: 70%;
+    }
+
+    .weight-control select {
+      float: left;
+      width: 30%;
+    }
+
   </style>
 
   <script>
@@ -110,7 +133,6 @@ var Cycle = require('../../models/Cycle');
 
       self.vm[e.target.name] = value;
       self.effectiveMax = this.vm.getEffectiveMax();
-
 
       calculateWeigthFractions();
 
@@ -143,11 +165,15 @@ var Cycle = require('../../models/Cycle');
       }
     };
 
+
+
+
     var route = riot.route.create();
 
     route('/logs/*', function(key) {
       var event = store.events[key];
 
+      console.log(2222, Log)
       var log = new Log(event);
       self.vm = log;
 

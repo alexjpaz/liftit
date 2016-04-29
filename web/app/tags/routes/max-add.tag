@@ -48,9 +48,12 @@ var DateUtils = require('../../date');
     route('/maxes/*', function(key) {
       var event = store.events[key];
 
-      console.log(event)
-
       var cycle = new Cycle(event);
+
+
+      console.log(Cycle.findLogs(cycle));
+
+
       self.vm = cycle;
 
       self.update();

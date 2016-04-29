@@ -27,10 +27,6 @@ Log.prototype.getEffectiveMax = function() {
     cycle = cycles[0];
   }
 
-  if(!cycle) {
-    cycle = new Cycle();
-  }
-
   return cycle;
 };
 
@@ -40,6 +36,15 @@ Log.findBefore = function(date) {
   });
 };
 
+Log.all = function() {
+  return Event.findByType('log');
+};
+
+Log.findBetween = function(start, end) {
+  return Event.findBetween(start, end).filter(function(e) {
+    return e.type === 'log';
+  });
+}
 
 Log.prototype.getEffectiveMaxWeight = function() {
   return this.getEffectiveMax()[this.lift];
@@ -60,10 +65,6 @@ Log.prototype.getRepsToMax = function() {
 
 Log.prototype.getLastAttempt = function() {
   return Log.findBefore(this.date).reps;
-};
-
-Log.all = function() {
-  return Event.findByType('log');
 };
 
 module.exports = Log;

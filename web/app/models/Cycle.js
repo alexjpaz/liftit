@@ -1,4 +1,5 @@
 var Event = require('./Event');
+var Log = require('./Log.js');
 var guid = require('../guid');
 var DateUtils = require('../date');
 
@@ -11,6 +12,22 @@ function Cycle(event) {
 
   Object.assign(this, event);
 }
+
+
+Cycle.findLogs = function(cycle) {
+  var futureDate = new Date();
+
+  var futureCycle = Event.findAfter(cycle.date);
+
+  if(futureCycle.length > 0) {
+    futureDate = futureCycle[0];
+  }
+
+
+  return Event.findBetween(cycle.date, futureDate).filter(function(e) {
+    return e.type === 'log';
+  });
+};
 
 Cycle.nextCycleFrom = function(cycle) {
   var cloned = Event.clone(cycle);
