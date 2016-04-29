@@ -12,7 +12,7 @@
     </thead>
     <tbody>
       <tr each={ l in logs } onclick={navigate(l.key)}>
-        <td>{ l.date }</td>
+        <td><a href='#/maxes/{ l.key }'>{ l.date }</a></td>
         <td>{ l.press }</td>
         <td>{ l.deadlift }</td>
         <td>{ l.bench }</td>
