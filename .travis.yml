@@ -11,5 +11,5 @@ deploy:
   local-dir: web/public
   acl: public_read
   on:
-    branch: web-client
+    branch: master
     repo: alexjpaz/liftit
