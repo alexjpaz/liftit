@@ -68,7 +68,9 @@ var store = function(config, storage, reducer) {
       events = [events];
     }
 
+
     events.forEach(function(event) {
+      event = Object.assign({}, event);
       event.updated = new Date().getTime();
       self.events[event.key] = event;
     });

@@ -10,12 +10,12 @@ var DateUtils = require('../../../date');
       <form onsubmit={submit}>
          <div class="form-group">
           <label>Date</label>
-          <input class="form-control" type="date" name='date' value={ vm.date } onchange={ model } />
+          <input class="form-control" type="date" name='date' value={ vm.date } onchange={ model } required />
         </div>
 
         <div class="form-group" each={l in config.lifts}>
           <label>{ l }</label>
-          <input class="form-control" type="number" name={l} value={vm[l]} onchange={ model } />
+          <input class="form-control" type="number" name={l} value={vm[l]} onchange={ model } required />
         </div>
 
         <button class="btn btn-primary">
@@ -98,6 +98,7 @@ var DateUtils = require('../../../date');
       });
 
       store.trigger('removeEvent', eventKeysToDelete);
+
       store.trigger('addEvent', self.cycles);
 
       window.history.back();
