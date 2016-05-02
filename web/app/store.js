@@ -24,9 +24,14 @@ var cloud = {
   fetch: function(callback, failure) {
     return ajax('GET', session.store.getUrl, null, function(data) {
       if(new Date(localStorage.getItem('lastUpdated')).getTime() > new Date(data.lastUpdated).getTime()) {
-        alert('Warning: updated timestamp on local device is new than the remote server! Please reload');
+
+        console.error('Warning: updated timestamp on local device is new than the remote server! Please reload');
+        setTimeout(function() {
+          window.location.reload();
+        },1000);
+      } else {
+        callback(data);
       }
-      callback(data);
     });
   }
 };
@@ -86,14 +91,15 @@ var store = function(config, storage, reducer) {
   });
 
   this.on('persist', function() {
+    var lastUpdated = new Date();
     storage.set('events', this.events);
     cloud.store({
       events: this.events,
       config: this.config,
-      lastUpdated: new Date()
+      lastUpdated: lastUpdated
     }, function(e) {
       self.trigger('persistSuccess', e);
-      localStorage.setItem('lastUpdated', new Date());
+      localStorage.setItem('lastUpdated', lastUpdated);
     }, function(e) {
       self.trigger('persistFailure', e);
     });
