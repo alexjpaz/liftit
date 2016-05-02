@@ -2,6 +2,7 @@ require('./routes/log-list.tag');
 require('./routes/log-add.tag');
 require('./routes/max-add.tag');
 require('./routes/max-list.tag');
+require('./routes/cycle/schedule.tag');
 require('./sheets.tag');
 require('./dashboard.tag');
 require('./nav-header.tag');
@@ -41,6 +42,9 @@ require('./layout/toast-bar.tag')
         </route>
         <route when='/logs'>
           <log-list></log-list>
+        </route>
+        <route when='/cycles/schedule'>
+          <cycle-schedule></cycle-schedule>
         </route>
         <route when='/maxes'>
           <max-list></max-list>

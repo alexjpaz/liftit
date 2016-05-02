@@ -1,4 +1,30 @@
 <max-list>
+  <a href='#/cycles/schedule' class='btn btn-block btn-default'>
+    <i class='glyphicon glyphicon-calendar'> </i>
+    Schedule Cycles
+  </a>
+  <hr />
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Press</th>
+        <th>Deadlift</th>
+        <th>Bench</th>
+        <th>Squat</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr each={ l in logs } onclick={navigate(l.key)}>
+        <td><a href='#/maxes/{ l.key }'>{ l.date }</a></td>
+        <td>{ l.press }</td>
+        <td>{ l.deadlift }</td>
+        <td>{ l.bench }</td>
+        <td>{ l.squat }</td>
+      </tr>
+    </tbody>
+  </table>
+  <hr />
   <div class='table-responsive'>
   <table class="table table-bordered">
     <thead>

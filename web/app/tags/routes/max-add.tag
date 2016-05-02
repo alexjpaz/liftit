@@ -82,8 +82,6 @@ var DateUtils = require('../../date');
         });
       }
 
-      console.log(cycle);
-
       self.vm = cycle;
       self.update();
     });
