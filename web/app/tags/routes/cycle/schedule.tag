@@ -91,7 +91,7 @@ var DateUtils = require('../../../date');
     this.submit = function(form) {
       form.preventDefault();
 
-      var futureCycles = Cycle.findAfter(self.today);
+      var futureCycles = Cycle.findAfter(self.vm.date);
 
       var eventKeysToDelete = futureCycles.map(function(cycle) {
         return cycle.key;

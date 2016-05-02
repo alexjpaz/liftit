@@ -68,14 +68,13 @@ var store = function(config, storage, reducer) {
     self.trigger('digest');
   });
 
-  this.on('removeEvent', function(eventKey) {
-    var array = eventKey;
-    if(eventKey instanceof Array === false) {
-      array = [eventKey];
+  this.on('removeEvent', function(events) {
+    if(events instanceof Array === false) {
+      events = [events];
     }
 
-    array.forEach(function(key) {
-      delete self.events[key];
+    events.forEach(function(event) {
+      delete self.events[event];
     });
 
     self.trigger('digest');
