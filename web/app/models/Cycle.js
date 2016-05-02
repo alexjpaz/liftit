@@ -13,6 +13,7 @@ function Cycle(event) {
   Object.assign(this, event);
 }
 
+Cycle.get = Event.get;
 
 Cycle.findLogs = function(cycle) {
   var futureDate = new Date();
@@ -55,9 +56,11 @@ Cycle.findBefore = function(date) {
 };
 
 Cycle.findAfter = function(date) {
+  console.log(11111111111111, date)
   if(date instanceof Date) {
     date = DateUtils.string(date);
   }
+
 
   var filteredEvents = Cycle.findSorted(function(event) {
     return event.date >= date;
@@ -75,6 +78,9 @@ Cycle.findSorted = function(filter) {
   return Cycle.all().filter(filter).sort(DateUtils.sort);
 };
 
+
+Cycle.removeAll = function(cycles) {
+}
 
 
 module.exports = Cycle;

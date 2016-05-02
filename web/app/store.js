@@ -53,14 +53,30 @@ var store = function(config, storage, reducer) {
     self.trigger('digest');
   });
 
-  this.on('addEvent', function(event) {
-    event.updated = new Date().getTime();
-    self.events[event.key] = event;
+  this.on('addEvent', function(events) {
+    if(events instanceof Array === false) {
+      events = [events];
+    }
+
+    events.forEach(function(event) {
+      event.updated = new Date().getTime();
+      self.events[event.key] = event;
+    });
+
+    self.events = Object.assign({}, self.events);
+
     self.trigger('digest');
   });
 
   this.on('removeEvent', function(eventKey) {
-    delete self.events[eventKey];
+    var array = eventKey;
+    if(eventKey instanceof Array === false) {
+      array = [eventKey];
+    }
+
+    array.forEach(function(key) {
+      delete self.events[key];
+    });
 
     self.trigger('digest');
   });

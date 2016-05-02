@@ -22,48 +22,83 @@ var DateUtils = require('../../../date');
           Save Cycle Schedule
         </button>
       </form>
-
-      <pre>{ JSON.stringify(cycles, null, 2) }</pre>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Press</th>
+            <th>Deadlift</th>
+            <th>Bench</th>
+            <th>Squat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr each={ l in cycles } onclick={navigate(l.key)}>
+            <td><a href='#/maxes/{ l.key }'>{ l.date }</a></td>
+            <td>{ l.press }</td>
+            <td>{ l.deadlift }</td>
+            <td>{ l.bench }</td>
+            <td>{ l.squat }</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
   </div>
   <script>
     var self = this;
-
+    this.mixin('api');
+    var store = self.api.store;
+    self.config = store.config;
 
     function generateScedule(templateCycle) {
       var repeat = 5;
 
-
-      console.log(templateCycle)
       self.cycles = Array(repeat).fill(true).map(function(none, index) {
         var increment = 5; // TODO
         var cycleIncrement = 30;
 
         var newDate = new Date(templateCycle.date);
-        newDate.setDate(newDate.getDate() + cycleIncrement * (index+1));
+        newDate.setDate(newDate.getDate() + cycleIncrement * (index));
 
         var row = {
           date: DateUtils.string(newDate),
-          press: templateCycle.press + (increment * (index+1)),
-          deadlift: index
         };
-        return row;
+
+        self.config.lifts.forEach(function(lift) {
+          row[lift] = +templateCycle[lift] + (increment * (index+1));
+        });
+
+        var cycle = new Cycle(row);
+
+        return cycle;
       });
 
     }
 
-    this.mixin('api');
+    this.model = function(e) {
+      var value = e.target.value;
 
-    var store = self.api.store;
-    self.config = store.config;
+      if(e.target.type === 'number') {
+        value = +value;
+      }
+
+      self.vm[e.target.name] = e.target.value;
+      generateScedule(self.vm);
+      self.update();
+    };
 
     this.submit = function(form) {
       form.preventDefault();
 
-      self.cycles.forEach(function(max) {
-        store.trigger('addEvent', Object.assign({}, max));
+      var futureCycles = Cycle.findAfter(self.today);
+
+      var eventKeysToDelete = futureCycles.map(function(cycle) {
+        return cycle.key;
       });
+
+      store.trigger('removeEvent', eventKeysToDelete);
+      store.trigger('addEvent', self.cycles);
 
       window.history.back();
     };
@@ -71,11 +106,29 @@ var DateUtils = require('../../../date');
     var route = riot.route.create();
 
     route('/cycles/schedule..', function() {
-      var today = riot.route.query().date;
-      generateScedule({
-        date: today,
-        press: 100
-      });
+      var today = null;
+      var query = riot.route.query();
+
+      if(query.from) {
+        var from = Cycle.get(query.from);
+        self.vm = new Cycle(from);
+        if(from) {
+          today = from.date;
+        }
+      } else {
+        if(query.date) {
+          today = riot.route.query().date;
+        } else {
+          today = DateUtils.create();
+        }
+        self.vm = new Cycle({
+          date: today
+        });
+      }
+
+      self.today = today;
+
+      generateScedule(self.vm);
       self.update();
     });
 

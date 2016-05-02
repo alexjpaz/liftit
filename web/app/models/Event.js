@@ -11,6 +11,10 @@ Event.clone = function(event) {
   return clone;
 };
 
+Event.get = function(key) {
+  return api.store.events[key];
+};
+
 Event.all = function() {
   return Object.keys(api.store.events).map(function(k) {
     return api.store.events[k];

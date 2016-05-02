@@ -18,7 +18,7 @@ var config = require('../../config');
       </tr>
     </thead>
     <tbody>
-      <tr each={ l in currentLogs } onclick={navigate(l.key)}>
+      <tr each={ l in currentLogs } onclick={navigateToSchedule(l.key)}>
         <td><a href='#/maxes/{ l.key }'>{ l.date }</a></td>
         <td>{ l.press }</td>
         <td>{ l.deadlift }</td>
@@ -113,9 +113,21 @@ var config = require('../../config');
 
       var currentCycle = Cycle.findBefore(new Date())[0];
 
-      self.currentLogs = Cycle.findAfter(currentCycle.date).reverse();
+      var currentCycleDate = new Date();
+
+      if(!currentCycle) {
+        currentCycleDate = new Date();
+      }
+
+      self.currentLogs = Cycle.findAfter(currentCycleDate).reverse();
 
       self.update();
+    };
+
+    self.navigateToSchedule = function(cycleKey) {
+      return function() {
+        riot.route('/cycles/schedule?from=' + cycleKey);
+      };
     };
 
     self.navigate = function(key) {
