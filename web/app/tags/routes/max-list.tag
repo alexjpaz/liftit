@@ -1,3 +1,6 @@
+var Cycle = require('../../models/Cycle');
+var config = require('../../config');
+
 <max-list>
   <a href='#/cycles/schedule' class='btn btn-block btn-default'>
     <i class='glyphicon glyphicon-calendar'> </i>
@@ -15,7 +18,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr each={ l in logs } onclick={navigate(l.key)}>
+      <tr each={ l in currentLogs } onclick={navigate(l.key)}>
         <td><a href='#/maxes/{ l.key }'>{ l.date }</a></td>
         <td>{ l.press }</td>
         <td>{ l.deadlift }</td>
@@ -37,12 +40,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr each={ l in logs } onclick={navigate(l.key)}>
-        <td><a href='#/maxes/{ l.key }'>{ l.date }</a></td>
-        <td>{ l.press }</td>
-        <td>{ l.deadlift }</td>
-        <td>{ l.bench }</td>
-        <td>{ l.squat }</td>
+      <tr each={ row in allCycles } onclick={navigate(row.cycle.key)}>
+        <td><a href='#/maxes/{ row.cycle.key }'>{ row.cycle.date }</a></td>
+        <td each={ l in config.lifts }>
+          <i class='glyphicon glyphicon-arrow-{ row.percentages[l].direction }'></i>
+          <span>{ row.cycle[l] }</span>
+          <small class='text-muted'>{ row.percentages[l].value }%</small>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -51,6 +55,16 @@
     Add Max
   </a>
 
+  <style scope>
+    .glyphicon-arrow-up {
+      color: green;
+    }
+
+    .glyphicon-arrow-down {
+      color: red;
+    }
+
+  </style>
   <script>
     var self = this;
 
@@ -58,8 +72,49 @@
 
     var store = this.api.store;
 
+    self.config = store.config;
+
     var getLogs = function() {
-      self.logs = store.maxes.list().reverse();
+      self.allCycles = [];
+
+
+      self.allCycles = Cycle.findSorted().reverse().map(function(cycle, index, array) {
+        var row = {
+          cycle: cycle
+        };
+
+        if(index === 0) {
+          return row;
+        }
+
+        var previousCycle = array[index-1];
+
+
+        row.percentages = {};
+
+        store.config.lifts.forEach(function(lift) {
+
+          row.percentages[lift] = {}
+          row.percentages[lift].value = Math.floor(100 - (+previousCycle[lift] / +cycle[lift])*100) || 0;
+
+          if(row.percentages[lift].value > 0) {
+            row.percentages[lift].direction = 'up';
+          }
+
+
+          if(row.percentages[lift].value < 0) {
+            row.percentages[lift].direction = 'down';
+          }
+        });
+
+
+        return row;
+      });
+
+      var currentCycle = Cycle.findBefore(new Date())[0];
+
+      self.currentLogs = Cycle.findAfter(currentCycle.date).reverse();
+
       self.update();
     };
 
@@ -68,8 +123,6 @@
         riot.route('/maxes/'+key);
       };
     };
-
-
     var route = riot.route.create();
 
     route('/maxes', getLogs);

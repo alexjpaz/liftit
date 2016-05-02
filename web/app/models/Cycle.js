@@ -54,4 +54,27 @@ Cycle.findBefore = function(date) {
   return filteredEvents;
 };
 
+Cycle.findAfter = function(date) {
+  if(date instanceof Date) {
+    date = DateUtils.string(date);
+  }
+
+  var filteredEvents = Cycle.findSorted(function(event) {
+    return event.date >= date;
+  });
+
+  return filteredEvents;
+};
+
+Cycle.findSorted = function(filter) {
+  if(!filter) {
+    filter = function(event) {
+      return true;
+    };
+  }
+  return Cycle.all().filter(filter).sort(DateUtils.sort);
+};
+
+
+
 module.exports = Cycle;

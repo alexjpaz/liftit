@@ -50,10 +50,6 @@ var DateUtils = require('../../date');
 
       var cycle = new Cycle(event);
 
-
-      console.log(Cycle.findLogs(cycle));
-
-
       self.vm = cycle;
 
       self.update();

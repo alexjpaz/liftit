@@ -43,7 +43,7 @@ require('./layout/toast-bar.tag')
         <route when='/logs'>
           <log-list></log-list>
         </route>
-        <route when='/cycles/schedule'>
+        <route when='/cycles/schedule..'>
           <cycle-schedule></cycle-schedule>
         </route>
         <route when='/maxes'>
