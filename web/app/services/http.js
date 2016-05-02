@@ -13,6 +13,8 @@ http.ajax = function(method, url, data, callback, failure) {
       if(this.status === 200) {
         if(this.responseText && this.responseText.length > 0) {
           callback(JSON.parse(this.responseText));
+        } else {
+          callback(this);
         }
       } else {
         failure(this);

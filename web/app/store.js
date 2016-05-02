@@ -22,7 +22,12 @@ var cloud = {
 
   },
   fetch: function(callback, failure) {
-    return ajax('GET', session.store.getUrl, null, callback);
+    return ajax('GET', session.store.getUrl, null, function(data) {
+      if(new Date(localStorage.getItem('lastUpdated')).getTime() > new Date(data.lastUpdated).getTime()) {
+        alert('Warning: updated timestamp on local device is new than the remote server! Please reload');
+      }
+      callback(data);
+    });
   }
 };
 
@@ -84,9 +89,11 @@ var store = function(config, storage, reducer) {
     storage.set('events', this.events);
     cloud.store({
       events: this.events,
-      config: this.config
+      config: this.config,
+      lastUpdated: new Date()
     }, function(e) {
       self.trigger('persistSuccess', e);
+      localStorage.setItem('lastUpdated', new Date());
     }, function(e) {
       self.trigger('persistFailure', e);
     });

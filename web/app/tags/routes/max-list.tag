@@ -18,14 +18,14 @@ var config = require('../../config');
       </tr>
     </thead>
     <tbody>
-      <tr class='info'>
+      <tr class='success'>
         <td><a href='#/maxes/{ l.key }'>{ currentCycle.date }</a></td>
         <td>{ currentCycle.press }</td>
         <td>{ currentCycle.deadlift }</td>
         <td>{ currentCycle.bench }</td>
         <td>{ currentCycle.squat }</td>
       </tr>
-      <tr each={ l in currentLogs } onclick={navigateToSchedule(l.key)}>
+      <tr each={ l in currentLogs } onclick={navigateToSchedule(l.key)} class='cycle--future'>
         <td><a href='#/maxes/{ l.key }'>{ l.date }</a></td>
         <td>{ l.press }</td>
         <td>{ l.deadlift }</td>
@@ -71,6 +71,9 @@ var config = require('../../config');
       color: red;
     }
 
+    .cycle--future {
+      color: #ddd;
+    }
   </style>
   <script>
     var self = this;
