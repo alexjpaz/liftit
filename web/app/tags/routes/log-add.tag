@@ -44,7 +44,6 @@ var Cycle = require('../../models/Cycle');
       <div class="form-group">
         <label>Reps</label>
         <select name='reps' class='form-control' onchange={model}>
-          <option>-- select reps --</option>
           <option selected={r == vm.reps} value={r} each={ r in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15] }>{r}</option>
         </select>
       </div>
@@ -134,6 +133,8 @@ var Cycle = require('../../models/Cycle');
       self.vm[e.target.name] = value;
       self.effectiveMax = this.vm.getEffectiveMax();
 
+
+
       calculateWeigthFractions();
 
       self.update();
@@ -165,15 +166,11 @@ var Cycle = require('../../models/Cycle');
       }
     };
 
-
-
-
     var route = riot.route.create();
 
     route('/logs/*', function(key) {
       var event = store.events[key];
 
-      console.log(2222, Log)
       var log = new Log(event);
       self.vm = log;
 
@@ -185,13 +182,13 @@ var Cycle = require('../../models/Cycle');
 
     });
 
-
     route('/logs/new...', function() {
-      self.vm = new Log({
-        date: riot.route.query().date
-      });
-      console.log(riot.route.query())
-      self.effectiveMax = self.vm.getEffectiveMax();
+      var log = Log.createNextLog(riot.route.query().date);
+
+      self.effectiveMax = log.getEffectiveMax();
+
+      self.vm = log;
+
       self.update();
     });
 
