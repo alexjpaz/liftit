@@ -47,5 +47,19 @@ session.create(function() {
   api.store.init(function() {
     riot.mount('*', opts);
     riot.route.exec();
+
+
+    api.store.on('persist', function() {
+      window.onbeforeunload = function () {
+        return "Warning! Data may not be saved. If you navigate away you may lose data!";
+      };
+      console.log(window.onbeforeunload)
+    });
+
+
+    api.store.on('persistSuccess', function() {
+      window.onbeforeunload = null;
+    });
+
   });
 });
