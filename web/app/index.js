@@ -19,7 +19,6 @@ if(getParameterByName('apiKey')) {
 
 
 session.create(function() {
-  return;
   var app = require('./tags/app.tag');
 
   var api = require('./api');
