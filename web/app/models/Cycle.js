@@ -24,7 +24,6 @@ Cycle.findLogs = function(cycle) {
     futureDate = futureCycle[0];
   }
 
-
   return Event.findBetween(cycle.date, futureDate).filter(function(e) {
     return e.type === 'log';
   });
@@ -56,11 +55,9 @@ Cycle.findBefore = function(date) {
 };
 
 Cycle.findAfter = function(date) {
-  console.log(11111111111111, date)
   if(date instanceof Date) {
     date = DateUtils.string(date);
   }
-
 
   var filteredEvents = Cycle.findSorted(function(event) {
     return event.date >= date;
@@ -81,6 +78,8 @@ Cycle.findSorted = function(filter) {
 
 Cycle.removeAll = function(cycles) {
 }
+
+
 
 
 module.exports = Cycle;

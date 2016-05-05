@@ -90,7 +90,7 @@ var DateUtils = require('../../date');
     this.submit = function(form) {
       form.preventDefault();
 
-      store.trigger('addEvent', Object.assign({}, self.vm));
+      store.trigger('updateEvents', self.vm);
 
       window.history.back();
     };
@@ -99,7 +99,8 @@ var DateUtils = require('../../date');
       form.preventDefault();
       var ans = confirm("Are you sure you want to remove this cycle?");
       if(ans) {
-        store.trigger('removeEvent', self.vm.key);
+        self.vm.disabled = true;
+        store.trigger('updateEvents', self.vm);
         window.history.back();
       }
     };

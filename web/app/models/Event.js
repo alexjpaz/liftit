@@ -18,7 +18,7 @@ Event.get = function(key) {
 Event.all = function() {
   return Object.keys(api.store.events).map(function(k) {
     return api.store.events[k];
-  });
+  }).filter(Event.filters.active);
 };
 
 Event.find = function(filter) {
@@ -81,6 +81,14 @@ Event.findAfter = function(date) {
   }).sort(DateUtils.sort);
 
   return filteredEvents;
+};
+
+Event.filters = {};
+
+Event.filters.active = function(event) {
+  if(event) {
+    return event.disabled !== true;
+  }
 };
 
 module.exports = Event;

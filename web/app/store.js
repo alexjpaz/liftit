@@ -63,11 +63,10 @@ var store = function(config, storage, reducer) {
     self.trigger('digest');
   });
 
-  this.on('addEvent', function(events) {
+  this.on('updateEvents', function(events) {
     if(events instanceof Array === false) {
       events = [events];
     }
-
 
     events.forEach(function(event) {
       event = Object.assign({}, event);
@@ -76,18 +75,6 @@ var store = function(config, storage, reducer) {
     });
 
     self.events = Object.assign({}, self.events);
-
-    self.trigger('digest');
-  });
-
-  this.on('removeEvent', function(events) {
-    if(events instanceof Array === false) {
-      events = [events];
-    }
-
-    events.forEach(function(event) {
-      delete self.events[event];
-    });
 
     self.trigger('digest');
   });

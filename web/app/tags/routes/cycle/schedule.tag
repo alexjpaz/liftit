@@ -91,15 +91,19 @@ var DateUtils = require('../../../date');
     this.submit = function(form) {
       form.preventDefault();
 
+      var events = [];
+
+      events = events.concat(self.cycles);
+
       var futureCycles = Cycle.findAfter(self.vm.date);
 
-      var eventKeysToDelete = futureCycles.map(function(cycle) {
-        return cycle.key;
-      });
+      events = events.concat(futureCycles.map(function(cycle) {
+        var clone = Object.assign({}, cycle)
+        clone.disabled = true;
+        return clone;
+      }));
 
-      store.trigger('removeEvent', eventKeysToDelete);
-
-      store.trigger('addEvent', self.cycles);
+      store.trigger('updateEvents', events);
 
       window.history.back();
     };
