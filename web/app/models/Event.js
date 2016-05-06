@@ -29,6 +29,12 @@ Event.find = function(filter) {
   return Event.all().filter(filter);
 };
 
+Event.findActiveByType = function(type) {
+  return Event.find(function(ev) {
+    return ev.type === type && ev.disabled !== true;
+  });
+};
+
 Event.findByType = function(type) {
   return Event.find(function(ev) {
     return ev.type === type;

@@ -14,6 +14,7 @@ function Cycle(event) {
 }
 
 Cycle.get = Event.get;
+Cycle.clone = Event.clone;
 
 Cycle.findLogs = function(cycle) {
   var futureDate = new Date();

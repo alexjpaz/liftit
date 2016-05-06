@@ -18,6 +18,11 @@ var DateUtils = require('../../../date');
           <input class="form-control" type="number" name={l} value={vm[l]} onchange={ model } required />
         </div>
 
+        <div class='form-group'>
+          <label>repeat</label>
+          <input class="form-control" type="number" name='repeat' value={ repeat } onchange={ updateRepeat } required />
+        </div>
+
         <button class="btn btn-primary">
           Save Cycle Schedule
         </button>
@@ -51,10 +56,10 @@ var DateUtils = require('../../../date');
     var store = self.api.store;
     self.config = store.config;
 
-    function generateScedule(templateCycle) {
-      var repeat = 5;
+    self.repeat = 5;
 
-      self.cycles = Array(repeat).fill(true).map(function(none, index) {
+    function generateScedule(templateCycle) {
+      self.cycles = Array(self.repeat).fill(true).map(function(none, index) {
         var increment = 5; // TODO
         var cycleIncrement = 30;
 
@@ -75,6 +80,18 @@ var DateUtils = require('../../../date');
       });
 
     }
+
+    this.updateRepeat = function(e) {
+      var value = e.target.value;
+      if(e.target.type === 'number') {
+        value = +value;
+      }
+
+      self.repeat = value;
+      generateScedule(self.vm);
+      self.update();
+
+    };
 
     this.model = function(e) {
       var value = e.target.value;
@@ -113,10 +130,11 @@ var DateUtils = require('../../../date');
     route('/cycles/schedule..', function() {
       var today = null;
       var query = riot.route.query();
+      var templateCycle = null
 
       if(query.from) {
         var from = Cycle.get(query.from);
-        self.vm = new Cycle(from);
+        templateCycle = Cycle.clone(from);
         if(from) {
           today = from.date;
         }
@@ -126,14 +144,17 @@ var DateUtils = require('../../../date');
         } else {
           today = DateUtils.create();
         }
-        self.vm = new Cycle({
+        templateCycle = new Cycle({
           date: today
         });
       }
 
+      generateScedule(templateCycle);
+
       self.today = today;
 
-      generateScedule(self.vm);
+      self.vm = templateCycle;
+
       self.update();
     });
 
