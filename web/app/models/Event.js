@@ -21,6 +21,10 @@ Event.all = function() {
   }).filter(Event.filters.active);
 };
 
+Event.findActive = function(filter) {
+  return Event.all().filter(Event.filters.active).filter(filter);
+};
+
 Event.find = function(filter) {
   return Event.all().filter(filter);
 };

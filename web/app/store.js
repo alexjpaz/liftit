@@ -4,16 +4,6 @@ var guid = require('./guid');
 var http = require('./services/http');
 var ajax = http.ajax;
 
-var dao = function(context, type) {
-  this.list = function() {
-    return Object.keys(context.events).map(function(k) {
-      return context.events[k];
-    }).filter(function(event) {
-      return event.type === type;
-    });
-  };
-};
-
 var session = JSON.parse(localStorage.getItem('session'));
 
 var cloud = {
@@ -102,12 +92,6 @@ var store = function(config, storage, reducer) {
     self.trigger('reduce');
     self.trigger('persist');
   });
-
-
-  this.maxes = new dao(this, 'max');
-  this.logs = new dao(this, 'log');
 };
-
-
 
 module.exports = store;

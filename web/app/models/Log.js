@@ -22,6 +22,7 @@ function Log(event) {
 Log.prototype.getEffectiveMax = function() {
   var cycles = Cycle.findBefore(this.date);
 
+
   var cycle = null;
 
   if(cycles) {

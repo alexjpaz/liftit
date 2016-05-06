@@ -142,7 +142,7 @@ var Cycle = require('../../models/Cycle');
 
     this.submit = function(form) {
       form.preventDefault();
-      store.trigger('addEvent', Object.assign({}, self.vm));
+      store.trigger('updateEvents', self.vm);
       window.history.back();
     };
 
@@ -150,7 +150,8 @@ var Cycle = require('../../models/Cycle');
       form.preventDefault();
       var ans = confirm("Are you sure you want to remove this log?");
       if(ans) {
-        store.trigger('removeEvent', self.vm.key);
+        self.vm.disabled = true;
+        store.trigger('updateEvents', self.vm);
         window.history.back();
       }
     };

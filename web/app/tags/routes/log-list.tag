@@ -1,3 +1,5 @@
+var Log = require('../../models/Log');
+
 <log-list>
 
 <table class="table table-bordered">
@@ -35,7 +37,7 @@
   };
 
   var getLogs = function() {
-    self.logs = store.logs.list();
+    self.logs = Log.all();
     self.update();
   };
 
