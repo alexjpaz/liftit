@@ -32,7 +32,6 @@ var config = require('../../config');
         <td>{ l.deadlift }</td>
         <td>{ l.bench }</td>
         <td>{ l.squat }</td>
-        <td>{ l.disabled }</td>
       </tr>
     </tbody>
   </table>
