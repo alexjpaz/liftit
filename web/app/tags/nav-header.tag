@@ -20,6 +20,7 @@
             <li><a href="#">Home</a></li>
             <li><a href="#/logs">Logs</a></li>
             <li><a href="#/maxes">Cycles</a></li>
+            <li><a href='http://unstable.ajpaz531.appspot.com/'>Go to PazFit</a></li>
          </ul>
         </div><!--/.nav-collapse -->
 
