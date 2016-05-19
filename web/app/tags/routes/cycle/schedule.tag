@@ -108,11 +108,21 @@ var DateUtils = require('../../../date');
     this.submit = function(form) {
       form.preventDefault();
 
+      var today = DateUtils.create();
+
+      if(self.vm.date < today) {
+        alert("Start date must be set in the future!");
+        return;
+      }
+
       var events = [];
 
       events = events.concat(self.cycles);
 
-      var futureCycles = Cycle.findAfter(self.vm.date);
+
+      var futureCycles = Cycle.findAfter(self.vm.date).filter(function(cycle) {
+        return cycle.date > today;
+      });
 
       events = events.concat(futureCycles.map(function(cycle) {
         var clone = Object.assign({}, cycle)
