@@ -1,5 +1,6 @@
-var index = require('file?name=[name].[ext]!./index.html')
-var login = require('file?name=[name].[ext]!./login.html')
+require('file?name=[name].[ext]!./index.html')
+require('file?name=[name].[ext]!./manifest.json')
+require('file?name=[name].[ext]!./login.html')
 
 var session = require('./services/session');
 
