@@ -1,3 +1,3 @@
 # liftit
 
-Drumb crud gym application
+Dumb crud gym application
