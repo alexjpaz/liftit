@@ -4,26 +4,10 @@ require('file?name=[name].[ext]!./login.html')
 
 var session = require('./services/session');
 
-var getParameterByName = function getParameterByName(name, url) {
-  if (!url) url = window.location.href;
-  name = name.replace(/[\[\]]/g, "\\$&");
-  var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-    results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
+var app = require('./tags/app.tag');
+var api = require('./api');
 
-if(getParameterByName('apiKey')) {
-  localStorage.setItem('apiKey', getParameterByName('apiKey'));
-}
-
-
-session.create(function() {
-  var app = require('./tags/app.tag');
-
-  var api = require('./api');
-
+session.create().then(function() {
   var opts = {
     api: api,
     views: {
@@ -45,10 +29,9 @@ session.create(function() {
 
   });
 
-  api.store.init(function() {
+  return api.store.init().then(function() {
     riot.mount('*', opts);
     riot.route.exec();
-
 
     api.store.on('persist', function() {
       window.onbeforeunload = function () {
@@ -56,7 +39,6 @@ session.create(function() {
       };
       console.log(window.onbeforeunload)
     });
-
 
     api.store.on('persistSuccess', function() {
       window.onbeforeunload = null;

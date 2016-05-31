@@ -1,4 +1,8 @@
+var AWS = require('aws-sdk');
+var P = require("bluebird/js/browser/bluebird.core");
+
 var session = function() {
+  riot.observable(this);
 };
 
 session.prototype.init = function(callback) {
@@ -7,37 +11,73 @@ session.prototype.init = function(callback) {
 
 var instance = null;
 
-session.create = function(successfn) {
-  try {
-    instance = JSON.parse(localStorage.getItem('session'));
+session.prototype.create = function() {
+  var self = this;
+  return new P(function(resolve, reject) {
+    var identityGoogle = localStorage.getItem('identity.google');
 
-    if(new Date() < new Date(instance.expires)) {
-      successfn(instance);
-      console.info('local session was found');
+    if(!identityGoogle) {
+      window.location.assign('/login.html');
       return;
     }
 
-    throw new Error('local session has expired');
-  } catch(e) {
-    console.info('error loading local session: ', e);
-    instance = null;
-  }
+    AWS.config.region = 'us-east-1'; // Region
+    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+      IdentityPoolId: 'us-east-1:726109ba-82d3-495e-9ad8-5f0d4141c443',
+      Logins: {
+        "accounts.google.com": identityGoogle
+      }
+    });
+    AWS.config.credentials.get(function(err){
+      if(err) {
+        window.location.assign('/login.html');
+        reject();
+        return;
+      }
+      self.dynamodb = new AWS.DynamoDB.DocumentClient();
+      resolve();
+    });
+  });
+};
 
-  if(instance === null) {
-    var url = 'https://b3gg00cbli.execute-api.us-east-1.amazonaws.com/prod/profile2';
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.setRequestHeader('x-api-key', localStorage.getItem('apiKey') || "NONE");
-    xhr.onload = function() {
-      if(this.responseText && this.responseText.length > 0) {
-        localStorage.setItem('session', this.responseText);
-        successfn(JSON.parse(this.responseText));
+session.prototype.fetch = function() {
+  var self = this;
+  return new P(function(resolve, reject) {
+    var params = {
+      TableName: 'liftit',
+      Key: {
+        userId: AWS.config.credentials.identityId
       }
     };
-    xhr.send(null);
-  }
+    self.dynamodb.get(params, function(err, data) {
+      if(err) {
+        reject(err, data);
+      }
+      resolve(data);
+    });
+  });
 };
+
+session.prototype.store = function(value) {
+  var self = this;
+  return new P(function(resolve, reject) {
+    var params = {
+      TableName: 'liftit',
+      Item: {
+        userId: AWS.config.credentials.identityId,
+        data: value
+      }
+    };
+    self.dynamodb.put(params, function(err, data) {
+      if(err) {
+        reject(err, data);
+      }
+      resolve(data);
+    });
+  });
+};
+
+
 
 session.getInstance = function() {
  if(!instance) {
@@ -47,4 +87,4 @@ session.getInstance = function() {
  return instance;
 };
 
-module.exports = session;
+module.exports = new session();

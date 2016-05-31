@@ -9,6 +9,7 @@ require('./nav-header.tag');
 require('./nav-links.tag');
 require('./route.tag');
 require('./routes/day.tag');
+require('./routes/setup.tag');
 require('./routes/profile.tag');
 require('./common/panel.tag')
 require('./layout/toast-bar.tag')
@@ -61,6 +62,9 @@ require('./layout/toast-bar.tag')
         <route when='/profile'>
           <profile></profile>
         </route>
+        <route when='/setup'>
+          <setup></setup>
+        </route>
       </div>
     </div>
     <toast-bar></toast-bar>
@@ -104,6 +108,10 @@ require('./layout/toast-bar.tag')
     })
 
     opts.api.routeParams = [];
+
+    if(!opts.api.store.events || Object.keys(opts.api.store.events).length === 0) {
+      riot.route('/setup');
+    }
 
     riot.route.start(true);
   </script>
