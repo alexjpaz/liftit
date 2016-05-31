@@ -25,43 +25,9 @@
     <meta name="msapplication-TileColor" content="#2b5797">
     <meta name="msapplication-TileImage" content="mstile-144x144.png">
 
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="//sdk.amazonaws.com/js/aws-sdk-2.3.11.js"></script>
 
-   <script src="https://sdk.amazonaws.com/js/aws-sdk-2.3.11.min.js"></script>
-
-
-
-    <script>
-      (function() {
-        if(localStorage) {
-          var identityGoogle = localStorage.getItem('identity.google');
-
-          if(!identityGoogle) {
-            window.location.assign('/login.html');
-            return;
-          }
-
-          AWS.config.region = 'us-east-1'; // Region
-          AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-            IdentityPoolId: 'us-east-1:726109ba-82d3-495e-9ad8-5f0d4141c443',
-            Logins: {
-              "accounts.google.com": identityGoogle
-            }
-          });
-          AWS.config.credentials.get(function(err){
-            if(err) {
-              window.location.assign('/login.html');
-              return;
-            }
-            // ready
-          });
-
-        }
-      })();
-    </script>
-
-    <!--<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>-->
   <body>
     <style>
       html, body {

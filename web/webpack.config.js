@@ -6,6 +6,9 @@ module.exports = {
     path: __dirname + '/public',
     filename: 'bundle.js'
   },
+  externals: {
+    'aws-sdk': 'AWS'
+  },
   plugins: [
     new webpack.ProvidePlugin({
       riot: 'riot'

@@ -4,27 +4,9 @@ var guid = require('./guid');
 var http = require('./services/http');
 var ajax = http.ajax;
 
-var session = JSON.parse(localStorage.getItem('session'));
+var session = require('./services/session');
 
-var cloud = {
-  store: function(value, callback, failure) {
-    return ajax('PUT', session.store.putUrl, value, callback, failure);
-
-  },
-  fetch: function(callback, failure) {
-    return ajax('GET', session.store.getUrl, null, function(data) {
-      if(new Date(localStorage.getItem('lastUpdated')).getTime() > new Date(data.lastUpdated).getTime()) {
-
-        console.error('Warning: updated timestamp on local device is new than the remote server! Please reload');
-        setTimeout(function() {
-          window.location.reload();
-        },1000);
-      } else {
-        callback(data);
-      }
-    });
-  }
-};
+var P = require("bluebird/js/browser/bluebird.core");
 
 var store = function(config, storage, reducer) {
   if(!storage) throw Error("Storage is not set");
@@ -34,16 +16,15 @@ var store = function(config, storage, reducer) {
 
   this.config = config;
 
-  this.events = /* storage.get('events') || */ {};
+  this.events = {};
 
   this.guid = guid;
 
   this.init = function(callback, failure) {
-   cloud.fetch(function(data) {
-      self.events = data.events;
-      self.config = data.config;
+   return session.fetch().then(function(data) {
+      self.events = data.Item.data.events;
+      self.config = data.Item.data.config;
       self.trigger('digest');
-      callback();
     });
   };
 
@@ -77,11 +58,11 @@ var store = function(config, storage, reducer) {
   this.on('persist', function() {
     var lastUpdated = new Date();
     storage.set('events', this.events);
-    cloud.store({
+    return session.store({
       events: this.events,
       config: this.config,
       lastUpdated: lastUpdated
-    }, function(e) {
+    }).then(function(e) {
       self.trigger('persistSuccess', e);
       localStorage.setItem('lastUpdated', lastUpdated);
     }, function(e) {
@@ -94,7 +75,7 @@ var store = function(config, storage, reducer) {
   });
 
   this.on('digest', function() {
-    self.trigger('reduce');
+    //self.trigger('reduce');
     self.trigger('persist');
   });
 };
