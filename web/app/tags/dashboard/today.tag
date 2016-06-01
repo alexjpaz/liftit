@@ -6,8 +6,8 @@
       {thing.currentMax.press}-{thing.currentMax.deadlift}-{thing.currentMax.bench}-{thing.currentMax.squat}
     <span>
     </a>
-  </div
-  <a href='http://liftit-sheets.alexjpaz.com/531bbb/?press={thing.currentMax.press}&deadlift={thing.currentMax.deadlift}&bench={thing.currentMax.bench}&squat={thing.currentMax.squat}'>view sheet</a>
+  </div>
+  <a class='btn btn-default btn-block' href='http://liftit-sheets.alexjpaz.com/531bbb/?press={thing.currentMax.press}&deadlift={thing.currentMax.deadlift}&bench={thing.currentMax.bench}&squat={thing.currentMax.squat}'>view sheet</a>
   <style scoped>
     :scope {
       display: block;
