@@ -1,4 +1,5 @@
 <dashboard-today>
+<a class='btn btn-default btn-block' href='http://liftit-sheets.alexjpaz.com/531bbb/?press={thing.currentMax.press}&deadlift={thing.currentMax.deadlift}&bench={thing.currentMax.bench}&squat={thing.currentMax.squat}'>view sheet</a>
   <div class='button-group'>
     <a href='#/logs/new' class='button-group--left' >Add Log</a>
     <a href='#/maxes/{ thing.currentMax.key }' class='button-group--right'>
@@ -7,7 +8,7 @@
     <span>
     </a>
   </div>
-  <a class='btn btn-default btn-block' href='http://liftit-sheets.alexjpaz.com/531bbb/?press={thing.currentMax.press}&deadlift={thing.currentMax.deadlift}&bench={thing.currentMax.bench}&squat={thing.currentMax.squat}'>view sheet</a>
+  
   <style scoped>
     :scope {
       display: block;
