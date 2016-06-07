@@ -19,12 +19,12 @@ var Cycle = require('../../models/Cycle');
     <form onsubmit={submit}>
        <div class="form-group">
         <label>Date</label>
-        <input class="form-control" type="date" id="sample1" name='date' onchange={ model } value={ vm.date } />
+        <input class="form-control" type="date" id="sample1" name='date' onchange={ model } value={ vm.date } required />
       </div>
 
       <div class="form-group">
         <label>Lift</label>
-        <select name='lift' class='form-control' onchange={model}>
+        <select name='lift' class='form-control' onchange={model} required>
           <option>-- select lift --</option>
           <option each={ l in lifts } value={ l } selected={ vm.lift === l }>{ l }</option>
         </select>
@@ -33,7 +33,7 @@ var Cycle = require('../../models/Cycle');
       <div class="form-group weight-control">
         <label>Weight</label>
         <div class='clearfix'>
-          <input name='weight' class='form-control' value={vm.weight} onchange={model}>
+          <input name='weight' class='form-control' value={vm.weight} onchange={model} type='number' required>
           <select name='weight' class='form-control' onchange={model}>
             <option>?</option>
             <option each={ wf in weightFractions } value={ wf.weight } selected={ vm.weight == wf.weight }>{ wf.fraction  }%</option>
@@ -43,7 +43,7 @@ var Cycle = require('../../models/Cycle');
 
       <div class="form-group">
         <label>Reps</label>
-        <select name='reps' class='form-control' onchange={model}>
+        <select name='reps' class='form-control' onchange={model} type='number' required>
           <option selected={r == vm.reps} value={r} each={ r in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15] }>{r}</option>
         </select>
       </div>

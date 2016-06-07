@@ -37,7 +37,6 @@ session.create().then(function() {
       window.onbeforeunload = function () {
         return "Warning! Data may not be saved. If you navigate away you may lose data!";
       };
-      console.log(window.onbeforeunload)
     });
 
     api.store.on('persistSuccess', function() {

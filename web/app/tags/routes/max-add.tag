@@ -16,7 +16,7 @@ var DateUtils = require('../../date');
 
         <div class="form-group" each={l in lifts}>
           <label>{ l }</label>
-          <input class="form-control" type="number" name={l} value={vm[l]} onchange={ model }>
+          <input class="form-control" type="number" name={l} value={vm[l]} onchange={ model } required>
         </div>
 
         <button class="btn btn-primary">

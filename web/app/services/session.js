@@ -68,6 +68,7 @@ session.prototype.store = function(value) {
         data: value
       }
     };
+
     self.dynamodb.put(params, function(err, data) {
       if(err) {
         reject(err, data);
