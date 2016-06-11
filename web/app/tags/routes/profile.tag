@@ -9,7 +9,7 @@
 
   <form onsubmit={deleteAllData}>
     <div class='form-group'>
-      <label>Clear All Data</label>
+      <label>Clear All Data 🙄</label>
     </div>
     <button class='btn btn-danger'>Clear All</button>
   </form>
