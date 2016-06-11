@@ -50,7 +50,7 @@ var store = function(config, storage, reducer) {
       self.events[event.key] = event;
     });
     
-    self.events = JSON.parse(JSON.stringify(self.events));
+   // self.events = JSON.parse(JSON.stringify(self.events));
     
     //self.events = Object.assign({}, self.events);
 
