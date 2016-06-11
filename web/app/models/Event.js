@@ -42,11 +42,8 @@ Event.findByType = function(type) {
 };
 
 Event.findOn = function(date) {
-  if(date instanceof Date) {
-    date = DateUtils.string(date);
-  }
-
   var filteredEvents = Event.all().filter(function(event) {
+    DateUtils.compare(event.date, date);
     return event.date == date;
   }).sort(DateUtils.sort);
 

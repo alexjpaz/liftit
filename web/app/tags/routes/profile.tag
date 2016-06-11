@@ -1,19 +1,18 @@
+var DateUtils = require('../../date');
 <profile>
-  <form onsubmit={submit}>
-    <div class='form-group'>
-      <label>API Key</label>
-      <input type='text' class='form-control' name='apiKey' value={apiKey} />
-    </div>
-    <button class='btn btn-primary'>Save</button>
-  </form>
+  <div>
+    <h3>Backup and Restore</h3>
+    <button class='btn btn-primary' onclick={backup}>Backup</button>
+    <button class='btn btn-primary' onclick={restore}>Restore</button>
+    <input type='file' id='restoreFile' onchange={restoreHanlder} style='display: none'/>
+  </div>
 
-  <form onsubmit={deleteAllData}>
-    <div class='form-group'>
-      <label>Clear All Data 🙄</label>
-    </div>
-    <button class='btn btn-danger'>Clear All</button>
-  </form>
-1
+  <div>
+    <h3>Clear All Data</h3>
+    <form onsubmit={deleteAllData}>
+      <button class='btn btn-danger'>Clear All</button>
+    </form>
+  </div>
 
   <script>
 
@@ -23,13 +22,59 @@
 
     this.apiKey =  localStorage.getItem('apiKey') || "EMPTY";
 
+    this.restoreHanlder = function(e) {
+      var files = e.target.files;
+       var reader = new FileReader();
+
+       reader.onload = (function(file) {
+         var json = JSON.parse(file.currentTarget.result);
+
+         var events = [];
+
+         Object.keys(json.events).forEach(function(key) {
+           events.push(json.events[key]);
+         });
+
+        self.api.store.trigger('updateEvents', events);
+       });
+
+       reader.readAsText(files[0]);
+
+      console.log(files);
+    };
+
+    this.restore = function(e) {
+      this.restoreFile.click();
+    };
+
+    this.backup = function(e) {
+      var saveData = (function () {
+        var a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = "display: none";
+        return function (data, fileName) {
+          var json = JSON.stringify(data),
+          blob = new Blob([json], {type: "octet/stream"}),
+          url = window.URL.createObjectURL(blob);
+          a.href = url;
+          a.download = fileName;
+          a.click();
+          window.URL.revokeObjectURL(url);
+        };
+      }());
+
+      var data = this.api.store;
+
+      saveData(data, 'liftit-'+DateUtils.create()+'-'+new Date().getTime()+'.json');
+    };
+
     this.submit = function(e) {
       self.apiKey = e.target.apiKey.value;
       localStorage.setItem('apiKey', self.apiKey);
     };
 
     this.deleteAllData = function(e) {
-      var yes = prompt("Delete All Data?");
+      var yes = confirm("Delete All Data?");
 
       if(yes) {
         this.api.store.trigger('clearEvents');

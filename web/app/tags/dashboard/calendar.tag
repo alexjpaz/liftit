@@ -101,7 +101,6 @@ var DateUtils = require('../../date');
     };
 
     function update() {
-      console.log('update');
       var now = new Date();
       var today = new Date();
 
@@ -119,7 +118,6 @@ var DateUtils = require('../../date');
       for(var i=this.days.length; i < daysInThisMonth(today) + self.firstDay.getDay(); i++) {
         cursorDate = new Date(today.getFullYear(), today.getMonth(), dateDay+1)
         cursorDate.setHours(0,0,0,0);
-
         dateDay = (i+1)-self.firstDay.getDay();
 
         this.days[i] = {

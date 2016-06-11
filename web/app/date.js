@@ -14,6 +14,18 @@ DateUtils.string = function(date) {
     ].join('-');
 };
 
+DateUtils.compare = function(a,b) {
+  if(a instanceof Date) {
+    a = DateUtils.string(a);
+  }
+
+  if(b instanceof Date) {
+    b = DateUtils.string(b);
+  }
+
+  console.log(a,b);
+  debugger;
+};
 
 DateUtils.before = function(date) {
 };

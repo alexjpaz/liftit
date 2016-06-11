@@ -22,8 +22,8 @@ var store = function(config, storage, reducer) {
 
   this.init = function(callback, failure) {
    return session.fetch().then(function(data) {
-      self.events = data.Item.data.events;
-      self.config = data.Item.data.config;
+      self.events = data.Item.data.events || events;
+      self.config = data.Item.data.config || config;
       self.trigger('digest');
     });
   };

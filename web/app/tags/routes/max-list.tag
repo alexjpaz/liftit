@@ -83,8 +83,6 @@ var config = require('../../config');
 
     var store = this.api.store;
 
-    self.config = store.config;
-
     var getLogs = function() {
       self.allCycles = [];
 
