@@ -20,11 +20,15 @@ var store = function(config, storage, reducer) {
 
   this.guid = guid;
 
-  this.init = function(callback, failure) {
+  this.init = function() {
    return session.fetch().then(function(data) {
-      self.events = data.Item.data.events || events;
-      self.config = data.Item.data.config || config;
-      self.trigger('digest');
+      if(data instanceof Object && !(data instanceof Array)) {
+        self.events = data.events || self.events;
+        self.config = data.config || self.config;
+        self.trigger('digest');
+      } else {
+        throw new Error("Invalid data fetched from server!");
+      }
     });
   };
 
@@ -49,9 +53,9 @@ var store = function(config, storage, reducer) {
 
       self.events[event.key] = event;
     });
-    
+
    // self.events = JSON.parse(JSON.stringify(self.events));
-    
+
     //self.events = Object.assign({}, self.events);
 
     self.trigger('digest');

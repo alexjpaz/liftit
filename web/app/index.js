@@ -44,4 +44,6 @@ session.create().then(function() {
     });
 
   });
+}, function(err) {
+  console.log(err);
 });

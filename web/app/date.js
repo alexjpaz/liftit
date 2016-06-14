@@ -22,9 +22,6 @@ DateUtils.compare = function(a,b) {
   if(b instanceof Date) {
     b = DateUtils.string(b);
   }
-
-  console.log(a,b);
-  debugger;
 };
 
 DateUtils.before = function(date) {
