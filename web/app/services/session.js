@@ -1,4 +1,3 @@
-var AWS = require('aws-sdk');
 var P = require("bluebird/js/browser/bluebird.core");
 
 var request = require('superagent');

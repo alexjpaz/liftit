@@ -7,7 +7,6 @@ module.exports = {
     filename: 'bundle.js'
   },
   externals: {
-    'aws-sdk': 'AWS'
   },
   plugins: [
     new webpack.ProvidePlugin({
