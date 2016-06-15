@@ -45,5 +45,6 @@ session.create().then(function() {
 
   });
 }, function(err) {
+  location.assign('/login.html');
   console.log(err);
 });
