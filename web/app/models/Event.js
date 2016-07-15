@@ -43,20 +43,15 @@ Event.findByType = function(type) {
 
 Event.findOn = function(date) {
   var filteredEvents = Event.all().filter(function(event) {
-    DateUtils.compare(event.date, date);
-    return event.date == date;
+    return new Date(event.date).getTime() == new Date(date).getTime();
   }).sort(DateUtils.sort);
 
   return filteredEvents;
 };
 
 Event.findBetween = function(firstDate, secondDate) {
-  if(firstDate instanceof Date) {
-    firstDate = DateUtils.string(firstDate);
-  }
-
-  if(secondDate instanceof Date) {
-    secondDate = DateUtils.string(secondDate);
+  if(firstDate instanceof Date === false || secondDate instanceof Date === false) {
+    throw new Error("Date parameter must be of type Date");
   }
 
   var filteredEvents = Event.all().filter(function(event) {
@@ -67,8 +62,8 @@ Event.findBetween = function(firstDate, secondDate) {
 };
 
 Event.findBefore = function(date) {
-  if(date instanceof Date) {
-    date = DateUtils.string(date);
+  if(date instanceof Date === false) {
+    throw new Error("Date parameter must be of type Date");
   }
 
   var filteredEvents = Event.all().filter(function(event) {
@@ -79,8 +74,8 @@ Event.findBefore = function(date) {
 };
 
 Event.findAfter = function(date) {
-  if(date instanceof Date) {
-    date = DateUtils.string(date);
+  if(date instanceof Date === false) {
+    throw new Error("Date parameter must be of type Date");
   }
 
   var filteredEvents = Event.all().filter(function(event) {

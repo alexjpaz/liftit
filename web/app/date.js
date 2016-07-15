@@ -15,13 +15,12 @@ DateUtils.string = function(date) {
 };
 
 DateUtils.compare = function(a,b) {
-  if(a instanceof Date) {
-    a = DateUtils.string(a);
-  }
+  var ad = new Date(a);
+  var bd = new Date(b);
 
-  if(b instanceof Date) {
-    b = DateUtils.string(b);
-  }
+  if(ad == bd) return 0;
+  if(ad > bd) return 1;
+  if(ad < bd) return -1;
 };
 
 DateUtils.before = function(date) {

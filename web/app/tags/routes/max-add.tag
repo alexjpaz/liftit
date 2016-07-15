@@ -11,7 +11,7 @@ var DateUtils = require('../../date');
       <form onsubmit={submit}>
          <div class="form-group">
           <label>Date</label>
-          <input class="form-control" type="date" name='date' value={ vm.date } onchange={ model }>
+          <input class="form-control" type="date" name='date' value={ formatDateView(vm.date) } onchange={ model }>
         </div>
 
         <div class="form-group" each={l in lifts}>
@@ -82,9 +82,19 @@ var DateUtils = require('../../date');
       self.update();
     });
 
+    this.formatDateView = function(val) {
+      return new Date(val).toISOString().slice(0,10);
+    };
 
     this.model = function(e) {
-      self.vm[e.target.name] = e.target.value;
+      var value = e.target.value;
+
+      if(e.target.type === "date") {
+        var d = new Date(value);
+        value = d.toString();
+      }
+
+      self.vm[e.target.name] = value;
     };
 
     this.submit = function(form) {

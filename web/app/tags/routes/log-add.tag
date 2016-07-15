@@ -19,7 +19,7 @@ var Cycle = require('../../models/Cycle');
     <form onsubmit={submit}>
        <div class="form-group">
         <label>Date</label>
-        <input class="form-control" type="date" id="sample1" name='date' onchange={ model } value={ vm.date } required />
+        <input class="form-control" type="date" id="sample1" name='date' onchange={ model } value={ formatDateView(vm.date) } required />
       </div>
 
       <div class="form-group">
@@ -127,13 +127,20 @@ var Cycle = require('../../models/Cycle');
 
     var store = this.api.store;
 
+    this.formatDateView = function(val) {
+      return new Date(val).toISOString().slice(0,10);
+    };
+
     this.model = function(e) {
-      var  value = e.target.value;
+      var value = e.target.value;
+
+      if(e.target.type === "date") {
+        var d = new Date(value);
+        value = d.toString();
+      }
 
       self.vm[e.target.name] = value;
       self.effectiveMax = this.vm.getEffectiveMax();
-
-
 
       calculateWeigthFractions();
 

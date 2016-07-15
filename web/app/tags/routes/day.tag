@@ -19,6 +19,7 @@ var Event = require('../../models/Event');
     <a href='#/logs/new?date={day}' class='button-group--left' >Add Log</a>
     <a href='#/maxes/new?date={day}' class='button-group--right'>Add Cycle</a>
   </div>
+  <pre>{ JSON.stringify(events, null, 4); }</pre>
 
   <style>
     .list-container {
@@ -82,7 +83,7 @@ var Event = require('../../models/Event');
     var route = riot.route.create();
     route('/day/([0-9]{4}\-([0-9]{2}\-[0-9]{2}))(.*)?', function(day) {
       self.day = day;
-      self.events = Event.findOn(day);
+      self.events = Event.findOn(new Date(day));
       self.update();
     });
 

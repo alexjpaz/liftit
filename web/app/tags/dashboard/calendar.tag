@@ -123,9 +123,9 @@ var DateUtils = require('../../date');
         this.days[i] = {
           date: cursorDate,
           label: dateDay,
-          events: Event.findOn(cursorDate),
+          events: Event.findOn(new Date(cursorDate.toISOString().slice(0,10))),
           isToday: false
-         };
+        };
 
         if(today.getTime() === cursorDate.getTime()) {
           this.days[i].isToday = true;
