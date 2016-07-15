@@ -71,6 +71,8 @@ Log.createNextLog = function(today) {
   nextLog.weight = nextWeight
   nextLog.reps = nextLog.getRepGoal();
 
+  nextLog.date = new Date(nextLog.date).toISOString();
+
   return nextLog;
 };
 

@@ -62,12 +62,9 @@ Event.findBetween = function(firstDate, secondDate) {
 };
 
 Event.findBefore = function(date) {
-  if(date instanceof Date === false) {
-    throw new Error("Date parameter must be of type Date");
-  }
 
   var filteredEvents = Event.all().filter(function(event) {
-    return event.date <= date;
+    return new Date(event.date).getTime() <= new Date(date).getTime();
   }).sort(DateUtils.sort);
 
   return filteredEvents;

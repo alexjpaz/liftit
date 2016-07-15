@@ -27,7 +27,9 @@ DateUtils.before = function(date) {
 };
 
 DateUtils.create = function() {
-  return DateUtils.string(new Date());
+  var today = new Date();
+  today.setHours(0,0,0,0);
+  return new Date(today).toISOString();
 };
 
 function pad(str) {

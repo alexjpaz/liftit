@@ -136,7 +136,7 @@ var Cycle = require('../../models/Cycle');
 
       if(e.target.type === "date") {
         var d = new Date(value);
-        value = d.toString();
+        value = d.toISOString();
       }
 
       self.vm[e.target.name] = value;
@@ -149,6 +149,7 @@ var Cycle = require('../../models/Cycle');
 
     this.submit = function(form) {
       form.preventDefault();
+      console.log(self.vm.date);
       store.trigger('updateEvents', self.vm);
       window.history.back();
     };

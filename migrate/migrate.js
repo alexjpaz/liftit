@@ -1,16 +1,17 @@
 const guid = require('../web/app/guid');
 const fs = require('fs');
 
-var data = JSON.parse(fs.readFileSync('./data.json').toString());
+var data = JSON.parse(fs.readFileSync('./input.json').toString());
 
 var events = {};
+
 
 events = Object.assign(events, data.PersonalRecord.reduce((p,c) => {
   let key = guid();
   let event = {};
   event.type = 'log';
   event.key = key;
-  event.date = new Date(c.date).toString(); // TODO; fix time with offset
+  event.date = c.date // TODO; fix time with offset
   event.lift = c.lift;
   event.reps = c.reps;
   event.weight = c.weight;

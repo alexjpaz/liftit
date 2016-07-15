@@ -65,7 +65,6 @@ var DateUtils = require('../../date');
 
         if(cyclesBeforeToday[0]) {
           cycle = Cycle.nextCycleFrom(cyclesBeforeToday[0]);
-          console.log(cycle);;
           cycle.date = today;
         }
       } else {
@@ -77,6 +76,8 @@ var DateUtils = require('../../date');
           date: today
         });
       }
+
+      cycle.date = new Date(cycle.date).toISOString();
 
       self.vm = cycle;
       self.update();
@@ -91,7 +92,7 @@ var DateUtils = require('../../date');
 
       if(e.target.type === "date") {
         var d = new Date(value);
-        value = d.toString();
+        value = d.toISOString();
       }
 
       self.vm[e.target.name] = value;
