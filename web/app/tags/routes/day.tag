@@ -19,8 +19,7 @@ var Event = require('../../models/Event');
     <a href='#/logs/new?date={day}' class='button-group--left' >Add Log</a>
     <a href='#/maxes/new?date={day}' class='button-group--right'>Add Cycle</a>
   </div>
-  <pre>{ JSON.stringify(events, null, 4); }</pre>
-
+  
   <style>
     .list-container {
       margin-bottom: 20px;
