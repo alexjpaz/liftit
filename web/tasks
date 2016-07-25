@@ -18,8 +18,8 @@ build() {
 
  npm install babel-core
  npm install
- npm test
- $WEBPACK -p
+ npm test || exit 1
+ $WEBPACK -p || exit 1
 
 }
 
