@@ -32,7 +32,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha"
+    "test": "node_modules/mocha/bin/mocha --recursive"
   },
   "author": "",
   "license": "ISC"

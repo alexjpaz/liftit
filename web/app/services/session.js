@@ -1,3 +1,5 @@
+var riot = require('riot');
+
 var P = require("bluebird/js/browser/bluebird.core");
 
 var request = require('superagent');

@@ -2,8 +2,14 @@ var api = require('../api');
 var DateUtils = require('../date');
 var guid = require('../guid');
 
+var store = api.store.events; //TODO: use the setStoreFunction();
+
 function Event() {
 }
+
+Event.setStore = function(newStore) {
+  store = newStore;
+};
 
 Event.clone = function(event) {
   var clone = Object.assign({}, event);
@@ -12,12 +18,12 @@ Event.clone = function(event) {
 };
 
 Event.get = function(key) {
-  return api.store.events[key];
+  return store[key];
 };
 
 Event.all = function() {
-  return Object.keys(api.store.events).map(function(k) {
-    return api.store.events[k];
+  return Object.keys(store).map(function(k) {
+    return store[k];
   }).filter(Event.filters.active);
 };
 
@@ -50,19 +56,14 @@ Event.findOn = function(date) {
 };
 
 Event.findBetween = function(firstDate, secondDate) {
-  if(firstDate instanceof Date === false || secondDate instanceof Date === false) {
-    throw new Error("Date parameter must be of type Date");
-  }
-
   var filteredEvents = Event.all().filter(function(event) {
-    return event.date >= firstDate && event.date <= secondDate;
+    return new Date(event.date).getTime() >= new Date(firstDate).getTime() && new Date(event.date).getTime() <= new Date(secondDate).getTime();
   }).sort(DateUtils.sort);
 
   return filteredEvents;
 };
 
 Event.findBefore = function(date) {
-
   var filteredEvents = Event.all().filter(function(event) {
     return new Date(event.date).getTime() <= new Date(date).getTime();
   }).sort(DateUtils.sort);
@@ -71,12 +72,8 @@ Event.findBefore = function(date) {
 };
 
 Event.findAfter = function(date) {
-  if(date instanceof Date === false) {
-    throw new Error("Date parameter must be of type Date");
-  }
-
   var filteredEvents = Event.all().filter(function(event) {
-    return event.date >= date;
+    return new Date(event.date).getTime() >= new Date(date).getTime();
   }).sort(DateUtils.sort);
 
   return filteredEvents;

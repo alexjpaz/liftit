@@ -20,7 +20,7 @@ function EffectiveMax(events, currentDate) {
 
 function checkInput(events, currentDate) {
  var valid = true;
-  valid &= events nstanceof Array;
+  valid &= events instanceof Array;
 
   if(!valid) {
     throw Error("Input must be an array of events");
