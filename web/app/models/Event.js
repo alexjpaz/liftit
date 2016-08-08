@@ -1,8 +1,7 @@
-var api = require('../api');
 var DateUtils = require('../date');
 var guid = require('../guid');
 
-var store = api.store.events; //TODO: use the setStoreFunction();
+var store = {};
 
 function Event() {
 }

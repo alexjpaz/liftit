@@ -8,6 +8,8 @@ var session = require('./services/session');
 
 var P = require("bluebird/js/browser/bluebird.core");
 
+var Event = require('./models/Event');
+
 var store = function(config, storage, reducer) {
   if(!storage) throw Error("Storage is not set");
 
@@ -26,6 +28,8 @@ var store = function(config, storage, reducer) {
         self.events = data.events || self.events;
         self.config = data.config || self.config;
         self.trigger('digest');
+        Event.setStore(self.events);
+
       } else {
         throw new Error("Invalid data fetched from server!");
       }
