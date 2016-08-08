@@ -26,10 +26,15 @@ DateUtils.compare = function(a,b) {
 DateUtils.before = function(date) {
 };
 
-DateUtils.create = function() {
-  var today = new Date();
-  today.setHours(0,0,0,0);
-  return new Date(today).toISOString();
+DateUtils.create = function(from) {
+  if(!from) {
+    from = new Date();
+  } else {
+    from = new Date(from);
+  }
+
+  var date = new Date(from.toISOString().slice(0,10));
+  return date.toISOString();
 };
 
 function pad(str) {

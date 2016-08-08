@@ -33,11 +33,8 @@ Log.prototype.getEffectiveMax = function() {
 };
 
 Log.createNextLog = function(today) {
-  var todayDate = new Date(today);
-  todayDate.setHours(0,0,0,0);
-  
   var nextLog = new Log({
-    date: todayDate.toISOString()
+    date: DateUtils.create(today)
   });
 
   var previousLog = Log.findBefore(today);

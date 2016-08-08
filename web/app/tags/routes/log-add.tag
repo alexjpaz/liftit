@@ -20,6 +20,7 @@ var Cycle = require('../../models/Cycle');
        <div class="form-group">
         <label>Date</label>
         <input class="form-control" type="date" id="sample1" name='date' onchange={ model } value={ formatDateView(vm.date) } required />
+        <code>{ vm.date }</code>
       </div>
 
       <div class="form-group">
@@ -192,6 +193,7 @@ var Cycle = require('../../models/Cycle');
     });
 
     route('/logs/new...', function() {
+    console.log(2222)
       var log = Log.createNextLog(riot.route.query().date);
 
       self.effectiveMax = log.getEffectiveMax();
