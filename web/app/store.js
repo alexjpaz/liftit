@@ -10,6 +10,8 @@ var P = require("bluebird/js/browser/bluebird.core");
 
 var Event = require('./models/Event');
 
+var DateUtils = require('./date');
+
 var store = function(config, storage, reducer) {
   if(!storage) throw Error("Storage is not set");
 
@@ -49,10 +51,10 @@ var store = function(config, storage, reducer) {
 
     events.forEach(function(event) {
       event = Object.assign({}, event);
-      event.updated = new Date().getTime();
+      event.updated = DateUtils.create();
 
       if(!self.events[event.key]) {
-        event.created = new Date().getTime();
+        event.created = DateUtils.create();
       }
 
       self.events[event.key] = event;
