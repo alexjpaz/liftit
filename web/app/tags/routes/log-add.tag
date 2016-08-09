@@ -132,14 +132,7 @@ var Form = require('../../form');
     this.formatDateView = Form.formatDateView;
 
     this.model = function(e) {
-      var value = e.target.value;
-
-      if(e.target.type === "date") {
-        var d = new Date(value);
-        value = d.toISOString();
-      }
-
-      self.vm[e.target.name] = value;
+      self.vm[e.target.name] = Form.parseValue(e);
       self.effectiveMax = this.vm.getEffectiveMax();
 
       calculateWeigthFractions();
@@ -149,7 +142,6 @@ var Form = require('../../form');
 
     this.submit = function(form) {
       form.preventDefault();
-      console.log(self.vm.date);
       store.trigger('updateEvents', self.vm);
       window.history.back();
     };
@@ -192,7 +184,6 @@ var Form = require('../../form');
     });
 
     route('/logs/new...', function() {
-    console.log(2222)
       var log = Log.createNextLog(riot.route.query().date);
 
       self.effectiveMax = log.getEffectiveMax();

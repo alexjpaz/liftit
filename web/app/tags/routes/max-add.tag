@@ -87,14 +87,7 @@ var Form = require('../../form');
     this.formatDateView = Form.formatDateView;
 
     this.model = function(e) {
-      var value = e.target.value;
-
-      if(e.target.type === "date") {
-        var d = new Date(value);
-        value = d.toISOString();
-      }
-
-      self.vm[e.target.name] = value;
+      self.vm[e.target.name] = Form.parseValue(e);
     };
 
     this.submit = function(form) {
