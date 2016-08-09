@@ -9,8 +9,8 @@ describe("DateUtils", () => {
   });
 
   it('should create a date from a date', () => {
-    var compareDate = new Date('2016-08-08');
-    var d = date.create();
+    var compareDate = new Date('2016-09-09');
+    var d = date.create(compareDate);
     expect(d).to.equal(compareDate.toISOString());
   });
 
