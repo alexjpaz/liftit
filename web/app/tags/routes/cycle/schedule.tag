@@ -1,5 +1,7 @@
 var Cycle = require('../../../models/Cycle');
 var DateUtils = require('../../../date');
+var config = require('../../../config');
+var Form = require('../../../form');
 
 <cycle-schedule>
   <div class='panel panel-default'>
@@ -10,7 +12,7 @@ var DateUtils = require('../../../date');
       <form onsubmit={submit}>
          <div class="form-group">
           <label>Date</label>
-          <input class="form-control" type="date" name='date' value={ vm.date } onchange={ model } required />
+          <input class="form-control" type="date" name='date' value={ formatDateView(vm.date) } onchange={ model } required />
         </div>
 
         <div class="form-group" each={l in config.lifts}>
@@ -58,28 +60,16 @@ var DateUtils = require('../../../date');
 
     self.repeat = 5;
 
-    function generateScedule(templateCycle) {
-      self.cycles = Array(self.repeat).fill(true).map(function(none, index) {
-        var increment = 5; // TODO
-        var cycleIncrement = 30;
+    this.formatDateView = Form.formatDateView;
 
-        var newDate = new Date(templateCycle.date);
-        newDate.setDate(newDate.getDate() + cycleIncrement * (index));
-
-        var row = {
-          date: DateUtils.string(newDate),
-        };
-
-        self.config.lifts.forEach(function(lift) {
-          row[lift] = +templateCycle[lift] + (increment * (index+1));
-        });
-
-        var cycle = new Cycle(row);
-
-        return cycle;
+    this.generateScedule = function(cycle) {
+      return Cycle.generateScedule({
+        repeat: self.repeat,
+        cycleIncrement: 30,
+        cycle: cycle,
+        config: config.get()
       });
-
-    }
+    };
 
     this.updateRepeat = function(e) {
       var value = e.target.value;
@@ -88,7 +78,7 @@ var DateUtils = require('../../../date');
       }
 
       self.repeat = value;
-      generateScedule(self.vm);
+      self.cycles = self.generateScedule(self.vm);
       self.update();
 
     };
@@ -101,7 +91,7 @@ var DateUtils = require('../../../date');
       }
 
       self.vm[e.target.name] = e.target.value;
-      generateScedule(self.vm);
+      self.cycles = self.generateScedule(self.vm);
       self.update();
     };
 
@@ -150,7 +140,7 @@ var DateUtils = require('../../../date');
         }
       } else {
         if(query.date) {
-          today = riot.route.query().date;
+          today = DateUtils.create(query().date);
         } else {
           today = DateUtils.create();
         }
@@ -159,7 +149,7 @@ var DateUtils = require('../../../date');
         });
       }
 
-      generateScedule(templateCycle);
+      self.generateScedule(templateCycle);
 
       self.today = today;
 

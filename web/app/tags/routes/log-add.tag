@@ -5,6 +5,8 @@ var utils = require('../../reducers/utils')
 var Log = require('../../models/Log');
 var Cycle = require('../../models/Cycle');
 
+var Form = require('../../form');
+
 <log-add>
   <div class='panel panel-danger' if={!effectiveMax}>
     <div class='panel-heading'>
@@ -20,7 +22,6 @@ var Cycle = require('../../models/Cycle');
        <div class="form-group">
         <label>Date</label>
         <input class="form-control" type="date" id="sample1" name='date' onchange={ model } value={ formatDateView(vm.date) } required />
-        <code>{ vm.date }</code>
       </div>
 
       <div class="form-group">
@@ -128,9 +129,7 @@ var Cycle = require('../../models/Cycle');
 
     var store = this.api.store;
 
-    this.formatDateView = function(val) {
-      return new Date(val).toISOString().slice(0,10);
-    };
+    this.formatDateView = Form.formatDateView;
 
     this.model = function(e) {
       var value = e.target.value;

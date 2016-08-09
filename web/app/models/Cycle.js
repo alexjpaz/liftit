@@ -2,6 +2,7 @@ var Event = require('./Event');
 var Log = require('./Log.js');
 var guid = require('../guid');
 var DateUtils = require('../date');
+var config = require('../config');
 
 function Cycle(event) {
   Event.call(this);
@@ -78,6 +79,26 @@ Cycle.findSorted = function(filter) {
 
 
 Cycle.removeAll = function(cycles) {
+}
+
+Cycle.generateScedule = function(opts) {
+  return Array(opts.repeat).fill(true).map(function(none, index) {
+    var newDate = new Date(opts.cycle.date);
+    newDate.setDate(newDate.getDate() + opts.cycleIncrement * (index));
+
+    var row = {
+      date: DateUtils.create(newDate),
+    };
+
+    opts.config.lifts.forEach(function(lift) {
+      row[lift] = +opts.cycle[lift] + (opts.config.liftIncrement[lift] * (index+1));
+    });
+
+    var cycle = new Cycle(row);
+
+    return cycle;
+  });
+
 }
 
 

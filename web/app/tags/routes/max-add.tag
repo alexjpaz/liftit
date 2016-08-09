@@ -1,6 +1,7 @@
 var Event = require('../../models/Event');
 var Cycle = require('../../models/Cycle');
 var DateUtils = require('../../date');
+var Form = require('../../form');
 
 <max-add>
   <div class='panel panel-default'>
@@ -83,9 +84,7 @@ var DateUtils = require('../../date');
       self.update();
     });
 
-    this.formatDateView = function(val) {
-      return new Date(val).toISOString().slice(0,10);
-    };
+    this.formatDateView = Form.formatDateView;
 
     this.model = function(e) {
       var value = e.target.value;
