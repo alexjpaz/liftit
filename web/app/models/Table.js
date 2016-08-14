@@ -7,8 +7,14 @@ function Table(opts) {
   }
 
   liftit.config.weekMap[opts.week].forEach(function(w) {
-    table.rows.push(liftit.plates(opts.weight * w));
+    var row = {
+      weight: liftit.roundTo(opts.weight * w, 5),
+      fraction: w
+    };
+    row = Object.assign(row, liftit.plates(opts.weight * w));
+    table.rows.push(row);
   });
+
 
   return table;
 }

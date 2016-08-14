@@ -4,8 +4,8 @@ var Form = require('../../../form');
   <table class='table table-bordered'>
     <thead>
       <tr>
-        <th>W</th>
         <th>%</th>
+        <th>W</th>
         <th each={w in table.plates}>
           { w }
         </th>
@@ -13,8 +13,8 @@ var Form = require('../../../form');
     </thead>
     <tbody>
       <tr each={row in table.rows}>
-        <td>zzz</td>
-        <td>zzz</td>
+        <td>{ row.fraction * 100 }%</td>
+        <td>{ row.weight }</td>
         <td each={col in row.list}>
           { col }
         </td>
@@ -23,10 +23,14 @@ var Form = require('../../../form');
   </table>
   <hr />
   <form name='settings'>
-    <input type='number' name='weight' value={opts.weight} onchange={model} class='form-control' />
-    <select name='week' onchange={model} class='form-control'>
-      <option each='{ k,v in Table.weekMap }' value={k} selected={tag.opts.week === k}>{k}</option>
-    </select>
+    <div class='form-group'>
+      <input type='number' name='weight' value={opts.weight} onchange={model} class='form-control' />
+    </div>
+    <div class='form-group'>
+      <select name='week' onchange={model} class='form-control'>
+        <option each='{ k,v in Table.weekMap }' value={k} selected={parent.opts.week === k}>{k}</option>
+      </select>
+    </div>
   </form>
   <script>
     var tag = this;

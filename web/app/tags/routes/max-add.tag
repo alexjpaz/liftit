@@ -7,26 +7,34 @@ var Form = require('../../form');
   <div class='panel panel-default'>
     <div class='panel-heading'>
       Max
+
+      <a class='pull-right' onclick={toggleEditMode}>
+        <i class='glyphicon glyphicon-pencil'></i>
+      </a>
     </div>
     <div class='panel-body'>
       <form onsubmit={submit}>
          <div class="form-group">
           <label>Date</label>
-          <input class="form-control" type="date" name='date' value={ formatDateView(vm.date) } onchange={ model }>
+          <input class="form-control" type="date" name='date' value={ formatDateView(vm.date) } onchange={ model } readonly={!editing}>
         </div>
 
         <div class="form-group" each={l in lifts}>
           <label>{ l }</label>
-          <input class="form-control" type="number" name={l} value={vm[l]} onchange={ model } required>
+          <a href='#/tools/table?weight={vm[l]}' class='pull-right'><i class='glyphicon glyphicon-list-alt'></i><a>
+          <input class="form-control" type="number" name={l} value={vm[l]} onchange={ model } readonly={!editing} required>
         </div>
 
-        <button class="btn btn-primary">
-          Store Max
-        </button>
+        <div if={editing}>
+          <hr />
+          <button class="btn btn-primary">
+            Store Max
+          </button>
 
-        <button class="btn btn-danger pull-right" onclick={ remove }>
-          Remove
-        </button>
+          <button class="btn btn-danger pull-right" onclick={ remove }>
+            Remove
+          </button>
+        </div>
       </form>
     </div>
   </div>
@@ -53,10 +61,16 @@ var Form = require('../../form');
 
       self.vm = cycle;
 
+      if(key === "new") {
+        self.editing = true;
+      } else {
+        self.editing = false;
+      }
+
       self.update();
     });
 
-    route('/maxes/new...', function() {
+    route('/maxes/new..', function() {
       var cycle = null;
 
       var today = riot.route.query().date;
@@ -81,6 +95,7 @@ var Form = require('../../form');
       cycle.date = new Date(cycle.date).toISOString();
 
       self.vm = cycle;
+      self.editing = true;
       self.update();
     });
 
@@ -96,6 +111,10 @@ var Form = require('../../form');
       store.trigger('updateEvents', self.vm);
 
       window.history.back();
+    };
+
+    this.toggleEditMode = function() {
+      self.editing = !self.editing;
     };
 
     this.remove = function(form) {

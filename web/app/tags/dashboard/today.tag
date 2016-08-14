@@ -1,14 +1,15 @@
+var Cycle = require('../../models/Cycle');
+var DateUtils = require('../../date');
 <dashboard-today>
-<a class='btn btn-default btn-block' href='http://liftit-sheets.alexjpaz.com/531bbb/?press={thing.currentMax.press}&deadlift={thing.currentMax.deadlift}&bench={thing.currentMax.bench}&squat={thing.currentMax.squat}'>view sheet</a>
   <div class='button-group'>
     <a href='#/logs/new' class='button-group--left' >Add Log</a>
-    <a href='#/maxes/{ thing.currentMax.key }' class='button-group--right'>
+    <a href='#/maxes/{ currentMax.key }' class='button-group--right'>
     <span>
-      {thing.currentMax.press}-{thing.currentMax.deadlift}-{thing.currentMax.bench}-{thing.currentMax.squat}
+      {currentMax.press}-{currentMax.deadlift}-{currentMax.bench}-{currentMax.squat}
     <span>
     </a>
   </div>
-  
+
   <style scoped>
     :scope {
       display: block;
@@ -51,7 +52,8 @@
     var route = riot.route.create();
 
     function getThings() {
-      self.thing = self.api.store.dashboard;
+      self.currentMax = Cycle.findBefore(DateUtils.create())[0];
+console.log(self.thing);
       self.update();
     }
 
