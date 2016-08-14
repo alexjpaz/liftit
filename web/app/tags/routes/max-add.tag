@@ -21,7 +21,7 @@ var Form = require('../../form');
 
         <div class="form-group" each={l in lifts}>
           <label>{ l }</label>
-          <a href='#/tools/table?weight={vm[l]}' class='pull-right'><i class='glyphicon glyphicon-list-alt'></i><a>
+          <a href='#/tools/table?weight={vm[l]}&lift={l}' class='pull-right'><i class='glyphicon glyphicon-list-alt'></i><a>
           <input class="form-control" type="number" name={l} value={vm[l]} onchange={ model } readonly={!editing} required>
         </div>
 

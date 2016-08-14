@@ -1,7 +1,8 @@
 var Table = require('../../../models/Table');
+var Log = require('../../../models/Log');
 var Form = require('../../../form');
 <tools-table>
-  <table class='table table-bordered'>
+  <table class='table table-bordered table--{opts.lift}'>
     <thead>
       <tr>
         <th>%</th>
@@ -31,13 +32,33 @@ var Form = require('../../../form');
         <option each='{ k,v in Table.weekMap }' value={k} selected={parent.opts.week === k}>{k}</option>
       </select>
     </div>
+    <div class='form-group'>
+      <select name='lift' onchange={model} class='form-control'>
+        <option value='press'>press</option>
+        <option value='deadlift'>deadlift</option>
+        <option value='bench'>bench</option>
+        <option value='squat'>squat</option>
+      </select>
+    </div>
   </form>
+  <style>
+    tools-table .table {
+      border: 4px solid red;
+      border-radius: 4px;
+    }
+
+    tools-table .table--press { border-color: red; }
+    tools-table .table--deadlift { border-color: green; }
+    tools-table .table--bench { border-color: blue; }
+    tools-table .table--squat { border-color: orange; }
+  </style>
   <script>
     var tag = this;
 
     tag.opts = {
       week: '1:1',
-      weight: 315
+      weight: 315,
+      lift: 'press'
     };
 
     tag.Table = Table;

@@ -1,5 +1,4 @@
 var Event = require('./Event');
-var Log = require('./Log.js');
 var guid = require('../guid');
 var DateUtils = require('../date');
 var config = require('../config');

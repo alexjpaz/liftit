@@ -22,7 +22,6 @@ function Log(event) {
 Log.prototype.getEffectiveMax = function() {
   var cycles = Cycle.findBefore(this.date);
 
-
   var cycle = null;
 
   if(cycles) {
@@ -46,7 +45,17 @@ Log.createNextLog = function(today) {
   previousLog = new Log(previousLog[0]);
 
   var effectiveMax = previousLog.getEffectiveMax();
+
+  if(!effectiveMax) {
+    throw new Error("Could not find effective max");
+  }
+
   var nextEffectiveMax =  nextLog.getEffectiveMax();
+
+  if(!nextEffectiveMax) {
+    throw new Error("Could not find next effiective max");
+  }
+
 
   var liftRing = new Ring([
     'press',
