@@ -13,6 +13,7 @@ require('./routes/setup.tag');
 require('./routes/profile.tag');
 require('./common/panel.tag')
 require('./layout/toast-bar.tag')
+require('./routes/tools/table.tag')
 
 <app>
   <style>
@@ -58,6 +59,9 @@ require('./layout/toast-bar.tag')
         </route>
         <route when='/day..'>
           <day></day>
+        </route>
+        <route when='/tools/table..'>
+          <tools-table></tools-table>
         </route>
         <route when='/profile'>
           <profile></profile>

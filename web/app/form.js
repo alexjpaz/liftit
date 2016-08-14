@@ -11,6 +11,10 @@ Form.parseValue = function(e) {
     value = d.toISOString();
   }
 
+  if(e.target.type === "number") {
+    value = +value;
+  }
+
   return value;
 };
 module.exports = Form;
