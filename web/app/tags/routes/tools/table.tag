@@ -13,6 +13,13 @@ var Form = require('../../../form');
       </tr>
     </thead>
     <tbody>
+      <tr each={row in tableWarmup.rows} class='table--warmup'>
+        <td>{ row.fraction * 100 }%</td>
+        <td>{ row.weight }</td>
+        <td each={col in row.list}>
+          { col }
+        </td>
+      </tr>
       <tr each={row in table.rows}>
         <td>{ row.fraction * 100 }%</td>
         <td>{ row.weight }</td>
@@ -47,6 +54,10 @@ var Form = require('../../../form');
       border-radius: 4px;
     }
 
+    tools-table .table--warmup {
+      background: #f0f0f0;
+    }
+
     tools-table .table--press { border-color: red; }
     tools-table .table--deadlift { border-color: green; }
     tools-table .table--bench { border-color: blue; }
@@ -66,6 +77,9 @@ var Form = require('../../../form');
     var updateTable = function(opts) {
       tag.opts = Object.assign(tag.opts, opts);
       tag.table = new Table(tag.opts);
+      tag.tableWarmup = new Table(Object.assign(tag.opts, {
+        week: 'DL'
+      }));
       tag.update();
     };
 
