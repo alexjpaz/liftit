@@ -67,7 +67,7 @@ var Form = require('../../../form');
     var tag = this;
 
     tag.opts = {
-      week: '1:1',
+      week: '3x5',
       weight: 315,
       lift: 'press'
     };
@@ -77,9 +77,10 @@ var Form = require('../../../form');
     var updateTable = function(opts) {
       tag.opts = Object.assign(tag.opts, opts);
       tag.table = new Table(tag.opts);
-      tag.tableWarmup = new Table(Object.assign(tag.opts, {
-        week: 'DL'
-      }));
+      tag.tableWarmup = new Table({
+        week: 'DL',
+        weight: tag.opts.weight
+      });
       tag.update();
     };
 
