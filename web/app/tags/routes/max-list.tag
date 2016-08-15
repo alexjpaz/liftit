@@ -1,6 +1,7 @@
 var Cycle = require('../../models/Cycle');
 var Event = require('../../models/Event');
 var config = require('../../config');
+var DateUtils = require('../../date');
 
 <max-list>
   <a href='#/cycles/schedule' class='btn btn-block btn-default'>
@@ -48,12 +49,12 @@ var config = require('../../config');
       </tr>
     </thead>
     <tbody>
-      <tr each={ row in allCycles } onclick={navigate(row.cycle.key)}>
+      <tr each={ row in allCycles } onclick={navigate(row.cycle.key)} class='{ row.isFutureCycle ? "cycle--future" : "" }'>
         <td><a href='#/maxes/{ row.cycle.key }'>{ row.cycle.date }</a></td>
         <td each={ l in config.lifts }>
-          <i class='glyphicon glyphicon-arrow-{ row.percentages[l].direction }'></i>
-          <span>{ row.cycle[l] }</span>
-          <small class='text-muted'>{ row.percentages[l].value }%</small>
+          <i class='glyphicon glyphicon-arrow-{ parent.row.percentages[l].direction }'></i>
+          <span>{ parent.row.cycle[l] }</span>
+          <small class='text-muted'>{ parent.row.percentages[l].value }%</small>
         </td>
       </tr>
     </tbody>
@@ -75,9 +76,14 @@ var config = require('../../config');
     .cycle--future {
       color: #ddd;
     }
+
+    tr.cycle--future {
+      background: #fafafa;
+    }
   </style>
   <script>
     var self = this;
+    self.config = config.get();
 
     this.mixin('api');
 
@@ -86,9 +92,11 @@ var config = require('../../config');
     var getLogs = function() {
       self.allCycles = [];
 
+      var today = DateUtils.create();
 
       self.allCycles = Cycle.findSorted().reverse().map(function(cycle, index, array) {
         var row = {
+          isFutureCycle: false,
           cycle: cycle
         };
 
@@ -96,8 +104,9 @@ var config = require('../../config');
           return row;
         }
 
-        var previousCycle = array[index-1];
+        row.isFutureCycle = DateUtils.isBefore(today, cycle.date);
 
+        var previousCycle = array[index-1];
 
         row.percentages = {};
 
@@ -115,7 +124,6 @@ var config = require('../../config');
             row.percentages[lift].direction = 'down';
           }
         });
-
 
         return row;
       });

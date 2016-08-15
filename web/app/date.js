@@ -15,15 +15,24 @@ DateUtils.string = function(date) {
 };
 
 DateUtils.compare = function(a,b) {
-  var ad = new Date(a);
-  var bd = new Date(b);
+  var ad = new Date(a).getTime();
+  var bd = new Date(b).getTime();
 
   if(ad == bd) return 0;
   if(ad > bd) return 1;
   if(ad < bd) return -1;
 };
 
-DateUtils.before = function(date) {
+DateUtils.isSameDay = function(a,b) {
+  return DateUtils.compare(a,b) === 0;
+};
+
+DateUtils.isBefore = function(a,b) {
+  return DateUtils.compare(a,b) == -1;
+};
+
+DateUtils.isAfter = function(a,b) {
+  return DateUtils.compare(a,b) === -1;
 };
 
 DateUtils.create = function(from) {

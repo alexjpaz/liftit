@@ -1,4 +1,5 @@
 const expect = require('chai').expect;
+const assert = require('chai').assert;
 const date = require('../app/date');
 
 describe("DateUtils", () => {
@@ -18,5 +19,28 @@ describe("DateUtils", () => {
     var compareDate = new Date('2016-08-08');
     var d = date.create('2016-08-08');
     expect(d).to.equal(compareDate.toISOString());
+  });
+
+  it('should compare same dates', () => {
+    var a = new Date();
+    var b = new Date();
+
+    assert.isTrue(date.isSameDay(a,b));
+    assert.isTrue(date.compare(a,b) === 0);
+  });
+
+  it('should compare past', () => {
+    var past = new Date('2016-01-01');
+    var present = new Date('2016-01-02');
+
+    expect(date.isBefore(past,present)).to.equal(true);
+    assert.isTrue(date.compare(past,present) === -1);
+  });
+
+  it('should compare strings', () => {
+    var a = '2016-01-02';
+    var b = '2016-01-02';
+
+    assert.isTrue(date.isSameDay(a,b));
   });
 });

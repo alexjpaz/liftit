@@ -100,7 +100,15 @@ Cycle.generateScedule = function(opts) {
 
 }
 
+Cycle.prototype.isPast = function(today) {
+  if(!today) {
+    today = DateUtils.create();
+  }
 
+  var result = DateUtils.compare(this.date, today);
+
+  return result == -1;
+};
 
 
 module.exports = Cycle;

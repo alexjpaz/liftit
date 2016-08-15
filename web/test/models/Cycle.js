@@ -26,4 +26,13 @@ describe('models/Cycle', () => {
     expect(schedule[1].date).to.equal('2016-01-31T00:00:00.000Z');
 
   });
+
+  it('should detect past,present,future cycles', () => {
+    var today = '2016-02-02';
+    var past = new Cycle({
+      date: '2016-01-01'
+    });
+
+    expect(past.isPast(today)).to.equal(true);
+  });
 });
