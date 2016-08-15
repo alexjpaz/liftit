@@ -54,6 +54,10 @@ var Form = require('../../../form');
       border-radius: 4px;
     }
 
+    tools-table .table tr {
+      text-align: center;
+    }
+
     tools-table .table--warmup {
       background: #f0f0f0;
     }
