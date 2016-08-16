@@ -54,8 +54,19 @@ var Form = require('../../../form');
       border-radius: 4px;
     }
 
-    tools-table .table tr {
+    tools-table .table th,
+    tools-table .table td {
+      width: 14.285%;
       text-align: center;
+    }
+
+    tools-table .table td:nth-child(3),
+    tools-table .table th:nth-child(3) {
+      border-left: 2px solid;
+    }
+
+    tools-table .table thead th {
+      border-bottom: 2px solid black;
     }
 
     tools-table .table--warmup {
