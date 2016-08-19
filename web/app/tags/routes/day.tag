@@ -1,3 +1,4 @@
+var Cycle = require('../../models/Cycle');
 var Event = require('../../models/Event');
 var DateUtils = require('../../date');
 <day>
@@ -16,10 +17,21 @@ var DateUtils = require('../../date');
       </div>
     </div>
   </div>
-  <div class='button-group'>
-    <a href='#/logs/new?date={day}' class='button-group--left' >Add Log</a>
-    <a href='#/maxes/new?date={day}' class='button-group--right'>Add Cycle</a>
-  </div>
+
+  <div class='clearfix'>
+    <div class='button-group'>
+      <a href='#/logs/new?date={day}' class='button-group--left' >Add Log</a>
+      <a href='#/maxes/new?date={day}' class='button-group--right'>Add Cycle</a>
+    </div>
+  <div>
+
+  <hr />
+  <a href='#/maxes/{ currentCycle.key }' class='btn btn-default btn-block'>
+    <span>
+      {currentCycle.press}-{currentCycle.deadlift}-{currentCycle.bench}-{currentCycle.squat}
+      <span>
+  </a>
+
 
   <style>
     .list-container {
@@ -87,6 +99,8 @@ var DateUtils = require('../../date');
     route('/day/([0-9]{4}\-([0-9]{2}\-[0-9]{2}))(.*)?', function(day) {
       self.day = day;
       self.events = Event.findOn(new Date(day));
+      self.currentCycle = Cycle.findBefore(DateUtils.create(day))[0];
+
       self.update();
     });
 
