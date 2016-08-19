@@ -1,6 +1,10 @@
 var Cycle = require('../../models/Cycle');
 var DateUtils = require('../../date');
 <dashboard-today>
+  <a href='#/day/2016-08-19' class='btn btn-block btn-default'>
+    Today
+  </a>
+  <br />
   <div class='button-group'>
     <a href='#/logs/new?date={today}' class='button-group--left' >Add Log</a>
     <a href='#/maxes/{ currentMax.key }' class='button-group--right'>
