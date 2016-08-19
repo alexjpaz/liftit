@@ -2,8 +2,8 @@
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <p class="navbar-text navbar-right pull-right">
-          <a href="#/profile" class="navbar-link">
-            <i class='glyphicon glyphicon-user'></i>
+          <a href="#/day" class="navbar-link">
+            <i class='glyphicon glyphicon-pencil'></i>
           </a>
         </p>
         <div class="navbar-header">
@@ -20,6 +20,7 @@
             <li><a href="#">Home</a></li>
             <li><a href="#/logs">Logs</a></li>
             <li><a href="#/maxes">Cycles</a></li>
+            <li><a href="#/profile">Profile</a></li>
             <li><a href="#/tools/table">Table</a></li>
             <li><a href='http://unstable.ajpaz531.appspot.com/'>Go to PazFit</a></li>
          </ul>
@@ -38,7 +39,6 @@
           self.navbar.classList.remove('in');
         }
       };
-
 
       var anchors = this.navbar.querySelectorAll('a');
       [].forEach.call(anchors, function(e) {

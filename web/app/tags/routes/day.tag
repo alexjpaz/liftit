@@ -1,4 +1,5 @@
 var Event = require('../../models/Event');
+var DateUtils = require('../../date');
 <day>
     <p if={ events.length === 0 }>No events to show for this day.</p>
     <div class='list-container'>
@@ -19,7 +20,7 @@ var Event = require('../../models/Event');
     <a href='#/logs/new?date={day}' class='button-group--left' >Add Log</a>
     <a href='#/maxes/new?date={day}' class='button-group--right'>Add Cycle</a>
   </div>
-  
+
   <style>
     .list-container {
       margin-bottom: 20px;
@@ -80,6 +81,9 @@ var Event = require('../../models/Event');
   <script>
     var self = this;
     var route = riot.route.create();
+    route('/day', function(day) {
+        riot.route("/day/"+DateUtils.create().slice(0,10), null, true);
+    });
     route('/day/([0-9]{4}\-([0-9]{2}\-[0-9]{2}))(.*)?', function(day) {
       self.day = day;
       self.events = Event.findOn(new Date(day));
