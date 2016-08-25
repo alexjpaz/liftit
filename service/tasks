@@ -1,0 +1,23 @@
+#!/bin/bash
+
+CMD=$1; shift; ARGS=$@
+
+zipIt() {
+  rm -rf deploy
+  mkdir deploy
+  zip -r deploy/dist.zip *
+}
+
+deploy() {
+  zipIt
+
+  local runtime="nodejs4.3"
+  local functionName="liftitGetSession"
+  local role="arn:aws:iam::048061681813:role/lambda_basic_execution"
+
+  aws lambda update-function-code \
+    --function-name liftitGetSession \
+    --zip-file fileb://deploy/dist.zip
+}
+
+$CMD $ARGS
