@@ -69,7 +69,8 @@ var Form = require('../../form');
           <td>
             <span>{ effectiveMax[vm.lift] }</span>
             <span>({ (effectiveMax[vm.lift] / vm.weight) * 100 }%)</span>
-            <a href="#/maxes/{ effectiveMax.key }">View Cycle</a>
+            <a href="#/maxes/{ effectiveMax.key }">Cycle </a>
+            <a href="#/tools/table?lift={vm.lift}&weight={effectiveMax[vm.lift]}&week={tableWeek}">Table</a>
           </td>
         </tr>
         <tr>
@@ -136,6 +137,7 @@ var Form = require('../../form');
       self.effectiveMax = this.vm.getEffectiveMax();
 
       calculateWeigthFractions();
+      generateTableLink();
 
       self.update();
     };
@@ -155,6 +157,21 @@ var Form = require('../../form');
         window.history.back();
       }
     };
+
+    function generateTableLink() {
+      self.tableWeek = self.tableWeek || "3x5";
+      var map = {
+        "85": "3x5",
+        "90": "3x3",
+        "95": "531"
+      };
+
+      self.weightFractions.forEach(function(wf) {
+        if(self.vm.weight == wf.weight) {
+          self.tableWeek = map[wf.fraction];
+        }
+      });
+    }
 
     function calculateWeigthFractions() {
       self.weightFractions = [];
@@ -178,6 +195,7 @@ var Form = require('../../form');
       self.effectiveMax = log.getEffectiveMax();
 
       calculateWeigthFractions();
+      generateTableLink();
 
       self.update();
 
