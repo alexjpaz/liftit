@@ -68,7 +68,7 @@ var Form = require('../../form');
           <th>Max</th>
           <td>
             <span>{ effectiveMax[vm.lift] }</span>
-            <span>({ (effectiveMax[vm.lift] / vm.weight) * 100 }%)</span>
+            <span>({ Math.floor((effectiveMax[vm.lift] / vm.weight) * 100) }%)</span>
             <a href="#/maxes/{ effectiveMax.key }">Cycle </a>
             <a href="#/tools/table?lift={vm.lift}&weight={effectiveMax[vm.lift]}&week={tableWeek}">Table</a>
           </td>
@@ -76,7 +76,7 @@ var Form = require('../../form');
         <tr>
           <th>Work</th>
           <td>
-            { vm.getWork() }
+            { Math.floor(vm.getWork()) }
           </td>
         </tr>
         <tr>
