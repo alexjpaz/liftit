@@ -16,7 +16,7 @@ describe('model/Table', () => {
       week: '3x5',
       weight: 370
     });
-    expect(t.rows.length).to.equal(1);
+    expect(t.rows.length).to.equal(3);
     expect(t.rows[2].list[0]).to.equal(3);
   });
 });
