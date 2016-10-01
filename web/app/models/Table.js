@@ -11,7 +11,7 @@ function Table(opts) {
       weight: liftit.roundTo(opts.weight * w, 5),
       fraction: w
     };
-    row = Object.assign(row, liftit.plates(opts.weight * w));
+    row = Object.assign(row, liftit.plates(row.weight));
     table.rows.push(row);
   });
 
