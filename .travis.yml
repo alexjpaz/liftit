@@ -13,3 +13,8 @@ deploy:
   on:
     branch: master
     repo: alexjpaz/liftit
+
+notifications:
+  slack:
+    rooms:
+      - alexjpaz:dYNaAcil8bDHPwppzFiH0L9i#coding
