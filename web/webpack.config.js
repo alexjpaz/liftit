@@ -25,6 +25,13 @@ module.exports = {
     ]
   },
   devServer: {
-    contentBase: './public'
-  }
+    contentBase: './public',
+    setup: function(app) {
+      app.get('/api/profile', function(req, res) {
+        res.json({
+          "test": "foo"
+        });
+      });
+    },
+  },
 };

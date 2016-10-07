@@ -19,6 +19,7 @@
     "riotjs": "^1.0.4",
     "riotjs-loader": "^2.0.0",
     "superagent": "^2.0.0",
+    "tojson-loader": "^1.0.4",
     "webpack": "^1.12.14"
   },
   "devDependencies": {

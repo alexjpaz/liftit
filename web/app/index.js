@@ -2,10 +2,13 @@ require('file?name=[name].[ext]!./index.html')
 require('file?name=[name].[ext]!./manifest.json')
 require('file?name=[name].[ext]!./login.html')
 
-var session = require('./services/session');
+var config = require('tojson!../config/index');
+var Session = require('./services/session');
 
 var app = require('./tags/app.tag');
 var api = require('./api');
+
+var session = new Session(config);
 
 session.create().then(function() {
   var opts = {
@@ -45,6 +48,6 @@ session.create().then(function() {
 
   });
 }, function(err) {
-  location.assign('/login.html');
-  console.log(err);
+  //location.assign('/login.html');
+  console.error(err);
 });

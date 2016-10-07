@@ -4,15 +4,13 @@ var guid = require('./guid');
 var http = require('./services/http');
 var ajax = http.ajax;
 
-var session = require('./services/session');
-
 var P = require("bluebird/js/browser/bluebird.core");
 
 var Event = require('./models/Event');
 
 var DateUtils = require('./date');
 
-var store = function(config, storage, reducer) {
+var store = function(config, storage, reducer, session) {
   if(!storage) throw Error("Storage is not set");
 
   riot.observable(this);
@@ -60,10 +58,6 @@ var store = function(config, storage, reducer) {
       self.events[event.key] = event;
     });
 
-   // self.events = JSON.parse(JSON.stringify(self.events));
-
-    //self.events = Object.assign({}, self.events);
-
     self.trigger('digest');
   });
 
@@ -87,7 +81,6 @@ var store = function(config, storage, reducer) {
   });
 
   this.on('digest', function() {
-    //self.trigger('reduce');
     self.trigger('persist');
   });
 };

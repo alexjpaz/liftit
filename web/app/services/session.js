@@ -4,7 +4,8 @@ var P = require("bluebird/js/browser/bluebird.core");
 
 var request = require('superagent');
 
-var session = function() {
+var session = function(config) {
+  this.storeEndpoint = config.storeEndpoint;
   riot.observable(this);
 };
 
@@ -13,8 +14,6 @@ session.prototype.init = function(callback) {
 };
 
 var instance = null;
-
-var storeEndpoint = 'https://b3gg00cbli.execute-api.us-east-1.amazonaws.com/prod/profile'
 
 session.prototype.create = function() {
   var self = this;
@@ -27,14 +26,14 @@ session.prototype.create = function() {
       return;
     }
 
-    self.fetch().then(resolve, reject)
+    self.fetch().then(resolve, reject);
   });
 };
 
 session.prototype.fetch = function() {
   var self = this;
   return new P(function(resolve, reject) {
-    request.get(storeEndpoint)
+    request.get(self.storeEndpoint)
     .set('Accept', 'application/json')
     .set('x-auth-key', self.identityGoogle)
     .end(function(err, res){
@@ -50,7 +49,7 @@ session.prototype.fetch = function() {
 session.prototype.store = function(value) {
   var self = this;
   return new P(function(resolve, reject) {
-    request.post(storeEndpoint)
+    request.post(self.storeEndpoint)
     .send(value)
     .set('Accept', 'application/json')
     .set('x-auth-key', self.identityGoogle)
@@ -72,4 +71,4 @@ session.getInstance = function() {
  return instance;
 };
 
-module.exports = new session();
+module.exports = session;
