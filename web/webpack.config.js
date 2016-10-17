@@ -1,4 +1,6 @@
 var webpack = require('webpack');
+var fs = require('fs');
+
 
 module.exports = {
   entry: './app/index',
@@ -18,19 +20,24 @@ module.exports = {
       { test: /\.tag$/, exclude: /node_modules/, loader: 'riotjs-loader', query: { type: 'none' } }
     ],
     loaders: [
-//      { test: /\.css$/, loader: "style-loader!css-loader" },
-  //    { test: /\.png$/, loader: "url-loader?limit=100000" },
-    //  { test: /\.jpg$/, loader: "file-loader" },
       { test: /\.js$|\.tag$/, exclude: /node_modules/, loader: 'babel-loader' }
     ]
   },
   devServer: {
     contentBase: './public',
     setup: function(app) {
+      var bodyParser = require('body-parser')
+
+      app.use(bodyParser());
+
+      app.post('/api/profile', function(req, res) {
+        console.log(req.body);
+        fs.writeFileSync('./mock/profile.json', JSON.stringify(req.body));
+        res.end("Saved", 200);
+      });
       app.get('/api/profile', function(req, res) {
-        res.json({
-          "test": "foo"
-        });
+        var buffer = fs.readFileSync('./mock/profile.json');
+        res.json(JSON.parse(buffer.toString()));
       });
     },
   },

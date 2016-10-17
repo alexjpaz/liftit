@@ -70,7 +70,7 @@ var store = function(config, storage, reducer, session) {
       lastUpdated: lastUpdated
     }).then(function(e) {
       self.trigger('persistSuccess', e);
-      localStorage.setItem('lastUpdated', lastUpdated);
+      storage.set('lastUpdated', lastUpdated);
     }, function(e) {
       self.trigger('persistFailure', e);
     });
