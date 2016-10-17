@@ -69,10 +69,11 @@ function Bootstrap() {
 
     });
   }, function(err) {
-    //location.assign('/login.html');
+    location.assign('/login.html');
+  }).catch(function(err) {
+    alert('Unhandled Exception!');
     console.error(err);
   });
-
 }
 
 Bootstrap();
