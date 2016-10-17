@@ -2,6 +2,7 @@ var Cycle = require('../../models/Cycle');
 var Event = require('../../models/Event');
 var config = require('../../config');
 var DateUtils = require('../../date');
+var Form = require('../../form');
 
 <max-list>
   <a href='#/cycles/schedule' class='btn btn-block btn-default'>
@@ -28,7 +29,7 @@ var DateUtils = require('../../date');
         <td>{ currentCycle.squat }</td>
       </tr>
       <tr each={ l in currentLogs } onclick={navigateToSchedule(l.key)} class='cycle--future'>
-        <td><a href='#/maxes/{ l.key }'>{ l.date }</a></td>
+        <td><a href='#/maxes/{ l.key }'>{ formatDateView(l.date) }</a></td>
         <td>{ l.press }</td>
         <td>{ l.deadlift }</td>
         <td>{ l.bench }</td>
@@ -50,7 +51,7 @@ var DateUtils = require('../../date');
     </thead>
     <tbody>
       <tr each={ row in allCycles } onclick={navigate(row.cycle.key)} class='{ row.isFutureCycle ? "cycle--future" : "" }'>
-        <td><a href='#/maxes/{ row.cycle.key }'>{ row.cycle.date }</a></td>
+        <td><a href='#/maxes/{ row.cycle.key }'>{ formatDateView(row.cycle.date) }</a></td>
         <td each={ l in config.lifts }>
           <i class='glyphicon glyphicon-arrow-{ parent.row.percentages[l].direction }'></i>
           <span>{ parent.row.cycle[l] }</span>
@@ -86,6 +87,8 @@ var DateUtils = require('../../date');
     self.config = config.get();
 
     this.mixin('api');
+
+    this.formatDateView = Form.formatDateView;
 
     var store = this.api.store;
 
