@@ -1,7 +1,7 @@
-var config = {
-  //storeEndpoint: 'https://b3gg00cbli.execute-api.us-east-1.amazonaws.com/prod/profile'
-};
+let config = {};
 
-Object.assign(config, require("./local"));
+let env = process.env.CONFIG_ENV || 'local';
+
+Object.assign(config, require("./"+env));
 
 module.exports = config;
