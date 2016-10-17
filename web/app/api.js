@@ -1,22 +1,11 @@
-var liftit = require('liftit-common');
-var store = require('./store');
-var config = require('./config');
-var persistence = require('./persistence');
-var reducers = require('./reducers/index');
-var DateUtils = require('./date');
-
-var api = function() {
+var Api = function(config) {
   var self = this;
 
-  this.version = 1;
+  this.build = config.store.config.build;
 
-  this.store = new store(
-    new config(),
-    new persistence.localStorage(),
-    new reducers()
-  );
+  this.store = config.store;
 
-  this.DateUtils = DateUtils;
+  this.DateUtils = config.DateUtils;
 };
 
-module.exports = new api();
+module.exports = Api;
