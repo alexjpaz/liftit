@@ -31,7 +31,6 @@ module.exports = {
       app.use(bodyParser());
 
       app.post('/api/profile', function(req, res) {
-        console.log(req.body);
         fs.writeFileSync('./mock/profile.json', JSON.stringify(req.body));
         res.end("Saved", 200);
       });
