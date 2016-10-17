@@ -1,7 +1,7 @@
 var Api = function(config) {
   var self = this;
 
-  this.version = 1.1;
+  this.build = config.store.config.build;
 
   this.store = config.store;
 

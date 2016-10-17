@@ -1,6 +1,11 @@
 var DateUtils = require('../../date');
 <profile>
   <div>
+    <h3>Build Info</h3>
+    <p><code>commit: {api.build.TRAVIS_COMMIT}</code></p>
+      <p><code>build_number: {api.build.TRAVIS_BUILD_NUMBER}</code></p>
+  </div>
+  <div>
     <h3>Backup and Restore</h3>
     <button class='btn btn-primary' onclick={backup}>Backup</button>
     <button class='btn btn-primary' onclick={restore}>Restore</button>
