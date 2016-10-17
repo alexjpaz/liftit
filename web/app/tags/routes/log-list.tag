@@ -1,5 +1,7 @@
 var Log = require('../../models/Log');
 
+var Form = require('../../form');
+
 <log-list>
 
 <table class="table table-bordered">
@@ -13,7 +15,7 @@ var Log = require('../../models/Log');
   </thead>
   <tbody>
     <tr each={ l in logs } onclick={navigate(l.key)}>
-      <td><a href='/logs/{ l.key }'>{ l.date }</a></td>
+      <td><a href='/logs/{ l.key }'>{ formatDateView(l.date) }</a></td>
       <td>{ l.lift }</td>
       <td>{ l.weight }</td>
       <td>{ l.reps }</td>
@@ -27,6 +29,8 @@ var Log = require('../../models/Log');
   var self = this;
 
   this.mixin('api');
+
+  this.formatDateView = Form.formatDateView;
 
   var store = self.store = this.api.store;
 
