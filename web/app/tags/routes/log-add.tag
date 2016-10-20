@@ -176,7 +176,7 @@ var Form = require('../../form');
     function calculateWeigthFractions() {
       self.weightFractions = [];
 
-      for(var i=0.65;i<1;i+=0.05) {
+      for(var i=0.85;i<1;i+=0.05) {
         self.weightFractions.push({
           weight: liftit.roundTo(self.effectiveMax[self.vm.lift] * i, 5),
           fraction: Math.floor(i * 100),
