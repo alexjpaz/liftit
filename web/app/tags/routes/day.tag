@@ -32,7 +32,6 @@ var DateUtils = require('../../date');
       <span>
   </a>
 
-
   <style>
     .list-container {
       margin-bottom: 20px;

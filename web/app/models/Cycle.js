@@ -110,5 +110,32 @@ Cycle.prototype.isPast = function(today) {
   return result == -1;
 };
 
+Cycle.prototype.findNext = function() {
+  var self = this;
+  var cycles = Cycle.findAfter(this.date).filter(function(c) {
+    return self.key !== c.key;
+  }).reverse();
+
+  var cycle = cycles[0];
+
+  console.log(cycles);
+
+  if(cycle && cycle.key !== this.key) {
+    return cycle;
+  }
+};
+
+Cycle.prototype.findPrevious = function() {
+  var self = this;
+  var cycles = Cycle.findBefore(this.date).filter(function(c) {
+    return self.key !== c.key;
+  });
+
+  var cycle = cycles[0];
+
+  if(cycle && cycle.key !== this.key) {
+    return cycle;
+  }
+};
 
 module.exports = Cycle;

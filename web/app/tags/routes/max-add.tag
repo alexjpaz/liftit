@@ -2,6 +2,7 @@ var Event = require('../../models/Event');
 var Cycle = require('../../models/Cycle');
 var DateUtils = require('../../date');
 var Form = require('../../form');
+var liftit = require('liftit-common');
 
 <max-add>
   <div class='panel panel-default'>
@@ -20,8 +21,8 @@ var Form = require('../../form');
         </div>
 
         <div class="form-group" each={l in lifts}>
-          <label>{ l }</label>
-          <a href='#/tools/table?weight={vm[l]}&lift={l}' class='pull-right'><i class='glyphicon glyphicon-list-alt'></i><a>
+          <label>{ l } <small class='text-muted'>{cyclePreviousFractions[l]}%</small></label>
+          <a href='#/tools/table?weight={vm[l]}&lift={l}' class='pull-right'><i class='glyphicon glyphicon-list-alt'></i></a>
           <input class="form-control" type="number" name={l} value={vm[l]} onchange={ model } readonly={!editing} required>
         </div>
 
@@ -43,6 +44,17 @@ var Form = require('../../form');
 
   <a href='http://liftit-sheets.alexjpaz.com/531bbb/?press={ vm.press }&deadlift={ vm.deadlift }&bench={vm.bench}&squat={vm.squat}' target='_blank'>View Cycle Sheet</a>
 
+  <hr />
+
+  <nav>
+  <ul class="pager">
+    <li if={cyclePrevious} class="previous"><a href="#/maxes/{cyclePrevious.key}"><span aria-hidden="true">&larr;</span> Older</a></li>
+    <li if={cycleNext} class="next {!cycleNext ? 'disabled' : ''}"><a href="#/maxes/{cycleNext.key}">Newer <span aria-hidden="true">&rarr;</span></a></li>
+  </ul>
+  </nav>
+
+
+
   <script>
     var self = this;
 
@@ -61,6 +73,18 @@ var Form = require('../../form');
 
       self.vm = cycle;
 
+      if(cycle) {
+        self.cycleNext = cycle.findNext();
+        self.cyclePrevious = cycle.findPrevious();
+
+        if(self.cyclePrevious) {
+          self.cyclePreviousFractions = self.lifts.reduce(function(p, lift) {
+            p[lift] = Math.floor(100 - (+self.cyclePrevious[lift] / +cycle[lift])*100) || 0
+            return p;
+            }, {});
+        }
+      }
+
       if(key === "new") {
         self.editing = true;
       } else {
@@ -68,6 +92,7 @@ var Form = require('../../form');
       }
 
       self.update();
+
     });
 
     route('/maxes/new..', function() {
@@ -115,6 +140,15 @@ var Form = require('../../form');
 
     this.toggleEditMode = function() {
       self.editing = !self.editing;
+    };
+
+    this.maxFractionFromPrevious = function(lift) {
+      if(self.cyclePrevious) {
+
+        var fraction = Math.floor(100 - (+vm.cyclePrevious[lift] / +vm[lift])*100) || 0;
+
+        return fraction;
+      }
     };
 
     this.remove = function(form) {
