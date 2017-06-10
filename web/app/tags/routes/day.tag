@@ -6,6 +6,9 @@ var DateUtils = require('../../date');
     <div class='list-container'>
       <div onclick={navigateToEvent(e)} each={ e in events } class='list'>
         <div if={ e.type ==='log'}>
+          <div class='pull-right'>
+            <span if={ e.isGenerated } class='label label-warning'>generated</span>
+          </div>
           <a class='list-avatar list-avatar--{ e.type }' href='#/logs/{ e. key }'>{ e.type[0].toUpperCase() }</a>
           <span>{ e.lift } { e.weight }x{ e.reps }</span>
         </div>

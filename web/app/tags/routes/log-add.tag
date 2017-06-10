@@ -136,6 +136,10 @@ var Form = require('../../form');
       self.vm[e.target.name] = Form.parseValue(e);
       self.effectiveMax = this.vm.getEffectiveMax();
 
+      if(e.target.name !== 'date') {
+          self.vm.isGenerated = false;
+      }
+
       calculateWeigthFractions();
       generateTableLink();
 

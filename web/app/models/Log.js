@@ -82,6 +82,8 @@ Log.createNextLog = function(today) {
 
   nextLog.date = new Date(nextLog.date).toISOString();
 
+  nextLog.isGenerated = true;
+
   return nextLog;
 };
 

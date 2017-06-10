@@ -27,6 +27,6 @@ describe('models/Log', () => {
     expect(log.lift).to.equal('deadlift');
     expect(log.weight).to.equal(75);
     expect(log.reps).to.equal(11);
-
+    expect(log.isGenerated).to.equal(true);
   });
 });

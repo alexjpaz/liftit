@@ -28,7 +28,7 @@ module.exports = {
     setup: function(app) {
       var bodyParser = require('body-parser')
 
-      app.use(bodyParser());
+      app.use(bodyParser({limit:'2mb'}));
 
       app.post('/api/profile', function(req, res) {
         fs.writeFileSync('./mock/profile.json', JSON.stringify(req.body));

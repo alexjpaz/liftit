@@ -16,7 +16,7 @@ var DateUtils = require('../../date');
         <div class='col day isToday--{ d.isToday != false }' each={ d in days } onclick={ selectDay(d) }>
           { d.label }
           <div class='events'>
-            <span each={ e in d.events } class='event event--{e.type}'></span>
+            <span each={ e in d.events } class='event event--{e.type} event__isGenerated--{!!e.isGenerated}'></span>
           </div>
         </div>
       </div>
@@ -51,6 +51,10 @@ var DateUtils = require('../../date');
 
     .event--log {
       background: blue;
+    }
+
+    .event--log.event__isGenerated--true {
+      opacity: 0.4;
     }
 
     .event--max {
