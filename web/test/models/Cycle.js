@@ -35,4 +35,20 @@ describe('models/Cycle', () => {
 
     expect(past.isPast(today)).to.equal(true);
   });
+
+ it('should increment cycle lifts from another cycle', () => {
+     let baseCycle = {
+         press: 100,
+         deadlift: 200,
+         bench: 300,
+         squat: 400
+     };
+
+     const newCycle = Cycle.nextCycleFrom(baseCycle);
+
+     expect(newCycle.press).to.equal(baseCycle.press + 5);
+     expect(newCycle.deadlift).to.equal(baseCycle.deadlift + 10);
+     expect(newCycle.bench).to.equal(baseCycle.bench + 5);
+     expect(newCycle.squat).to.equal(baseCycle.squat + 10);
+ });
 });

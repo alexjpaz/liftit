@@ -34,8 +34,8 @@ Cycle.nextCycleFrom = function(cycle) {
   var cloned = Event.clone(cycle);
   cloned.press = +cloned.press + 5;
   cloned.deadlift = +cloned.deadlift + 10;
-  cloned.bench = +cloned.press + 5;
-  cloned.squat = +cloned.press + 10;
+  cloned.bench = +cloned.bench + 5;
+  cloned.squat = +cloned.squat + 10;
   return cloned;
 };
 
