@@ -1,0 +1,12 @@
+{
+  "name": "liftit",
+  "version": "2.0.0-beta1",
+  "description": "Big lift tracking application",
+  "main": "index.js",
+  "repository": "git@github.com:alexjpaz/liftit.git",
+  "author": "Alexander Paz <alexjpaz@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+      "test": "echo 'test'"
+  }
+}
