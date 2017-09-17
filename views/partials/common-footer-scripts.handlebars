@@ -1,0 +1,37 @@
+		<!-- Loads the GUN library -->
+		<script src="https://cdn.rawgit.com/amark/gun/master/gun.js"></script>
+
+		<script>
+
+        const el = document.querySelector('#foo')
+		// We're not connecting to any peers
+		// just yet...
+        var peers = [
+            location.origin+'/gun',
+        ];
+		var gun = Gun(peers);
+
+		// Create an interface for the `greetings`
+		// key, storing it in a variable.
+		var greetings = gun.get('greetings');
+
+      console.log(greetings);
+
+		// Update the value on `greetings`.
+		greetings.put({ hello: 'world'+new Date().getTime() });
+
+		// Read the value and listen for
+		// any changes.
+		greetings.on(function (data) {
+            el.value = data.thing;
+			console.log('Update!', data)
+		})
+
+            console.log(1)
+        el.addEventListener('input', function(e) {
+            greetings.put({
+                thing: e.target.value
+            });
+        });
+
+        </script>

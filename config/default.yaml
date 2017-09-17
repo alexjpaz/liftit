@@ -1,0 +1,5 @@
+gun:
+  file: 'data.json'
+  s3:
+    bucket: liftit.alexjpaz.com
+    prefix: 'datastore/gun/'
