@@ -12,7 +12,7 @@ class Root extends React.Component {
   }
 
   componentWillMount() {
-    this.root = gun.get('root');
+    this.root = this.props.gun.get('root');
 
     this.root.on((data) => {
       this.setState({
