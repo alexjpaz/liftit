@@ -47,14 +47,14 @@ class Root extends React.Component {
         <div class="field">
           <label class="label">Name</label>
           <div class="control">
-            <input class="input" type="text" name='name' placeholder="Name" onChange={this.handleOnChange}>
+            <input class="input" type="text" name='name' placeholder="Name" onChange={this.handleOnChange}></input>
           </div>
         </div>
 
         <div class="field">
           <label class="label">Role</label>
           <div class="control">
-            <input class="input" type="text" name='role' placeholder="Name" onChange={this.handleOnChange}>
+            <input class="input" type="text" name='role' placeholder="Name" onChange={this.handleOnChange}></input>
           </div>
         </div>
         <hr />

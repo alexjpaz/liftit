@@ -1,5 +1,5 @@
 describe('<Root />', () => {
   it('test', () => {
-    return Promise.reject();
+    return Promise.reject("No test specificed");
   });
 });
