@@ -6,7 +6,14 @@ class TextControl extends React.Component {
   }
 
   render() {
-    return <div>foo</div>;
+    return (
+      <div className="field">
+        <label className="label">Name</label>
+        <div className="control">
+          <input className='input' name={this.props.name} onChange={this.props.onChange} />
+        </div>
+      </div>
+    )
   }
 }
 

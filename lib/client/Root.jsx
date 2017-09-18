@@ -1,10 +1,11 @@
 import React from 'react';
 
+import TextControl from './TextControl.jsx';
+
 class Root extends React.Component {
   constructor(props) {
     super(props);
     this.gun = props.gun;
-
       
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -43,20 +44,7 @@ class Root extends React.Component {
   render () {
     return (
       <form onSubmit={this.handleSubmit}>
-
-        <div class="field">
-          <label class="label">Name</label>
-          <div class="control">
-            <input class="input" type="text" name='name' placeholder="Name" onChange={this.handleOnChange}></input>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="label">Role</label>
-          <div class="control">
-            <input class="input" type="text" name='role' placeholder="Name" onChange={this.handleOnChange}></input>
-          </div>
-        </div>
+        <TextControl name='foo' onChange={this.handleOnChange} />
         <hr />
         <pre>
           { 
