@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Field from './Field.jsx';
+
 class TextControl extends React.Component {
   constructor(props) {
     super(props);
@@ -7,12 +9,9 @@ class TextControl extends React.Component {
 
   render() {
     return (
-      <div className="field">
-        <label className="label">Name</label>
-        <div className="control">
+      <Field name={this.props.name}>
           <input className='input' name={this.props.name} onChange={this.props.onChange} />
-        </div>
-      </div>
+      </Field>
     )
   }
 }
