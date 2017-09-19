@@ -7,6 +7,9 @@ class DateControl extends React.Component {
     super(props);
   }
 
+  componentWillMount() {
+  }
+
   render() {
     return (
       <Field name={this.props.name}>

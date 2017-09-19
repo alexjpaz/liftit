@@ -6,13 +6,36 @@ import Log from './Log/index.jsx';
 class Root extends React.Component {
   constructor(props) {
     super(props);
+    this.db = props.gun.get('root');
+  }
+
+  componentWillMount() {
+    this.db.val((err, data) => {
+      if(err) console.error(err);
+      this.setState({
+        ...this.state,
+        data
+      });
+    });
+  }
+
+  bindOnChange(name) {
+    return (data) => {
+      this.state[name] = data;
+      this.setState({
+        ...this.state,
+      });
+      this.db.put(name, data);
+    };
   }
 
   render () {
     return (
       <div>
         <Calendar />
-        <Log />
+        <Log onChange={this.bindOnChange('log')}/>
+        <hr />
+        <pre>{ JSON.stringify(this.state) }</pre>
       </div>
     );
   }

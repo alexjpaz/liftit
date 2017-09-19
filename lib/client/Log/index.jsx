@@ -1,9 +1,17 @@
 import React from 'react';
 
-import DateControl from '../common/DateControl.jsx';
-import LiftControl from '../common/LiftControl.jsx';
+import {
+  DateControl,
+  LiftControl,
+  RepControl,
+  WeightControl
+} from '../common/index.jsx';
 
 class Log extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentWillMount() {
     this.setState({});
     this.handleOnChange = this.handleOnChange.bind(this);
@@ -17,6 +25,9 @@ class Log extends React.Component {
 
     const newState = { ...this.state };
     newState[event.target.name] = event.target.value;
+
+    console.log(newState);
+    this.props.onChange(newState);
     this.setState(newState);
   }
 
@@ -26,6 +37,8 @@ class Log extends React.Component {
         <form>
           <DateControl name='date' onChange={this.handleOnChange}/>
           <LiftControl name='lift' onChange={this.handleOnChange}/>
+          <RepControl name='reps' onChange={this.handleOnChange}/>
+          <WeightControl name='weight' onChange={this.handleOnChange}/>
         </form>
         <hr />
         <pre>{ JSON.stringify(this.state, null, 4) }</pre>
