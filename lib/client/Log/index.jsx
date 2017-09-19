@@ -27,8 +27,8 @@ class Log extends React.Component {
     newState[event.target.name] = event.target.value;
 
     console.log(newState);
-    this.props.onChange(newState);
     this.setState(newState);
+    this.props.onChange(newState);
   }
 
   render() {
