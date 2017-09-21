@@ -10,8 +10,7 @@ class Root extends React.Component {
   }
 
   componentWillMount() {
-    this.db.val((err, data) => {
-      if(err) console.error(err);
+    this.db.on((data) => {
       this.setState({
         ...this.state,
         data
@@ -35,7 +34,7 @@ class Root extends React.Component {
         <Calendar />
         <Log onChange={this.bindOnChange('log')}/>
         <hr />
-        <pre>{ JSON.stringify(this.state) }</pre>
+        <pre id='testDebug'>{ JSON.stringify(this.state) }</pre>
       </div>
     );
   }

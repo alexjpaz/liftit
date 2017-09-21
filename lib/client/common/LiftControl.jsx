@@ -11,7 +11,7 @@ class LiftControl extends React.Component {
 
   componentWillMount() {
     this.lifts = Lifts.getLiftNames().map((lift) => {
-      return <option value={lift}>{lift}</option>
+      return <option key={lift} value={lift}>{lift}</option>
     });
   }
 

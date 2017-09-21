@@ -11,12 +11,12 @@ class RepControl extends React.Component {
 
   componentWillMount() {
     this.options = [
-      <option>none</option>
+      <option key={-1}>none</option>
     ];
 
     for(let i=0; i<15; i++) {
       this.options.push(
-        <option value={i}>{i}</option>
+        <option key={i} value={i}>{i}</option>
       );
     }
   }
