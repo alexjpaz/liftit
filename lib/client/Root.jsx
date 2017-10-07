@@ -14,45 +14,18 @@ class Root extends React.Component {
     this.db = props.db;
   }
 
-  fetchDocs() {
-    this.db.allDocs({
-      include_docs: true
-    }).then((data) => {
-      
-      this.setState({
-        ...this.state,
-        data: data.rows.map(row => {
-          console.log(row.id);
-          return row.doc;
-        })
-      });
-    });
-  }
-
-  componentWillMount() {
-    this.fetchDocs();
-    this.db.changes({
-      live: true,
-      since: 'now',
-    }).on('change', (data) => {
-      this.fetchDocs();
-    });
-  }
-
- 
-
   render () {
     const compose = (component) => {
       const db = this.db;
       return ({match}) => new component({match, db});
     };
-    if(!this.state || !this.state.data) {
-      return null;
-    }
     return (
       <Router>
-          <Route path="/log/:id" component={compose(LogRoute)} />
-        </Router>
+        <div>
+          <Route exact path="/logs" component={compose(LogRoute)} />
+          <Route path="/logs/:id" component={compose(LogRoute)} />
+        </div>
+      </Router>
     );
   }
 }

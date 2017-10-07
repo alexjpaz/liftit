@@ -40,6 +40,7 @@ class Log extends React.Component {
     event.preventDefault();
     if(this.props.onSubmit) {
       this.props.onSubmit(this.state);
+      history.back();
     }
   }
 
