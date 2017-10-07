@@ -20,6 +20,7 @@ class Log extends React.Component {
       this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
 
+    console.log(534435, this.props);
     this.setState(this.props.item || {});
   }
 
