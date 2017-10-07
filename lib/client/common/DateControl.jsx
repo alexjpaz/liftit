@@ -13,7 +13,7 @@ class DateControl extends React.Component {
   render() {
     return (
       <Field name={this.props.name}>
-          <input className='input' name={this.props.name} onChange={this.props.onChange} type='date' />
+          <input className='input' value={this.props.value} name={this.props.name} onChange={this.props.onChange} type='date' />
         </Field>
     )
   }

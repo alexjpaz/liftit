@@ -5,9 +5,6 @@ const exphbs  = require('express-handlebars');
 const app = express()
 const server = http.createServer(app);
 
-const Gun = require('./lib/gun');
-const gun = Gun({ web: server });
-
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 

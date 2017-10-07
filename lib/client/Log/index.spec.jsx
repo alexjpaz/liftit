@@ -16,9 +16,9 @@ describe('<Log />', () => {
 
 
   it('execute the onChange callback when changed', () => {
-    const onChange = jest.fn();
+    const onSubmit = jest.fn();
     const wrapper = mount((
-      <Log onChange={onChange}/>
+      <Log onSubmit={onSubmit}/>
     ));
 
     wrapper.find('select[name="lift"]')
@@ -27,11 +27,12 @@ describe('<Log />', () => {
     wrapper.find('select[name="reps"]')
       .simulate('change', { target: { name: 'reps', value: '5' } })
 
-
     expect(wrapper.state()).toEqual({ lift: 'press', reps: '5'});
 
+    wrapper.find('form')
+      .simulate('submit');
 
-    expect(onChange).toHaveBeenCalled();
+    expect(onSubmit).toHaveBeenCalled();
   });
 
 });
