@@ -22,6 +22,7 @@ class Root extends React.Component {
     return (
       <Router>
         <div>
+          <h1>Liftit</h1>
           <Route exact path="/logs" component={compose(LogRoute)} />
           <Route path="/logs/:id" component={compose(LogRoute)} />
         </div>

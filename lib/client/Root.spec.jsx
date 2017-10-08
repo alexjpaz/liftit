@@ -4,28 +4,24 @@ import Root from './Root';
 import { shallow } from 'enzyme';
 import { mount } from 'enzyme';
 
-import Gun from 'gun';
+import PouchDB from 'pouchdb';
 
 describe('<Root />', () => {
   it('test', () => {
     return new Promise((resolve, reject) => {
-      const gun = new Gun({ file: "/dev/null" });
-
       const id = new Date().getTime().toString();
 
-      gun.get("root").put({
-        debug: id
-      });
+
+      const db = new PouchDB("liftit"); 
 
       setTimeout(() => {
         try {
           const wrapper = mount((
-            <Root gun={gun} />
+            <Root db={db} />
           ));
 
-          expect(wrapper.html()).toContain('Calendar');
+          expect(wrapper.html()).toContain('<h1>Liftit</h1>');
 
-          expect(wrapper.find('#testDebug').html()).toContain(`\"debug\":\"${id}\"`);
         } catch(e) {
           return reject(e);
         }
