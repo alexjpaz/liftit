@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { HashRouter as Router, Route } from 'react-router-dom'
 
+import Navbar from './layout/Navbar.jsx';
 
 import Calendar from './Calendar/index.jsx';
 import Log from './Log/index.jsx';
@@ -20,13 +21,21 @@ class Root extends React.Component {
       return ({match}) => new component({match, db});
     };
     return (
+      <div>
+        <Navbar />
+<section className="section">
+    <div className="container">
+  
       <Router>
         <div>
-          <h1>Liftit</h1>
           <Route exact path="/logs" component={compose(LogRoute)} />
           <Route path="/logs/:id" component={compose(LogRoute)} />
         </div>
       </Router>
+</div>
+</section>
+
+      </div>
     );
   }
 }

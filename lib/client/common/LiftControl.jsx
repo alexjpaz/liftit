@@ -10,9 +10,14 @@ class LiftControl extends React.Component {
   }
 
   componentWillMount() {
-    this.lifts = Lifts.getLiftNames().map((lift) => {
+    this.lifts = [
+      <option key={-1}>none</option>
+    ];
+
+
+    this.lifts = this.lifts.concat(Lifts.getLiftNames().map((lift) => {
       return <option key={lift} value={lift}>{lift}</option>
-    });
+    }));
   }
 
   render() {
