@@ -9,6 +9,10 @@ class Navbar extends React.Component {
             <img src="" alt="liftit v2" width="112" height="28"/>
           </a>
 
+          <a className="navbar-item" href="#logs">
+            Logs
+          </a>
+
           <button className="button navbar-burger">
             <span></span>
             <span></span>
