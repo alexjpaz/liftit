@@ -13,10 +13,10 @@ const awaitApplicationStart = () => {
           resolve();
           clearInterval(intervalId);
         }).catch(e => {
-          console.error("Could not connect. Retrying", e);
+          console.error("Could not connect. Retrying: ", e.message);
         });
 
-    });
+    }, 2000);
   });
 };
 

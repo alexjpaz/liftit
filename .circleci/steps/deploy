@@ -8,7 +8,7 @@ if [ "${CIRCLE_BRANCH}" == "v2" ]; then
     #now -t ${NOW_TOKEN} rm -y roll || echo "No deployments to remove"                                        
     NOW_URL=$(now --public -t ${NOW_TOKEN} -e BUILD_COMMIT=${CIRCLE_SHA1})
 
-    yarn smokeTest APP_URL=$NOW_URL
+    APP_URL=$NOW_URL yarn smokeTest
     
     now -e "NODE_APP_INSTANCE=deployed" -t ${NOW_TOKEN} alias set ${NOW_URL} ${NOW_ALIAS}         
 fi    
