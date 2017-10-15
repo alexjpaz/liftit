@@ -20,7 +20,7 @@ describe('<Root />', () => {
             <Root db={db} />
           ));
 
-          expect(wrapper.html()).toContain('<h1>Liftit</h1>');
+          expect(wrapper.html()).toContain('alt=\"liftit');
 
         } catch(e) {
           return reject(e);

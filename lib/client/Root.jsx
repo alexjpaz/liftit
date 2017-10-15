@@ -8,7 +8,8 @@ import Calendar from './Calendar/index.jsx';
 import Log from './Log/index.jsx';
 
 import LogRoute from './Routes/LogRoute.jsx';
-import RootRoute from './Routes/RootRoute';
+import LogListRoute from './Routes/LogListRoute.jsx';
+import HomeRoute from './Routes/HomeRoute.jsx';
 
 class Root extends React.Component {
   constructor(props) {
@@ -28,8 +29,8 @@ class Root extends React.Component {
           <div className="container">
             <Router>
               <div>
-                <Route exact path="/" component={compose(RootRoute)} />
-                <Route exact path="/logs" component={compose(LogRoute)} />
+                <Route exact path="/" component={compose(HomeRoute)} />
+                <Route exact path="/logs" component={compose(LogListRoute)} />
                 <Route path="/logs/:id" component={compose(LogRoute)} />
               </div>
             </Router>

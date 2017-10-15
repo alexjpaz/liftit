@@ -27,7 +27,7 @@ describe('<Log />', () => {
     wrapper.find('select[name="reps"]')
       .simulate('change', { target: { name: 'reps', value: '5' } })
 
-    expect(wrapper.state()).toEqual({ lift: 'press', reps: '5'});
+    expect(wrapper.state()).toEqual({ lift: 'press', reps: '5', type: 'log'});
 
     wrapper.find('form')
       .simulate('submit');

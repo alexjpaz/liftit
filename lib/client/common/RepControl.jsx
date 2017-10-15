@@ -24,7 +24,7 @@ class RepControl extends React.Component {
   render() {
     return (
       <Field name={this.props.name}>
-          <select className='input select' value={this.props.value} name={this.props.name} onChange={this.props.onChange}>
+          <select className='input select' required value={this.props.value} name={this.props.name} onChange={this.props.onChange}>
             { this.options }
           </select>
       </Field>
