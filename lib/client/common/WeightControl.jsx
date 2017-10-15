@@ -12,7 +12,7 @@ class WeightControl extends React.Component {
   render() {
     return (
       <Field name={this.props.name}>
-        <input className='input select' name={this.props.name} onChange={this.props.onChange} type='number' value={this.props.value} />
+        <input className='input select' required name={this.props.name} onChange={this.props.onChange} type='number' value={this.props.value} />
       </Field>
     )
   }

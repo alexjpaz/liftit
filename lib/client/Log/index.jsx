@@ -12,7 +12,7 @@ class Log extends React.Component {
   constructor(props) {
     super(props);
 
-    this.id = "dac2fe7c-74ba-4c60-a0d1-e7b246c13552" || this.props.id || uuid().toString();
+    this.id = this.props.id || uuid().toString();
 
   }
 
@@ -58,10 +58,10 @@ class Log extends React.Component {
           <LiftControl name='lift' onChange={this.handleOnChange} value={this.state.lift} />
           <RepControl name='reps' onChange={this.handleOnChange} value={this.state.reps} />
           <WeightControl name='weight' onChange={this.handleOnChange} value={this.state.weight} />
-
-          <button className='button'>Save</button>
+          <hr />
+          <button className='button is-primary'>Save</button>
+          <button className='button is-pulled-right'>Delete</button>
         </form>
-        <hr />
       </div>
     );
   }
