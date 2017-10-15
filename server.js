@@ -16,7 +16,7 @@ app.get('/', function (req, res) {
   //res.setHeader('Cache-Control', 'public, max-age=3600');
   res.render('home', {
     foo: new Date(),
-    devmode: config.devmode === true
+    devmode: config.devmode !== false
   });
 });
 

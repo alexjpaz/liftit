@@ -4,6 +4,8 @@ import EntityRoute from './EntityRoute';
 
 import Log from '../Log/index.jsx';
 
+import NoLogsNotification from '../Log/NoLogsNotification.jsx';
+
 class LogRoute extends EntityRoute {
   getLogList() {
     return this.state.list
@@ -22,7 +24,7 @@ class LogRoute extends EntityRoute {
 
     let list = null
 
-    if(this.state.list) {
+    if(this.state.list && this.state.list.length > 0) {
       list = (
         <table className='table is-bordered is-striped is-narrow is-fullwidth'>
           <tbody>
@@ -43,6 +45,8 @@ class LogRoute extends EntityRoute {
           </tbody>
         </table>
       )
+    } else {
+      list = <NoLogsNotification />
     }
     return (
       <div>

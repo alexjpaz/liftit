@@ -1,6 +1,7 @@
 import React from 'react';
 import EntityRoute from './EntityRoute';
 
+import NoLogsNotification from '../Log/NoLogsNotification.jsx';
 
 class LastLog extends React.Component {
   constructor(props) {
@@ -15,7 +16,12 @@ class LastLog extends React.Component {
     };
   }
 
+ 
+
   render() {
+    if(!this.props.item) {
+      return null;
+    }
     return (
       <article className='notification is-info' onClick={this.navigateToLog(this.props.item._id)}>
         <p>
@@ -31,6 +37,12 @@ class LastLog extends React.Component {
 }
 
 class HomeRoute extends EntityRoute {
+  hasEmptyLogs() {
+    return this.state.list
+      .filter((item) => item.type === 'log')
+      .length === 0;
+  }
+
   getLastLog() {
     return this.state.list
         .filter((item) => item.type === 'log')
@@ -57,6 +69,11 @@ class HomeRoute extends EntityRoute {
           <div className="tile is-child">
             <LastLog history={this.history} item={this.getLastLog()} />
           </div>
+          { this.hasEmptyLogs() && 
+          <div className="tile is-child">
+              <NoLogsNotification />
+          </div>
+          }
         </div>
       </div>
     )

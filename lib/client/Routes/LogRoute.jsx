@@ -5,6 +5,16 @@ import EntityRoute from './EntityRoute';
 import Log from '../Log/index.jsx';
 
 class LogRoute extends EntityRoute {
+
+  createNewEntity() {
+    this.setState({
+      isNew: true,
+      date: new Date().toISOString().slice(0,10),
+      type: 'log',
+      weight: 100
+    });
+  }
+
   render() {
     if(!this.state) {
       return null;
@@ -12,7 +22,12 @@ class LogRoute extends EntityRoute {
     return (
       <div>
         <Log item={this.state} onSubmit={(state) => {
-          this.db.put(state);
+          if(this.state.isNew) {
+            this.state.isNew = undefined;
+            this.db.post(this.state);
+          } else {
+            this.db.put(state);
+          }
         }}/>
       </div>
     )
