@@ -1,7 +1,0 @@
-gun:
-  s3:
-    secret: AWS_SECRET_ACCESS_KEY
-    key: AWS_ACCESS_KEY_ID
-    bucket: AWS_S3_BUCKET
-    prefix: AWS_S3_BUCKET_PREFIX
-

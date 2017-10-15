@@ -1,3 +1,5 @@
+const config = require('config');
+
 var http = require('http')
 const express = require('express')
 const exphbs  = require('express-handlebars');
@@ -8,10 +10,13 @@ const server = http.createServer(app);
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+app.use('/build', express.static('build'));
+
 app.get('/', function (req, res) {
-  res.setHeader('Cache-Control', 'public, max-age=3600');
+  //res.setHeader('Cache-Control', 'public, max-age=3600');
   res.render('home', {
-    foo: new Date()
+    foo: new Date(),
+    devmode: config.devmode === true
   });
 });
 

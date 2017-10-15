@@ -10,6 +10,7 @@
     "dev": "nodemon --exec 'npm start'",
     "start": "node index.js",
     "test": "jest",
+    "smokeTest": "mocha -t 300000 'test/smokeTest/**.js'",
     "build": "webpack -p",
     "tdd": "jest --watch"
   },
@@ -37,8 +38,12 @@
     "react-test-renderer": "^15.6.1",
     "redux": "^3.7.2",
     "style-loader": "^0.18.2",
-    "superagent": "^3.5.2",
+    "superagent": "^3.6.3",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1"
   }
 }

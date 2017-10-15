@@ -1,2 +1,2 @@
-gun:
-  file: /dev/null
+devmode: false
+
