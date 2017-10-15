@@ -1,5 +1,8 @@
 #!/bin/bash
+set -e
+
 NOW_ALIAS=liftit.now.sh                                                                                    
+
 now () { 
     node_modules/.bin/now $@ 
 }                                                                       
