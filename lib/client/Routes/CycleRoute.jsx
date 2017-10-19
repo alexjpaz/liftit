@@ -2,7 +2,7 @@ import React from 'react';
 
 import EntityRoute from './EntityRoute';
 
-import Log from '../Log/index.jsx';
+import CycleForm from '../Cycle/CycleForm.jsx';
 
 import Breadcrumb from './Breadcrumb.jsx';
 
@@ -12,8 +12,8 @@ class LogRoute extends EntityRoute {
     this.setState({
       isNew: true,
       date: new Date().toISOString().slice(0,10),
-      type: 'log',
-      weight: 100
+      type: 'cycle',
+      lifts: {}
     });
   }
 
@@ -25,10 +25,10 @@ class LogRoute extends EntityRoute {
       <div>
         <Breadcrumb crumbs={[
             { title: 'Workbook', href: '/'},
-            { title: 'Logs', href: '/logs' }
+            { title: 'Cycles', href: '/cycles' }
           ]}
           active={'New'}/>
-        <Log item={this.state} onSubmit={(state) => {
+        <CycleForm item={this.state} onSubmit={(state) => {
           if(this.state.isNew) {
             this.state.isNew = undefined;
             this.db.post(this.state);

@@ -9,6 +9,10 @@ import Log from './Log/index.jsx';
 
 import LogRoute from './Routes/LogRoute.jsx';
 import LogListRoute from './Routes/LogListRoute.jsx';
+
+import CycleRoute from './Routes/CycleRoute.jsx';
+import CycleListRoute from './Routes/CycleListRoute.jsx';
+
 import HomeRoute from './Routes/HomeRoute.jsx';
 
 class Root extends React.Component {
@@ -32,6 +36,8 @@ class Root extends React.Component {
                 <Route exact path="/" component={compose(HomeRoute)} />
                 <Route exact path="/logs" component={compose(LogListRoute)} />
                 <Route path="/logs/:id" component={compose(LogRoute)} />
+                <Route exact path="/cycles" component={compose(CycleListRoute)} />
+                <Route exact path="/cycles/:id" component={compose(CycleRoute)} />
               </div>
             </Router>
           </div>
