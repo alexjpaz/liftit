@@ -6,7 +6,7 @@ import CycleList from '../Cycle/CycleList.jsx';
 
 import Breadcrumb from './Breadcrumb.jsx';
 
-class CycleRoute extends EntityRoute {
+class CycleListRoute extends EntityRoute {
   getCycleList() {
     return this.state.list
       .filter(item => item.type === 'cycle')
@@ -18,21 +18,18 @@ class CycleRoute extends EntityRoute {
     if(!this.state) {
       return null;
     }
-
-    if(this.state.list && this.state.list.length > 0) {
-      return (
-        <div>
-          <Breadcrumb crumbs={[
+    return (
+      <div>
+        <Breadcrumb crumbs={[
             { title: 'Workbook', href: '/'},
-            ]}
-            active={'Cycle'}/>
-          <CycleList 
-            history={this.history}
-            items={this.getCycleList()} />
-        </div>
-      );
-    }
+          ]}
+          active={'Cycle'}/>
+        <CycleList 
+          history={this.history}
+          items={this.getCycleList()} />
+      </div>
+    );
   }
 };
 
-module.exports = CycleRoute;
+module.exports = CycleListRoute;

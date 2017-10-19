@@ -2,6 +2,7 @@ import React from 'react';
 import EntityRoute from './EntityRoute';
 
 import NoLogsNotification from '../Log/NoLogsNotification.jsx';
+import NoCyclesNotification from '../Cycle/NoCyclesNotification.jsx';
 
 class LastLog extends React.Component {
   constructor(props) {
@@ -37,6 +38,12 @@ class LastLog extends React.Component {
 }
 
 class HomeRoute extends EntityRoute {
+  hasEmptyCycles() {
+    return this.state.list
+      .filter((item) => item.type === 'cycle')
+      .length === 0;
+  }
+
   hasEmptyLogs() {
     return this.state.list
       .filter((item) => item.type === 'log')
@@ -59,6 +66,22 @@ class HomeRoute extends EntityRoute {
       ;
   }
 
+  getLastLog() {
+    return this.state.list
+      .filter((item) => item.type === 'cycle')
+      .sort((a,b) => {
+        a = new Date(a.date);
+        b = new Date(b.date);
+        return b-a;
+      })
+      .map((f) => {
+        console.log(f);
+        return f;
+      })
+      .find((item) => item)
+    ;
+  }
+
   render() {
     if(!this.state) {
       return null;
@@ -72,6 +95,12 @@ class HomeRoute extends EntityRoute {
           { this.hasEmptyLogs() && 
           <div className="tile is-child">
               <NoLogsNotification />
+          </div>
+          }
+
+          { this.hasEmptyCycles() && 
+          <div className="tile is-child">
+              <NoCyclesNotification />
           </div>
           }
         </div>

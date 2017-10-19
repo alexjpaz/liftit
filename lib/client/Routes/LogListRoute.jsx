@@ -4,6 +4,8 @@ import EntityRoute from './EntityRoute';
 
 import LogList from '../Log/LogList.jsx';
 
+import Breadcrumb from './Breadcrumb.jsx';
+
 class LogRoute extends EntityRoute {
   getLogList() {
     return this.state.list
@@ -16,22 +18,17 @@ class LogRoute extends EntityRoute {
     if(!this.state) {
       return null;
     }
-
-    if(this.state.list && this.state.list.length > 0) {
-      return (
-        <div>
-          <nav className="breadcrumb" aria-label="breadcrumbs">
-            <ul>
-              <li><a href="#">Workbook</a></li>
-              <li className="is-active"><a href="#" aria-current="page">Logs</a></li>
-            </ul>
-        </nav>
-          <LogList 
-            history={this.history}
-            items={this.getLogList()} />
-        </div>
-      );
-    }
+    return (
+      <div>
+        <Breadcrumb crumbs={[
+            { title: 'Workbook', href: '/'},
+          ]}
+          active={'Logs'}/>
+        <LogList 
+          history={this.history}
+          items={this.getLogList()} />
+      </div>
+    );
   }
 };
 

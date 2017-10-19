@@ -6,7 +6,7 @@ import CycleForm from '../Cycle/CycleForm.jsx';
 
 import Breadcrumb from './Breadcrumb.jsx';
 
-class LogRoute extends EntityRoute {
+class CycleRoute extends EntityRoute {
 
   createNewEntity() {
     this.setState({
@@ -41,4 +41,4 @@ class LogRoute extends EntityRoute {
   }
 };
 
-module.exports = LogRoute;
+module.exports = CycleRoute;
