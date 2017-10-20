@@ -29,7 +29,6 @@ class Root extends React.Component {
     return (
       <div>
         <Navbar />
-        <section className="section">
           <div className="container">
             <Router>
               <div>
@@ -41,7 +40,6 @@ class Root extends React.Component {
               </div>
             </Router>
           </div>
-        </section>
       </div>
     );
   }

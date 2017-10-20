@@ -40,6 +40,8 @@ class Log extends React.Component {
     newState[event.target.name] = event.target.value;
 
     this.setState(newState);
+
+    console.log(1111111, newState);
   }
 
   handleOnSubmit(event) {

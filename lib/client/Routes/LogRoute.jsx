@@ -31,7 +31,8 @@ class LogRoute extends EntityRoute {
         <Log item={this.state} onSubmit={(state) => {
           if(this.state.isNew) {
             this.state.isNew = undefined;
-            this.db.post(this.state);
+            const d = this.db.post(this.state);
+            console.log('CREATED', this.state, d)
           } else {
             this.db.put(state);
           }

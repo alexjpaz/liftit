@@ -92,7 +92,7 @@ class Navbar extends React.Component {
           </div>
 
           <div className="navbar-end">
-            <a className="navbar-item" href="#logs">
+            <a className="navbar-item" href="#/settings">
               Settings
             </a>
           </div>
