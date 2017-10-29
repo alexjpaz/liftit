@@ -1,6 +1,8 @@
 import React from 'react';
 import uuid from 'uuid';
 
+import EntityForm from '../Entity/EntityForm.jsx';
+
 import {
   DateControl,
   LiftControl,
@@ -10,46 +12,9 @@ import {
 
 import CycleLiftControl from './CycleLiftControl.jsx'; 
 
-class Cycle extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.id = this.props.id || uuid().toString();
-
-  }
-
-  componentWillMount() {
-    this.handleOnChange = this.handleOnChange.bind(this);
-    this.handleOnSubmit = this.handleOnSubmit.bind(this);
-
-    const log = {
-      type: "log"
-    };
-
-    this.setState({
-      ...log,
-      ...this.props.item
-      });
-  }
-
-  handleOnChange(event) {
-    event.preventDefault();
-
-    var data = {};
-    data[event.target.name] = event.target.value;
-
-    const newState = { ...this.state };
-    newState[event.target.name] = event.target.value;
-
-    this.setState(newState);
-  }
-
-  handleOnSubmit(event) {
-    event.preventDefault();
-    if(this.props.onSubmit) {
-      this.props.onSubmit(this.state);
-      history.back();
-    }
+class Cycle extends EntityForm {
+  getType() {
+    return "cycle";
   }
 
   render() {

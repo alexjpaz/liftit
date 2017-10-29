@@ -31,7 +31,7 @@ class CycleRoute extends EntityRoute {
         <CycleForm item={this.state} onSubmit={(state) => {
           if(this.state.isNew) {
             this.state.isNew = undefined;
-            this.db.post(this.state);
+            this.db.post(state);
           } else {
             this.db.put(state);
           }
