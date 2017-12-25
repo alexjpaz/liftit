@@ -12,7 +12,7 @@ describe('<Root />', () => {
       const id = new Date().getTime().toString();
 
 
-      const db = new PouchDB("liftit"); 
+      const db = new PouchDB("/tmp/liftit.test"); 
 
       setTimeout(() => {
         try {
