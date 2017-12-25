@@ -17,6 +17,15 @@ class LogRoute extends EntityRoute {
     });
   }
 
+  onSubmit(state) {
+    if(this.state.isNew) {
+      delete this.state.isNew;
+      const d = this.db.post(this.state);
+    } else {
+      this.db.put(state);
+    }
+  }
+
   render() {
     if(!this.state) {
       return null;
@@ -28,15 +37,7 @@ class LogRoute extends EntityRoute {
             { title: 'Logs', href: '/logs' }
           ]}
           active={'New'}/>
-        <Log id={this.props.id} item={this.state} onSubmit={(state) => {
-          if(this.state.isNew) {
-            this.state.isNew = undefined;
-            const d = this.db.post(this.state);
-            console.log('CREATED', this.state, d)
-          } else {
-            this.db.put(state);
-          }
-        }}/>
+        <Log id={this.props.id} item={this.state} onSubmit={s => this.onSubmit(s)}/>
       </div>
     )
   }
