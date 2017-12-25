@@ -22,20 +22,14 @@ class CycleRoute extends EntityRoute {
       return null;
     }
     return (
-      <div>
+      <div id={`CycleForm-${this.props.id}`}>
         <Breadcrumb crumbs={[
             { title: 'Workbook', href: '/'},
             { title: 'Cycles', href: '/cycles' }
           ]}
           active={'New'}/>
-        <CycleForm item={this.state} onSubmit={(state) => {
-          if(this.state.isNew) {
-            this.state.isNew = undefined;
-            this.db.post(state);
-          } else {
-            this.db.put(state);
-          }
-        }}/>
+
+        <CycleForm id={this.props.id} item={this.state} onSubmit={s => this.onSubmit(s)}/>
       </div>
     )
   }

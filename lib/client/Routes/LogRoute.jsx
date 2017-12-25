@@ -17,15 +17,6 @@ class LogRoute extends EntityRoute {
     });
   }
 
-  onSubmit(state) {
-    if(this.state.isNew) {
-      delete this.state.isNew;
-      const d = this.db.post(this.state);
-    } else {
-      this.db.put(state);
-    }
-  }
-
   render() {
     if(!this.state) {
       return null;
