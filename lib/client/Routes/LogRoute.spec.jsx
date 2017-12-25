@@ -6,33 +6,54 @@ import { shallow } from 'enzyme';
 import { mount } from 'enzyme';
 
 describe('<LogRoute />', () => {
-  it('should render an named <input>', (done) => {
-    const match = { params: 123 };
-    const db = {
-      allDocs: jest.fn(() => {
-        return Promise.resolve({
-          rows: [
-            { 
-              doc: {
-                foo: "bar"
+  const createInstance = ({
+    id
+  }) => {
+    return new Promise((resolve, reject) => {
+      const match = { params: 123 };
+      const db = {
+        allDocs: jest.fn(() => {
+          return Promise.resolve({
+            rows: [
+              { 
+                doc: {
+                  foo: "bar"
+                }
               }
-            }
-          ]
-        });
-      })
-    };
-    const history = jest.fn();
-    const wrapper = mount(
-      <LogRoute
-        match={match} 
-        db={db}
-        history={history}
-      />);
+            ]
+          });
+        })
+      };
+      const history = jest.fn();
+      const wrapper = mount(
+        <LogRoute
+          id={id}
+          match={match} 
+          db={db}
+          history={history}
+        />);
 
-    setTimeout(() => {
-      console.log(wrapper.html());
-      expect(wrapper.html()).toContain("hi");
-      done();
-    },200); // There has to be a better way :(
+      setTimeout(() => {
+        try {
+          resolve({
+            wrapper,
+          })
+        } catch(e) {
+          reject(e);
+        }
+      }, 200); // There has to be a better way :(
+    });
+  };
+
+  it('should render an components with the log form <Log />', () => {
+    const id = `id-${new Date().getTime()}`;
+
+    return createInstance({
+      id,
+    }).then(({wrapper}) => {
+      const html = wrapper.html();
+      expect(html).toContain(`LogRoute-${id}`);
+      expect(html).toContain(`Log-${id}`);
+    });
   });
 });

@@ -40,8 +40,6 @@ class Log extends React.Component {
     newState[event.target.name] = event.target.value;
 
     this.setState(newState);
-
-    console.log(1111111, newState);
   }
 
   handleOnSubmit(event) {
@@ -54,7 +52,7 @@ class Log extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id={`Log-${this.props.id}`}>
         <form onSubmit={this.handleOnSubmit}>
           <DateControl name='date' onChange={this.handleOnChange} value={this.state.date} />
           <LiftControl name='lift' onChange={this.handleOnChange} value={this.state.lift} />

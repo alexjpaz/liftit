@@ -22,13 +22,13 @@ class LogRoute extends EntityRoute {
       return null;
     }
     return (
-      <div>
+      <div id={`LogRoute-${this.props.id}`}>
         <Breadcrumb crumbs={[
             { title: 'Workbook', href: '/'},
             { title: 'Logs', href: '/logs' }
           ]}
           active={'New'}/>
-        <Log item={this.state} onSubmit={(state) => {
+        <Log id={this.props.id} item={this.state} onSubmit={(state) => {
           if(this.state.isNew) {
             this.state.isNew = undefined;
             const d = this.db.post(this.state);
