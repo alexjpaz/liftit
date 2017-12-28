@@ -28,16 +28,15 @@ class Cycle extends EntityForm {
     }
     return (
       <div>
-        <form onSubmit={this.handleOnSubmit}>
-
+        <form>
           {control(DateControl, 'date')}
           {control(CycleLiftControl, 'press')}
           {control(CycleLiftControl, 'squat')}
           {control(CycleLiftControl, 'bench')}
           {control(CycleLiftControl, 'deadlift')}
           <hr />
-          <button className='button is-primary'>Save</button>
-          <button className='button is-pulled-right'>Delete</button>
+          {this.saveButtonComponent()}
+          {this.deleteButtonComponent()}
         </form>
       </div>
     );

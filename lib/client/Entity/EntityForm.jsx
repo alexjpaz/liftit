@@ -18,6 +18,7 @@ class EntityForm extends React.Component {
   componentWillMount() {
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
+    this.handleOnDelete = this.handleOnDelete.bind(this);
 
     const entity = {
       type: this.getType()
@@ -52,18 +53,37 @@ class EntityForm extends React.Component {
     }
   }
 
+  confirmDelete() {
+    if(this.props.confirmDelete) {
+      return this.props.confirmDelete();
+    } else {
+      return window.confirm("Are you sure you want to delete this entity?");
+    }
+  }
+
   handleOnDelete(event) {
     event.preventDefault();
 
     if(this.props.onDelete) {
-      const ans = window.prompt();
-      if(ans) {
+      if(this.confirmDelete() === true) {
         this.props.onDelete(this.state);
         history.back();
       }
     } else {
-      console.warn("onSubmit handler not set");
+      console.warn("onDelete handler not set");
     }
+  }
+
+  saveButtonComponent() {
+    return (
+      <button className='button is-primary the-save-button' onClick={this.handleOnSubmit}>Save</button>
+    );
+  }
+
+  deleteButtonComponent() {
+    return (
+      <button className='button is-pulled-right the-delete-button' onClick={this.handleOnDelete}>Delete</button>
+    );
   }
 
   render() {
@@ -72,7 +92,9 @@ class EntityForm extends React.Component {
 }
 
 EntityForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func,
+  confirmDelete: PropTypes.func
 };
 
 module.exports = EntityForm;

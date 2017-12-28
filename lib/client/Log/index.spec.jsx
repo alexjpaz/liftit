@@ -7,8 +7,9 @@ import { mount } from 'enzyme';
 
 describe('<Log />', () => {
   it('should render an named <input>', () => {
-    const wrapper = shallow((
-      <Log name="foo" />
+    const onSubmit = jest.fn();
+    const wrapper = mount((
+      <Log onSubmit={onSubmit}/>
     ));
 
     expect(wrapper.html()).toContain('<input');
@@ -27,7 +28,13 @@ describe('<Log />', () => {
     wrapper.find('select[name="reps"]')
       .simulate('change', { target: { name: 'reps', value: '5' } })
 
-    expect(wrapper.state()).toEqual({ lift: 'press', reps: '5', type: 'log'});
+    wrapper.find('input[name="weight"]')
+      .simulate('change', { target: { name: 'weight', value: 100 } })
+
+    wrapper.find('input[name="date"]')
+      .simulate('change', { target: { name: 'date', value: "2017" } })
+
+    expect(wrapper.state()).toEqual({ lift: 'press', reps: '5', date: "2017", weight: 100, type: 'log'});
 
     wrapper.find('.the-save-button')
       .simulate('click');
@@ -38,8 +45,9 @@ describe('<Log />', () => {
   it('execute the onDelete callback when the delete button is clicked', () => {
     const onSubmit = jest.fn();
     const onDelete = jest.fn();
+    const confirmDelete = () => true;
     const wrapper = mount((
-      <Log onSubmit={onSubmit} onDelete={onDelete}/>
+      <Log onSubmit={onSubmit} onDelete={onDelete} confirmDelete={confirmDelete}/>
     ));
 
     wrapper.find('.the-delete-button')

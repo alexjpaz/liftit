@@ -29,7 +29,7 @@ class CycleRoute extends EntityRoute {
           ]}
           active={'New'}/>
 
-        <CycleForm id={this.props.id} item={this.state} onSubmit={s => this.onSubmit(s)}/>
+        <CycleForm id={this.props.id} item={this.state} onSubmit={s => this.onSubmit(s)} onDelete={s => this.onDelete(s)}/>
       </div>
     )
   }
