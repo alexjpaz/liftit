@@ -130,27 +130,5 @@ describe('<LogRoute />', () => {
         expect(db.put).toHaveBeenCalledWith(state);
       });
     });
-    it('should create a new entity when the id is new', () => {
-      const db = {
-        allDocs: defaults.db.allDocs,
-        post: jest.fn()
-      };
-
-      return createInstance({
-        db,
-        match: { 
-          params: {
-            id: "new"
-          }
-        }
-      }).then(({wrapper}) => {
-        const state = {
-          foo: 1
-        };
-        wrapper.instance().onSubmit(state);
-        expect(wrapper.state().isNew).not.toBeDefined();
-        expect(db.post).toHaveBeenCalled;
-      });
-    });
   });
 });

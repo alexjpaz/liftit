@@ -1,6 +1,7 @@
 const config = require('config');
 
-require('./server').listen(3000);
+require('./server').listen(3000, () => {
+});
 
 if(config.devmode !== false) {
   console.warn("dev mode enabled")
@@ -13,4 +14,5 @@ if(config.devmode !== false) {
   });
 
   server.listen(8080);
+  console.log('Open http://localhost:8080')
 }

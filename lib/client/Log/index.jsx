@@ -19,6 +19,7 @@ class Log extends React.Component {
   componentWillMount() {
     this.handleOnChange = this.handleOnChange.bind(this);
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
+    this.handleOnDelete = this.handleOnDelete.bind(this);
 
     const log = {
       type: "log"
@@ -50,17 +51,25 @@ class Log extends React.Component {
     }
   }
 
+  handleOnDelete(event) {
+    event.preventDefault();
+    if(this.props.onDelete) {
+      this.props.onDelete(this.state);
+      history.back();
+    }
+  }
+
   render() {
     return (
       <div id={`Log-${this.props.id}`}>
-        <form onSubmit={this.handleOnSubmit}>
+        <form>
           <DateControl name='date' onChange={this.handleOnChange} value={this.state.date} />
           <LiftControl name='lift' onChange={this.handleOnChange} value={this.state.lift} />
           <RepControl name='reps' onChange={this.handleOnChange} value={this.state.reps} />
           <WeightControl name='weight' onChange={this.handleOnChange} value={this.state.weight} />
           <hr />
-          <button className='button is-primary'>Save</button>
-          <button className='button is-pulled-right'>Delete</button>
+          <button className='button is-primary the-save-button' onClick={this.handleOnSubmit}>Save</button>
+          <button className='button is-pulled-right the-delete-button' onClick={this.handleOnDelete}>Delete</button>
         </form>
       </div>
     );

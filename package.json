@@ -7,7 +7,7 @@
   "author": "Alexander Paz <alexjpaz@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --exec 'npm start'",
+    "dev": "DEVMODE=true nodemon --exec 'npm start'",
     "start": "node index.js",
     "test": "jest",
     "smokeTest": "mocha -t 300000 'test/smokeTest/**.js'",

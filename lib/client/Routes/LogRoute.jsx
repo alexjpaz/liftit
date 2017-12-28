@@ -28,7 +28,12 @@ class LogRoute extends EntityRoute {
             { title: 'Logs', href: '/logs' }
           ]}
           active={'New'}/>
-        <Log id={this.props.id} item={this.state} onSubmit={s => this.onSubmit(s)}/>
+        <Log 
+          id={this.props.id} 
+          item={this.state} 
+          onSubmit={s => this.onSubmit(s)}
+          onDelete={s => this.onDelete(s)}
+        />
       </div>
     )
   }

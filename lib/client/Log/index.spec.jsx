@@ -29,10 +29,24 @@ describe('<Log />', () => {
 
     expect(wrapper.state()).toEqual({ lift: 'press', reps: '5', type: 'log'});
 
-    wrapper.find('form')
-      .simulate('submit');
+    wrapper.find('.the-save-button')
+      .simulate('click');
 
     expect(onSubmit).toHaveBeenCalled();
+  });
+
+  it('execute the onDelete callback when the delete button is clicked', () => {
+    const onSubmit = jest.fn();
+    const onDelete = jest.fn();
+    const wrapper = mount((
+      <Log onSubmit={onSubmit} onDelete={onDelete}/>
+    ));
+
+    wrapper.find('.the-delete-button')
+      .simulate('click');
+
+    expect(onSubmit).not.toHaveBeenCalled();
+    expect(onDelete).toHaveBeenCalled();
   });
 
 });
