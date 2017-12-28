@@ -18,22 +18,14 @@ class Cycle extends EntityForm {
   }
 
   render() {
-    const control = (Component, name) => {
-      return (<Component 
-          name={name}
-          onChange={this.handleOnChange}
-          value={this.state[name]}
-        />)
-          
-    }
     return (
       <div>
         <form>
-          {control(DateControl, 'date')}
-          {control(CycleLiftControl, 'press')}
-          {control(CycleLiftControl, 'squat')}
-          {control(CycleLiftControl, 'bench')}
-          {control(CycleLiftControl, 'deadlift')}
+          {this.control(DateControl, 'date')}
+          {this.control(CycleLiftControl, 'press')}
+          {this.control(CycleLiftControl, 'squat')}
+          {this.control(CycleLiftControl, 'bench')}
+          {this.control(CycleLiftControl, 'deadlift')}
           <hr />
           {this.saveButtonComponent()}
           {this.deleteButtonComponent()}

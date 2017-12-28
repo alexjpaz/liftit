@@ -75,7 +75,6 @@ class HomeRoute extends EntityRoute {
         return b-a;
       })
       .map((f) => {
-        console.log(f);
         return f;
       })
       .find((item) => item)

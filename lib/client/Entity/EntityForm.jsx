@@ -86,6 +86,14 @@ class EntityForm extends React.Component {
     );
   }
 
+  control(Component, name) {
+    return (<Component 
+      name={name}
+      onChange={this.handleOnChange}
+      value={this.state[name] || ''}
+    />)
+  }
+
   render() {
     return null;
   }

@@ -16,21 +16,13 @@ class Log extends EntityForm {
   }
 
   render() {
-    const control = (Component, name) => {
-      return (<Component 
-          name={name}
-          onChange={this.handleOnChange}
-          value={this.state[name] || ''}
-        />)
-          
-    }
     return (
       <div id={`Log-${this.props.id}`}>
         <form>
-          {control(DateControl, 'date')}
-          {control(LiftControl, 'lift')}
-          {control(RepControl, 'reps')}
-          {control(WeightControl, 'weight')}
+          {this.control(DateControl, 'date')}
+          {this.control(LiftControl, 'lift')}
+          {this.control(RepControl, 'reps')}
+          {this.control(WeightControl, 'weight')}
           <hr />
           {this.saveButtonComponent()}
           {this.deleteButtonComponent()}
