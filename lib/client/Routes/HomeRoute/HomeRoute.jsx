@@ -1,8 +1,8 @@
 import React from 'react';
-import EntityRoute from './EntityRoute';
+import EntityRoute from '../EntityRoute';
 
-import NoLogsNotification from '../Log/NoLogsNotification.jsx';
-import NoCyclesNotification from '../Cycle/NoCyclesNotification.jsx';
+import NoLogsNotification from '../../Log/NoLogsNotification.jsx';
+import NoCyclesNotification from '../../Cycle/NoCyclesNotification.jsx';
 
 class LastLog extends React.Component {
   constructor(props) {

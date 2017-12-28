@@ -27,6 +27,8 @@
     "enzyme": "^2.9.1",
     "express": "^4.15.4",
     "express-handlebars": "^3.0.0",
+    "file-loader": "^1.1.6",
+    "image-webpack-loader": "^3.4.2",
     "jest": "^20.0.4",
     "js-yaml": "^3.9.1",
     "nodemon": "^1.11.0",

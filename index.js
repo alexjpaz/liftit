@@ -10,7 +10,7 @@ if(config.devmode !== false) {
   var compiler = webpack(require('./webpack.config.js'));
 
   var server = new WebpackDevServer(compiler, {
-    hot: true
+    hot: true,
   });
 
   server.listen(8080);

@@ -24,9 +24,12 @@ class LogRoute extends EntityRoute {
             { title: 'Workbook', href: '/'},
           ]}
           active={'Logs'}/>
-        <LogList 
-          history={this.history}
-          items={this.getLogList()} />
+        <a className="button is-link is-outlined" href='#/logs/new'>Add new log</a>
+        <div>
+          <LogList 
+            history={this.history}
+            items={this.getLogList()} />
+        </div>
       </div>
     );
   }

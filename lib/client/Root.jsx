@@ -13,7 +13,7 @@ import LogListRoute from './Routes/LogListRoute.jsx';
 import CycleRoute from './Routes/CycleRoute.jsx';
 import CycleListRoute from './Routes/CycleListRoute.jsx';
 
-import HomeRoute from './Routes/HomeRoute.jsx';
+import HomeRoute from './Routes/HomeRoute';
 
 class Root extends React.Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class Root extends React.Component {
       return ({match, history}) => new component({match, history, db});
     };
     return (
-      <div>
+      <div className='container'>
         <Navbar />
           <div className="container">
             <Router>

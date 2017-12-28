@@ -1,5 +1,7 @@
 import React from 'react';
 
+import logo from '../../resources/logo.png';
+
 class Burger extends React.Component {
   constructor(props) {
     super(props);
@@ -67,13 +69,7 @@ class Navbar extends React.Component {
       <nav className="navbar is-transparent" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <a className="navbar-item" href="#/">
-            <img src="" alt="liftit v2" width="112" height="28"/>
-          </a>
-          <a className="navbar-item is-hidden-desktop-only" href="#/logs/new">
-            <Icon name='plus-circle' />
-          </a>
-          <a className="navbar-item is-hidden-desktop-only" href="#/logs">
-            <Icon name='calendar-o' />
+            <img src={logo} alt="liftit v2" height="28"/>
           </a>
           <Burger 
             isActive={this.state.burger.isActive} 
@@ -92,9 +88,11 @@ class Navbar extends React.Component {
           </div>
 
           <div className="navbar-end">
-            <a className="navbar-item" href="#/settings">
-              Settings
-            </a>
+              <a className="navbar-item" href="#/profile">
+                <span className="icon">
+                    <i className="fa fa-user-circle-o"></i>
+                </span>
+              </a>
           </div>
         </div>
 

@@ -24,6 +24,7 @@ class CycleListRoute extends EntityRoute {
             { title: 'Workbook', href: '/'},
           ]}
           active={'Cycle'}/>
+        <a className="button is-link is-outlined" href='#/cycles/new'>Add new cycle</a>
         <CycleList 
           history={this.history}
           items={this.getCycleList()} />

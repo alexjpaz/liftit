@@ -7,6 +7,24 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [
+          { 
+            loader: 'file-loader',
+            options: {
+              outputPath: "build/",
+              publicPath: "http://localhost:8080/"
+            }
+          },
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true,
+            },
+          },
+        ],
+      },
       { test: /\.css$/, loader: "style-loader!css-loader" },
       {
         test: /.jsx?$/,
