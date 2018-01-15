@@ -1,6 +1,8 @@
 import React from 'react';
 
-import logo from '../../resources/logo.png';
+//import logo from '../../resources/logo.png';
+
+const logo = '';
 
 class Burger extends React.Component {
   constructor(props) {
@@ -90,7 +92,7 @@ class Navbar extends React.Component {
           <div className="navbar-end">
               <a className="navbar-item" href="#/profile">
                 <span className="icon">
-                    <i className="fa fa-user-circle-o"></i>
+                    <i className="fa fa-2x fa-user-circle-o"></i>
                 </span>
               </a>
           </div>

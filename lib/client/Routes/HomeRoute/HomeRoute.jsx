@@ -4,6 +4,8 @@ import EntityRoute from '../EntityRoute';
 import NoLogsNotification from '../../Log/NoLogsNotification.jsx';
 import NoCyclesNotification from '../../Cycle/NoCyclesNotification.jsx';
 
+import Calendar from '../../Calendar/index.jsx';
+
 class LastLog extends React.Component {
   constructor(props) {
     super(props);
@@ -16,8 +18,6 @@ class LastLog extends React.Component {
       this.history.push(`/logs/${logId}`)
     };
   }
-
- 
 
   render() {
     if(!this.props.item) {
@@ -88,6 +88,9 @@ class HomeRoute extends EntityRoute {
     return (
       <div className="tile is-ancestor">
         <div className="tile is-parent is-vertical ">
+          <div className="tile is-child">
+            <Calendar />
+          </div>
           <div className="tile is-child">
             <LastLog history={this.history} item={this.getLastLog()} />
           </div>
