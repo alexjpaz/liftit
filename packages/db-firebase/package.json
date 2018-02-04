@@ -1,15 +1,14 @@
 {
-  "name": "liftit-host-firebase",
+  "name": "liftit-db-firebase",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "",
-    "deploy": "firebase deploy"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "firebase-tools": "^3.16.0"
   }
 }

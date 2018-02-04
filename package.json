@@ -9,6 +9,7 @@
   },
   "scripts": {
     "postinstall": "lerna --loglevel=error bootstrap",
+    "deploy": "lerna --loglevel=silent run deploy",
     "test": "lerna --loglevel=silent run test"
   },
   "repository": {
