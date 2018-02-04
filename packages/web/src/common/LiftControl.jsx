@@ -3,7 +3,7 @@ import React from 'react';
 import Lifts from '../config/Lifts.jsx';
 import Field from './Field.jsx';
 
-class LiftControl extends React.Component {
+export default class LiftControl extends React.Component {
   constructor(props) {
     super(props);
 

@@ -24,6 +24,9 @@ export default class Root extends React.Component {
   render () {
     const compose = (component) => {
       const db = this.db;
+      if(typeof component !== 'function') {
+        throw new Error("Component is not a function! " + component)
+      }
       return ({match, history}) => new component({match, history, db});
     };
     return (
@@ -48,3 +51,4 @@ export default class Root extends React.Component {
 Root.propTypes = {
   db: PropTypes.object.isRequired
 };
+

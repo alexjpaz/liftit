@@ -2,7 +2,7 @@ import React from 'react';
 
 import Field from './Field.jsx';
 
-class NumberControl extends React.Component {
+export default class NumberControl extends React.Component {
   constructor(props) {
     super(props);
   }

@@ -37,7 +37,7 @@ class LastLog extends React.Component {
   }
 }
 
-class HomeRoute extends EntityRoute {
+export default class HomeRoute extends EntityRoute {
   hasEmptyCycles() {
     return this.state.list
       .filter((item) => item.type === 'cycle')

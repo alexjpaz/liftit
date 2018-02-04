@@ -1,8 +1,8 @@
 module.exports = {
-  DateControl: require('./DateControl.jsx'),
-  Field: require('./Field.jsx'),
-  LiftControl: require('./LiftControl.jsx'),
-  RepControl: require('./RepControl.jsx'),
-  TextControl: require('./TextControl.jsx'),
-  WeightControl: require('./WeightControl.jsx')
+  DateControl: require('./DateControl.jsx').default,
+  Field: require('./Field.jsx').default,
+  LiftControl: require('./LiftControl.jsx').default,
+  RepControl: require('./RepControl.jsx').default,
+  TextControl: require('./TextControl.jsx').default,
+  WeightControl: require('./WeightControl.jsx').default
 };

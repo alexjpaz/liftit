@@ -2,7 +2,7 @@ import React from 'react';
 
 import Field from './Field.jsx';
 
-class RepControl extends React.Component {
+export default class RepControl extends React.Component {
   constructor(props) {
     super(props);
 
