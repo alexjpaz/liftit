@@ -11,8 +11,14 @@
     ],
     "rewrites": [
       {
-        "source": "**",
-        "destination": "/index.html"
+        "source": "/auth",
+        "destination": "/auth.html"
+
+      },
+      {
+        "source": "/auth",
+        "destination": "/auth.html"
+
       }
     ]
   },

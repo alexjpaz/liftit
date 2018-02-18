@@ -1,0 +1,25 @@
+<h1>logout</h1>
+
+<script src="https://www.gstatic.com/firebasejs/4.10.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDgxpIgtC9vqebEyg1sSouyu8RAKsEpXho",
+    authDomain: "liftit-1138.firebaseapp.com",
+    databaseURL: "https://liftit-1138.firebaseio.com",
+    projectId: "liftit-1138",
+    storageBucket: "liftit-1138.appspot.com",
+    messagingSenderId: "592807124060"
+  };
+  firebase.initializeApp(config);
+
+  firebase.auth().getRedirectResult().then(function(result) {
+    if(!result.user) {
+      var provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithRedirect(provider);
+      return;
+    }
+
+    location.assign("/");
+  });
+<
