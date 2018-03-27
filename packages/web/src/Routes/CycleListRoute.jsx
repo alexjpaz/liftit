@@ -10,6 +10,7 @@ export default class CycleListRoute extends EntityRoute {
   getCycleList() {
     return this.state.list
       .filter(item => item.type === 'cycle')
+      .filter(item => !item._deleted)
       .sort((a,b) => new Date(b.date) - new Date(a.date))
     ;
   }

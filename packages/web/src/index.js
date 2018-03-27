@@ -8,9 +8,7 @@ import Root from './Root';
 
 import registerServiceWorker from './registerServiceWorker';
 
-import db from './db';
+import firebase from './firebase';
 
-
-
-ReactDOM.render(<Root db={db} />, document.querySelector('#root'));
+ReactDOM.render(<Root db={{}} firebase={firebase} />, document.querySelector('#root'));
 //registerServiceWorker();

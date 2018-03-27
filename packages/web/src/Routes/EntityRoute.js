@@ -1,10 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import uuid from 'uuid';
 
 export default class EntityRoute extends React.Component {
-  constructor({match, history, db}) {
+  constructor({match, history, db, firebaseDatabaseRef}) {
     super();
     this.id = match.params.id;
     this.db = db;
+    this.firebaseDatabaseRef = firebaseDatabaseRef;
     this.history = history;
   }
 
@@ -18,20 +22,22 @@ export default class EntityRoute extends React.Component {
     if(this.id === 'new') {
       this.createNewEntity();
     }  else if(this.id) {
-      this.db.get(this.id)
-        .then((data) => {
+      this.firebaseDatabaseRef.child(this.id)
+        .once('value')
+        .then((snap) => {
           this.setState({
             ...this.state,
-            ...data
+            ...snap.val()
           });
         });
     } else {
-      this.db.allDocs({
-        include_docs: true
-      })
-        .then((data) => {
-            const rows = data.rows.map(r => r.doc);
-            this.setState({list: rows});
+      this.firebaseDatabaseRef
+        .once('value')
+        .then((snap) => {
+          const objects = snap.val();
+          const keys = Object.keys(objects);
+          const rows = keys.map(k => objects[k]);
+          this.setState({list: rows});
         });
     }
   }
@@ -39,9 +45,14 @@ export default class EntityRoute extends React.Component {
   async onSubmit(state) {
     if(state.isNew) {
       delete state.isNew;
-      return await this.db.post(state);
+
+      if(!state._id) {
+        state._id = uuid().toString();
+      }
+
+      return await this.firebaseDatabaseRef.child(state._id).set(state);
     } else {
-      return await this.db.put(state);
+      return await this.firebaseDatabaseRef.child(state._id).set(state);
     }
   }
 
@@ -49,10 +60,16 @@ export default class EntityRoute extends React.Component {
     const newState = Object.assign({
       _deleted: true
     }, state);
-    return await this.db.put(newState);
+    return await this.firebaseDatabaseRef.child(newState._id).set(newState);
   }
 
   render() {
     return null;
   }
 }
+
+EntityRoute.propTypes = {
+  db: PropTypes.object.isRequired,
+  firebase: PropTypes.object.isRequired
+};
+

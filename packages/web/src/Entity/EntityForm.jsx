@@ -3,7 +3,6 @@ import uuid from 'uuid';
 
 import PropTypes from 'prop-types';
 
-
 export default class EntityForm extends React.Component {
   constructor(props) {
     super(props);

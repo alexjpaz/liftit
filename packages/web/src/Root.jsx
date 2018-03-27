@@ -19,15 +19,17 @@ export default class Root extends React.Component {
   constructor(props) {
     super(props);
     this.db = props.db;
+    this.firebase = props.firebase;
   }
 
   render () {
     const compose = (component) => {
       const db = this.db;
+      const firebaseDatabaseRef = this.firebase.database().ref('users/local');
       if(typeof component !== 'function') {
         throw new Error("Component is not a function! " + component)
       }
-      return ({match, history}) => new component({match, history, db});
+      return ({match, history}) => new component({match, history, db, firebaseDatabaseRef});
     };
     return (
       <div className='container'>
@@ -49,6 +51,7 @@ export default class Root extends React.Component {
 }
 
 Root.propTypes = {
-  db: PropTypes.object.isRequired
+  db: PropTypes.object.isRequired,
+  firebase: PropTypes.object.isRequired
 };
 
