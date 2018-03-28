@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import 'bulma/css/bulma.css'
-import './index.css';
+import './styles.js';
 
 import Root from './Root';
 
