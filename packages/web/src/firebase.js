@@ -19,16 +19,24 @@ if(!Firebase) {
 
   var mockapp = mocksdk.initializeApp();
 
-  const key = "liftit/firebase-mock/local";
+  function loadDataFromLocalStorage() {
+    try {
+      if(!window.localStorage) return;
 
-  mockapp.database().ref().set(JSON.parse(localStorage.getItem(key)));
+      const key = "liftit/firebase-mock/local";
 
-  mockapp.database().ref().on('value', (snap) => {
-    console.log('lol', snap.val());
-    localStorage.setItem(key, JSON.stringify(snap.val()));
-  });
+      mockapp.database().ref().set(JSON.parse(localStorage.getItem(key)));
 
+      mockapp.database().ref().on('value', (snap) => {
+        localStorage.setItem(key, JSON.stringify(snap.val()));
+      });
+    } catch(e) {
+      console.warn("Could not load data from localStorage", e);
+    }
+  }
 
+  loadDataFromLocalStorage();
+ 
   Firebase = mockapp;
 }
 

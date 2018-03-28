@@ -69,7 +69,8 @@ export default class EntityRoute extends React.Component {
 }
 
 EntityRoute.propTypes = {
-  db: PropTypes.object.isRequired,
-  firebase: PropTypes.object.isRequired
+  firebaseDatabaseRef: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+  history: PropTypes.func.isRequired
 };
 

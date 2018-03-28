@@ -10,6 +10,7 @@ export default class LogListRoute extends EntityRoute {
   getLogList() {
     return this.state.list
       .filter(item => item.type === 'log')
+      .filter(item => !item._deleted)
       .sort((a,b) => new Date(b.date) - new Date(a.date))
     ;
   }

@@ -4,7 +4,6 @@ import Root from './Root';
 import { shallow } from 'enzyme';
 import { mount } from 'enzyme';
 
-import PouchDB from 'pouchdb';
 
 describe('<Root />', () => {
   xit('test', () => {
@@ -17,7 +16,7 @@ describe('<Root />', () => {
       setTimeout(() => {
         try {
           const wrapper = mount((
-            <Root db={db} />
+            <Root db={{}} firebase={{}} />
           ));
 
           expect(wrapper.html()).toContain('alt=\"liftit');

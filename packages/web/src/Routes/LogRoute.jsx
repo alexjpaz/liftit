@@ -19,7 +19,7 @@ export default class LogRoute extends EntityRoute {
 
   render() {
     if(!this.state) {
-      return null;
+      return <h1>LOADING</h1>;
     }
     return (
       <div id={`LogRoute-${this.props.id}`}>

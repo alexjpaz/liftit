@@ -2,41 +2,26 @@ import React from 'react';
 
 import EntityRoute from './EntityRoute';
 
-import PouchDB from 'pouchdb';
-
 import { shallow } from 'enzyme';
 import { mount } from 'enzyme';
+
+import firebase from '../firebase';
 
 describe('<EntityRoute />', () => {
   const defaults = {
     history: jest.fn(),
     match: { params: 123 },
-    db: {
-      allDocs: jest.fn(() => {
-        return Promise.resolve({
-          rows: [
-            { 
-              doc: {
-                foo: "bar"
-              }
-            }
-          ]
-        });
-      })
-    }
+    firebaseDatabaseRef: firebase.database().ref("dummy")
   };
 
   const setupDb = (opts) => {
-    const db = new PouchDB(`/tmp/liftit.test.${new Date().getTime()}`); 
-
-    return db;
   };
 
   const createInstance = (opts) => {
     const { 
       id,
       history,
-      db,
+      firebaseDatabaseRef,
       match
     } = Object.assign({}, defaults, opts);
 
@@ -45,7 +30,7 @@ describe('<EntityRoute />', () => {
         <EntityRoute
           id={id}
           match={match} 
-          db={db}
+          firebaseDatabaseRef={firebaseDatabaseRef}
           history={history}
         />);
 
@@ -64,15 +49,24 @@ describe('<EntityRoute />', () => {
     });
   };
 
-  describe('initial state', () => {
+  it('should not blow up by default', async () => {
+    const wrapper = await createInstance({})
+  });
+
+  describe('views based on props', () => {
     it('should show the list view by default', () => {
+      const ref = firebase.database().ref("dummy");
+      ref.set({
+        "foo": {"bar":"baz"}
+      });
       return createInstance({
+        firebaseDatabaseRef: ref
       }).then(({wrapper}) => {
         const state = wrapper.state();
-        expect(state).toEqual({"list": [{"foo": "bar"}]});
+        expect(state).toEqual({"list": [{"bar": "baz"}]});
       });
     });
-
+    
     it('should createNewEntity when id is "new"', () => {
       return createInstance({
         match: {
@@ -87,14 +81,11 @@ describe('<EntityRoute />', () => {
     });
 
     it('should call get when there is an id in the url', () => {
+      const data = {
+        foo: 1
+      };
+      const ref = firebase.database().ref("dummy/some-id").set(data);
       return createInstance({
-        db: {
-          get: jest.fn(async () => {
-            return await {
-              foo: 1
-            };
-          })
-        },
         match: {
           params: {
             id: "some-id"
@@ -102,7 +93,7 @@ describe('<EntityRoute />', () => {
         }
       }).then(({wrapper}) => {
         const state = wrapper.state();
-        expect(state.foo).toEqual(1);
+        expect(state).toEqual(data);
       });
     });
 
@@ -110,30 +101,27 @@ describe('<EntityRoute />', () => {
 
   describe('updating', () => {
     it('should update the db instance when onSubmit is called', () => {
-      const db = {
-        allDocs: defaults.db.allDocs,
-        put: jest.fn()
-      };
+      const ref = firebase.database().ref("dummy/some-id");
 
       return createInstance({
-        db
+        firebaseDatabaseRef: ref
       }).then(({wrapper}) => {
         const state = {
-          foo: 1
+          _id: 'some-id', // TODO: this is required for some reason
+          foo: new Date().getTime()
         };
+
         wrapper.instance().onSubmit(state);
-        expect(db.put).toHaveBeenCalledWith(state);
+
+        expect(ref.getData()['some-id']).toEqual(state);
       });
     });
+
     it('should create a new entity when the id is new', () => {
-      const db = {
-        allDocs: defaults.db.allDocs,
-        put: jest.fn(),
-        post: jest.fn()
-      };
+      const ref = firebase.database().ref("dummy/new-id-1");
 
       return createInstance({
-        db,
+        firebaseDatabaseRef: ref,
         match: { 
           params: {
             id: "new"
@@ -142,49 +130,57 @@ describe('<EntityRoute />', () => {
       }).then(({wrapper}) => {
         const state = {
           isNew: true,
-          foo: 1
+          _id: 'new-id',
+          foo: new Date().getTime()
         };
         wrapper.instance().onSubmit(state);
-        //expect(wrapper.state().isNew).not.toBeDefined();
-        expect(db.put).not.toHaveBeenCalled;
-        expect(db.post).toHaveBeenCalled;
+        expect(ref.getData()['new-id']).toEqual(state);
+      });
+    });
+
+    it('should create a new entity with a generated id', () => {
+      const ref = firebase.database().ref("dummy/new-id-7");
+
+      return createInstance({
+        firebaseDatabaseRef: ref,
+        match: { 
+          params: {
+            id: "new"
+          }
+        }
+      }).then(({wrapper}) => {
+        const state = {
+          isNew: true,
+          foo: new Date().getTime()
+        };
+        wrapper.instance().onSubmit(state);
+        // state now has a generated id
+        expect(ref.getData()[state._id]).toEqual(state);
       });
     });
   });
 
   describe('delete', () => {
     it('should delete an existing entity', async () => {
-      const db = setupDb();
-
-      const entity = {
-        _id: "123",
-        foo: "bar"
-      };
-
-      await db.post(entity);
-
-      const res = await db.get("123");
-
+      const ref = firebase.database().ref("dummy/delete-me");
+      ref.child('delete-me').set({
+        _id: "delete-me",
+        i_should_be_deleted: true
+      });
       return createInstance({
-        db,
+        firebaseDatabaseRef: ref,
         match: { 
           params: {
-            id: "123"
+            id: "delete-me"
           }
         }
       }).then(async ({wrapper}) => {
         const state = wrapper.state();
-        expect(state.foo).toEqual(entity.foo);
-        const rsp = await wrapper.instance().onDelete(state);
+        expect(state.i_should_be_deleted).toEqual(true);
 
-        expect(rsp.ok).toEqual(true);
+        await wrapper.instance().onDelete(state);
 
-        try {
-          await db.get("123");
-          throw new Error("This should not find an entity");
-        } catch(e) {
-          // Everything is okay
-        }
+        expect(ref.getData()['delete-me']._deleted).toEqual(true);
       });
 
     });
