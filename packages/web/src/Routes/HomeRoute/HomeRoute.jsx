@@ -41,18 +41,21 @@ export default class HomeRoute extends EntityRoute {
   hasEmptyCycles() {
     return this.state.list
       .filter((item) => item.type === 'cycle')
+      .filter(item => !item._deleted)
       .length === 0;
   }
 
   hasEmptyLogs() {
     return this.state.list
       .filter((item) => item.type === 'log')
+      .filter(item => !item._deleted)
       .length === 0;
   }
 
   getLastLog() {
     return this.state.list
         .filter((item) => item.type === 'log')
+        .filter(item => !item._deleted)
         .sort((a,b) => {
           a = new Date(a.date);
           b = new Date(b.date);
@@ -66,9 +69,10 @@ export default class HomeRoute extends EntityRoute {
       ;
   }
 
-  getLastLog() {
+  getLastCycle() {
     return this.state.list
       .filter((item) => item.type === 'cycle')
+      .filter(item => !item._deleted)
       .sort((a,b) => {
         a = new Date(a.date);
         b = new Date(b.date);
