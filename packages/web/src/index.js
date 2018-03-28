@@ -6,7 +6,7 @@ import './index.css';
 
 import Root from './Root';
 
-import registerServiceWorker from './registerServiceWorker';
+//import registerServiceWorker from './registerServiceWorker';
 
 import firebase from './firebase';
 

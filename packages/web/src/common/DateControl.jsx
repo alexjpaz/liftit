@@ -3,13 +3,6 @@ import React from 'react';
 import Field from './Field.jsx';
 
 export default class DateControl extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentWillMount() {
-  }
-
   render() {
     return (
       <Field name={this.props.name}>

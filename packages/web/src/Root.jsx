@@ -4,9 +4,6 @@ import { HashRouter as Router, Route } from 'react-router-dom'
 
 import Navbar from './layout/Navbar.jsx';
 
-import Calendar from './Calendar/index.jsx';
-import Log from './Log/index.jsx';
-
 import LogRoute from './Routes/LogRoute.jsx';
 import LogListRoute from './Routes/LogListRoute.jsx';
 

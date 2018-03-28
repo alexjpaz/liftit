@@ -3,10 +3,6 @@ import React from 'react';
 import Field from './Field.jsx';
 
 export default class TextControl extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <Field name={this.props.name}>

@@ -4,9 +4,6 @@ import EntityForm from '../Entity/EntityForm.jsx';
 
 import {
   DateControl,
-  LiftControl,
-  RepControl,
-  WeightControl
 } from '../common/index.jsx';
 
 import CycleLiftControl from './CycleLiftControl.jsx'; 

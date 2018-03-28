@@ -4,10 +4,6 @@ import Lifts from '../config/Lifts.jsx';
 import Field from './Field.jsx';
 
 export default class LiftControl extends React.Component {
-  constructor(props) {
-    super(props);
-
-  }
 
   componentWillMount() {
     this.lifts = [

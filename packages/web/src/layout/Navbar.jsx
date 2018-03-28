@@ -1,8 +1,6 @@
 import React from 'react';
 
-//import logo from '../../resources/logo.png';
-
-const logo = '';
+import logo from '../resources/logo.png';
 
 class Burger extends React.Component {
   constructor(props) {
@@ -68,7 +66,7 @@ export default class Navbar extends React.Component {
   }
   render() {
     return (
-      <nav className="navbar is-transparent" role="navigation" aria-label="main navigation">
+      <nav className="navbar is-transparent" aria-label="main navigation">
         <div className="navbar-brand">
           <a className="navbar-item" href="#/">
             <img src={logo} alt="liftit v2" height="28"/>
@@ -91,15 +89,10 @@ export default class Navbar extends React.Component {
 
           <div className="navbar-end">
               <a className="navbar-item" href="#/profile">
-                <span className="icon">
-                    <i className="fa fa-2x fa-user-circle-o"></i>
-                </span>
+                <Icon name={"user-circle-o fa-2x"} />
               </a>
           </div>
         </div>
-
-
-
       </nav>
     );
   }
