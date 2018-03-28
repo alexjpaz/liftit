@@ -36,7 +36,7 @@ export default class CycleList extends Component {
                   </a>
                 </td>
                   <td>{item.press}</td>
-                  <td>{item.squat}</td>
+                  <td>{item.deadlift}</td>
                   <td>{item.bench}</td>
                   <td>{item.squat}</td>
                 </tr>
