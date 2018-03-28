@@ -8,5 +8,7 @@ import Calendar from './';
 
 storiesOf("Calendar", module)
   .add('default', () => (
-    <Calendar />
+    <div style={{"padding":"10px 80px"}}>
+      <Calendar />
+    </div>
   ))   

@@ -10,6 +10,12 @@ export default class EntityForm extends React.Component {
     this.history = props.history || window.history;
 
     this.id = this.props.id || uuid().toString();
+
+    this.postHandle = e => this.history.back();
+
+    if(typeof this.props.postHandle === 'function') {
+      this.postHandle = this.props.postHandle;
+    }
   }
 
   getType() {
@@ -48,7 +54,7 @@ export default class EntityForm extends React.Component {
 
     if(this.props.onSubmit) {
       this.props.onSubmit(this.state);
-      this.history.back();
+      this.postHandle({ event, state: this.state });
     } else {
       console.warn("onSubmit handler not set");
     }
@@ -68,7 +74,7 @@ export default class EntityForm extends React.Component {
     if(this.props.onDelete) {
       if(this.confirmDelete() === true) {
         this.props.onDelete(this.state);
-        this.history.back();
+        this.postHandle({ event, state: this.state });
       }
     } else {
       console.warn("onDelete handler not set");

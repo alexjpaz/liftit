@@ -8,7 +8,7 @@ import {
 
 import CycleLiftControl from './CycleLiftControl.jsx'; 
 
-export default class Cycle extends EntityForm {
+export default class CycleForm extends EntityForm {
   getType() {
     return "cycle";
   }

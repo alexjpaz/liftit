@@ -9,4 +9,4 @@ class Lifts {
   }
 }
 
-module.exports = new Lifts();
+export default new Lifts();
