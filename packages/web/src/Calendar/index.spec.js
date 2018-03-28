@@ -7,9 +7,9 @@ import { shallow } from 'enzyme';
 describe('<Calendar />', () => {
   it('should do a thing', () => {
     const wrapper = shallow((
-      <Calendar name="foo" />
+      <Calendar  />
     ));
 
-    expect(wrapper.html()).toContain('<p>foo</p>');
+    expect(wrapper.html()).toContain('<div>March 2018</div>');
   });
 });
