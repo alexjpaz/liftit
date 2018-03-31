@@ -70,13 +70,15 @@ if(!MOCK_FIREBASE_ENABLED) {
 
   firebase = Firebase.initializeApp(config);
 
+  // HACK
+  const provider = new Firebase.auth.GoogleAuthProvider();
+
   // NOT SURE WHERE TO STICK THIS YET
   firebase.auth().onAuthStateChanged((user) => {
     if(!user) {
       firebase.auth().getRedirectResult().then(function(result) {
         console.log('getRedirectResult', result);
         if(!result.user) {
-          var provider = new firebase.auth.GoogleAuthProvider();
           firebase.auth().signInWithRedirect(provider);
         } else {
           var userId = result.user.uid;

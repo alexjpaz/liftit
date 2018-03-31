@@ -74,6 +74,10 @@ export default class Root extends React.Component {
                 <Route path="/logs/:id" component={compose(LogRoute)} />
                 <Route exact path="/cycles" component={compose(CycleListRoute)} />
                 <Route exact path="/cycles/:id" component={compose(CycleRoute)} />
+                <Route exact path="/signout" component={() => {
+                  this.firebase.auth().signOut();
+                  return <h1>Signing out</h1>
+                }} />
               </div>
             </Router>
           </div>
