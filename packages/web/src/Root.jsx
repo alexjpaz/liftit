@@ -12,17 +12,52 @@ import CycleListRoute from './Routes/CycleListRoute.jsx';
 
 import HomeRoute from './Routes/HomeRoute';
 
+import Authentication from './components/Authentication';
+
 export default class Root extends React.Component {
   constructor(props) {
     super(props);
     this.db = props.db;
     this.firebase = props.firebase;
+
+    this.state = {
+      isAuthenticated: false,
+    };
+  }
+
+  componentWillMount() {
+    const setFirebaseDatabaseRef = (user) => {
+      if (user) {
+        const firebaseDatabaseRef = this.firebase.database().ref(`users/${user.uid}`);
+
+        this.setState({
+          ...this.state,
+          firebaseDatabaseRef,
+          isAuthenticated: true,
+        });
+
+      } else {
+        console.log("Ther is no user session. You must log in");
+      }
+    }
+
+    if(this.firebase.auth().currentUser) {
+      setFirebaseDatabaseRef(this.firebase.auth().currentUser);
+      return;
+    } else {
+      this.firebase.auth().onAuthStateChanged(setFirebaseDatabaseRef);
+    }
   }
 
   render () {
+    console.log(this.state);
+    if(!this.state.isAuthenticated) {
+      return <Authentication />;
+    }
+
     const compose = (component) => {
       const db = this.db;
-      const firebaseDatabaseRef = this.firebase.database().ref('users/local');
+      const firebaseDatabaseRef = this.state.firebaseDatabaseRef;
       if(typeof component !== 'function') {
         throw new Error("Component is not a function! " + component)
       }

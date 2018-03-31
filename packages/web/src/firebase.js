@@ -1,8 +1,9 @@
 // Do some logic to determine 
 
-let Firebase = window.firebase;
+let firebase = null;
 
-if(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+if(process.env.REACT_APP_FIREBASE !== 'production') {
+  console.info("firebase-mock enabled");
   var firebasemock = require('firebase-mock');
 
   var mockauth = new firebasemock.MockFirebase();
@@ -34,12 +35,27 @@ if(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
   }
 
   loadDataFromLocalStorage();
+
+  mocksdk.auth().changeAuthState({
+    uid: 'local',
+    provider: 'custom',
+    token: 'authToken',
+    expires: Math.floor(new Date() / 1000) + 24 * 60 * 60,
+    auth: {
+      isAdmin: true
+    }
+  });
+  mocksdk.auth().flush();
  
-  Firebase = mockapp;
+  firebase = mockapp;
 } 
 
-if(process.env.NODE_ENV === 'production' || process.env.REACT_APP_FIREBASE === 'production') {
-  const firebase = require('firebase');
+if(process.env.REACT_APP_FIREBASE === 'production') {
+  console.info("firebase enabled");
+  const Firebase = require('firebase/app');
+  require('firebase/auth');
+  require('firebase/database');
+
 
   var config = {
     apiKey: "AIzaSyDgxpIgtC9vqebEyg1sSouyu8RAKsEpXho",
@@ -50,26 +66,29 @@ if(process.env.NODE_ENV === 'production' || process.env.REACT_APP_FIREBASE === '
     messagingSenderId: "592807124060"
   };
 
-  Firebase = firebase.initializeApp(config);
+  firebase = Firebase.initializeApp(config);
+
+  // NOT SURE WHERE TO STICK THIS YET
+  firebase.auth().onAuthStateChanged((user) => {
+    if(!user) {
+      firebase.auth().getRedirectResult().then(function(result) {
+        console.log('getRedirectResult', result);
+        if(!result.user) {
+          var provider = new firebase.auth.GoogleAuthProvider();
+          firebase.auth().signInWithRedirect(provider);
+        } else {
+          var userId = result.user.uid;
+
+          firebase.database().ref(`users/${userId}/timestamp`).set({
+            date: `${new Date()}`
+          });
+
+        }
+      });
+    }
+  });
 }
 
-//var user = firebase.auth().currentUser;
 
-    //if(!user) {
-      //firebase.auth().getRedirectResult().then(function(result) {
-        //console.log('getRedirectResult', result);
-        //if(!result.user) {
-          //var provider = new firebase.auth.GoogleAuthProvider();
-          //firebase.auth().signInWithRedirect(provider);
-        //} else {
-          //var userId = result.user.uid;
 
-          //firebase.database().ref(`users/${userId}/timestamp`).set({
-            //date: `${new Date()}`
-          //});
-
-        //}
-      //});
-    //}
-
-export default Firebase;
+export default firebase;
