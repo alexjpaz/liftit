@@ -32,23 +32,23 @@ var webpackConfig = {
     new CopyWebpackPlugin([
       "node_modules/web/build/"
     ]),
+   new HtmlWebpackPlugin({
+      filename: "index.html",
+      template: 'node_modules/web/build/index.html',
+      chunks: ["main"]
+    }),
+    new HtmlWebpackPlugin({
+      filename: "auth.html",
+      template: 'src/auth/index.html',
+      chunks: ["auth"]
+    }),
     new HtmlWebpackIncludeAssetsPlugin({
       assets: [
         "https://www.gstatic.com/firebasejs/4.10.0/firebase.js"
       ],
       append: true
     }),
-    new HtmlWebpackPlugin({
-      filename: "index.html",
-      template: 'node_modules/web/build/index.html',
-      chunks: ["main"]
-    }),
-
-    new HtmlWebpackPlugin({
-      filename: "auth.html",
-      template: 'src/auth/index.html',
-      chunks: ["auth"]
-    }),
+ 
   ]
 };
 

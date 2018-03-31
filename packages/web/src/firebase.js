@@ -53,4 +53,23 @@ if(process.env.NODE_ENV === 'production' || process.env.REACT_APP_FIREBASE === '
   Firebase = firebase.initializeApp(config);
 }
 
+//var user = firebase.auth().currentUser;
+
+    //if(!user) {
+      //firebase.auth().getRedirectResult().then(function(result) {
+        //console.log('getRedirectResult', result);
+        //if(!result.user) {
+          //var provider = new firebase.auth.GoogleAuthProvider();
+          //firebase.auth().signInWithRedirect(provider);
+        //} else {
+          //var userId = result.user.uid;
+
+          //firebase.database().ref(`users/${userId}/timestamp`).set({
+            //date: `${new Date()}`
+          //});
+
+        //}
+      //});
+    //}
+
 export default Firebase;
