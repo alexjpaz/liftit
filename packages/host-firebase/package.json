@@ -9,7 +9,8 @@
     "build": "webpack -p",
     "start": "firebase serve",
     "deploy": "firebase deploy",
-    "webpack": "webpack"
+    "webpack": "webpack",
+    "postinstall": "cd functions && npm i"
   },
   "author": "",
   "license": "ISC",
