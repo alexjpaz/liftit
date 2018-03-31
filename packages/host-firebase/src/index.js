@@ -1,5 +1,3 @@
-const persistence = require('./persistence');
-
 document.addEventListener('DOMContentLoaded', function() {
 
   try {
@@ -15,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
     firebase.initializeApp(config);
 
     firebase.auth().onAuthStateChanged(function(user) {
-      console.log('lol', user);
       if (user) {
         // User is signed in.
       } else {
@@ -41,8 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
         //}
       //});
     //}
-
-    persistence();
   } catch (e) {
     console.error(e);
   }

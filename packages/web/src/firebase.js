@@ -2,9 +2,7 @@
 
 let Firebase = window.firebase;
 
-if(!Firebase) {
-  console.log("Firebase was not found. Using `firebase-mock`");
-
+if(process.env.NODE_ENV === 'development') {
   var firebasemock = require('firebase-mock');
 
   var mockauth = new firebasemock.MockFirebase();
@@ -38,6 +36,8 @@ if(!Firebase) {
   loadDataFromLocalStorage();
  
   Firebase = mockapp;
+} else {
+  Firebase = require('firebase');
 }
 
 export default Firebase;
