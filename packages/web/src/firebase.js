@@ -2,7 +2,7 @@
 
 let Firebase = window.firebase;
 
-if(process.env.NODE_ENV === 'development') {
+if(process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
   var firebasemock = require('firebase-mock');
 
   var mockauth = new firebasemock.MockFirebase();
