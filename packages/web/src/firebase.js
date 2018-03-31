@@ -36,8 +36,21 @@ if(process.env.NODE_ENV === 'development') {
   loadDataFromLocalStorage();
  
   Firebase = mockapp;
-} else {
-  Firebase = require('firebase');
+} 
+
+if(process.env.NODE_ENV === 'production' || process.env.REACT_APP_FIREBASE === 'production') {
+  const firebase = require('firebase');
+
+  var config = {
+    apiKey: "AIzaSyDgxpIgtC9vqebEyg1sSouyu8RAKsEpXho",
+    authDomain: "liftit-1138.firebaseapp.com",
+    databaseURL: "https://liftit-1138.firebaseio.com",
+    projectId: "liftit-1138",
+    storageBucket: "liftit-1138.appspot.com",
+    messagingSenderId: "592807124060"
+  };
+
+  Firebase = firebase.initializeApp(config);
 }
 
 export default Firebase;
