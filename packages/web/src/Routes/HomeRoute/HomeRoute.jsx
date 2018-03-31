@@ -4,8 +4,6 @@ import EntityRoute from '../EntityRoute';
 import NoLogsNotification from '../../Log/NoLogsNotification.jsx';
 import NoCyclesNotification from '../../Cycle/NoCyclesNotification.jsx';
 
-import Calendar from '../../Calendar/index.jsx';
-
 class LastLog extends React.Component {
   constructor(props) {
     super(props);
@@ -89,27 +87,30 @@ export default class HomeRoute extends EntityRoute {
       return null;
     }
     return (
-      <div className="tile is-ancestor">
-        <div className="tile is-parent is-vertical ">
-          <div className="tile is-child">
-            <Calendar />
-          </div>
-          <div className="tile is-child">
-            <LastLog history={this.history} item={this.getLastLog()} />
-          </div>
-          { this.hasEmptyLogs() && 
-          <div className="tile is-child">
-              <NoLogsNotification />
-          </div>
-          }
+      <section className='section'>
+        <div className="tile is-ancestor">
+          <div className="tile is-parent is-vertical ">
+            <div className="tile is-child">
+              <LastLog history={this.history} item={this.getLastLog()} />
+            </div>
+            { this.hasEmptyLogs() && 
+            <div className="tile is-child">
+                <NoLogsNotification />
+            </div>
+            }
 
-          { this.hasEmptyCycles() && 
-          <div className="tile is-child">
-              <NoCyclesNotification />
+            { this.hasEmptyCycles() && 
+            <div className="tile is-child">
+                <NoCyclesNotification />
+            </div>
+            }
+
+            <p><a className='button is-link is-outlined' href='#/logs'>Manage Logs</a></p>
+            <br />
+            <p><a className='button is-link is-outlined' href='#/cycles'>Manage Cycles</a></p>
           </div>
-          }
         </div>
-      </div>
+      </section>
     )
   }
 }

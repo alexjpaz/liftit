@@ -65,7 +65,6 @@ export default class Root extends React.Component {
     return (
       <div className='container'>
         <Navbar />
-          <div className="container">
             <Router>
               <div>
                 <Route exact path="/" component={compose(HomeRoute)} />
@@ -79,7 +78,6 @@ export default class Root extends React.Component {
                 }} />
               </div>
             </Router>
-          </div>
       </div>
     );
   }
