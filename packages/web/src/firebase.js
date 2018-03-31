@@ -2,7 +2,9 @@
 
 let firebase = null;
 
-if(process.env.REACT_APP_FIREBASE !== 'production') {
+const MOCK_FIREBASE_ENABLED = process.env.REACT_APP_FIREBASE !== 'production' && process.env.NODE_ENV !== 'production';
+
+if(MOCK_FIREBASE_ENABLED) {
   console.info("firebase-mock enabled");
   var firebasemock = require('firebase-mock');
 
@@ -50,7 +52,7 @@ if(process.env.REACT_APP_FIREBASE !== 'production') {
   firebase = mockapp;
 } 
 
-if(process.env.REACT_APP_FIREBASE === 'production') {
+if(!MOCK_FIREBASE_ENABLED) {
   console.info("firebase enabled");
   const Firebase = require('firebase/app');
   require('firebase/auth');
