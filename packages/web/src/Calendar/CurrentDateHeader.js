@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class CurrentDateHeader extends React.Component { 
+export default class CurrentDateHeader extends Component {
   render() {
     return (
       <div>

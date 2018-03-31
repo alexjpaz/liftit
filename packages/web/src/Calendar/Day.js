@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class Day extends React.Component { 
+export default class Day extends Component { 
   onSelect(e) {
     this.props.onSelect({ 
       date: this.props.date,

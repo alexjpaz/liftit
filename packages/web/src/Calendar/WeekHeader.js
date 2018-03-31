@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class WeekHeader extends React.Component { 
+export default class WeekHeader extends Component { 
   render() {
     return (
       <div className="columns has-text-centered is-gapless">

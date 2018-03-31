@@ -11,7 +11,7 @@
     "postinstall": "lerna --loglevel=error bootstrap",
     "deploy": "lerna --loglevel=silent run deploy",
     "test": "lerna --loglevel=silent run test",
-    "build": "lerna --loglevel=error run build"
+    "build": "lerna --loglevel=silent run build"
   },
   "repository": {
     "type": "git",
