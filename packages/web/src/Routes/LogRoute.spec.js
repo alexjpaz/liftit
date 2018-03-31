@@ -5,19 +5,27 @@ import LogRoute from './LogRoute';
 import { shallow } from 'enzyme';
 import { mount } from 'enzyme';
 
-import firebase from '../firebase';
+let firebase = null;
 
 describe('<LogRoute />', () => {
-  const defaults = {
-    history: jest.fn(),
-    match: { params: 123 },
-    firebaseDatabaseRef: firebase.database().ref("dummy"),
-    initialState: {
-      foo: {
-        initial: true
+  let defaults = {};
+
+  beforeEach(async () => {
+    const { getFirebaseInstance } = await import('../firebase/index.js')
+    const module  = await getFirebaseInstance();
+    firebase = module.firebase;
+
+    defaults = {
+      history: jest.fn(),
+      match: { params: 123 },
+      firebaseDatabaseRef: firebase.database().ref("dummy"),
+      initialState: {
+        foo: {
+          initial: true
+        }
       }
-    }
-  };
+    };
+  });
 
   const createInstance = (opts) => {
     const { 

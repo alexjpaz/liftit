@@ -5,14 +5,21 @@ import EntityRoute from './EntityRoute';
 import { shallow } from 'enzyme';
 import { mount } from 'enzyme';
 
-import firebase from '../firebase';
+let firebase = null;
 
 describe('<EntityRoute />', () => {
-  const defaults = {
-    history: jest.fn(),
-    match: { params: 123 },
-    firebaseDatabaseRef: firebase.database().ref("dummy")
-  };
+  let defaults = {};
+  beforeEach(async () => {
+    const { getFirebaseInstance } = await import('../firebase/index.js')
+    const module  = await getFirebaseInstance();
+    firebase = module.firebase;
+
+    defaults = {
+      history: jest.fn(),
+      match: { params: 123 },
+      firebaseDatabaseRef: firebase.database().ref("dummy")
+    };
+  });
 
   const setupDb = (opts) => {
   };

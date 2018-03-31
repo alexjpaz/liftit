@@ -50,7 +50,6 @@ export default class Root extends React.Component {
   }
 
   render () {
-    console.log(this.state);
     if(!this.state.isAuthenticated) {
       return <Authentication />;
     }
