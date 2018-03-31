@@ -1,17 +1,7 @@
 #!/bin/bash
 set -e
 
-NOW_ALIAS=liftit.now.sh                                                                                    
-
-now () { 
-    node_modules/.bin/now $@ 
-}                                                                       
 if [ "${CIRCLE_BRANCH}" == "v2" ]; then                                                                    
-    yarn add now                                                                                             
-    #now -t ${NOW_TOKEN} rm -y roll || echo "No deployments to remove"                                        
-    NOW_URL=$(now --public -t ${NOW_TOKEN} -e BUILD_COMMIT=${CIRCLE_SHA1})
-
-    APP_URL=$NOW_URL yarn smokeTest
-    
-    now -e "NODE_APP_INSTANCE=deployed" -t ${NOW_TOKEN} alias set ${NOW_URL} ${NOW_ALIAS}         
+    cd packages/host-firebase
+    yarn firebase deploy --token "$FIREBASE_TOKEN"
 fi    
