@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import DateUtils from '../common/DateUtils';
+
 import NoCyclesNotification from './NoCyclesNotification.jsx';
 
 export default class CycleList extends Component {
@@ -8,6 +10,13 @@ export default class CycleList extends Component {
     return () => {
       this.props.history.push(`/cycles/${logId}`);
     };
+  }
+
+  getSortedItems() {
+    return this.props.items
+      .sort(DateUtils.sort)
+      .slice(0,this.props.limitTo)
+    ;
   }
  
   render() {
@@ -27,7 +36,7 @@ export default class CycleList extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.items.map((item) => {
+            {this.getSortedItems().map((item) => {
               return (
                 <tr key={item._id} onClick={this.navigateToLog(item._id)}>
                 <td>
@@ -55,6 +64,10 @@ export default class CycleList extends Component {
     )
 
   }
+};
+
+CycleList.defaultProps = {
+  limitTo: 100
 };
 
 CycleList.propsTypes = {

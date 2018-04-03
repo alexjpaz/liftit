@@ -10,12 +10,10 @@ import { action } from '@storybook/addon-actions';
 
 storiesOf("Cycle/CycleForm", module)
   .addDecorator((fn) => (
-    <div style={{
-      "width":"960px",
-      "padding": "10px 20px"
+    <section className='section' style={{
     }}>
       {fn()}
-    </div>
+    </section>
   ))
   .add('blank', () => (
       <CycleForm 

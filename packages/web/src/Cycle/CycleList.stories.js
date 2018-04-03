@@ -11,22 +11,23 @@ import uuid from 'uuid';
 
 storiesOf("Cycle/CycleList", module)
   .addDecorator((fn) => (
-    <div style={{
-      "width":"960px",
-      "padding": "10px 20px"
+    <section className='section' style={{
+      "max-width":"960px",
     }}>
       {fn()}
-    </div>
+    </section>
   ))
   .add('blank', () => (
     <CycleList />
   )) 
   .add('with valid cycles', () => {
-    let items = Array(10).fill(true).map((e) => {
+    let items = Array(10).fill(true).map((e,i) => {
+      const date = new Date();
+      date.setDate(i);
       return {
         _id: uuid().toString(),
         type: 'cycle',
-        date: "2018-03-01",
+        date: date.toISOString().slice(0,10),
         press: Math.round(Math.random() * 1000),
         deadlift: Math.round(Math.random() * 1000),
         bench: Math.round(Math.random() * 1000),
@@ -35,6 +36,26 @@ storiesOf("Cycle/CycleList", module)
     });
 
     return <CycleList
+      items={items}
+    />
+  }) 
+  .add('with limit 10', () => {
+    let items = Array(100).fill(true).map((e,i) => {
+      const date = new Date();
+      date.setDate(i);
+      return {
+        _id: uuid().toString(),
+        type: 'cycle',
+        date: date.toISOString().slice(0,10),
+        press: Math.round(Math.random() * 1000),
+        deadlift: Math.round(Math.random() * 1000),
+        bench: Math.round(Math.random() * 1000),
+        squat: Math.round(Math.random() * 1000)
+      }
+    });
+
+    return <CycleList
+      limitTo={10}
       items={items}
     />
   }) 
