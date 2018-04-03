@@ -22,13 +22,15 @@ storiesOf("Log/LogList", module)
     <LogList />
   )) 
   .add('with valid logs', () => {
-    let items = Array(10).fill(true).map((e) => {
+    let items = Array(10).fill(true).map((e,i) => {
+      const date = new Date();
+      date.setDate(i);
       const lifts = ['press','deadlift','bench','squat'];
       const lift = lifts[Math.floor(Math.random()*lifts.length)];
       return {
         _id: uuid().toString(),
         type: 'log',
-        date: "2018-03-01",
+        date: date.toISOString().slice(0,10),
         lift: lift,
         weight: Math.round(Math.random() * 1000),
         reps: Math.round(Math.random() * 10)
