@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@storybook/cli": "^3.3.15",
-    "bulma": "^0.6.2",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "react": "^16.2.0",
@@ -30,6 +29,8 @@
     "babel-core": "^6.26.0",
     "firebase": "^4.12.1",
     "firebase-mock": "^2.1.8",
+    "material-ui": "^1.0.0-beta.40",
+    "material-ui-icons": "^1.0.0-beta.36",
     "md5": "^2.2.1",
     "mockfirebase": "^0.12.0"
   }

@@ -14,6 +14,7 @@ import HomeRoute from './Routes/HomeRoute';
 
 import Authentication from './components/Authentication';
 
+
 export default class Root extends React.Component {
   constructor(props) {
     super(props);
