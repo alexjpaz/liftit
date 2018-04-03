@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import DateUtils from '../common/DateUtils';
+
 import NoLogsNotification from './NoLogsNotification.jsx';
 
 export default class LogList extends Component {
@@ -8,6 +10,13 @@ export default class LogList extends Component {
     return () => {
       this.props.history.push(`/logs/${logId}`);
     };
+  }
+
+  getSortedItems() {
+    return this.props.items
+      .sort(DateUtils.sort)
+      .slice(0,this.props.limitTo)
+    ;
   }
  
   render() {
@@ -26,7 +35,7 @@ export default class LogList extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.items.map((item) => {
+            {this.getSortedItems().map((item) => {
               return (
                 <tr key={item._id} onClick={this.navigateToLog(item._id)}>
                 <td>
@@ -54,6 +63,12 @@ export default class LogList extends Component {
 
   }
 };
+
+LogList.defaultProps = {
+  limitTo: 100
+};
+
+
 
 LogList.propsTypes = {
   items: PropTypes.array.isRequired
