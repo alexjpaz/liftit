@@ -28,7 +28,7 @@ storiesOf("Cycle/CycleList", module)
         _id: uuid().toString(),
         type: 'cycle',
         date: date.toISOString().slice(0,10),
-        press: Math.round(Math.random() * 1000),
+        press: i * 25,
         deadlift: Math.round(Math.random() * 1000),
         bench: Math.round(Math.random() * 1000),
         squat: Math.round(Math.random() * 1000)
