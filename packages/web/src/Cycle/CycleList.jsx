@@ -5,12 +5,81 @@ import DateUtils from '../common/DateUtils';
 
 import NoCyclesNotification from './NoCyclesNotification.jsx';
 
-const lifts = ['press','deadlift','bench','squat'];
+import { lifts } from '../common/Constants';
+
+export class TrendDirection extends Component {
+  render() {
+    const { delta } = this.props;
+    let direction = 'fa-minus';
+    let color = null;
+
+    if(delta > 0) {
+      direction = 'fa-arrow-alt-circle-up';
+      color = 'has-text-success';
+    }
+
+    if(delta < 0) {
+      direction = 'fa-arrow-alt-circle-down';
+      color = 'has-text-danger';
+    }
+
+    if(direction) {
+      return (
+        <span className={color}>
+          <i className={`far ${direction}`}></i>
+        </span>
+      );
+    } else {
+      return null;
+    }
+  }
+}
+
+export class CycleListLiftCell extends Component {
+  render() {
+    const { item, lift } = this.props;
+
+    const max = item[lift];
+
+    let cell = null;
+
+    const delta = item[`${lift}_delta`];
+    const fraction = item[`${lift}_fraction`];
+
+    if(!max) {
+      cell = (
+        <td>
+        </td>
+      );
+    } else if(!delta) {
+      cell = (
+        <td>
+          <span>{item[lift]}</span>
+        </td>
+      );
+    } else {
+      cell = (
+        <td>
+          <TrendDirection delta={delta} />
+          <span> {item[lift]}</span>
+          <span className='has-text-grey is-size-7'>
+            <span> </span>
+            <span> </span>
+            <span>{delta} </span> 
+            <span>({fraction}%)</span>
+          </span>
+        </td>
+      );
+    }
+
+    return cell;
+  }
+}
 
 export default class CycleList extends Component {
-  navigateToLog(logId) {
+  navigateTo(id) {
     return () => {
-      this.props.history.push(`/cycles/${logId}`);
+      this.props.history.push(`/cycles/${id}`);
     };
   }
 
@@ -30,7 +99,7 @@ export default class CycleList extends Component {
 
     const delta = lifts.reduce((p,c) => {
       p[`${c}_delta`] = cycle[c] - previousCycle[c];
-      p[`${c}_fraction`] = 100 - Math.round((previousCycle[c] / cycle[c]) * 100);
+      p[`${c}_fraction`] = Math.floor(100 - (+previousCycle[c] / +cycle[c]) * 100) || 0;
       return p;
     }, {});
     
@@ -39,7 +108,6 @@ export default class CycleList extends Component {
   }
  
   render() {
-
     let list = null;
 
     if(this.props.items && this.props.items.length > 0) {
@@ -48,24 +116,21 @@ export default class CycleList extends Component {
           <thead>
             <tr>
               <th>Date</th>
-              <th>Press</th>
-              <th>Deadlift</th>
-              <th>Bench</th>
-              <th>Squat</th>
+              {lifts.map((lift) => (
+              <th key={lift}>{lift}</th>
+              ))}
             </tr>
           </thead>
           <tbody>
             {this.getSortedItems().map((item) => {
               return (
-                <tr key={item._id} onClick={this.navigateToLog(item._id)}>
+                <tr id={`cycle__${item._id}`} key={item._id} onClick={this.navigateTo(item._id)}>
                 <td>
                   <a key={item._id} href={"#/cycles/"+item._id}>
                     {item.date}
                   </a>
                 </td>
-                  {lifts.map((lift) => (
-                  <td>{item[lift]} <p className='has-text-grey is-size-7'>{item[`${lift}_delta`]} {item[`${lift}_fraction`]}</p></td>
-                  ))}
+                  {lifts.map((lift) => <CycleListLiftCell key={lift} lift={lift} item={item} />)}
                 </tr>
               )
             })}

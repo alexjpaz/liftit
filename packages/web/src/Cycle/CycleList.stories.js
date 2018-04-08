@@ -28,10 +28,27 @@ storiesOf("Cycle/CycleList", module)
         _id: uuid().toString(),
         type: 'cycle',
         date: date.toISOString().slice(0,10),
-        press: i * 25,
-        deadlift: Math.round(Math.random() * 1000),
-        bench: Math.round(Math.random() * 1000),
-        squat: Math.round(Math.random() * 1000)
+        press: 100 + (i+1) * 5,
+        deadlift: 200 + (i+1) * 10,
+        bench: 100 + (i+1) * 5,
+        squat: 200 + (i+1) * 10,
+      }
+    });
+
+    return <CycleList
+      items={items}
+    />
+  }) 
+  .add('show trends', () => {
+    let items = Array(3).fill(true).map((e,i) => {
+      const date = new Date();
+      date.setDate(i);
+      return {
+        _id: uuid().toString(),
+        type: 'cycle',
+        date: date.toISOString().slice(0,10),
+        press: 100 + (i+1) * 5,
+        deadlift: 100 - (i+1) * 10,
       }
     });
 
