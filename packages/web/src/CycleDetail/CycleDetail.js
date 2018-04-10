@@ -11,12 +11,25 @@ class AddNewLogLink extends React.Component {
   }
 }
 
+class LogThing extends React.Component {
+  render() {
+    const log = this.props.log;
+    const isDone = !!this.props.log.date;
+    
+    return (
+      <a href={`#/logs/${log._id}`}>
+        <span>{log.reps}x{log.weight}</span>
+      </a>
+    );
+  }
+}
+
 class LogLink extends React.Component {
   render() {
     if(!this.props.log) {
       return (<AddNewLogLink />);
     } else {
-      return this.props.log.date || '✔';
+      return (<LogThing log={this.props.log}/>);
     }
   }
 }
@@ -58,11 +71,11 @@ export default class CycleDetail extends React.Component {
     const table = this.generateTable();
     return (
       <div>
-        <div className='content'>
-          <h2>Cycle on {this.props.cycle.date}</h2>
-        </div>
         <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
           <thead>
+            <tr>
+              <th colspan='5'>Cycle {this.props.cycle.date}</th>
+            </tr>
             <tr>
               <th className='has-text-right'>Lift</th>
               <th>Max</th>
