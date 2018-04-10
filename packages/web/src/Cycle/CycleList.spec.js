@@ -135,7 +135,7 @@ describe('<CycleList />', () => {
     const next = instance.decorateCycles(cycles[0], 0, cycles);
 
     expect(next._id).toEqual(1);
-    expect(Math.round(next.press_fraction)).toEqual(-11); // 10% - TODO - seems off a bit
+    expect(next.press_fraction).toEqual(-11); // 10% - TODO - seems off a bit
   });
 
   it('should sort and decorate cycles', () => {

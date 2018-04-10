@@ -99,7 +99,7 @@ export default class CycleList extends Component {
 
     const delta = lifts.reduce((p,c) => {
       p[`${c}_delta`] = cycle[c] - previousCycle[c];
-      p[`${c}_fraction`] = Math.floor(100 - (+previousCycle[c] / +cycle[c]) * 100) || 0;
+      p[`${c}_fraction`] = Math.round(100 - (+previousCycle[c] / +cycle[c]) * 100) || 0;
       return p;
     }, {});
     
