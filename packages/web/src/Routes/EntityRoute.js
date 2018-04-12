@@ -35,10 +35,19 @@ export default class EntityRoute extends React.Component {
         .once('value')
         .then((snap) => {
           const objects = snap.val();
+
+          if(objects === null) {
+            return this.setState({list: []});
+          }
+
           const keys = Object.keys(objects);
           const rows = keys.map(k => objects[k]);
           this.setState({list: rows});
-        });
+        })
+        .catch((e) => {
+          console.error("Could not load data from ref", e);
+        })
+      ;
     }
   }
 
