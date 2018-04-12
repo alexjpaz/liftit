@@ -37,5 +37,16 @@ jobs:
       - run: yarn test
       - run: yarn build
       - deploy:
+          name: Delpoy to firebase
+
           command: |
-            .circleci/steps/deploy
+            echo "Determining if we should deploy the branch '$CIRCLE_BRANCH'"
+            case $CIRCLE_BRANCH in
+                v2)
+                  "Deploying '$CIRCLE_BRANCH' to firebase"
+                  .circleci/steps/deploy
+                  ;;
+                *)
+                    echo "Not deploying."
+                  ;;
+            esac
