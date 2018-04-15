@@ -22,9 +22,7 @@
             <li><a href="#/maxes">Cycles</a></li>
             <li><a href="#/profile">Profile</a></li>
             <li><a href="#/tools/table">Table</a></li>
-            <li role="separator" class="divider"></li>
             <li><a href='https://liftit-1138.firebaseapp.com/'>Go to liftit v2 (beta)</li>
-            <li><a href='http://unstable.ajpaz531.appspot.com/'>Go to PazFit</a></li>
          </ul>
         </div><!--/.nav-collapse -->
 
