@@ -84,7 +84,7 @@ export default class HomeRoute extends EntityRoute {
 
   render() {
     if(!this.state) {
-      return null;
+      return <h1>lolM</h1>;
     }
     return (
       <section className='section'>
