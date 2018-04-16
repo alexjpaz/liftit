@@ -2,6 +2,9 @@ import React from 'react';
 
 import CycleDetail from '../CycleDetail';
 
+import SmartCard from './SmartCard';
+
+
 export default class Workbook extends React.Component {
   componentWillMount() {
     this.workbookEntries = this.props.workbook.entries;
@@ -30,8 +33,20 @@ export default class Workbook extends React.Component {
   render() {
     return (
       <div>
+        <SmartCard />
+        <br />
+
         {this.getNextLog()}
         {this.getCycleDetail()}
+
+        <div className="field is-grouped">
+          <p className="control">
+            <a className='button is-link is-outlined' href='#/logs'>Manage Logs</a> 
+          </p>
+          <p className="control">
+            <a className='button is-link is-outlined' href='#/cycles'>Manage Cycles</a> 
+          </p>
+        </div>
       </div>
     )
   }

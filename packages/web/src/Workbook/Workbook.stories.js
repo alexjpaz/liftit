@@ -8,7 +8,7 @@ import Workbook from './Workbook';
 
 storiesOf("Workbook", module)
   .add('default', () => (
-    <div style={{"padding":"10px 80px"}}>
+    <div style={{"margin":"10px 80px","width":"425px"}}>
       <Workbook 
         workbook={{
           entries: [{
@@ -24,6 +24,13 @@ storiesOf("Workbook", module)
             squat: 200,
             bench: 300,
             deadlift: 400
+          },{
+            date: '2018-01-02',
+            type: 'cycle',
+            press: 105,
+            squat: 205,
+            bench: 305,
+            deadlift: 405
           }]
         }}
       />
