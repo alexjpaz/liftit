@@ -10,6 +10,10 @@ export default class LiftTable extends React.Component {
   generateTableData() {
     const opts = this.props;
 
+    if(!opts.week) {
+      throw new Error("Illegal argument exception: must have a week to generate lift table");
+    }
+
     var table = {
       plates: liftit.config.plates,
       rows: []
@@ -24,6 +28,18 @@ export default class LiftTable extends React.Component {
       table.rows.push(row);
     });
 
+    if(!opts.hideWarmup) {
+      liftit.config.weekMap['DL'].forEach(function(w) {
+        var row = {
+          weight: liftit.roundTo(opts.weight * w, 5),
+          fraction: w,
+          isWarmup: true
+        };
+        row = Object.assign(row, liftit.plates(row.weight));
+        table.rows.unshift(row);
+      })
+    }
+
 
     return table;
   }
@@ -32,7 +48,7 @@ export default class LiftTable extends React.Component {
     const table = this.generateTableData();
 
     return (
-      <div>
+      <div className='LiftTable'>
         <table className={`table is-bordered table--is-centered table--${this.props.lift}`}>
           <thead>
             <tr>
@@ -45,7 +61,7 @@ export default class LiftTable extends React.Component {
           </thead>
           <tbody>
             {table.rows.map((r) => (
-              <tr className="">
+              <tr className={`${r.isWarmup ? 'is-warmup' : ''}`}>
                 <td>{r.fraction*100}</td>
                 <td>{r.weight}</td>
                 {r.list.map((r) => (
@@ -54,7 +70,8 @@ export default class LiftTable extends React.Component {
               </tr>
             ))}
           </tbody>
-      </table>
+        </table>
+        <p class='has-text-grey'><small>{this.props.weight} {this.props.week}</small></p>
       </div>
     );
   }
