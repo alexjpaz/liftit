@@ -17,3 +17,7 @@
 .table--is-centered * {
   text-align: center;
 }
+
+.LiftTable .is-warmup {
+  background: #eaeaea;
+}

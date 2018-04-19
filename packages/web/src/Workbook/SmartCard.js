@@ -10,7 +10,12 @@ export default class SmartCard extends React.Component {
       lift: 'press',
       minimumReps: 3,
       targetReps: 8,
-      weight: 145
+      weight: 145,
+      week: "3x3",
+      cycle: {
+        _id: "foo",
+        press: 180
+      }
     };
 
     this.state = {};
@@ -32,7 +37,11 @@ export default class SmartCard extends React.Component {
               <span>{this.nextLift.lift} </span>
               <span>{this.nextLift.minimumReps}x{this.nextLift.weight}</span>
             </p>
-            <LiftTable />
+            <LiftTable 
+              week={this.nextLift.week} 
+              weight={this.nextLift.weight}
+            />
+            <span>{this.nextLift.cycle[this.nextLift.lift]}</span>
           </div>
         </div>
         <footer className="card-footer">
