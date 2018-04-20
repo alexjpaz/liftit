@@ -2,9 +2,9 @@ import React from 'react';
 
 import LiftTable from '../common/LiftTable'
 
-import './SmartCard.css';
+import './NextLogCard.css';
 
-export default class SmartCard extends React.Component {
+export default class NextLogCard extends React.Component {
   constructor(props) {
     super(props);
 
@@ -32,7 +32,7 @@ export default class SmartCard extends React.Component {
   render() {
     const lift = this.props.lift;
     return (
-      <div className="SmartCard">
+      <div className="NextLogCard">
         <div className="card">
           <header class="card-header">
             <p class="card-header-title">

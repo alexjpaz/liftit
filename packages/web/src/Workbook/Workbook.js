@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SmartCard from './SmartCard';
+import NextLogCard from './NextLogCard';
 
 import CurrentCycleCard from './CurrentCycleCard';
 
@@ -12,7 +12,7 @@ export default class Workbook extends React.Component {
   getNextLog() {
     const nextLog = this.workbookEntries.filter(e => e.type === 'log');
     return (
-      <SmartCard
+      <NextLogCard
         log={nextLog}
       />
     );
