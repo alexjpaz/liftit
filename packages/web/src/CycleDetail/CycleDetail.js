@@ -116,8 +116,8 @@ export default class CycleDetail extends React.Component {
                 <th className='has-text-right'>
                   {week}
                 </th>
-                {Object.keys(table).map((k) => (
-                  <td className='has-text-centered'>
+                {Object.keys(table).map((k,j) => (
+                  <td key={j} className='has-text-centered'>
                     <LogLink 
                       log={table[k][fractions[i]]} 
                       lift={k}
