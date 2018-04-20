@@ -34,17 +34,22 @@ export default class SmartCard extends React.Component {
     return (
       <div className="SmartCard">
         <div className="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              Next Entry
+            </p>
+          </header>
           <div className="card-content">
             <div className="content">
-              <p class="title">
+              <p className="title has-text-centered">
                 <span>{this.nextLift.lift} </span>
                 <span>{this.nextLift.minimumReps}x{this.nextLift.weight}</span>
+                <span> ({this.nextLift.targetReps})</span>
               </p>
               <LiftTable 
                 week={this.nextLift.week} 
                 weight={this.nextLift.weight}
               />
-              <span>{this.nextLift.cycle[this.nextLift.lift]}</span>
             </div>
           </div>
           <footer className="card-footer">

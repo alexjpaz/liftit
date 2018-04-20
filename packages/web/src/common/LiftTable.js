@@ -70,8 +70,14 @@ export default class LiftTable extends React.Component {
               </tr>
             ))}
           </tbody>
+          <tbody>
+            <tr>
+              <th colspan="7">
+                <p class='has-text-grey'><small>{this.props.weight} {this.props.week}</small></p>
+              </th>
+            </tr>
+          </tbody>
         </table>
-        <p class='has-text-grey'><small>{this.props.weight} {this.props.week}</small></p>
       </div>
     );
   }

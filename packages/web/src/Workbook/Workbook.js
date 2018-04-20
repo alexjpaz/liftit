@@ -1,9 +1,8 @@
 import React from 'react';
 
-import CycleDetail from '../CycleDetail';
-
 import SmartCard from './SmartCard';
 
+import CurrentCycleCard from './CurrentCycleCard';
 
 export default class Workbook extends React.Component {
   componentWillMount() {
@@ -13,8 +12,9 @@ export default class Workbook extends React.Component {
   getNextLog() {
     const nextLog = this.workbookEntries.filter(e => e.type === 'log');
     return (
-      <div className='box'>
-      </div>
+      <SmartCard
+        log={nextLog}
+      />
     );
   }
   getCycleDetail() {
@@ -23,7 +23,7 @@ export default class Workbook extends React.Component {
     const logs = workbookEntries.filter(e => e.type === 'log');
 
     return (
-      <CycleDetail
+      <CurrentCycleCard 
         cycle={latestCycle}
         logs={logs}
       />
@@ -33,16 +33,9 @@ export default class Workbook extends React.Component {
   render() {
     return (
       <div>
-        <SmartCard />
+        {this.getNextLog()}
         <br />
-
-
-        <div className="card">
-          <div className="card-content">
-            {this.getCycleDetail()}
-          </div>
-        </div>
-
+        {this.getCycleDetail()}
         <br />
 
         <div className="field is-grouped">
