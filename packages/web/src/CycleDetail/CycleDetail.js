@@ -40,7 +40,6 @@ class LogLink extends React.Component {
 }
 
 
-
 export default class CycleDetail extends React.Component { 
   generateTable() {
     const table = {};
@@ -79,7 +78,13 @@ export default class CycleDetail extends React.Component {
     } = this.props;
 
     if(!this.props.cycle.date) {
-      return null;
+      return (
+        <div className='has-text-centered'>
+          <i className='fas fa-exclamation-triangle'></i>
+          <p><span>No data</span></p>
+          <pre>{JSON.stringify(this.props)}</pre>
+        </div>
+      );
     }
 
     const cycle = this.props.cycle;
@@ -132,6 +137,7 @@ export default class CycleDetail extends React.Component {
 
 CycleDetail.defaultProps = {
   cycle: {},
+  logs: [],
   lifts,
   fractions,
   weeks
