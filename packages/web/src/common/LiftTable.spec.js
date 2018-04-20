@@ -7,7 +7,7 @@ import LiftTable from './LiftTable';
 describe('<LiftTable />', () => {
   it('should render', () => {
     const wrapper = shallow((
-      <LiftTable name="foo" />
+      <LiftTable week="3x3" />
     ));
   });
 });

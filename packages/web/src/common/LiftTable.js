@@ -54,18 +54,18 @@ export default class LiftTable extends React.Component {
             <tr>
               <th>%</th>
               <th>W</th>
-              {table.plates.map((p) => (
-                <th>{p}</th>
+              {table.plates.map((p, i) => (
+                <th key={i}>{p}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {table.rows.map((r) => (
-              <tr className={`${r.isWarmup ? 'is-warmup' : ''}`}>
+            {table.rows.map((r, i) => (
+              <tr key={i} className={`${r.isWarmup ? 'is-warmup' : ''}`}>
                 <td>{r.fraction*100}</td>
                 <td>{r.weight}</td>
-                {r.list.map((r) => (
-                  <td>{r}</td>
+                {r.list.map((r, i) => (
+                  <td key={i}>{r}</td>
                 ))}
               </tr>
             ))}
