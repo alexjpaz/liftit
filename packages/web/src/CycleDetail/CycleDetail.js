@@ -91,13 +91,17 @@ export default class CycleDetail extends React.Component {
           <thead>
             <tr>
               <th colspan='5'>
-                <a href={`#/cycle/${this.props.cycle._id}`}>Cycle {this.props.cycle.date}</a>
+                <a href={`#/cycle/${this.props.cycle._id}`}>{this.props.cycle.date}</a>
               </th>
             </tr>
             <tr>
               <th></th>
-              {Object.keys(table).map((k) => (
-                <th className='has-text-centered'>{k}</th>
+              {Object.keys(table).map((k,i) => (
+                <th className='has-text-centered'>
+                  {k}
+                  <br />
+                  <small className='has-text-grey-light'>{cycle[k]}</small>
+                </th>
               ))}
             </tr>
           </thead>
