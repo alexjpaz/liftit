@@ -4,11 +4,11 @@ import { storiesOf } from '@storybook/react';
 
 import '../styles';
 
-import SmartCard from './SmartCard';
+import NextLogCard from './NextLogCard';
 
-storiesOf("Workbook/SmartCard", module)
+storiesOf("Workbook/NextLogCard", module)
   .add('default', () => (
     <div style={{"margin":"10px 80px","width":"425px"}}>
-      <SmartCard />
+      <NextLogCard />
     </div>
   ))   
