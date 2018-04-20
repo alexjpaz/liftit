@@ -2,6 +2,8 @@ import React from 'react';
 
 import LiftTable from '../common/LiftTable'
 
+import './SmartCard.css';
+
 export default class SmartCard extends React.Component {
   constructor(props) {
     super(props);
@@ -30,24 +32,26 @@ export default class SmartCard extends React.Component {
   render() {
     const lift = this.props.lift;
     return (
-      <div className="card">
-        <div className="card-content">
-          <div className="content">
-            <p class="title">
-              <span>{this.nextLift.lift} </span>
-              <span>{this.nextLift.minimumReps}x{this.nextLift.weight}</span>
-            </p>
-            <LiftTable 
-              week={this.nextLift.week} 
-              weight={this.nextLift.weight}
-            />
-            <span>{this.nextLift.cycle[this.nextLift.lift]}</span>
+      <div className="SmartCard">
+        <div className="card">
+          <div className="card-content">
+            <div className="content">
+              <p class="title">
+                <span>{this.nextLift.lift} </span>
+                <span>{this.nextLift.minimumReps}x{this.nextLift.weight}</span>
+              </p>
+              <LiftTable 
+                week={this.nextLift.week} 
+                weight={this.nextLift.weight}
+              />
+              <span>{this.nextLift.cycle[this.nextLift.lift]}</span>
+            </div>
           </div>
+          <footer className="card-footer">
+            <a href="#" className="card-footer-item">Save</a>
+            <a href="#" className="card-footer-item">Edit</a>
+          </footer>
         </div>
-        <footer className="card-footer">
-          <a href="#" className="card-footer-item">Save</a>
-          <a href="#" className="card-footer-item">Edit</a>
-        </footer>
       </div>
     );
   }
