@@ -1,12 +1,17 @@
 import React from 'react';
 
+import liftit from 'liftit-common';
+
 const lifts = ['press','squat','bench','deadlift'];
 const fractions = ['85', '90', '95'];
+const weeks = ['3x5','3x3','531'];
 
 class AddNewLogLink extends React.Component {
   render() {
     return (
-      <a href={"#/logs/new"}>Add</a>
+      <a href={`#/logs/new?from=${JSON.stringify(this.props)}`} className='has-text-grey-light'>
+        <i className="fas fa-plus"></i>
+      </a>
     );
   }
 }
@@ -18,7 +23,7 @@ class LogThing extends React.Component {
     
     return (
       <a href={`#/logs/${log._id}`}>
-        <span>{log.reps}x{log.weight}</span>
+        <i className='fas fa-check'></i>
       </a>
     );
   }
@@ -27,7 +32,7 @@ class LogThing extends React.Component {
 class LogLink extends React.Component {
   render() {
     if(!this.props.log) {
-      return (<AddNewLogLink />);
+      return (<AddNewLogLink {...this.props} />);
     } else {
       return (<LogThing log={this.props.log}/>);
     }
@@ -39,7 +44,12 @@ class LogLink extends React.Component {
 export default class CycleDetail extends React.Component { 
   generateTable() {
     const table = {};
-    const logs = this.props.logs;
+
+    const {
+      logs,
+      lifts
+    } = this.props;
+
     lifts.map((lift) => {
       if(!table[lift]) {
         table[lift] = {};
@@ -62,6 +72,12 @@ export default class CycleDetail extends React.Component {
   }
 
   render() {
+    let {
+      lifts,
+      fractions,
+      weeks
+    } = this.props;
+
     if(!this.props.cycle.date) {
       return null;
     }
@@ -71,34 +87,38 @@ export default class CycleDetail extends React.Component {
     const table = this.generateTable();
     return (
       <div>
-        <table className="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <table className="table is-striped is-narrow is-hoverable is-fullwidth">
           <thead>
             <tr>
-              <th colspan='5'>Cycle {this.props.cycle.date}</th>
+              <th colspan='5'>
+                <a href={`#/cycle/${this.props.cycle._id}`}>Cycle {this.props.cycle.date}</a>
+              </th>
             </tr>
             <tr>
-              <th className='has-text-right'>Lift</th>
-              <th>Max</th>
-              <th className='has-text-centered'>3x5</th>
-              <th className='has-text-centered'>3x3</th>
-              <th className='has-text-centered'>531</th>
+              <th></th>
+              {Object.keys(table).map((k) => (
+                <th className='has-text-centered'>{k}</th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            { Object.keys(table).map((k) => {
-              return (
-                <tr key='k'>
-                  <th className='has-text-right'>{k}</th>
-                  <th>{cycle[k]}</th>
-
-                  { fractions.map((f) => {
-                    return <td className='has-text-centered'>
-                      <LogLink log={table[k][f]} />
-                    </td>
-                  })}
-                </tr>
-              );
-            }) }
+            {weeks.map((week,i) => (
+              <tr key={i}>
+                <th className='has-text-right'>
+                  {week}
+                </th>
+                {Object.keys(table).map((k) => (
+                  <td className='has-text-centered'>
+                    <LogLink 
+                      log={table[k][fractions[i]]} 
+                      lift={k}
+                      cycle={cycle[k]}
+                      fraction={fractions[i]}
+                    />
+                  </td>
+                ))}
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -107,5 +127,8 @@ export default class CycleDetail extends React.Component {
 }
 
 CycleDetail.defaultProps = {
-  cycle: {}
+  cycle: {},
+  lifts,
+  fractions,
+  weeks
 };

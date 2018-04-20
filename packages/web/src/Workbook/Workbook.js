@@ -36,8 +36,14 @@ export default class Workbook extends React.Component {
         <SmartCard />
         <br />
 
-        {this.getNextLog()}
-        {this.getCycleDetail()}
+
+        <div className="card">
+          <div className="card-content">
+            {this.getCycleDetail()}
+          </div>
+        </div>
+
+        <br />
 
         <div className="field is-grouped">
           <p className="control">
