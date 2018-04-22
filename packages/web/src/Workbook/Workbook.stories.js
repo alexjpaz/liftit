@@ -7,8 +7,15 @@ import '../styles';
 import Workbook from './Workbook';
 
 storiesOf("Workbook", module)
-  .add('default', () => (
+  .addDecorator((fn) => (
     <div style={{"margin":"10px 80px","width":"425px"}}>
+      {fn()}
+    </div>
+  ))
+  .add('blank', () => (
+    <Workbook />
+  ))
+  .add('default', () => (
       <Workbook 
         workbook={{
           entries: [{
@@ -34,5 +41,4 @@ storiesOf("Workbook", module)
           }]
         }}
       />
-    </div>
   ))   
