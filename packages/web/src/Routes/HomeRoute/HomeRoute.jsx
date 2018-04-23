@@ -2,6 +2,7 @@ import React from 'react';
 import EntityRoute from '../EntityRoute';
 
 import Workbook from '../../Workbook/Workbook';
+import GettingStartedCard from './GettingStartedCard';
 
 export default class HomeRoute extends EntityRoute {
   render() {
@@ -9,14 +10,21 @@ export default class HomeRoute extends EntityRoute {
       return <h1>loading</h1>;
     }
 
+    const entries = this.state.list;
+    const props = {
+      entries: this.state.list
+    };
+
     return (
-      <section className='section'>
+      <div>
+        <GettingStartedCard {...props} />
+        <br />
         <Workbook 
           workbook={{
             entries: this.state.list
           }}
         />
-      </section>
+      </div>
     )
   }
 }
