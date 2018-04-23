@@ -7,6 +7,27 @@ describe('WorkbookReducers', () => {
     workbookReducers = new WorkbookReducers();
   });
 
+  it('should get cycles', () => {
+    const items = workbookReducers.getCycles([{
+      id: 1,
+      type: 'cycle'
+    }, {
+      type: 'log'
+    }]);
+
+    expect(items).toHaveLength(1);
+    expect(items[0].id).toEqual(1);
+  });
+
+
+  it('should detect empty cycles', () => {
+    const items = workbookReducers.hasEmptyCycles([{
+      type: 'log'
+    }]);
+
+    expect(items).toEqual(true);
+  });
+
   it('should get last cycle', () => {
     const items = workbookReducers.getLastCycle([{
       id: 1,
