@@ -1,7 +1,17 @@
 export default class Workbook {
-  hasEmptyCycles(entries) {
+
+  getCycles(entries) {
     return entries
-      .filter((item) => item.type === 'cycle')
+      .filter((item) => item.type === 'cycle');
+  }
+
+  getLogs(entries) {
+    return entries
+      .filter((item) => item.type === 'log');
+  }
+
+  hasEmptyCycles(entries) {
+    return this.getCycles(entries)
       .filter(item => !item._deleted)
       .length === 0;
   }
@@ -47,6 +57,7 @@ export default class Workbook {
 
   getNextLog(entries) {
     const cycle = this.getLastCycle(entries);
+    //https://github.com/alexjpaz/liftit/blob/2702ed3a8965d9641309a93a21e831f5ce090b5f/web/test/models/Ring.js#L7
 
     const nextLog = {
       lift: 'press',
