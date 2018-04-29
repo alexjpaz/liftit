@@ -4,11 +4,11 @@ import LiftTable from '../common/LiftTable'
 
 import './NextLogCard.css';
 
-export default class NextLogCard extends React.Component {
-  componentWillMount() {
-    this.state = {};
-  }
+import { connect } from 'react-redux';
 
+import { getNextLog } from './reducers/WorkbookReducers';
+
+export class NextLogCard extends React.Component {
   render() {
     const nextLog = this.props.nextLog;
 
@@ -38,7 +38,7 @@ export default class NextLogCard extends React.Component {
             </div>
           </div>
           <footer className="card-footer">
-            <a href="#" className="card-footer-item">Save</a>
+            <a href={`#/logs/new?from=${JSON.stringify(this.props.nextLog)}`} className="card-footer-item">Save</a>
             <a href="#" className="card-footer-item">Edit</a>
           </footer>
         </div>
@@ -46,3 +46,11 @@ export default class NextLogCard extends React.Component {
     );
   }
 }
+
+export const mapStateToProps = (state, ownProps) => {
+  return {
+    nextLog: getNextLog(state.entries)
+  };
+};
+
+export default connect(mapStateToProps)(NextLogCard);

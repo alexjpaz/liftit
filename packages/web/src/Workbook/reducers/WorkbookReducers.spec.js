@@ -336,6 +336,23 @@ describe('WorkbookReducers', () => {
 
     it('should get next log', () => {
       const items = [
+        { id: 1, type: 'cycle', squat: 100, date: '2018-01-01' },
+        { id: 2, type: 'log', lift: 'press', date: '2018-01-01' },
+      ];
+
+      const nextLog = getNextLog(items);
+
+      expect(nextLog).toBeDefined();
+      expect(nextLog.cycle.id).toEqual(1);
+      expect(nextLog.lift).toEqual('squat');
+      expect(nextLog.week).toEqual('3x5');
+      expect(nextLog.minimumReps).toEqual(5);
+      expect(nextLog.targetReps).toEqual(8);
+      expect(nextLog.weight).toEqual(85);
+    });
+
+    it('should get next log', () => {
+      const items = [
         { id: 1, type: 'cycle', press: 100, date: '2018-01-01' },
       ];
 

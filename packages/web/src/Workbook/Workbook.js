@@ -29,26 +29,8 @@ export default class Workbook extends React.Component {
   }
 
   getNextLog() {
-    if(!this.workbookEntries) {
-      return null;
-    }
-
-    const nextLog = {  
-      lift: 'press',
-        minimumReps: 3,
-        targetReps: 8,
-        weight: 145,
-        week: "3x3",
-        cycle: {
-          _id: "foo",
-            press: 180
-        }
-    };
-
     return (
-      <NextLogCard
-        nextLog={nextLog}
-      />
+      <NextLogCard />
     );
   }
   getCycleDetail() {
@@ -91,7 +73,6 @@ export default class Workbook extends React.Component {
 
     return (
       <div>
-        {this.getNextLog()}
         <br />
         {this.getCycleDetail()}
         <br />

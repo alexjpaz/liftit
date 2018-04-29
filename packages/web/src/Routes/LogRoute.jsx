@@ -9,12 +9,24 @@ import Breadcrumb from './Breadcrumb.jsx';
 export default class LogRoute extends EntityRoute {
 
   createNewEntity() {
-    this.setState({
+
+    let entity = {
       isNew: true,
       date: new Date().toISOString().slice(0,10),
       type: 'log',
       weight: 100
-    });
+    };
+
+    try {
+      const { search } = this.history.location;
+      if(search) {
+        const from = JSON.parse(decodeURIComponent(search.split('=')[1]));
+        entity = { ...entity, ...from, reps: from.targetReps };
+      }
+    } catch(e) {
+    }
+
+    this.setState(entity);
   }
 
   render() {
