@@ -5,7 +5,12 @@ import DateUtils from '../common/DateUtils';
 
 import NoLogsNotification from './NoLogsNotification.jsx';
 
-export default class LogList extends Component {
+import { connect } from 'react-redux';
+import { 
+  getLogs
+} from '../Workbook/reducers/WorkbookReducers';
+
+export class LogList extends Component {
   navigateToLog(logId) {
     return () => {
       this.props.history.push(`/logs/${logId}`);
@@ -73,3 +78,12 @@ LogList.defaultProps = {
 LogList.propsTypes = {
   items: PropTypes.array.isRequired
 }
+
+export const mapStateToProps = (state, ownProps) => {
+  return {
+    history: ownProps.history,
+    items: getLogs(state.entries)
+  }
+}
+
+export default connect(mapStateToProps)(LogList)

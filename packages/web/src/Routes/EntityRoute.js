@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 import uuid from 'uuid';
 
 export default class EntityRoute extends React.Component {
-  constructor({match, history, db, firebaseDatabaseRef}) {
+  constructor({match, location, history, db, firebaseDatabaseRef}) {
     super();
     this.id = match.params.id;
     this.db = db;
     this.firebaseDatabaseRef = firebaseDatabaseRef;
     this.history = history;
+    console.log(location);
   }
 
   createNewEntity() {

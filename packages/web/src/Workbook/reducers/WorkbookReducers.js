@@ -1,4 +1,4 @@
-import { Ring } from './ring';
+import { Ring } from './Ring';
 
 export const getAll = (entries) => entries;
 
@@ -169,7 +169,9 @@ export const getTargetReps = (cycle, lastLog, week) => {
 
 export  const getNextLog = (entries) => {
   const cycle = getLastCycle(entries);
-  const logs = getCycleLogs(cycle, entries);
+  const logs = getCycleLogs(cycle, entries)
+    .sort(sortByDate);
+
 
   const lifts = new Ring(['press','squat','bench','deadlift']);
   const weeks = new Ring(['3x5','3x3','531']);
@@ -180,7 +182,7 @@ export  const getNextLog = (entries) => {
   let lift = 'press';
 
   if(lastLog) {
-    lifts.next(lastLog.lift);
+    lift = lifts.next(lastLog.lift);
 
     if(lifts.isLast(lastLog.lift)) {
       week = weeks.next(week);

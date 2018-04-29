@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 
 import '../styles';
 
-import LogList from './LogList.jsx';
+import { LogList } from './LogList.jsx';
 
 import uuid from 'uuid';
 

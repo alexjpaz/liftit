@@ -1,6 +1,7 @@
 import React from 'react';
 import EntityRoute from '../EntityRoute';
 
+import NextLogCard from '../../Workbook/NextLogCard';
 import Workbook from '../../Workbook/Workbook';
 import GettingStartedCard from './GettingStartedCard';
 
@@ -18,6 +19,8 @@ export default class HomeRoute extends EntityRoute {
     return (
       <div>
         <GettingStartedCard {...props} />
+        <br />
+        <NextLogCard />
         <br />
         <Workbook 
           workbook={{

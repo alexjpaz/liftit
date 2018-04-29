@@ -5,7 +5,11 @@ import './styles.js';
 
 import Root from './Root';
 
+import { Provider } from 'react-redux';
+
 //import registerServiceWorker from './registerServiceWorker';
+
+import store, { firebaseSync } from './store';
 
 (async () => {
   const { getFirebaseInstance } = await import('./firebase/index.js')
@@ -14,7 +18,19 @@ import Root from './Root';
 
   console.log("%cfirebase module loaded: %c%s ", 'font-weight: bold; color: #a00', 'font-weight: none', name);
 
-  ReactDOM.render(<Root db={{}} firebase={firebase} />, document.querySelector('#root'));
+  firebase.database().ref("users").on("value", (snapshot) => {
+    store.dispatch(firebaseSync(snapshot));
+  });
+
+  const element = (
+    <Provider store={store}>
+      <Root db={{}} firebase={firebase} />
+    </Provider>
+  )
+
+  const node = document.querySelector('#root');
+
+  ReactDOM.render(element, node);
 })();
 
 //registerServiceWorker();

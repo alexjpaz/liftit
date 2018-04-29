@@ -55,12 +55,11 @@ export default class Root extends React.Component {
     }
 
     const compose = (component) => {
-      const db = this.db;
       const firebaseDatabaseRef = this.state.firebaseDatabaseRef;
       if(typeof component !== 'function') {
         throw new Error("Component is not a function! " + component)
       }
-      return ({match, history}) => new component({match, history, db, firebaseDatabaseRef});
+      return ({match, history}) => new component({match, history, firebaseDatabaseRef});
     };
     return (
       <div className='container'>
