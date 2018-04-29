@@ -78,12 +78,12 @@ export const hasEmptyType = (type, entries) => (
 )
 
 export const hasEmptyCycles = (entries) => (
-  hasEmptyType('cycle')
+  hasEmptyType('cycle', entries)
 )
 
-export const hasEmptyLogs = (entries) => {
-  hasEmptyType('log')
-}
+export const hasEmptyLogs = (entries) => (
+  hasEmptyType('log', entries)
+)
 
 export const sortByDate = (a,b) => {
   if(!a.date && b.date) return 1;
@@ -126,13 +126,13 @@ export const getCycleLogs = (cycle, entries) => {
     .filter(isActive)
     .filter(isLog)
     .filter(isOnOrAfterDate(cycle.date))
-    //.filter((item) => {
-      //if(!nextCycle) {
-        //return;
-      //}
+    .filter((item) => {
+      if(!nextCycle) {
+        return item;
+      }
 
-      //return isBeforeDate(nextCycle.date)(item);
-    //})
+      return isBeforeDate(nextCycle.date)(item);
+    })
 }
 
 export const getMinimumReps = (week) => {
