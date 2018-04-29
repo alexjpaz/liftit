@@ -299,7 +299,6 @@ describe('WorkbookReducers', () => {
       { id: 2, type: 'log', date: '2018-01-01' },
       { id: 3, type: 'log', date: '2018-01-02' },
       { id: 4, type: 'log', date: '2018-01-03' },
-      { id: 5, type: 'log', date: '2017-02-02' },
       { id: 6, type: 'cycle', date: '2018-02-01' },
       { id: 7, type: 'log', date: '2018-02-02' },
     ];
@@ -307,7 +306,7 @@ describe('WorkbookReducers', () => {
     const result = getCycleLogs(items[0], items);
 
     expect(result).toBeDefined();
-    expect(result).toHaveLength(4);
+    expect(result).toHaveLength(3);
     expect(result.map(i => i.id)).toContain(4);
     expect(result.map(i => i.id)).not.toContain(5);
     expect(result.map(i => i.id)).not.toContain(7);
@@ -315,7 +314,7 @@ describe('WorkbookReducers', () => {
 
 
 
-  describe.only('generate next log', () => {
+  describe('generate next log', () => {
     const { getNextLog } = workbookReducers;
 
     it('should get next log', () => {

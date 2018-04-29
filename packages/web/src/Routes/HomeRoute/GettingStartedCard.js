@@ -1,21 +1,21 @@
 import React from 'react';
 
-import WorkbookReducers from '../../common/WorkbookReducers';
+import { connect } from 'react-redux';
 
-export default class GettingStartedCard extends React.Component {
-  shouldDisplay() {
-    const entries = this.props.entries;
-    const workbookReducers = new WorkbookReducers();
+import { 
+  hasEmptyLogs,
+  hasEmptyCycles
+} from '../../Workbook/reducers/WorkbookReducers';
 
-    const hasEmptyLogs = workbookReducers.hasEmptyLogs(entries);
-
-    const hasEmptyCycles = workbookReducers.hasEmptyCycles(entries);
-
-    return (hasEmptyLogs || hasEmptyCycles);
-  }
+export class GettingStartedCard extends React.Component {
 
   render() {
-    if(this.shouldDisplay()) {
+    const {
+      hasEmptyCycles,
+      hasEmptyLogs
+    } = this.props;
+
+    if(hasEmptyCycles || hasEmptyLogs) {
       return (
         <div className='notification is-info'>
           <p className='subtitle'>
@@ -28,3 +28,10 @@ export default class GettingStartedCard extends React.Component {
     }
   }
 }
+
+export const mapStateToProps = ({ entries }) => ({
+  hasEmptyLogs: hasEmptyLogs(entries),
+  hasEmptyCycles: hasEmptyCycles(entries),
+});
+
+export default connect(mapStateToProps)(GettingStartedCard);
