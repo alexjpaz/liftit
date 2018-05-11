@@ -7,19 +7,21 @@ export const firebaseSync = (snapshot) => ({
   val: snapshot.val()
 })
 
-const reducer = (state, action) => {
+export const reducer = (state, action) => {
   switch(action.type) {
     case FIREBASE_SYNC:
       const val = action.val;
-
-      const entries = Object.keys(val.local)
-        .map(k => val.local[k]);
+      let entries = [];
+ 
+      if(val) {
+        entries = Object.keys(val.local)
+          .map(k => val.local[k]);
+      }
 
       return {
         ...state,
         entries
       }
-      //return { ...state, ...val, ...entries }
     default:
       return state;
   }

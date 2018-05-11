@@ -89,7 +89,7 @@ export default class Navbar extends React.Component {
 
           <div className="navbar-end">
               <a className="navbar-item" href="#/profile">
-                <Icon name={"user-circle-o fa-2x"} />
+                { /* <Icon name={"user-circle-o fa-2x"} /> */ }
               </a>
           </div>
         </div>

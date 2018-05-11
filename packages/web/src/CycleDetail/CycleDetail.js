@@ -96,7 +96,7 @@ export default class CycleDetail extends React.Component {
           <thead>
             <tr>
               <th colspan='5'>
-                <a href={`#/cycle/${this.props.cycle._id}`}>{this.props.cycle.date}</a>
+                <a href={`#/cycles/${this.props.cycle._id}`}>{this.props.cycle.date}</a>
               </th>
             </tr>
             <tr>

@@ -37,19 +37,9 @@ export default class Workbook extends React.Component {
     if(!this.workbookEntries) {
       return null;
     }
-    const workbookEntries = this.workbookEntries;
-    const latestCycle = workbookEntries.find(e => e.type === 'cycle');
-    const logs = workbookEntries.filter(e => e.type === 'log');
-
-    if(!latestCycle) {
-      return <NoCyclesNotification />;
-    }
 
     return (
-      <CurrentCycleCard 
-        cycle={latestCycle}
-        logs={logs}
-      />
+      <CurrentCycleCard />
     );
   }
 

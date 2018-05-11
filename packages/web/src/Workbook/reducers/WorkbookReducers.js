@@ -22,6 +22,10 @@ export const isEmpty = (items) => (
   items.length === 0
 )
 
+export const isNullOrEmpty = (items) => (
+  items === null || items === undefined || isEmpty(items)
+)
+
 export const isOnDate = (date) => (
   (item) => item.date === date
 );
@@ -111,7 +115,7 @@ export const getLastCycle = (entries) => (
   getLatestOfType('cycle', entries)
 )
 
-export const getNextCycle = (cycle, entries) => (
+export const getNextCycle = (cycle = {}, entries = []) => (
   entries
     .filter(isActive)
     .filter(isCycle)
@@ -168,6 +172,8 @@ export const getTargetReps = (cycle, lastLog, week) => {
 };
 
 export  const getNextLog = (entries) => {
+  if(isNullOrEmpty(entries)) return;
+
   const cycle = getLastCycle(entries);
   const logs = getCycleLogs(cycle, entries)
     .sort(sortByDate);
