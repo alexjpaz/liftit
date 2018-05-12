@@ -1,8 +1,5 @@
 import React from 'react';
 
-import NoLogsNotification from '../Log/NoLogsNotification.jsx';
-import NoCyclesNotification from '../Cycle/NoCyclesNotification.jsx';
-
 import NextLogCard from './NextLogCard';
 
 import CurrentCycleCard from './CurrentCycleCard';

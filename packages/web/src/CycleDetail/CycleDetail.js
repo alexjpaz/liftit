@@ -1,7 +1,5 @@
 import React from 'react';
 
-import liftit from 'liftit-common';
-
 const lifts = ['press','squat','bench','deadlift'];
 const fractions = ['85', '90', '95'];
 const weeks = ['3x5','3x3','531'];
@@ -19,7 +17,6 @@ class AddNewLogLink extends React.Component {
 class LogThing extends React.Component {
   render() {
     const log = this.props.log;
-    const isDone = !!this.props.log.date;
     
     return (
       <a href={`#/logs/${log._id}`}>
@@ -49,18 +46,16 @@ export default class CycleDetail extends React.Component {
       lifts
     } = this.props;
 
-    lifts.map((lift) => {
+    lifts.forEach((lift) => {
       if(!table[lift]) {
         table[lift] = {};
       }
 
       const cycle = this.props.cycle;
 
-      const weight = cycle[lift];
-
       logs
         .filter((l) => l.lift === lift)
-        .map((l) => {
+        .forEach((l) => {
           const fraction = (l.weight / cycle[lift]) * 100;
           table[lift][fraction] = l;
         });
@@ -72,7 +67,6 @@ export default class CycleDetail extends React.Component {
 
   render() {
     let {
-      lifts,
       fractions,
       weeks
     } = this.props;

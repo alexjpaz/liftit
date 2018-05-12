@@ -39,7 +39,6 @@ export class NextLogCard extends React.Component {
           </div>
           <footer className="card-footer">
             <a href={`#/logs/new?from=${JSON.stringify(this.props.nextLog)}`} className="card-footer-item">Save</a>
-            <a href="#" className="card-footer-item">Edit</a>
           </footer>
         </div>
       </div>

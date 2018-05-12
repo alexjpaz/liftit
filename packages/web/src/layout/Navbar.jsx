@@ -37,14 +37,6 @@ class Burger extends React.Component {
   }
 }
 
-class Icon extends React.Component {
-  render() {
-    return <span className="icon">
-      <i className={`fa fa-${this.props.name}`}></i>
-    </span>
-  }
-}
-
 export default class Navbar extends React.Component {
   componentWillMount() {
     this.setState({

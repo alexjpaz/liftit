@@ -17,7 +17,7 @@ export class Ring {
 
   isFirst(value) {
     const { array } = this;
-    var idx = this.array.indexOf(value);
+    var idx = array.indexOf(value);
     return idx === 0;
   }
 

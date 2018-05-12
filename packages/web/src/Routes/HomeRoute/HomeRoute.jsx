@@ -11,7 +11,6 @@ export default class HomeRoute extends EntityRoute {
       return <h1>loading</h1>;
     }
 
-    const entries = this.state.list;
     const props = {
       entries: this.state.list
     };
