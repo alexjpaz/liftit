@@ -73,4 +73,25 @@ describe('<LogRoute />', () => {
       expect(html).toContain(`Log-${id}`);
     });
   });
+
+  it('should create an entity', () => {
+    const history = () => {};
+    history.location = {
+      search: '?from={"lift":"squat","weight":340,"reps":8}'
+    };
+    return createInstance({
+      history,
+      match: {
+        params: {
+          id: "new"
+        }
+      }
+    }).then(({wrapper}) => {
+      const state = wrapper.state();
+      expect(state.isNew).toEqual(true);
+      expect(state.type).toEqual('log');
+      expect(state.weight).toEqual(340);
+      expect(state.reps).toEqual(8);
+    });
+  });
 });

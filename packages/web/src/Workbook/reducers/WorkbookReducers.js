@@ -1,6 +1,8 @@
 import { Ring } from './Ring';
 
-export const getAll = (entries) => entries;
+import liftit from 'liftit-common';
+
+export const getAll = (entries) => entries || [];
 
 export const findAny = (item) => item;
 
@@ -69,11 +71,11 @@ export const getCycles = (entries) => {
     .filter(isActive)
     .filter(isCycle)
 }
-export const getLogs = (entries) => (
-  entries
+export const getLogs = (entries) => {
+  return getAll(entries)
     .filter(isActive)
     .filter(isLog)
-)
+}
 
 export const hasEmptyType = (type, entries) => (
   isEmpty(entries
@@ -210,4 +212,20 @@ export  const getNextLog = (entries) => {
   };
 
   return nextLog;
+}
+
+export const getLogFrom = (fromLog) => {
+  const log = {} 
+
+  if(fromLog.fraction) {
+    log.lift = fromLog.lift;
+    log.reps = 8 // TODO: calc
+    log.weight = liftit.roundTo(fromLog.cycle * (fromLog.fraction / 100), 5);
+  } else {
+    log.lift = fromLog.lift;
+    log.weight = fromLog.weight;
+    log.reps = fromLog.targetReps;
+  }
+
+  return log;
 }

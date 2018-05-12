@@ -19,8 +19,20 @@ describe('WorkbookReducers', () => {
       expect(items.find(i => i.id === 1)).toBeDefined();
       expect(items.find(i => i.id === 2)).toBeDefined();
     });
+
+    it('getAll should return an empty array', () => {
+      const { getAll } = workbookReducers;
+      expect(getAll).toBeDefined();
+
+      let entries = null;
+
+      let items = getAll(entries);
+
+      expect(items).toHaveLength(0);
+    });
   });
 
+  
   describe('filtering', () => {
     it('should filter by type', () => {
       const { isType } = workbookReducers;
@@ -365,6 +377,45 @@ describe('WorkbookReducers', () => {
       expect(nextLog.minimumReps).toEqual(5);
       expect(nextLog.targetReps).toEqual(8);
       expect(nextLog.weight).toEqual(85);
+    });
+  });
+
+  describe('getLogFrom', () => {
+    const { getLogFrom } = workbookReducers;
+
+    it('should build a log', () => {
+      const log = getLogFrom({
+        "lift": "bench",
+        "weight": 340,
+        "minimumReps": 5,
+        "targetReps": 8,
+        "week": "3x5",
+        "cycle": {
+          "_id": "01a0b94c-67e0-45cc-aae9-495f96fa0722",
+          "bench": "400",
+          "date": "2018-05-12",
+          "deadlift": "400",
+          "press": "100",
+          "squat": "400",
+          "type": "cycle"
+        }
+      });
+
+      expect(log).toEqual({
+        lift: "bench",
+        weight: 340,
+        reps: 8
+      });
+    })
+
+    it('should build a log from a fraction', () => {
+      const from = {"lift":"press","cycle":"100","fraction":"90"};
+      const log = getLogFrom(from);
+      expect(log).toEqual({
+        lift: 'press',
+        reps: 8,
+        weight: 90,
+      });
     });
   });
 

@@ -10,7 +10,6 @@ export default class EntityRoute extends React.Component {
     this.db = db;
     this.firebaseDatabaseRef = firebaseDatabaseRef;
     this.history = history;
-    console.log(location);
   }
 
   createNewEntity() {

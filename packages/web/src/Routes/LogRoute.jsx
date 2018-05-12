@@ -14,14 +14,15 @@ export default class LogRoute extends EntityRoute {
       isNew: true,
       date: new Date().toISOString().slice(0,10),
       type: 'log',
-      weight: 100
+      weight: null,
+      reps: null
     };
 
     try {
       const { search } = this.history.location;
       if(search) {
         const from = JSON.parse(decodeURIComponent(search.split('=')[1]));
-        entity = { ...entity, ...from, reps: from.targetReps };
+        entity = { ...entity, ...from };
       }
     } catch(e) {
     }

@@ -1,5 +1,9 @@
 import React from 'react';
 
+import {
+  getLogFrom
+} from '../Workbook/reducers/WorkbookReducers';
+
 const lifts = ['press','squat','bench','deadlift'];
 const fractions = ['85', '90', '95'];
 const weeks = ['3x5','3x3','531'];
@@ -7,7 +11,7 @@ const weeks = ['3x5','3x3','531'];
 class AddNewLogLink extends React.Component {
   render() {
     return (
-      <a href={`#/logs/new?from=${JSON.stringify(this.props)}`} className='has-text-grey-light'>
+      <a href={`#/logs/new?from=${JSON.stringify(getLogFrom(this.props))}`} className='has-text-grey-light'>
         <i className="fas fa-plus"></i>
       </a>
     );

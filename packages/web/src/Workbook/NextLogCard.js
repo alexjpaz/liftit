@@ -6,9 +6,16 @@ import './NextLogCard.css';
 
 import { connect } from 'react-redux';
 
-import { getNextLog } from './reducers/WorkbookReducers';
+import { 
+  getNextLog,
+  getLogFrom,
+} from './reducers/WorkbookReducers';
 
 export class NextLogCard extends React.Component {
+  getLogTemplate() {
+    return getLogFrom(this.props.nextLog);
+  }
+
   render() {
     const nextLog = this.props.nextLog;
 
@@ -38,7 +45,7 @@ export class NextLogCard extends React.Component {
             </div>
           </div>
           <footer className="card-footer">
-            <a href={`#/logs/new?from=${JSON.stringify(this.props.nextLog)}`} className="card-footer-item">Save</a>
+            <a href={`#/logs/new?from=${JSON.stringify(this.getLogTemplate())}`} className="card-footer-item">Save</a>
           </footer>
         </div>
       </div>

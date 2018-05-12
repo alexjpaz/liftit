@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { 
-  getLogs,
+  getCycleLogs,
   getLatestOfType
 } from './reducers/WorkbookReducers';
 
@@ -19,7 +19,6 @@ export class CurrentCycleCard extends React.Component {
 
     return ( 
       <div className="card">
-      <pre>{JSON.stringify(this.props, null, 2)}</pre>
         <header class="card-header">
           <p class="card-header-title">
             Current Cycle
@@ -43,7 +42,7 @@ export const mapStateToProps = ({ entries }) => {
   const cycle = getLatestOfType('cycle', entries);
   return {
     cycle,
-    logs: getLogs(cycle, entries)
+    logs: getCycleLogs(cycle, entries)
   }
 };
 
