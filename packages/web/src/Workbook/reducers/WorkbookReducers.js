@@ -126,12 +126,14 @@ export const getNextCycle = (cycle = {}, entries = []) => (
 )
 
 export const getCycleLogs = (cycle, entries) => {
-  const nextCycle = getNextCycle(cycle, entries);
+  let nextCycle = getNextCycle(cycle, entries);
+
+  let date = cycle ? cycle.date : null;
 
   return entries
     .filter(isActive)
     .filter(isLog)
-    .filter(isOnOrAfterDate(cycle.date))
+    .filter(isOnOrAfterDate(date))
     .filter((item) => {
       if(!nextCycle) {
         return item;
@@ -180,6 +182,7 @@ export  const getNextLog = (entries) => {
   const logs = getCycleLogs(cycle, entries)
     .sort(sortByDate);
 
+  if(!cycle) return;
 
   const lifts = new Ring(['press','squat','bench','deadlift']);
   const weeks = new Ring(['3x5','3x3','531']);

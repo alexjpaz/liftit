@@ -12,7 +12,7 @@ export const reducer = (state, action) => {
     case FIREBASE_SYNC:
       const val = action.val;
       let entries = [];
- 
+
       if(val) {
         entries = Object.keys(val.local)
           .map(k => val.local[k]);

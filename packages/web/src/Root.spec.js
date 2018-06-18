@@ -3,29 +3,60 @@ import Root from './Root';
 
 import { shallow } from 'enzyme';
 import { mount } from 'enzyme';
+import { render } from 'enzyme';
 
+import store, { firebaseSync } from './store';
+
+import { Provider } from 'react-redux';
 
 describe('<Root />', () => {
-  xit('test', () => {
-    return new Promise((resolve, reject) => {
-      const id = new Date().getTime().toString();
+  let firebase;
 
+  beforeEach(async () => {
+    const { getFirebaseInstance } = await import('./firebase/index.js')
 
-      const db = new PouchDB("/tmp/liftit.test"); 
+    const instance  = await getFirebaseInstance();
 
-      setTimeout(() => {
-        try {
-          const wrapper = mount((
-            <Root db={{}} firebase={{}} />
-          ));
+    firebase = instance.firebase;
 
-          expect(wrapper.html()).toContain('alt=\"liftit');
+    const snapshot = {
+      val: jest.fn(() => ({
+        local: {}
+      }))
+    };
 
-        } catch(e) {
-          return reject(e);
-        }
-        return resolve();
-      }, 200);
-    });
+    store.dispatch(firebaseSync(snapshot));
   });
+
+  test('empty snapshot', async () => {
+    const dom = render(
+      <Provider store={store}>
+        <Root db={{}} firebase={firebase} />
+      </Provider>
+    );
+
+    expect(dom.html()).toContain('<h1>loading</h1>');
+  });
+
+  xtest('snapshot with some data', async () => {
+
+    const snapshot = {
+      val: jest.fn(() => ({
+        local: {
+          "123": { }
+        }
+      }))
+    };
+
+    store.dispatch(firebaseSync(snapshot));
+
+    const dom = render(
+      <Provider store={store}>
+        <Root db={{}} firebase={firebase} />
+      </Provider>
+    );
+
+    expect(dom.html()).not.toContain('<h1>loading</h1>');
+  });
+
 });

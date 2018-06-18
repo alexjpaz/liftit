@@ -16,6 +16,12 @@ export class CurrentCycleCard extends React.Component {
       logs,
     } = this.props;
 
+    if(!cycle) {
+      return (
+        <h1>No cycle. Please create one.</h1>
+      );
+    }
+
 
     return ( 
       <div className="card">
@@ -38,11 +44,12 @@ export class CurrentCycleCard extends React.Component {
   }
 }
 
-export const mapStateToProps = ({ entries }) => {
+export const mapStateToProps = ({ entries = [] }) => {
   const cycle = getLatestOfType('cycle', entries);
+  const logs = getCycleLogs(cycle, entries);
   return {
     cycle,
-    logs: getCycleLogs(cycle, entries)
+    logs
   }
 };
 

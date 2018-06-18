@@ -93,14 +93,14 @@ export default class CycleDetail extends React.Component {
         <table className="table is-striped is-narrow is-hoverable is-fullwidth">
           <thead>
             <tr>
-              <th colspan='5'>
+              <th colSpan='5'>
                 <a href={`#/cycles/${this.props.cycle._id}`}>{this.props.cycle.date}</a>
               </th>
             </tr>
             <tr>
               <th></th>
               {Object.keys(table).map((k,i) => (
-                <th className='has-text-centered'>
+                <th className='has-text-centered'> { /* DO NOT ADD KEY ATTRIBUTE HERE */ }
                   {k}
                   <br />
                   <small className='has-text-grey-light'>{cycle[k]}</small>

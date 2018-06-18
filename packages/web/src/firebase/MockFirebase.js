@@ -18,11 +18,14 @@ function loadDataFromLocalStorage() {
 
     const key = "liftit/firebase-mock/local";
 
-    mockapp.database().ref().set(JSON.parse(localStorage.getItem(key)));
+    const value = localStorage.getItem(key) || null;
+
+    mockapp.database().ref().set(JSON.parse(value));
 
     mockapp.database().ref().on('value', (snap) => {
       localStorage.setItem(key, JSON.stringify(snap.val()));
     });
+
   } catch(e) {
     console.warn("Could not load data from localStorage", e);
   }
