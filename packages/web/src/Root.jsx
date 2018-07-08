@@ -14,6 +14,8 @@ import HomeRoute from './Routes/HomeRoute';
 
 import Authentication from './components/Authentication';
 
+import { initFirebaseDatabaseRef } from './helpers';
+
 export default class Root extends React.Component {
   constructor(props) {
     super(props);
@@ -25,28 +27,19 @@ export default class Root extends React.Component {
     };
   }
 
+  async initFirebaseDatabaseRef() {
+    const firebaseDatabaseRef = await initFirebaseDatabaseRef(this.firebase);
+
+    this.setState({
+      ...this.state,
+      firebaseDatabaseRef,
+      isAuthenticated: true,
+    });
+  }
+
+
   componentWillMount() {
-    const setFirebaseDatabaseRef = (user) => {
-      if (user) {
-        const firebaseDatabaseRef = this.firebase.database().ref(`users/${user.uid}`);
-
-        this.setState({
-          ...this.state,
-          firebaseDatabaseRef,
-          isAuthenticated: true,
-        });
-
-      } else {
-        console.log("Ther is no user session. You must log in");
-      }
-    }
-
-    if(this.firebase.auth().currentUser) {
-      setFirebaseDatabaseRef(this.firebase.auth().currentUser);
-      return;
-    } else {
-      this.firebase.auth().onAuthStateChanged(setFirebaseDatabaseRef);
-    }
+    this.initFirebaseDatabaseRef();
   }
 
   render () {

@@ -14,8 +14,8 @@ export const reducer = (state, action) => {
       let entries = [];
 
       if(val) {
-        entries = Object.keys(val.local)
-          .map(k => val.local[k]);
+        entries = Object.keys(val)
+          .map(k => val[k]);
       }
 
       return {

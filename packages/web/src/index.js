@@ -11,6 +11,8 @@ import { Provider } from 'react-redux';
 
 import store, { firebaseSync } from './store';
 
+import { initFirebaseDatabaseRef } from './helpers';
+
 (async () => {
   const { getFirebaseInstance } = await import('./firebase/index.js')
 
@@ -18,7 +20,10 @@ import store, { firebaseSync } from './store';
 
   console.log("%cfirebase module loaded: %c%s ", 'font-weight: bold; color: #a00', 'font-weight: none', name);
 
-  firebase.database().ref("users").on("value", (snapshot) => {
+
+  const ref = await initFirebaseDatabaseRef(firebase);
+
+  ref.on("value", (snapshot) => {
     store.dispatch(firebaseSync(snapshot));
   });
 

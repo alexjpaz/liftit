@@ -13,10 +13,8 @@ describe('store', () => {
 
   it('should sync values', () => {
     const val = {
-      local: { // WEIRD that we have to do this
-        "abc": { id: "abc" },
-        "def": { id: "def" },
-      }
+      "abc": { id: "abc" },
+      "def": { id: "def" },
     };
     store.dispatch({ type: FIREBASE_SYNC, val });
     const state = store.getState();

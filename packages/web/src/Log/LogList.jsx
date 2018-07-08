@@ -80,6 +80,7 @@ LogList.propsTypes = {
 }
 
 export const mapStateToProps = (state, ownProps) => {
+  console.log(state);
   return {
     history: ownProps.history,
     items: getLogs(state.entries)
