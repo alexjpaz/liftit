@@ -2,6 +2,14 @@
   "rules": {
     ".read": false,
     ".write": false,
+    "liftit_v2": {
+      "users": {
+        "$uid": {
+          ".read": "$uid === auth.uid",
+          ".write": "$uid === auth.uid"
+        }
+      }
+    },
     "users": {
       "$uid": {
         ".read": "$uid === auth.uid",

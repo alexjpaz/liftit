@@ -20,7 +20,6 @@ import { initFirebaseDatabaseRef } from './helpers';
 
   console.log("%cfirebase module loaded: %c%s ", 'font-weight: bold; color: #a00', 'font-weight: none', name);
 
-
   const ref = await initFirebaseDatabaseRef(firebase);
 
   ref.on("value", (snapshot) => {
