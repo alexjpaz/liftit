@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "test": "echo test"
+  },
+  "dependencies": {
+    "serverless-http": "^1.6.0"
+  }
+}
