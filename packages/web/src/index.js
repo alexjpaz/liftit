@@ -7,24 +7,16 @@ import Root from './Root';
 
 import { Provider } from 'react-redux';
 
-//import registerServiceWorker from './registerServiceWorker';
+import store, { firebaseInit } from './store';
 
-import store, { firebaseSync } from './store';
-
-import { initFirebaseDatabaseRef } from './helpers';
-
-(async () => {
+export const startApp = async (options) => {
   const { getFirebaseInstance } = await import('./firebase/index.js')
 
   const { firebase, name } = await getFirebaseInstance();
 
   console.log("%cfirebase module loaded: %c%s ", 'font-weight: bold; color: #a00', 'font-weight: none', name);
 
-  const ref = await initFirebaseDatabaseRef(firebase);
-
-  ref.on("value", (snapshot) => {
-    store.dispatch(firebaseSync(snapshot));
-  });
+  store.dispatch(firebaseInit(firebase));
 
   const element = (
     <Provider store={store}>
@@ -35,6 +27,7 @@ import { initFirebaseDatabaseRef } from './helpers';
   const node = document.querySelector('#root');
 
   ReactDOM.render(element, node);
-})();
+};
 
+startApp({});
 //registerServiceWorker();
