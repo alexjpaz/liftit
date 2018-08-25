@@ -1,3 +1,14 @@
 .Calendar {
   border: 2px solid rgba(0,0,0,0.2);
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto;
+  grid-gap: 1px;
+}
+
+.Calendar .WeekHeader {
+  border: 2px solid rgba(0,0,0,0.2);
+  grid-column-start: col-start 2;
+}
+
+.WeekHeader__Column {
 }
