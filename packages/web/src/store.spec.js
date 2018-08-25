@@ -10,21 +10,15 @@ describe('action creaters', () => {
   test('firebaseReady', () => {
     const firebase = {};
 
-    const thunk = firebaseReady(firebase);
+    const result = firebaseReady(firebase);
 
-    const dispatch = jest.fn();
-
-    const result = thunk(dispatch);
-
-    expect(result).toEqual(undefined);
-
-    expect(dispatch).toHaveBeenCalledWith({
+    expect(result).toEqual({
       type: FIREBASE_READY,
       value: firebase
     });
   });
 
-  test('firebaseInit', () => {
+  test('firebaseInit', async () => {
     const auth = {
       currentUser: {
         uid: "FAKE"
@@ -45,9 +39,11 @@ describe('action creaters', () => {
 
     const dispatch = jest.fn();
 
-    const result = thunk(dispatch);
+    await thunk(dispatch);
 
     expect(ref.on).toHaveBeenCalled();
+
+    expect(dispatch).toHaveBeenCalled();
 
     expect(dispatch).toHaveBeenCalledWith({
       type: FIREBASE_READY,

@@ -13,12 +13,10 @@ export const firebaseSync = (snapshot) => ({
 })
 
 export const firebaseReady = (firebase) => {
-  return (dispatch) => {
-    return dispatch({
-      type: FIREBASE_READY,
-      value: firebase
-    });
-  }
+  return {
+    type: FIREBASE_READY,
+    value: firebase
+  };
 };
 
 export const firebaseInit = (firebase) => {
@@ -30,7 +28,7 @@ export const firebaseInit = (firebase) => {
       store.dispatch(firebaseSync(snapshot));
     });
 
-    firebaseReady(firebase); 
+    dispatch(firebaseReady(firebase));
   };
 };
 
