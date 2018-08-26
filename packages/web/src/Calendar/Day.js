@@ -32,8 +32,8 @@ export default class Day extends Component {
 
 
     return (
-      <div onClick={(e) => this.onSelect(e)}>
-        <p className='has-text-right'>{dayOfTheMonth}</p>
+      <div className='Day cell' onClick={(e) => this.onSelect(e)}>
+        <p className='has-text-left'>{dayOfTheMonth}</p>
         <div>
           {events}
         </div>
