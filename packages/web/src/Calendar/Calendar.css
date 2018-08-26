@@ -1,0 +1,27 @@
+.Calendar {
+  border: 2px solid rgba(0,0,0,0.2);
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto;
+  grid-gap: 0px;
+  font-size: 0.74em;
+  color: rgba(0,0,0,0.75);
+}
+
+.Calendar .WeekHeader {
+  border: 2px solid rgba(0,0,0,0.2);
+  grid-column-start: col-start 2;
+}
+
+.Calendar .cell {
+  padding: 2px;
+  border: 1px solid rgba(0,0,0,0.2);
+}
+
+.Day {
+  min-height: 50px;
+  text-align: left;
+}
+
+.WeekHeader__Column {
+  text-align: center;
+}
