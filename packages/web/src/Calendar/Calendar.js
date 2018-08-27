@@ -29,19 +29,25 @@ export default class Calendar extends React.Component {
   }
 
   getDatesForMonth(date = new Date()) {
-    const firstDateOfTheMonth = new Date(date).setDate(0);
+    const firstDateOfTheMonth = this.getFirstDay(date);
     const lastDateOfTheMonth = new Date(date).setDate(0);
 
     return [firstDate];
   }
 
-  generateDays() {
-    const days = Array(5*7).fill(true).map((e,i) => {
-      const date = new Date();
-      return <Day date={date} />
-    });
+  generateDays(date = new Date()) {
+    const daysInTheMonth = this.getNumberOfDaysInTheMonthOf(date); 
+    const firstDay  = this.getFirstDay();
 
-    return days;
+    const offset = firstDay.getDay();
+
+    let components = Array(offset).fill(<Day />);
+
+    for(let i=offset;i<daysInTheMonth;i++) {
+      components.push(<Day date={date} />);
+    }
+
+    return components;
   }
 
   render() {

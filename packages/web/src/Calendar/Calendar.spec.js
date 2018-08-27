@@ -5,13 +5,10 @@ import Calendar from './Calendar';
 import { shallow } from 'enzyme';
 
 describe('<Calendar />', () => {
-  xit('should do a thing', () => {
-    const wrapper = shallow((
-      <Calendar  />
-    ));
-
-    expect(wrapper.html()).toContain('<div>March 2018</div>');
+  it('should shallow mount', () => {
+    shallow(<Calendar  />);
   });
+
 });
 
 describe('Calendar', () => {
@@ -49,18 +46,20 @@ describe('Calendar', () => {
     });
   });
 
-  xit('should return all dates in the current month', () => {
+  it('should generate day components', () => {
     const tests = [
-      { date: "2018-07-07", days: 30 },
-    ]
+      { date: "2018-08-01", days: 31 },
+      { date: "2018-07-07", days: 31 },
+      { date: "2018-07-06", days: 31 },
+      { date: "2018-01-06", days: 31 },
+      { date: "2018-02-06", days: 28 },
+      { date: "2016-02-06", days: 29 },
+    ];
 
-    tests.forEach(() => {
-      const today = new Date("2018-07-07");
-      const todayClone = new Date(today);
-      const dates = calendar.getDatesForMonth(today);
-
-      expect(dates.length).not.toEqual(0);
-      expect(today).toEqual(todayClone);
+    tests.forEach((tt) => {
+      const testDate = new Date(tt.date);
+      const components = calendar.generateDays(testDate);
+      expect(components).toHaveLength(tt.days);
     });
-  });
+  })
 });
