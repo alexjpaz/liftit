@@ -9,10 +9,16 @@ import Info from './Info';
 
 export default class Calendar extends React.Component {
   getCurrentDate() {
+    console.log(this);
+    console.log(this.props);
+    if(this.props.date) {
+      return this.props.date;
+    }
+
     return new Date();
   }
 
-  getFirstDay(date = new Date()) {
+  getFirstDay(date = this.getCurrentDate()) {
     const clonedDate = new Date(date);
 
     let firstDay = clonedDate;
@@ -25,11 +31,11 @@ export default class Calendar extends React.Component {
     return firstDay;
   }
 
-  isFirstDayOfTheMonth(date = new Date()) {
+  isFirstDayOfTheMonth(date = this.getCurrentDate()) {
     return date.toISOString().slice(8,10) === '01';
   }
 
-  getNumberOfDaysInTheMonthOf(date = new Date()) {
+  getNumberOfDaysInTheMonthOf(date = this.getCurrentDate()) {
     const month = date.getMonth()+1;
     const year = date.getYear();
 
@@ -40,20 +46,26 @@ export default class Calendar extends React.Component {
     return days;
   }
 
-  getDatesForMonth(date = new Date()) {
+  getDatesForMonth(date = this.getCurrentDate()) {
     const firstDateOfTheMonth = this.getFirstDay(date);
     const lastDateOfTheMonth = new Date(date).setDate(0);
 
     return [firstDate];
   }
 
-  generateDays(date = new Date()) {
+  generateDays(date = this.getCurrentDate()) {
     const daysInTheMonth = this.getNumberOfDaysInTheMonthOf(date); 
     const firstDay  = this.getFirstDay(date);
 
     const offset = firstDay.getDay();
 
     let components = Array(offset).fill(<Day />);
+
+    const bindOnSelectDay = (e) => {
+      return () => {
+        this.props.onSelectDay(e);
+      };
+    };
 
     for(let i=offset;i<daysInTheMonth+offset;i++) {
       let date = new Date(firstDay);
@@ -62,21 +74,22 @@ export default class Calendar extends React.Component {
         date = new Date(firstDay.getFullYear(), firstDay.getMonth(), i + 1 - offset);
       }
 
-      components.push(<Day date={date} />);
+      components.push(<Day date={date} onSelect={bindOnSelectDay(date)} />);
     }
 
     return components;
   }
 
   render() {
-    const days = this.generateDays();
+    let days = this.generateDays();
+
     return (
       <div>
         <div className='Calendar'>
           <WeekHeader />
           {days}
         </div>
-        <Info />
+        <Info date={this.getCurrentDate()}/>
       </div>
     )
   }

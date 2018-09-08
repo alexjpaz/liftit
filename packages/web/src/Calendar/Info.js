@@ -4,7 +4,7 @@ export default class Info extends Component {
   render() {
     return (
       <p className='muted'>
-        2018-01-01
+        {this.props.date.toISOString()}
       </p>
     );
   }
