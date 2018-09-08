@@ -5,6 +5,7 @@ import './Calendar.css';
 import WeekHeader from './WeekHeader';
 import CurrentDateHeader from './CurrentDateHeader';
 import Day from './Day';
+import Info from './Info';
 
 export default class Calendar extends React.Component {
   getCurrentDate() {
@@ -13,8 +14,19 @@ export default class Calendar extends React.Component {
 
   getFirstDay(date = new Date()) {
     const clonedDate = new Date(date);
-    let firstDay = new Date(clonedDate.getFullYear(), clonedDate.getMonth(), 1);
+
+    let firstDay = clonedDate;
+
+    // WTF Javascript - if we don't then it rolls back to the previous month
+    if(!this.isFirstDayOfTheMonth(firstDay)) {
+      firstDay = new Date(clonedDate.getFullYear(), clonedDate.getMonth(), 1);
+    }
+
     return firstDay;
+  }
+
+  isFirstDayOfTheMonth(date = new Date()) {
+    return date.toISOString().slice(8,10) === '01';
   }
 
   getNumberOfDaysInTheMonthOf(date = new Date()) {
@@ -37,13 +49,19 @@ export default class Calendar extends React.Component {
 
   generateDays(date = new Date()) {
     const daysInTheMonth = this.getNumberOfDaysInTheMonthOf(date); 
-    const firstDay  = this.getFirstDay();
+    const firstDay  = this.getFirstDay(date);
 
     const offset = firstDay.getDay();
 
     let components = Array(offset).fill(<Day />);
 
-    for(let i=offset;i<daysInTheMonth;i++) {
+    for(let i=offset;i<daysInTheMonth+offset;i++) {
+      let date = new Date(firstDay);
+
+      if(i !== offset) {
+        date = new Date(firstDay.getFullYear(), firstDay.getMonth(), i + 1 - offset);
+      }
+
       components.push(<Day date={date} />);
     }
 
@@ -53,9 +71,12 @@ export default class Calendar extends React.Component {
   render() {
     const days = this.generateDays();
     return (
-      <div className='Calendar'>
-        <WeekHeader />
-        {days}
+      <div>
+        <div className='Calendar'>
+          <WeekHeader />
+          {days}
+        </div>
+        <Info />
       </div>
     )
   }

@@ -6,9 +6,15 @@ import '../styles';
 
 import Calendar from './Calendar';
 
+const sss = {
+  padding: "10px 80px",
+  margin: "0 auto",
+  width: "490px"
+};
+
 storiesOf("Calendar", module)
   .add('default', () => (
-    <div style={{"padding":"10px 80px"}}>
+    <div style={sss}>
       <Calendar />
     </div>
   ))   

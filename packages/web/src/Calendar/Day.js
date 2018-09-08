@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
 
 export default class Day extends Component { 
+  constructor(props) {
+    super(props);
+
+    let dayOfTheMonth = null; 
+
+    if(this.props.date) {
+      dayOfTheMonth = this.props.date.toISOString().slice(8, 10);
+      dayOfTheMonth = +dayOfTheMonth;
+    }
+
+    this.dayOfTheMonth = dayOfTheMonth;
+  }
+
   onSelect(e) {
     this.props.onSelect({ 
       date: this.props.date,
@@ -9,12 +22,6 @@ export default class Day extends Component {
   }
 
   render() {
-    let dayOfTheMonth = null; 
-
-    if(this.props.date) {
-      dayOfTheMonth = this.props.date.getDate();
-    }
-
     let events = null;
 
     if(this.props.events) {
@@ -33,7 +40,7 @@ export default class Day extends Component {
 
     return (
       <div className='Day cell' onClick={(e) => this.onSelect(e)}>
-        <p className='has-text-left'>{dayOfTheMonth}</p>
+        <p className='has-text-left'>{this.dayOfTheMonth}</p>
         <div>
           {events}
         </div>
