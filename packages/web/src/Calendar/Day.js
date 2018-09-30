@@ -27,12 +27,13 @@ export default class Day extends Component {
     if(this.props.events) {
       events = this.props.events.map((e) => {
         return <div className='is-pulled-right' style={{
+          "margin-top": "4px",
           "border": "1px solid",
           "color": e.color,
           "border-radius": "50%",
           "background": e.color,
-          "width": "10px",
-          "height": "10px"
+          "width": "6px",
+          "height": "6px"
         }}></div>
       });
     }
@@ -40,10 +41,10 @@ export default class Day extends Component {
 
     return (
       <div className='Day cell' onClick={(e) => this.onSelect(e)}>
-        <p className='has-text-left'>{this.dayOfTheMonth}</p>
         <div>
           {events}
         </div>
+        <p className='has-text-left'>{this.dayOfTheMonth}</p>
       </div>
     );
   }

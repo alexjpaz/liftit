@@ -4,6 +4,7 @@ import EntityRoute from '../EntityRoute';
 import NextLogCard from '../../Workbook/NextLogCard';
 import Workbook from '../../Workbook/Workbook';
 import GettingStartedCard from './GettingStartedCard';
+import Calendar from '../../Calendar/Calendar';
 
 export default class HomeRoute extends EntityRoute {
   render() {
@@ -16,11 +17,11 @@ export default class HomeRoute extends EntityRoute {
     };
 
     return (
-      <div>
+      <div className='section'>
         <GettingStartedCard {...props} />
+        <Calendar />
         <br />
-        <NextLogCard />
-        <br />
+        { /* <NextLogCard /> */ }
         <Workbook 
           workbook={{
             entries: this.state.list

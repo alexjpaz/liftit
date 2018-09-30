@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { connect } from 'react-redux';
+
 import './Calendar.css';
 
 import WeekHeader from './WeekHeader';
@@ -7,10 +9,8 @@ import CurrentDateHeader from './CurrentDateHeader';
 import Day from './Day';
 import Info from './Info';
 
-export default class Calendar extends React.Component {
+export class Calendar extends React.Component {
   getCurrentDate() {
-    console.log(this);
-    console.log(this.props);
     if(this.props.date) {
       return this.props.date;
     }
@@ -50,7 +50,7 @@ export default class Calendar extends React.Component {
     const firstDateOfTheMonth = this.getFirstDay(date);
     const lastDateOfTheMonth = new Date(date).setDate(0);
 
-    return [firstDate];
+    //return [firstDate];
   }
 
   generateDays(date = this.getCurrentDate()) {
@@ -74,7 +74,18 @@ export default class Calendar extends React.Component {
         date = new Date(firstDay.getFullYear(), firstDay.getMonth(), i + 1 - offset);
       }
 
-      components.push(<Day date={date} onSelect={bindOnSelectDay(date)} />);
+      let events = [];
+
+      if(this.props.events) {
+        const isoDate = date.toISOString().slice(0,10);
+        events = this.props.events.map((e) => {
+          if(isoDate === e.date) {
+            return e;
+          }
+        }).filter(e => e);
+      }
+
+      components.push(<Day date={date} onSelect={bindOnSelectDay(date)} events={events} />);
     }
 
     return components;
@@ -82,15 +93,28 @@ export default class Calendar extends React.Component {
 
   render() {
     let days = this.generateDays();
+        console.log(this.props.events)
 
     return (
-      <div>
-        <div className='Calendar'>
-          <WeekHeader />
-          {days}
-        </div>
-        <Info date={this.getCurrentDate()}/>
+      <div className='Calendar'>
+        <WeekHeader />
+        {days}
       </div>
     )
   }
 }
+
+export const mapStateToProps = ({ entries }) => {
+  let events = [];
+
+  entries.forEach((e) => {
+    console.log(e);
+    //events.push(ev);
+  });
+
+  return {
+    events
+  };
+};
+
+export default connect(mapStateToProps)(Calendar);
