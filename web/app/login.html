@@ -93,10 +93,19 @@
           console.log("Email: " + profile.getEmail());
 
           // The ID token you need to pass to your backend:
-          var id_token = googleUser.getAuthResponse().id_token;
+          var auth = googleUser.getAuthResponse();
+          var id_token = auth.id_token;
           console.log("ID Token: " + id_token);
+          console.log(googleUser.getAuthResponse());
 
           localStorage.setItem('identity.google', id_token);
+
+          localStorage.setItem('identity.google.profile', JSON.stringify(profile));
+
+          localStorage.setItem('identity.google.auth', JSON.stringify({
+            id_token: auth.id_token,
+            expires_at: auth.expires_at,
+          }));
 
           localStorage.removeItem('session');
           window.location.assign('/');
