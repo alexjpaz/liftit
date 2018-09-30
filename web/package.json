@@ -31,6 +31,7 @@
     "moment": "^2.12.0",
     "riot": "^2.3.16",
     "riotjs-loader": "^2.0.0",
+    "sinon": "^6.3.4",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
   },

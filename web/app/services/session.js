@@ -5,6 +5,7 @@ var P = require("bluebird/js/browser/bluebird.core");
 var request = require('superagent');
 
 var session = function(config) {
+  this.localStorage = config.localStorage || global.localStorage;
   this.storeEndpoint = config.storeEndpoint;
   riot.observable(this);
 };
@@ -61,6 +62,48 @@ session.prototype.store = function(value) {
       }
     });
   });
+};
+
+session.prototype.isSessionExpired = function() {
+  var auth = JSON.parse(this.localStorage.getItem('identity.google.auth'));
+
+  if(!auth) {
+    return true;
+  }
+
+  var now = new Date().getTime();
+
+  if(now >= auth.expires_at) {
+    return true;
+  }
+
+  return false;
+};
+
+session.prototype.forceExpiration = function() {
+  this.localStorage.removeItem('identity.google');
+  this.localStorage.removeItem('identity.google.auth');
+  this.localStorage.removeItem('identity.google.profile');
+};
+
+session.prototype.getProfileInfo = function() {
+   var profile = JSON.parse(this.localStorage.getItem('identity.google.profile'));
+  return profile;
+}
+
+session.prototype.getAuthInfo = function() {
+  var auth = JSON.parse(this.localStorage.getItem('identity.google.auth'));
+
+
+  if(!auth) {
+    return {};
+  }
+
+  auth.tokenExpires = (auth.expires_at - new Date().getTime());
+  auth.tokenExpiresInSeconds = Math.floor(auth.tokenExpires / 1000);
+  auth.tokenExpiresInMinutes = Math.floor(auth.tokenExpiresInSeconds / 60);
+
+  return auth;
 };
 
 session.getInstance = function() {

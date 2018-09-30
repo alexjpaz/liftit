@@ -23,12 +23,15 @@
       this.mixin('api');
 
       var store = this.api.store;
+      var session = this.api.session;
 
       setInterval(function() {
-        // check auth expiration
-        var auth = JSON.parse(localStorage.getItem('identity.google.auth'));
-        if(new Date().getTime() >= auth.expires_at) {
+        var isSessionExpired = session.isSessionExpired();
+
+        if(isSessionExpired) {
           self.showAuth = true;
+          self.update();
+          session.forceExpiration();
         } 
       }, 100);
 

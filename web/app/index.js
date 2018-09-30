@@ -27,7 +27,8 @@ var store = new Store(config, new persistence.localStorage(), new reducers, sess
 
 var api = new Api({
   store: store,
-  DateUtils: DateUtils
+  DateUtils: DateUtils,
+  session: session
 });
 
 function Bootstrap() {

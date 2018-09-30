@@ -6,6 +6,8 @@ var Api = function(config) {
   this.store = config.store;
 
   this.DateUtils = config.DateUtils;
+
+  this.session = config.session;
 };
 
 module.exports = Api;

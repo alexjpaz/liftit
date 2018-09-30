@@ -3,7 +3,8 @@ var DateUtils = require('../../date');
   <div>
     <h3>User</h3>
     <p>{profile.ig}</p>
-    <p>Token expires in {tokenExpiresInMinutes} minutes ({tokenExpiresInSeconds} seconds)</p>
+    <p if={auth}>Token expires in {tokenExpiresInMinutes} minutes ({tokenExpiresInSeconds} seconds)</p>
+    <p if={!auth}>Token expired! Please refresh.</p>
   </div>
   <div>
     <h3>Build Info</h3>
@@ -30,17 +31,21 @@ var DateUtils = require('../../date');
 
     this.mixin('api');
 
+    var session = this.api.session;
+
     this.apiKey =  localStorage.getItem('apiKey') || "EMPTY";
 
     (function() {
-      self.profile = JSON.parse(localStorage.getItem('identity.google.profile'));
+      self.profile = session.getProfileInfo();
+
       self.update();
     
       var updateExpires = function() {
-        var auth = JSON.parse(localStorage.getItem('identity.google.auth'));
-        self.tokenExpires = (auth.expires_at - new Date().getTime());
-        self.tokenExpiresInSeconds = Math.floor(self.tokenExpires / 1000);
-        self.tokenExpiresInMinutes = Math.floor(self.tokenExpiresInSeconds / 60);
+        var auth = session.getAuthInfo();
+        self.auth = auth;
+        self.tokenExpires = auth.tokenExpires;
+        self.tokenExpiresInSeconds = auth.tokenExpiresInSeconds;
+        self.tokenExpiresInMinutes = auth.tokenExpiresInMinutes
         self.update();
       };
 
