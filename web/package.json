@@ -20,11 +20,12 @@
     "riot": "^2.3.16",
     "riotjs": "^1.0.4",
     "riotjs-loader": "^2.0.0",
-    "superagent": "^2.0.0",
+    "superagent": "^3.7.0",
     "tojson-loader": "^1.0.4",
     "webpack": "^1.12.14"
   },
   "devDependencies": {
+    "growl": "1.10.0",
     "babel": "^6.5.2",
     "babel-loader": "^6.2.4",
     "css-loader": "^0.23.1",
