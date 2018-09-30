@@ -30,12 +30,20 @@ module.exports = {
 
       app.use(bodyParser({limit:'2mb'}));
 
+      const profilePath = './mock/profile.json';
+
       app.post('/api/profile', function(req, res) {
-        fs.writeFileSync('./mock/profile.json', JSON.stringify(req.body));
+        fs.writeFileSync(profilePath, JSON.stringify(req.body));
         res.end("Saved", 200);
       });
       app.get('/api/profile', function(req, res) {
-        var buffer = fs.readFileSync('./mock/profile.json');
+        if (!fs.existsSync('mock')) {
+          fs.mkdirSync('mock');
+        }
+        if (!fs.existsSync(profilePath)) {
+          fs.writeFileSync(profilePath, "{}");
+        }
+        var buffer = fs.readFileSync(profilePath);
         res.json(JSON.parse(buffer.toString()));
       });
     },
