@@ -13,27 +13,74 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <link rel="apple-touch-icon" sizes="57x57" href="//liftit.alexjpaz.com/static/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="//liftit.alexjpaz.com/static/favicon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="//liftit.alexjpaz.com/static/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="//liftit.alexjpaz.com/static/favicon/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="//liftit.alexjpaz.com/static/favicon/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="//liftit.alexjpaz.com/static/favicon/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="//liftit.alexjpaz.com/static/favicon/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="//liftit.alexjpaz.com/static/favicon/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="//liftit.alexjpaz.com/static/favicon/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="//liftit.alexjpaz.com/static/favicon/favicon-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="//liftit.alexjpaz.com/static/favicon/favicon-160x160.png" sizes="160x160">
+    <link rel="icon" type="image/png" href="//liftit.alexjpaz.com/static/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="//liftit.alexjpaz.com/static/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="//liftit.alexjpaz.com/static/favicon/favicon-32x32.png" sizes="32x32">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="mstile-144x144.png">
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <style>
+      html, body {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        background: #4C8056;
+      }
+
+      .liftit-login-container {
+        display: flex;
+        align-items: center;
+        max-width: 425px;
+        margin: 0 auto;
+        height: 100%;
+      }
+
+      @media screen and (min-width: 768px) {
+        .liftit-login-container {
+        }
+      }
+
+      .heading {
+        text-align: center;
+        color: white;
+        margin-bottom: 40px;
+      }
+
+      .liftit-login-form {
+        text-align: center;
+        margin: 0 auto;
+      }
+
+      .g-signin2 {
+        width: 100%;
+      }
+
+      .g-signin2 > div{
+        margin: 0 auto;
+      }
+    </style>
   </head>
   <body>
-
-    <div class='container'>
-    <body>
-      <style>
-        html, body {
-          height: 100%;
-          padding: 0;
-          margin: 0;
-        }
-      </style>
-      <div class='container'>
-        <h1>liftit</h1>
-        <h3>login</h3>
-        <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+      <!-- -->
+      <div class='liftit-login-container'>
+        <div class='liftit-login-form'>
+          <h1 class='heading'>Welcome to Liftit</h1>
+          <div class="g-signin2" data-width="320px" data-onsuccess="onSignIn" data-theme="light"></div>
+        </div>
       </div>
-    </div>
+      <!-- -->
       <script>
         function onSignIn(googleUser) {
           // Useful data for your client-side scripts:
