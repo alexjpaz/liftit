@@ -20,6 +20,7 @@ require('./routes/tools/table.tag')
     .app-container {
       padding-left: 0px;
       padding-right: 0px;
+      max-width: 768px;
     }
 
     .navbar-toggle {

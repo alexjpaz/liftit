@@ -7,6 +7,8 @@ var Cycle = require('../../models/Cycle');
 
 var Form = require('../../form');
 
+var LogAddController = require('./log-add.js');
+
 <log-add>
   <div class='panel panel-danger' if={!effectiveMax}>
     <div class='panel-heading'>
@@ -51,7 +53,11 @@ var Form = require('../../form');
       </div>
 
       <button class="btn btn-primary">
-        Store Log
+        Save Log
+      </button>
+
+      <button class="btn btn-default" onclick={submitReschedule}>
+        Reschedule
       </button>
 
       <button class="btn btn-danger pull-right" onclick={ remove }>
@@ -122,6 +128,10 @@ var Form = require('../../form');
   <script>
     var self = this;
 
+    var controller = new LogAddController(self);
+
+    this.controller = controller;
+
     this.liftit = liftit;
 
     this.lifts = ['press','deadlift','bench','squat'];
@@ -149,6 +159,19 @@ var Form = require('../../form');
     this.submit = function(form) {
       form.preventDefault();
       store.trigger('updateEvents', self.vm);
+      window.history.back();
+    };
+
+    this.submitReschedule = function(e) {
+      e.preventDefault();
+
+      var events = this.controller.rescheduleFutureEvents(self.vm, self.original.date, self.vm.date);
+
+      var ans = window.confirm("This will affect " +events.length+ " events.Are you sure you want to change them?");
+
+      if(!ans) return;
+
+      store.trigger('updateEvents', events);
       window.history.back();
     };
 
@@ -196,6 +219,8 @@ var Form = require('../../form');
       var log = new Log(event);
       self.vm = log;
 
+      self.original = JSON.parse(JSON.stringify(self.vm));
+
       self.effectiveMax = log.getEffectiveMax();
 
       calculateWeigthFractions();
@@ -211,6 +236,8 @@ var Form = require('../../form');
       self.effectiveMax = log.getEffectiveMax();
 
       self.vm = log;
+
+      self.original = JSON.parse(JSON.stringify(self.vm));
 
       self.update();
     });
