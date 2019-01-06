@@ -1,5 +1,8 @@
 var Event = require('../../models/Event');
 var DateUtils = require('../../date');
+
+require('./event.tag')
+
 <dashboard-calendar>
       <div class='week'>
         <div class='day-of-week'>
@@ -16,7 +19,7 @@ var DateUtils = require('../../date');
         <div class='col day isToday--{ d.isToday != false }' each={ d in days } onclick={ selectDay(d) }>
           { d.label }
           <div class='events'>
-            <span each={ e in d.events } class='event event--{e.type} event__isGenerated--{!!e.isGenerated}'></span>
+            <event each={ e in d.events} e={e} />
           </div>
         </div>
       </div>
@@ -36,29 +39,8 @@ var DateUtils = require('../../date');
           text-align: right;
     }
 
-    .event {
-      border-radius: 101px;
-      line-height: 0;
-      height: 6px;
-      width: 6px;
-      display: block;
-      margin-bottom: 2px;
-    }
-
     .scrollable {
 
-    }
-
-    .event--log {
-      background: blue;
-    }
-
-    .event--log.event__isGenerated--true {
-      opacity: 0.4;
-    }
-
-    .event--max {
-      background: red;
     }
 
     .week {
