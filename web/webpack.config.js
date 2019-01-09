@@ -25,6 +25,7 @@ module.exports = {
   },
   devServer: {
     contentBase: './public',
+    disableHostCheck: true,
     setup: function(app) {
       var bodyParser = require('body-parser')
 

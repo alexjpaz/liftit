@@ -78,6 +78,14 @@ Event.findAfter = function(date) {
   return filteredEvents;
 };
 
+Event.findAfterExclusive = function(date) {
+  var filteredEvents = Event.all().filter(function(event) {
+    return new Date(event.date).getTime() > new Date(date).getTime();
+  }).sort(DateUtils.sort);
+
+  return filteredEvents;
+};
+
 Event.filters = {};
 
 Event.filters.active = function(event) {
