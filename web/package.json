@@ -37,8 +37,8 @@
     "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
-    "start": "./tasks dev",
-    "test": "node_modules/mocha/bin/mocha --recursive"
+    "test": "node_modules/mocha/bin/mocha --recursive",
+    "start": "./tasks dev"
   },
   "author": "",
   "license": "ISC"
