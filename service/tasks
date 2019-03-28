@@ -11,7 +11,7 @@ zipIt() {
 deploy() {
   zipIt
 
-  local runtime="nodejs4.3"
+  local runtime="nodejs8.10"
   local functionName="liftitGetSession"
   local role="arn:aws:iam::048061681813:role/lambda_basic_execution"
 
