@@ -37,4 +37,5 @@ jobs:
         
       # run tests!
       - run: cd web ; npm test
+      - run: cd test-integration; npm i
       - run: ./serve-and-run-tests
