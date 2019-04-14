@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+const { exec } = require('child_process');
+
+const server = exec('cd web; node node_modules/.bin/webpack-dev-server --hot --inline --host 0.0.0.0 --port 8008 --content-base public/', (err, stdout, stderr) => {
+    console.log(stdout);
+});
+
+const tests = exec('cd test-integration; npm test', (err, stdout, stderr) => {
+    console.log(stdout);
+});
+
+
+tests.on('close', (code) => {
+    exec('killall node'); // So bad...
+    process.exit(code);
+});
