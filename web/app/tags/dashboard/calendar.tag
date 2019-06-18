@@ -51,7 +51,7 @@ require('./event.tag')
 
     .col {
       float: left;
-      width: 14.286%;
+      width: 14.285%;
       border: 1px #eee solid;
     }
 
