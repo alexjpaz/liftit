@@ -13,7 +13,7 @@
     }
 
     .event--log {
-      background: blue;
+      background: #2a9fd6;
         
     }
 
@@ -27,7 +27,7 @@
     }
 
     .event--max {
-      background: red;
+      background: #cc0000;
     }
     .event--max::before { content: "▲" }
     .event--max-reset::before { content: "▼" }

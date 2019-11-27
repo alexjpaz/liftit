@@ -64,8 +64,8 @@ var DateUtils = require('../../date');
       font-weight: bold;
     }
 
-    .list-avatar--max { background: brick; }
-    .list-avatar--log { background: #0606BB; }
+    .list-avatar--max { background: #cc0000 ; }
+    .list-avatar--log { background: #2a9fd6; }
 
     .button-group {
     }

@@ -70,7 +70,8 @@ var Form = require('../../../form');
     }
 
     tools-table .table--warmup {
-      background: #f0f0f0;
+      background: rgba(255,255,255,0.25);
+      color: rgba(255, 255, 255, 0.25);
     }
 
     tools-table .table--press { border-color: red; }
