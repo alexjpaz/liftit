@@ -79,7 +79,7 @@ var DateUtils = require('../../date');
       self.futureEvents = self.futureEvents.slice(0,6);
 
       self.pastEvents = Event.findBefore(self.today);
-      self.pastEvents = self.pastEvents.slice(0,self.pastEventsLimit);
+      self.pastEvents = self.pastEvents.slice(1,self.pastEventsLimit);
       self.update();
     }
 
