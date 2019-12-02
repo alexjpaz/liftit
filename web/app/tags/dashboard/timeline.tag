@@ -4,6 +4,8 @@ var DateUtils = require('../../date');
 require('./today-max.tag');
 require('./today-table.tag');
 
+require('./max-fraction.tag');
+
 <dashboard-timeline>
   <div>
     <div class='pull-right'>
@@ -19,7 +21,8 @@ require('./today-table.tag');
         </div>
         <div if={ e.type ==='log'}>
           <a class='list-avatar list-avatar--{ e.type }' href='#/logs/{ e. key }'>{ e.type[0].toUpperCase() }</a>
-          <span>{ e.lift } { e.weight }x{ e.reps }</span>
+          <span>{ e.lift } { e.weight }x{ e.reps } /</span>
+          <max-fraction log={e}></max-fraction>
         </div>
         <div if={ e.type ==='max'}>
           <a class='list-avatar list-avatar--{ e.type }' href='#/maxes/{ e. key }'>{ e.type[0].toUpperCase() }</a>
@@ -39,7 +42,8 @@ require('./today-table.tag');
         </div>
         <div if={ e.type ==='log'}>
           <a class='list-avatar list-avatar--{ e.type }' href='#/logs/{ e. key }'>{ e.type[0].toUpperCase() }</a>
-          <span>{ e.lift } { e.weight }x{ e.reps }</span>
+          <span>{ e.lift } { e.weight }x{ e.reps } /</span>
+          <max-fraction log={e}></max-fraction>
         </div>
         <div if={ e.type ==='max'}>
           <a class='list-avatar list-avatar--{ e.type }' href='#/maxes/{ e. key }'>{ e.type[0].toUpperCase() }</a>
