@@ -6,9 +6,7 @@ require('./dashboard/timeline.tag');
 
 <dashboard>
   <dashboard-calendar></dashboard-calendar>
-  <dashboard-today></dashboard-today>
   <dashboard-graph></dashboard-graph>
-  <br />
   <dashboard-timeline></dashboard-timeline>
 
   <script>

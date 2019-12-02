@@ -1,8 +1,15 @@
 var Event = require('../../models/Event');
 var DateUtils = require('../../date');
 
+require('./today-max.tag');
+
 <dashboard-timeline>
-  <h4>Today</h4>
+  <div>
+    <div class='pull-right'>
+        <today-max></today-max>
+    </div>
+    <h4>Today</h4>
+  </div>
   <hr />
   <div class='list-container'>
      <div onclick={navigateToEvent(e)} each={ e in todayEvents } class='list'>
