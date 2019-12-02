@@ -3,6 +3,7 @@
     "start_url": "/",
     "display": "standalone",
     "orientation": "portrait",
+    "background_color": "#000",
     "icons": [{
       "src": "//liftit.alexjpaz.com/static/favicon/favicon-192x192.png",
       "sizes": "192x192",
