@@ -1,3 +1,5 @@
+require('./layout/nav-max.tag');
+
 <nav-header>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
@@ -5,6 +7,9 @@
           <a href="#/day" class="navbar-link">
             <i class='glyphicon glyphicon-pencil'></i>
           </a>
+        </p>
+        <p class="navbar-text navbar-right pull-right">
+          <nav-max></nav-max>
         </p>
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" onclick={toggleMenu}>
