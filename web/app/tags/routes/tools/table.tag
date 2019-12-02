@@ -41,10 +41,7 @@ var Form = require('../../../form');
     </div>
     <div class='form-group'>
       <select name='lift' onchange={model} class='form-control'>
-        <option value='press'>press</option>
-        <option value='deadlift'>deadlift</option>
-        <option value='bench'>bench</option>
-        <option value='squat'>squat</option>
+        <option each={ l in lifts } value={l} selected={parent.opts.lift === l}>{l}</option>
       </select>
     </div>
   </form>
@@ -81,6 +78,8 @@ var Form = require('../../../form');
   </style>
   <script>
     var tag = this;
+
+    tag.lifts = ['press','deadlift','bench','squat'];
 
     tag.opts = {
       week: '3x5',
