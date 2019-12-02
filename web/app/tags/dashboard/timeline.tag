@@ -2,11 +2,12 @@ var Event = require('../../models/Event');
 var DateUtils = require('../../date');
 
 require('./today-max.tag');
+require('./today-table.tag');
 
 <dashboard-timeline>
   <div>
     <div class='pull-right'>
-        <today-max></today-max>
+        <dashboard-today-table></dashboard-today-table>
     </div>
     <h4>Today</h4>
   </div>
