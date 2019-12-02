@@ -113,6 +113,10 @@ var Form = require('../../form');
 
         row.percentages = {};
 
+        if(!store.config.lifts) {
+            return row;
+        }
+
         store.config.lifts.forEach(function(lift) {
 
           row.percentages[lift] = {}
