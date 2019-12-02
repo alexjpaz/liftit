@@ -7,6 +7,43 @@ require('./today-table.tag');
 require('./max-fraction.tag');
 
 <dashboard-timeline>
+  <style>
+    .flash { animation-duration: 2s; }
+    .flash--press { animation-name: flash_red; }
+    .flash--deadlift { animation-name: flash_green; }
+    .flash--bench { animation-name: flash_blue; }
+    .flash--squat { animation-name: flash_orange; }
+
+    @keyframes flash_red {
+        from {
+            border-color: red;
+            background-color: red;
+        }
+    }
+
+    @keyframes flash_green {
+        from {
+            border-color: green;
+            background-color: green;
+        }
+    }
+
+    @keyframes flash_blue {
+        from {
+            border-color: blue;
+            background-color: blue;
+        }
+    }
+
+    @keyframes flash_orange {
+        from {
+            border-color: orange;
+            background-color: orange;
+        }
+    }
+
+
+  </style>
   <div>
     <div class='pull-right'>
         <dashboard-today-table></dashboard-today-table>
@@ -15,7 +52,7 @@ require('./max-fraction.tag');
   </div>
   <hr />
   <div class='list-container'>
-     <div onclick={navigateToEvent(e)} each={ e in todayEvents } class='list'>
+     <div onclick={navigateToEvent(e)} each={ e in todayEvents } class='list flash flash--{e.lift}'>
         <div class='pull-right'>
            <span>{e.date.slice(0,10)}</span>
         </div>

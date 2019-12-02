@@ -62,6 +62,45 @@ var Form = require('../../../form');
       border-left: 2px solid;
     }
 
+    tools-table .table tr:nth-child(6) td:nth-child(1),
+    tools-table .table tr:nth-child(6) td:nth-child(2)
+    {
+      animation-duration: 2s;
+    }
+
+    tools-table .table--press td    { animation-name: flash_red; }
+    tools-table .table--deadlift td { animation-name: flash_green; }
+    tools-table .table--bench td    { animation-name: flash_blue; }
+    tools-table .table--squat td    { animation-name: flash_orange; }
+
+    @keyframes flash_red {
+        from {
+            border-color: red;
+            background-color: red;
+        }
+    }
+
+    @keyframes flash_green {
+        from {
+            border-color: green;
+            background-color: green;
+        }
+    }
+
+    @keyframes flash_blue {
+        from {
+            border-color: blue;
+            background-color: blue;
+        }
+    }
+
+    @keyframes flash_orange {
+        from {
+            border-color: orange;
+            background-color: orange;
+        }
+    }
+
     tools-table .table thead th {
       border-bottom: 2px solid black;
     }
