@@ -44,7 +44,7 @@ require('./event.tag')
     }
 
     .week {
-      border: 1px #eee solid;
+      border: 1px #ddd solid;
       position: relative;
       overflow: hidden;
     }
@@ -52,7 +52,7 @@ require('./event.tag')
     .col {
       float: left;
       width: 14.285%;
-      border: 1px #eee solid;
+      border: 1px #2d2d2d solid;
     }
 
     .day {
@@ -65,7 +65,7 @@ require('./event.tag')
 
     .day.isToday--true {
       font-weight: bold;
-      background: #eee;
+      background: #2d2d2d;
     }
 
     .day-of-week {
