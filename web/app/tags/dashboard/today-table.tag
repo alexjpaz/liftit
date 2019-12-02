@@ -17,7 +17,7 @@ var DateUtils = require('../../date');
     var route = riot.route.create();
 
     function generateTableLink() {
-      self.week = self.week || "3x5";
+      self.week = self.week || null;
       var map = {
         "85": "3x5",
         "90": "3x3",
@@ -25,7 +25,7 @@ var DateUtils = require('../../date');
       };
 
       self.weightFractions.forEach(function(wf) {
-        if(self.weight == wf.weight) {
+        if(self.log.weight == wf.weight) {
           self.week = map[wf.fraction];
         }
       });
@@ -46,6 +46,8 @@ var DateUtils = require('../../date');
       var log = Log.findBefore(DateUtils.create())[0];
 
       log = new Log(log); // TODO
+
+      self.log = log;
 
       self.effectiveMax = log.getEffectiveMax();
 
