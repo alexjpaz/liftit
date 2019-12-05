@@ -5,45 +5,23 @@ var DateUtils = require('../../date');
 
 <dashboard-today-table>
   <style scoped>
-    .flash { animation-duration: 2s; }
-    .flash--press { animation-name: flash_red; }
-    .flash--deadlift { animation-name: flash_green; }
-    .flash--bench { animation-name: flash_blue; }
-    .flash--squat { animation-name: flash_orange; }
-
-    :scope a.flash {
+    :scope a.raised {
         border-radius: 100%;
+        color: black;
+        background: white;
     }
 
-    @keyframes flash_red {
-        from {
-            border-color: red;
-            background-color: red;
-        }
+    :scope a.raised:active {
+        color: black;
+        background: white;
     }
 
-    @keyframes flash_green {
-        from {
-            border-color: green;
-            background-color: green;
-        }
-    }
-
-    @keyframes flash_blue {
-        from {
-            border-color: blue;
-            background-color: blue;
-        }
-    }
-
-    @keyframes flash_orange {
-        from {
-            border-color: orange;
-            background-color: orange;
-        }
+    :scope a.raised:hover {
+        color: black;
+        background: white;
     }
   </style>
-  <a href='#/tools/table?weight={weight}&lift={lift}&week={week}' class='btn btn-link flash flash--{lift}'>
+  <a href='#/tools/table?weight={weight}&lift={lift}&week={week}' class='btn btn-link raised'>
 <i class='glyphicon glyphicon-list-alt'></i>
 </a>
   <script>

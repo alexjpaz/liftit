@@ -7,7 +7,7 @@ require('./today-table.tag');
 require('./max-fraction.tag');
 
 <dashboard-timeline>
-  <style>
+  <style scoped>
     .flash { animation-duration: 2s; }
     .flash--press { animation-name: flash_red; }
     .flash--deadlift { animation-name: flash_green; }
@@ -41,7 +41,6 @@ require('./max-fraction.tag');
             background-color: orange;
         }
     }
-
 
   </style>
   <div>
