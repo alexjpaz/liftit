@@ -1,4 +1,7 @@
-# liftit
+<h1>
+  <img src='http://liftit.alexjpaz.com/static/favicon/favicon-96x96.png' width="24px" />
+  liftit
+</h1>
 
 > CRUDy Gym weight / max application
 
