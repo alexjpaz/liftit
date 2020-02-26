@@ -43,6 +43,10 @@ Cycle.all = function() {
   return Event.findByType('max');
 };
 
+Cycle.allSortedByDate = function() {
+  return Cycle.all().sort(DateUtils.sort);
+};
+
 Cycle.findBefore = function(date) {
   if(date instanceof Date) {
     date = DateUtils.string(date);

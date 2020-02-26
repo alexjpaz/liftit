@@ -97,6 +97,10 @@ Log.all = function() {
   return Event.findByType('log');
 };
 
+Log.allSortedByDate = function() {
+  return Log.all().sort(DateUtils.sort);
+};
+
 Log.findBetween = function(start, end) {
   return Event.findBetween(start, end).filter(function(e) {
     return e.type === 'log';

@@ -41,7 +41,7 @@ var Form = require('../../form');
   };
 
   var getLogs = function() {
-    self.logs = Log.all();
+    self.logs = Log.allSortedByDate();
     self.update();
   };
 

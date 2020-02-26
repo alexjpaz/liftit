@@ -1,3 +1,4 @@
+const Event = require('../../app/models/Event');
 const Cycle = require('../../app/models/Cycle');
 const config = require('../../app/config');
 const expect = require("chai").expect;
@@ -51,4 +52,23 @@ describe('models/Cycle', () => {
      expect(newCycle.bench).to.equal(baseCycle.bench + 5);
      expect(newCycle.squat).to.equal(baseCycle.squat + 10);
  });
+
+  it('should sort by date', () => {
+    Event.setStore({
+      "testLog1": {
+        "key": "1",
+        "type": "max",
+        "date": "2016-01-01",
+      },
+      "testLog2": {
+        "key": "2",
+        "type": "max",
+        "date": "2019-01-01",
+      }
+    });
+
+    expect(Cycle.all()[0].key).to.equal("1");
+    expect(Cycle.allSortedByDate()[0].key).to.equal("2");
+  });
+
 });
