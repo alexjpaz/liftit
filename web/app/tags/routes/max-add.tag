@@ -8,7 +8,7 @@ var liftit = require('liftit-common');
   <div class='panel panel-default'>
     <div class='panel-heading'>
       Max
-
+      <span if={isFutureCycle()} class='label label-warning'> Upcoming Cycle</span>
       <a class='pull-right' onclick={toggleEditMode}>
         <i class='glyphicon glyphicon-pencil'></i>
       </a>
@@ -16,12 +16,18 @@ var liftit = require('liftit-common');
     <div class='panel-body'>
       <form onsubmit={submit}>
          <div class="form-group">
-          <label>Date</label>
+          <label>
+            Date
+          </label>
           <input class="form-control" type="date" name='date' value={ formatDateView(vm.date) } onchange={ model } readonly={!editing}>
         </div>
 
         <div class="form-group" each={l in lifts}>
-          <label>{ l } <small class='text-muted'>{cyclePreviousFractions[l]}%</small></label>
+          <label>{ l }
+            <small class='text-muted'>
+                <span class='label {getFractionLabelColor(cyclePreviousFractions[l])}'>{cyclePreviousFractions[l]}%</span>
+            </small>
+          </label>
           <a href='#/tools/table?weight={vm[l]}&lift={l}' class='pull-right'><i class='glyphicon glyphicon-list-alt'></i></a>
           <input class="form-control" type="number" name={l} value={vm[l]} onchange={ model } readonly={!editing} required>
         </div>
@@ -128,6 +134,25 @@ var liftit = require('liftit-common');
 
     this.model = function(e) {
       self.vm[e.target.name] = Form.parseValue(e);
+    };
+
+    this.isFutureCycle = function() {
+      if(self.vm && self.vm.date) {
+        var today = new Date().toISOString();
+        if(today < self.vm.date) {
+          return true;
+        }
+      }
+    };
+
+    this.getFractionLabelColor = function(fraction) {
+        if(fraction < 0) {
+            return "label-danger";
+        }
+
+        if(fraction === 0) {
+            return "label-info";
+        }
     };
 
     this.submit = function(form) {
