@@ -153,6 +153,8 @@ var liftit = require('liftit-common');
         if(fraction === 0) {
             return "label-info";
         }
+
+        return "label-default";
     };
 
     this.submit = function(form) {
