@@ -13,7 +13,7 @@
     "file-loader": "^0.8.5",
     "liftit-common": "git+https://github.com/alexjpaz/liftit-common.git",
     "material-design-lite": "^1.1.2",
-    "mocha": "^2.4.5",
+    "mocha": "^10.1.0",
     "q": "^1.4.1",
     "redux": "^3.3.1",
     "require-dir": "^0.3.0",
