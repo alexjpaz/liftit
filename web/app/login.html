@@ -8,8 +8,8 @@
     <title>liftit</title>
 
     <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="592807124060-udu0o3890dgfqdl00roab82m44ai7ohd.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="592807124060-vkq374qambeakdteo8p66e7hcmo4k9bb.apps.googleusercontent.com">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -77,34 +77,36 @@
       <div class='liftit-login-container'>
         <div class='liftit-login-form'>
           <h1 class='heading'>Welcome to Liftit</h1>
-          <div class="g-signin2" data-width="320px" data-onsuccess="onSignIn" data-theme="light"></div>
+          <div id="g_id_onload"
+              data-client_id="592807124060-vkq374qambeakdteo8p66e7hcmo4k9bb.apps.googleusercontent.com"
+              data-callback="onSignIn">
+          </div>
+          <div class="g_id_signin" data-type="standard"></div>
         </div>
       </div>
       <!-- -->
       <script>
+        function parseJwt (token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+
+            return JSON.parse(jsonPayload);
+        }
         function onSignIn(googleUser) {
-          // Useful data for your client-side scripts:
-          var profile = googleUser.getBasicProfile();
-          console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-          console.log('Full Name: ' + profile.getName());
-          console.log('Given Name: ' + profile.getGivenName());
-          console.log('Family Name: ' + profile.getFamilyName());
-          console.log("Image URL: " + profile.getImageUrl());
-          console.log("Email: " + profile.getEmail());
+          console.log(googleUser)
 
-          // The ID token you need to pass to your backend:
-          var auth = googleUser.getAuthResponse();
-          var id_token = auth.id_token;
-          console.log("ID Token: " + id_token);
-          console.log(googleUser.getAuthResponse());
+          const parsed = parseJwt(googleUser.credential);
 
-          localStorage.setItem('identity.google', id_token);
+          localStorage.setItem('identity.google', parsed.sub);
 
-          localStorage.setItem('identity.google.profile', JSON.stringify(profile));
+          localStorage.setItem('identity.google.profile', parsed.name);
 
           localStorage.setItem('identity.google.auth', JSON.stringify({
-            id_token: auth.id_token,
-            expires_at: auth.expires_at,
+            id_token: googleUser.credential,
+            expires_at: parsed.exp,
           }));
 
           localStorage.removeItem('session');
