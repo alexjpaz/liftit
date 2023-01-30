@@ -33,9 +33,9 @@ module.exports = {
 
       const profilePath = './mock/profile.json';
 
-      app.get('/login.html', function(req, res) {
-        res.redirect("./login-fake.html");
-      });
+      //app.get('/login.html', function(req, res) {
+        //res.redirect("./login-fake.html");
+      //});
 
       app.post('/api/profile', function(req, res) {
         fs.writeFileSync(profilePath, JSON.stringify(req.body));

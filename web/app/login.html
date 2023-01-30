@@ -102,11 +102,19 @@
 
           localStorage.setItem('identity.google', parsed.sub);
 
-          localStorage.setItem('identity.google.profile', parsed.name);
+          localStorage.setItem('identity.google.profile', JSON.stringify({ 
+            ig: parsed.name
+          }));
+
+          // HACK
+          const now = new Date();
+          const future = new Date(now.getTime() + 30 * 60000);
+
+          expires_at = future.getTime()
 
           localStorage.setItem('identity.google.auth', JSON.stringify({
             id_token: googleUser.credential,
-            expires_at: parsed.exp,
+            expires_at: expires_at,
           }));
 
           localStorage.removeItem('session');
