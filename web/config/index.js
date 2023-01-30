@@ -6,7 +6,7 @@ let config = {
 
 };
 
-let env = process.env.CONFIG_ENV || 'local';
+let env = process.env.CONFIG_ENV || 'production';
 
 Object.assign(config, require("./"+env));
 
