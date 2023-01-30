@@ -82,10 +82,34 @@
               data-callback="onSignIn">
           </div>
           <div class="g_id_signin" data-type="standard"></div>
+          <hr />
+          <button onclick="localOnly()">LOCAL ONLY</button>
         </div>
       </div>
       <!-- -->
       <script>
+        function localOnly() {
+          localStorage.setItem('identity.google', "LOCALONLY");
+
+          localStorage.setItem('identity.google.profile', JSON.stringify({ 
+            ig: "LOCAL"
+          }));
+
+          // HACK bruh
+          const now = new Date();
+          const future = new Date(now.getTime() + 30 * 60000);
+
+          expires_at = future.getTime()
+
+          localStorage.setItem('identity.google.auth', JSON.stringify({
+            id_token: "LOCALONLY",
+            expires_at: expires_at,
+          }));
+
+          localStorage.removeItem('session');
+          window.location.assign('/');
+        };
+
         function parseJwt (token) {
             var base64Url = token.split('.')[1];
             var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');

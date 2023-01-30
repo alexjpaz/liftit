@@ -33,6 +33,19 @@ session.prototype.create = function() {
 
 session.prototype.fetch = function() {
   var self = this;
+
+  if(self.identityGoogle === "LOCALONLY") {
+    var data = {};
+
+    try {
+      data = JSON.parse(localStorage.getItem("events"));
+    } catch(e) {
+      console.error(e);
+    }
+
+    return P.resolve(data);
+  }
+
   return new P(function(resolve, reject) {
     request.get(self.storeEndpoint)
     .set('Accept', 'application/json')
@@ -49,6 +62,18 @@ session.prototype.fetch = function() {
 
 session.prototype.store = function(value) {
   var self = this;
+
+  if(self.identityGoogle === "LOCALONLY") {
+
+    try {
+      data = JSON.parse(localStorage.setItem("events", JSON.stringify(value)));
+    } catch(e) {
+      console.error(e);
+    }
+
+    return P.resolve();
+  }
+
   return new P(function(resolve, reject) {
     request.post(self.storeEndpoint)
     .send(value)
