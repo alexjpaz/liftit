@@ -39,6 +39,10 @@ session.prototype.fetch = function() {
 
     try {
       data = JSON.parse(localStorage.getItem("events"));
+
+      if(!data) {
+        data = {};
+      }
     } catch(e) {
       console.error(e);
     }
